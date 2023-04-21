@@ -41,6 +41,5 @@ public:
 
 private:
 	GameManager* gameObjectManager = nullptr;
-	Player* player = nullptr;
 };
 
