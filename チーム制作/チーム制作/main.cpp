@@ -1,4 +1,6 @@
-#include "DxLib.h"
+#include"DxLib.h"
+#include"GameScene.h"
+
 
 const char TITLE[] = "デス摩天楼";
 
@@ -8,6 +10,7 @@ const int WIN_HEIGHT = 720;//ウィンドウ縦幅
 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
+
 	ChangeWindowMode(TRUE);						//ウィンドウモードに設定
 	//ウィンドウサイズを手動では変更できず、かつウィンドウサイズに合わせて拡大できないようにする
 	SetWindowSizeChangeEnableFlag(FALSE, FALSE);
@@ -22,9 +25,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	//（ダブルバッファ）描画先グラフィック領域は裏面を指定
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	//画像などのリソースデータの変数宣言と読み込み
 
-
+	GameScene* gameScene = nullptr;
+	gameScene = new GameScene();
+	gameScene->Initialize();
 
 	//ゲームループで使う変数の宣言
 	char keys[256] = { 0 }; //最新のキーボード情報用
@@ -44,10 +48,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 		//更新処理
 
-
+		gameScene->Update();
 
 
 		//描画処理
+		gameScene->Draw();
 
 		//---------  ここまでにプログラムを記述  ---------//
 		ScreenFlip();//（ダブルバッファ）裏面

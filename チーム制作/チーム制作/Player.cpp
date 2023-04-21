@@ -10,13 +10,62 @@ Player::~Player()
 
 void Player::Initialize()
 {
+	objectMember = GameObject::PLAYER;//ƒvƒŒƒCƒ„[
+	objState = GameObject::AncientTimes;//ŒÃ‘ã
+	position = { 300,300 };
+	r = 32;
 }
 
 void Player::Update()
 {
+	Move();//ˆÚ“®
+	Attack();//UŒ‚
 }
 
 void Player::Draw()
 {
+	//‰~•\Ž¦
+	DrawCircle(position.x,position.y, r, (0,0,0), true);
+}
 
+void Player::Move()
+{
+	if (CheckHitKey(KEY_INPUT_D) == 1)
+	{
+		position.x += 5;
+	}
+	if (CheckHitKey(KEY_INPUT_A) == 1)
+	{
+		position.x -= 5;
+	}
+	if (CheckHitKey(KEY_INPUT_W) == 1)
+	{
+		position.y -= 5;
+	}
+	if (CheckHitKey(KEY_INPUT_S) == 1)
+	{
+		position.y += 5;
+	}
+}
+
+void Player::Attack()
+{
+	if (timeFlag == false)
+	{
+		if (CheckHitKey(KEY_INPUT_SPACE) == 1)
+		{
+			bullet = new PlayerBullet();
+			bullet->BaseInitialize(referenceGameObjects);
+			bullet->Initialize(position);
+			addGameObjects.push_back(bullet);
+			timeFlag = true;
+		}
+	}
+	else
+	{
+		time++;
+		if (time <= 5)return;
+			timeFlag = false;
+			time = 0;
+	}
 }

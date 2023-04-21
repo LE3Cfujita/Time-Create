@@ -1,5 +1,7 @@
 #pragma once
-class Player
+#include"GameObject.h"
+#include"PlayerBullet.h"
+class Player : public GameObject
 {
 public:
 	Player();
@@ -11,5 +13,15 @@ public:
 	void Update();
 
 	void Draw();
+private:
+
+	void Move();
+
+	void Attack();
+
+	PlayerBullet* bullet = nullptr;
+
+	bool timeFlag = false;//falseなら打つ
+	int time = 0;//クールタイム
 };
 
