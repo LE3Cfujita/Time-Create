@@ -13,6 +13,7 @@ void GameScene::Initialize()
 	gameObjectManager->Initialize();
 	//画像などのリソースデータの変数宣言と読み込み
 
+	Player* player = nullptr;
 	player = new Player();
 	player->BaseInitialize(gameObjectManager->GetGameObjects());
 	player->Initialize();
