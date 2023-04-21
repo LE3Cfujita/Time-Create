@@ -32,19 +32,19 @@ void Player::Move()
 {
 	if (CheckHitKey(KEY_INPUT_D) == 1)
 	{
-		position.x += 5;
+		position.x += 5;//âE
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
 	{
-		position.x -= 5;
+		position.x -= 5;//ç∂
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
-		position.y -= 5;
+		position.y -= 5;//è„
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
-		position.y += 5;
+		position.y += 5;//â∫
 	}
 }
 
