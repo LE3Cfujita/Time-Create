@@ -1,6 +1,6 @@
 #include "DxLib.h"
 
-const char TITLE[] = "K020G1172：訓練課題３";
+const char TITLE[] = "デス摩天楼";
 
 const int WIN_WIDTH = 1280; //ウィンドウ横幅
 const int WIN_HEIGHT = 720;//ウィンドウ縦幅
