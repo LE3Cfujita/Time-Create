@@ -10,11 +10,11 @@ EnemyBullet::~EnemyBullet()
 
 void EnemyBullet::Initialize(XMFLOAT2 pos)
 {
-	objectMember = GameObject::PLAYERBULLET;
+	objectMember = GameObject::ENEMYBULLET;
 	objectAge = GameObject::ANCIENT;
 	position = { pos.x,pos.y };
 	r = 16;
-	color = (0, 0, 255);
+	color = GetColor(255, 0, 255);
 }
 
 void EnemyBullet::Update()
@@ -29,4 +29,9 @@ void EnemyBullet::Draw()
 
 void EnemyBullet::Move()
 {
+	position.x -= 10;
+	if (position.x <= -10)
+	{
+		deathFlag = true;
+	}
 }

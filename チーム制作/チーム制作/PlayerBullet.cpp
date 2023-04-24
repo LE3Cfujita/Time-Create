@@ -14,7 +14,7 @@ void PlayerBullet::Initialize(XMFLOAT2 pos)
 	objectAge = GameObject::ANCIENT;
 	position = { pos.x,pos.y };
 	r = 16;
-	color = (0,0,0);
+	color = GetColor(0,0,0);
 }
 
 void PlayerBullet::Update()

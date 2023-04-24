@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "EnemyBullet.h"
 
 Enemy::Enemy()
 {
@@ -13,14 +14,14 @@ void Enemy::Initialize()
 	objectMember = GameObject::ENEMY;
 	objectAge = GameObject::ANCIENT;
 	objState = GameObject::IDLE;
-	position = { 1000,300 };
+	position = { 1000,400 };
 	r = 32;
 	color= GetColor(255, 255, 255);
 }
 
 void Enemy::Update()
 {
-
+	Attack();
 }
 
 void Enemy::Draw()
@@ -34,6 +35,21 @@ void Enemy::Move()
 
 void Enemy::Attack()
 {
+	if (timeFlag == false)
+	{
+			EnemyBullet* bullet = new EnemyBullet();
+			bullet->BaseInitialize(referenceGameObjects);
+			bullet->Initialize(position);
+			addGameObjects.push_back(bullet);
+			timeFlag = true;
+	}
+	else
+	{
+		time++;
+		if (time <= 10)return;
+		timeFlag = false;
+		time = 0;
+	}
 }
 
 void Enemy::HitAction(GameObject* gameObject)

@@ -17,8 +17,7 @@ private:
 	void Move();
 	void Attack();
 
-	bool timeFlag = false;//false‚È‚ç‘Å‚Â
-	int time = 0;
+	
 
 };
 

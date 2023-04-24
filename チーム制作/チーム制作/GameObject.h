@@ -13,8 +13,9 @@ public:
 	{
 		NONEMEMBER,//初期
 		PLAYER,//プレイヤー
-		PLAYERBULLET,//弾
+		PLAYERBULLET,//プレイヤーの弾
 		ENEMY,//敵
+		ENEMYBULLET,//敵の弾
 	};
 	enum OBJAGE
 	{
@@ -46,6 +47,9 @@ protected:
 	bool actionFlag;
 	//物理的判定フラグ
 	bool physicsFlag;
+
+	bool timeFlag = false;//falseなら打つ
+	int time = 0;
 public:
 	GameObject() {}
 	virtual ~GameObject() {
@@ -65,6 +69,9 @@ public:
 		r = 32;
 
 		color = 0;
+
+		timeFlag = false;//falseなら打つ
+		time = 0;
 
 		std::vector<GameObject*>().swap(addGameObjects);
 		this->referenceGameObjects = referenceGameObjects;
