@@ -15,6 +15,7 @@ void EnemyBullet::Initialize(XMFLOAT2 pos)
 	position = { pos.x,pos.y };
 	r = 16;
 	color = GetColor(255, 0, 255);
+	ancient = -10;
 }
 
 void EnemyBullet::Update()
@@ -29,8 +30,10 @@ void EnemyBullet::Draw()
 
 void EnemyBullet::Move()
 {
-	position.x -= 10;
-	if (position.x <= -10)
+	position.x -= 5;
+	position.y += ancient;
+	ancient += 0.25;
+	if (position.x <= -20)
 	{
 		deathFlag = true;
 	}

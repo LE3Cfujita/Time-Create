@@ -46,7 +46,7 @@ void Enemy::Attack()
 	else
 	{
 		time++;
-		if (time <= 10)return;
+		if (time <= 60)return;
 		timeFlag = false;
 		time = 0;
 	}
