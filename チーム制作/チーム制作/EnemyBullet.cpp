@@ -22,6 +22,7 @@ void EnemyBullet::Update()
 
 void EnemyBullet::Draw()
 {
+	DrawCircle(position.x, position.y, r, (1, 0, 0), true);
 }
 
 void EnemyBullet::Move()

@@ -13,6 +13,7 @@ void PlayerBullet::Initialize(XMFLOAT2 pos)
 	objectMember = GameObject::PLAYERBULLET;
 	position = { pos.x,pos.y };
 	r = 16;
+	
 }
 
 void PlayerBullet::Update()
