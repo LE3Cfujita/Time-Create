@@ -15,6 +15,7 @@ void Player::Initialize()
 	objectState = GameObject::ANCIENT;
 	position = { 300,300 };
 	r = 32;
+	color = GetColor(0, 0, 0);
 }
 
 void Player::Update()
@@ -25,7 +26,7 @@ void Player::Update()
 
 void Player::Draw()
 {
-	DrawCircle(position.x, position.y, r, (0, 0, 0), true);
+	DrawCircle(position.x, position.y, r, color, true);
 }
 
 void Player::Move()

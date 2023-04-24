@@ -1,7 +1,8 @@
 #pragma once
 #include "GameObject.h"
 #include "Player.h"
-#include"GameManager.h"
+#include"Enemy.h"
+#include"GameObjectManager.h"
 #include"DxLib.h"
 class GameScene
 {
@@ -9,18 +10,9 @@ public:
 	enum GameState
 	{
 		TITLE,
-		OPTION_SELECT,
-		OPTION_SOUND,
-		OPTION_KEY,
-		OPTION_SENSI,
 		PLAY,
 		CLEA,
 		OVER,
-		SCENECHANGE,
-		SCENECHANGEOVER,
-		SCENECHANGECLEA,
-		OPERATION,
-		RULE
 	};
 public:
 	/// <summary>
@@ -39,7 +31,17 @@ public:
 
 	void Draw();
 
+	void ChangeScene();
+
+	void ObjCreate();
 private:
-	GameManager* gameObjectManager = nullptr;
+	GameState gameState;
+	GameObjectManager* gameObjectManager = nullptr;
+
+	int title;
+	int keyCount = 0;
+
+
+
 };
 
