@@ -11,8 +11,10 @@ PlayerBullet::~PlayerBullet()
 void PlayerBullet::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::PLAYERBULLET;
+	objectAge = GameObject::ANCIENT;
 	position = { pos.x,pos.y };
 	r = 16;
+	color = GetColor(0,0,0);
 }
 
 void PlayerBullet::Update()
@@ -22,7 +24,7 @@ void PlayerBullet::Update()
 
 void PlayerBullet::Draw()
 {
-	DrawCircle(position.x, position.y, r, (1, 0, 0), true);
+	DrawCircle(position.x, position.y, r,color, true);
 }
 
 void PlayerBullet::Move()
