@@ -24,13 +24,19 @@ public:
 	};
 	enum OBJSTATE
 	{
-
+		IDLE,		//ë“ã@
+		MOVE,		//à⁄ìÆ
+		ATTACK,		//çUåÇ
+		DEATH,		//éÄñS
+		ALIVE,		//ê∂éY
+		NONESTATE,	//Ç»Çµ
 	};
 
 protected:
 	bool deathFlag;
 	OBJECTMEMBER objectMember;
-	OBJAGE objectState;
+	OBJAGE objectAge;
+	OBJSTATE objState;
 	XMFLOAT2 position;
 	//à⁄ìÆó 
 	XMFLOAT2 vel;
@@ -48,7 +54,8 @@ public:
 	void BaseInitialize(std::vector<GameObject*> referenceGameObjects)
 	{
 		objectMember = OBJECTMEMBER::NONEMEMBER;
-		objectState = OBJAGE::ANCIENT;
+		objectAge = OBJAGE::ANCIENT;
+		objState = OBJSTATE::IDLE;
 
 		deathFlag = false;
 		position = { 0,0 };
@@ -76,8 +83,7 @@ public:
 	std::vector<GameObject*> referenceGameObjects;
 
 	OBJECTMEMBER GetObjectMember() { return objectMember; }
-	OBJAGE GetObjectState() { return objectState; }
-	bool GetDeathFlag() { return deathFlag; }
+	OBJAGE GetObjectState() { return objectAge; }
 
 	/// <summary>
 	/// à íuéÊìæ
@@ -140,5 +146,12 @@ public:
 	bool GetDeathFlag() { return deathFlag; }
 
 	void SetDeathFlag(bool deathFlag) { this->deathFlag = deathFlag; }
+
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	OBJECTMEMBER GetObjectMenber() { return objectMember; }
 };
 

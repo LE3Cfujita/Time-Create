@@ -12,7 +12,7 @@ void GameScene::Initialize()
 	gameObjectManager = new GameObjectManager();
 	gameObjectManager->Intialize();
 
-	gameState = PLAY;
+	gameState = TITLE;
 	//画像などのリソースデータの変数宣言と読み込み
 
 	title=LoadGraph("Resource/TITLE.png"); // 描画
@@ -27,6 +27,7 @@ void GameScene::Update()
 		break;
 	case PLAY://ゲームプレイ
 		gameObjectManager->Update();
+		
 		break;
 	case CLEA://クリア
 		break;

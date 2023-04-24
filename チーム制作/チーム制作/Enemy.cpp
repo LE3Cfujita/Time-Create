@@ -11,7 +11,8 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	objectMember = GameObject::ENEMY;
-	objectState = GameObject::ANCIENT;
+	objectAge = GameObject::ANCIENT;
+	objState = GameObject::IDLE;
 	position = { 1000,300 };
 	r = 32;
 	color= GetColor(255, 255, 255);
@@ -37,4 +38,9 @@ void Enemy::Attack()
 
 void Enemy::HitAction(GameObject* gameObject)
 {
+	if (gameObject->GetObjectMenber() == OBJECTMEMBER::PLAYERBULLET)
+	{
+		deathFlag = true;
+		gameObject->SetDeathFlag(true);
+	}
 }

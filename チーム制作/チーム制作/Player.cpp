@@ -12,7 +12,8 @@ Player::~Player()
 void Player::Initialize()
 {
 	objectMember = GameObject::PLAYER;
-	objectState = GameObject::ANCIENT;
+	objectAge = GameObject::ANCIENT;
+	objState = GameObject::IDLE;
 	position = { 300,300 };
 	r = 32;
 	color = GetColor(0, 0, 0);
