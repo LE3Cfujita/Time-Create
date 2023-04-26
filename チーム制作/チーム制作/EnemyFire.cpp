@@ -8,13 +8,26 @@ EnemyFire::~EnemyFire()
 {
 }
 
-void EnemyFire::Initialize(XMFLOAT2 pos)
+void EnemyFire::Initialize(XMFLOAT2 pos,int number)
 {
 	objectMember = GameObject::ENEMYFIRE;
 	objectAge = GameObject::ANCIENT;
-	position = { pos.x,pos.y };
-	r = 16;
+
+	r = 32;
+	this->number = number;
+	if (this->number == 0)
+	{
+		position = { pos.x,pos.y - r };
+	}
+	else
+	{
+		position = { pos.x,pos.y + r };
+	}
+	
 	color = GetColor(255, 0, 0);
+
+
+	bulletSpeed = rand() % 10 - 20 ;
 }
 
 void EnemyFire::Update()
@@ -29,8 +42,8 @@ void EnemyFire::Draw()
 
 void EnemyFire::Move()
 {
-	position.x -= 10;
-	if (position.x >= 1300)
+	position.x += bulletSpeed;
+	if (position.x <= -10)
 	{
 		deathFlag = true;
 	}

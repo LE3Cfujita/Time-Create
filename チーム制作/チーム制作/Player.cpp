@@ -6,29 +6,28 @@ Player::Player()
 
 Player::~Player()
 {
-	
+
 }
 
 void Player::Initialize()
 {
-	objectMember = GameObject::PLAYER;
-	objectAge = GameObject::ANCIENT;
+	objectMember = GameObject::PLAYER;//プレイヤー
+	objectAge = GameObject::ANCIENT;//古代
 	objState = GameObject::IDLE;
 	position = { 300,300 };
-	r = 32;
-	color = GetColor(0, 0, 0);
+	r = 64;
 	player = LoadGraph("Resource/Player.png"); // 描画
 }
 
 void Player::Update()
 {
-	Move();
-	Attack();
+	Move();//移動
+	Attack();//攻撃
 }
 
 void Player::Draw()
 {
-	DrawCircle(position.x, position.y, r, color, true);
+	DrawExtendGraph(position.x - r, position.y - r, position.x + r, position.y + r, player, TRUE);
 }
 
 void Player::Move()
@@ -55,11 +54,11 @@ void Player::Attack()
 {
 	if (timeFlag == false)
 	{
-		if (CheckHitKey(KEY_INPUT_SPACE) == 1)
+		if (CheckHitKey(KEY_INPUT_SPACE) == 1)//スペース長押しで攻撃し続ける
 		{
 			PlayerBullet* bullet = new PlayerBullet();
 			bullet->BaseInitialize(referenceGameObjects);
-			bullet->Initialize(position);
+			bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
 			addGameObjects.push_back(bullet);
 			timeFlag = true;
 		}
@@ -75,7 +74,7 @@ void Player::Attack()
 
 void Player::HitAction(GameObject* gameObject)
 {
-	if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBULLET|| gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYFIRE)
+	if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBULLET || gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYFIRE)
 	{
 		//deathFlag = true;
 		gameObject->SetDeathFlag(true);

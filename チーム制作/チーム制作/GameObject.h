@@ -52,12 +52,14 @@ protected:
 	bool timeFlag;//false‚È‚ç‚Ü‚Á‚·‚®‘Å‚Â
 	int time;
 
-	bool fireFlag;
-	int fireTime;
 
-	float ancient = 0;
+	float ancient;
 
-	int number = 0;
+	int number;
+
+	double angle;
+
+	float bulletSpeed;
 public:
 	GameObject() {}
 	virtual ~GameObject() {
@@ -81,12 +83,13 @@ public:
 		timeFlag = false;//false‚È‚ç‘Å‚Â
 		time = 0;
 
-		fireFlag = false;
-		fireTime = 0;
-
 		ancient = 0;
 
 		number = 0;
+
+		angle = 0;
+		
+		bulletSpeed = 0;
 		std::vector<GameObject*>().swap(addGameObjects);
 		this->referenceGameObjects = referenceGameObjects;
 	}

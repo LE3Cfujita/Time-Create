@@ -18,6 +18,6 @@ private:
 	void Attack();
 	void HitAction(GameObject* gameObject);
 
-	int player;
+	int player;//•`‰æ—p
 };
 

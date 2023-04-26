@@ -16,5 +16,6 @@ private:
 
 	void Move();
 
+	int bullet;
 };
 

@@ -10,8 +10,8 @@ PlayerBullet::~PlayerBullet()
 
 void PlayerBullet::Initialize(XMFLOAT2 pos)
 {
-	objectMember = GameObject::PLAYERBULLET;
-	objectAge = GameObject::ANCIENT;
+	objectMember = GameObject::PLAYERBULLET;//ÉvÉåÉCÉÑÅ[íe
+	objectAge = GameObject::ANCIENT;//å√ë„
 	position = { pos.x,pos.y };
 	r = 16;
 	color = GetColor(0,0,0);
@@ -19,7 +19,7 @@ void PlayerBullet::Initialize(XMFLOAT2 pos)
 
 void PlayerBullet::Update()
 {
-	Move();
+	Move();//à⁄ìÆ
 }
 
 void PlayerBullet::Draw()

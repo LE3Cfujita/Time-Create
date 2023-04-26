@@ -8,7 +8,7 @@ public:
 	~EnemyFire();
 
 	//‰Šú‰»
-	void Initialize(XMFLOAT2 pos);
+	void Initialize(XMFLOAT2 pos,int number);
 
 	void Update();
 
