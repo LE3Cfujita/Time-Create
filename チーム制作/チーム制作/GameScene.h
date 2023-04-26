@@ -39,6 +39,7 @@ private:
 	GameObjectManager* gameObjectManager = nullptr;
 
 	int title;
+	int back;
 	int keyCount = 0;
 
 };

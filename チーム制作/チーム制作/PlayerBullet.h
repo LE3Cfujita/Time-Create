@@ -15,6 +15,8 @@ public:
 private:
 
 	void Move();
+
+	int bullet;
 };
 
 

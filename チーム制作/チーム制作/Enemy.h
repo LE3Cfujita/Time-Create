@@ -25,5 +25,8 @@ private:
 
 	int moveCount = 0;//0‚Ìê‡ãˆÚ“®
 
+	int enemy;
+
+	bool move = true;
 };
 

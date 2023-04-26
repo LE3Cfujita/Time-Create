@@ -16,7 +16,7 @@ void Player::Initialize()
 	objState = GameObject::IDLE;
 	position = { 300,300 };
 	r = 64;
-	player = LoadGraph("Resource/Player.png"); // •`‰æ
+	player = LoadGraph("Resource/Player2.png"); // •`‰æ
 }
 
 void Player::Update()
@@ -47,6 +47,22 @@ void Player::Move()
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
 		position.y += 5;//‰º
+	}
+	if (position.x - 32 <= 0)
+	{
+		position.x = 32;
+	}
+	if (position.y - r <= 0)
+	{
+		position.y = 0 + r;
+	}
+	if (position.x + 32 >= 1280)
+	{
+		position.x = 1280 - 32;
+	}
+	if (position.y + r >= 720)
+	{
+		position.y = 720 - r;
 	}
 }
 

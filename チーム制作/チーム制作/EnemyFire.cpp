@@ -24,7 +24,7 @@ void EnemyFire::Initialize(XMFLOAT2 pos,int number)
 		position = { pos.x,pos.y + r };
 	}
 	
-	color = GetColor(255, 0, 0);
+	bullet = LoadGraph("Resource/EnemyFire.png"); // •`‰æ
 
 
 	bulletSpeed = rand() % 10 - 20 ;
@@ -37,7 +37,7 @@ void EnemyFire::Update()
 
 void EnemyFire::Draw()
 {
-	DrawCircle(position.x, position.y, r, color, true);
+	DrawExtendGraph(position.x - r, position.y - r, position.x + r, position.y + r, bullet, TRUE);
 }
 
 void EnemyFire::Move()

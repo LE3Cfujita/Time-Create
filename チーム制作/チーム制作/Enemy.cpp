@@ -14,34 +14,60 @@ void Enemy::Initialize()
 	objectAge = GameObject::ANCIENT;
 	objState = GameObject::IDLE;
 	position = { 1000,600 };
-	r = 32;
-	color = GetColor(255, 255, 255);
+	r = 128;
+	enemy= LoadGraph("Resource/Enemy.png"); // •`‰æ
 }
 
 void Enemy::Update()
 {
+	if (move == true)
+	{
+		Move();
+	}
 	Attack();
 }
 
 void Enemy::Draw()
 {
-	DrawCircle(position.x, position.y, r, color, true);
+	DrawExtendGraph(position.x - r-16, position.y - r, position.x + r, position.y + r, enemy, TRUE);
 }
 
 void Enemy::Attack()
 {
-	
-	BulletAttack();//’e
-	FireAttack();
+
+	if (timeFlag == false)
+	{
+		//int rad = rand() % 2;
+		//if (rad == 1)
+		//{
+		//	BulletAttack();//’e
+		//}
+		//else
+		//{
+		//	FireAttack();
+		//}
+		BulletAttack();//’e
+		FireAttack();//‰Î
+		move = false;
+	}
+	else
+	{
+		time++;
+		if (time <= 60)return;
+		move = true;
+		if (time <= 180)return;
+		timeFlag = false;
+		time = 0;
+	}
 }
 
 void Enemy::Move()
 {
-	if (position.y <= 64)
+	if (position.y-r <= 0)
 	{
 		moveCount = 1;
 	}
-	if (position.y >= 654)
+	if (position.y+r >= 720)
 	{
 		moveCount = 0;
 	}
@@ -57,53 +83,34 @@ void Enemy::Move()
 
 void Enemy::BulletAttack()
 {
-	if (timeFlag == false)
+	for (int i = 0; i < 3; i++)
 	{
-		for (int i = 0; i < 3; i++)
-		{
-			EnemyBullet* bullet = new EnemyBullet();
-			bullet->BaseInitialize(referenceGameObjects);
-			bullet->Initialize(position, i);
-			addGameObjects.push_back(bullet);
-			timeFlag = true;
-		}
+		EnemyBullet* bullet = new EnemyBullet();
+		bullet->BaseInitialize(referenceGameObjects);
+		bullet->Initialize(position, i);
+		addGameObjects.push_back(bullet);
+		timeFlag = true;
 	}
-	else
-	{
-		time++;
-		if (time <= 60)return;
-		timeFlag = false;
-		time = 0;
-	}
+
 }
 
 void Enemy::FireAttack()
 {
-	if (timeFlag == false)
-	{
 	/*	for (int i = 0; i < 2; i++)
 		{*/
-			EnemyFire* bullet = new EnemyFire();
-			bullet->BaseInitialize(referenceGameObjects);
-			bullet->Initialize(position,1);
-			addGameObjects.push_back(bullet);
-			timeFlag = true;
-		//}
-	}
-	else
-	{
-		time++;
-		if (time <= 60)return;
-		timeFlag = false;
-		time = 0;
-	}
+	EnemyFire* bullet = new EnemyFire();
+	bullet->BaseInitialize(referenceGameObjects);
+	bullet->Initialize(position, 1);
+	addGameObjects.push_back(bullet);
+	timeFlag = true;
+	//}
 }
 
 void Enemy::HitAction(GameObject* gameObject)
 {
 	if (gameObject->GetObjectMenber() == OBJECTMEMBER::PLAYERBULLET)
 	{
-		deathFlag = true;
+		//deathFlag = true;
 		gameObject->SetDeathFlag(true);
 	}
 }
