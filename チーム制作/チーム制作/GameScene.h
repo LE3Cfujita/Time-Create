@@ -41,7 +41,5 @@ private:
 	int title;
 	int keyCount = 0;
 
-
-
 };
 

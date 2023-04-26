@@ -16,8 +16,8 @@ public:
 private:
 	void Move();
 	void Attack();
+	void HitAction(GameObject* gameObject);
 
-	
-
+	int player;
 };
 

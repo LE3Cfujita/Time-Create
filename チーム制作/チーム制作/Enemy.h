@@ -1,5 +1,7 @@
 #pragma once
 #include"GameObject.h"
+#include "EnemyBullet.h"
+#include"EnemyFire.h"
 class Enemy : public GameObject
 {
 
@@ -15,7 +17,8 @@ public:
 	void Draw();
 private:
 	void Move();
-	void Attack();
+	void BulletAttack();//’eUŒ‚
+	void FireAttack();//‰ÎUŒ‚
 
 	void HitAction(GameObject* gameObject);
 

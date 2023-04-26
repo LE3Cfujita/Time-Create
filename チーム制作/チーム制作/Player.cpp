@@ -17,6 +17,7 @@ void Player::Initialize()
 	position = { 300,300 };
 	r = 32;
 	color = GetColor(0, 0, 0);
+	player = LoadGraph("Resource/Player.png"); // •`‰æ
 }
 
 void Player::Update()
@@ -69,5 +70,14 @@ void Player::Attack()
 		if (time <= 5)return;
 		timeFlag = false;
 		time = 0;
+	}
+}
+
+void Player::HitAction(GameObject* gameObject)
+{
+	if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBULLET|| gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYFIRE)
+	{
+		//deathFlag = true;
+		gameObject->SetDeathFlag(true);
 	}
 }

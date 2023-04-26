@@ -16,6 +16,7 @@ public:
 		PLAYERBULLET,//ƒvƒŒƒCƒ„[‚Ì’e
 		ENEMY,//“G
 		ENEMYBULLET,//“G‚Ì’e
+		ENEMYFIRE,//“G‚Ì‰Î
 	};
 	enum OBJAGE
 	{
@@ -48,8 +49,15 @@ protected:
 	//•¨—“I”»’èƒtƒ‰ƒO
 	bool physicsFlag;
 
-	bool timeFlag = false;//false‚È‚ç‘Å‚Â
-	int time = 0;
+	bool timeFlag;//false‚È‚ç‚Ü‚Á‚·‚®‘Å‚Â
+	int time;
+
+	bool fireFlag;
+	int fireTime;
+
+	float ancient = 0;
+
+	int number = 0;
 public:
 	GameObject() {}
 	virtual ~GameObject() {
@@ -73,6 +81,12 @@ public:
 		timeFlag = false;//false‚È‚ç‘Å‚Â
 		time = 0;
 
+		fireFlag = false;
+		fireTime = 0;
+
+		ancient = 0;
+
+		number = 0;
 		std::vector<GameObject*>().swap(addGameObjects);
 		this->referenceGameObjects = referenceGameObjects;
 	}
