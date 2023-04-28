@@ -11,7 +11,6 @@ EnemyFire::~EnemyFire()
 void EnemyFire::Initialize(XMFLOAT2 pos,int number)
 {
 	objectMember = GameObject::ENEMYFIRE;
-	objectAge = GameObject::ANCIENT;
 
 	r = 32;
 	this->number = number;

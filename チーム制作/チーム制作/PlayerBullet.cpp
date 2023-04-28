@@ -11,7 +11,6 @@ PlayerBullet::~PlayerBullet()
 void PlayerBullet::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::PLAYERBULLET;//ÉvÉåÉCÉÑÅ[íe
-	objectAge = GameObject::ANCIENT;//å√ë„
 	position = { pos.x,pos.y-32 };
 	r = 16;
 

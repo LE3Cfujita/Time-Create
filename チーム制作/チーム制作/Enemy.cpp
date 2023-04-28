@@ -11,7 +11,7 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	objectMember = GameObject::ENEMY;
-	objectAge = GameObject::ANCIENT;
+	objectAge = GameObject::MODERN;
 	objState = GameObject::IDLE;
 	position = { 1000,600 };
 	r = 128;
@@ -24,12 +24,32 @@ void Enemy::Update()
 	{
 		Move();
 	}
-	Attack();
+	switch (objectAge)
+	{
+	case ANCIENT://ŒÃ‘ãUŒ‚
+		Attack();
+		break;
+	case MODERN://Œ»‘ãUŒ‚
+		BalkanAttack();
+		break;
+	case FUTURE://–¢—ˆUŒ‚
+		break;
+	}
 }
 
 void Enemy::Draw()
 {
-	DrawExtendGraph(position.x - r-16, position.y - r, position.x + r, position.y + r, enemy, TRUE);
+	switch (objectAge)
+	{
+	case ANCIENT://ŒÃ‘ãŠG
+		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, enemy, TRUE);
+		break;
+	case MODERN://Œ»‘ãŠG
+		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, enemy, TRUE);
+		break;
+	case FUTURE://–¢—ˆŠG
+		break;
+	}
 }
 
 void Enemy::Attack()
@@ -104,6 +124,25 @@ void Enemy::FireAttack()
 	addGameObjects.push_back(bullet);
 	timeFlag = true;
 	//}
+}
+
+void Enemy::BalkanAttack()
+{
+	if (timeFlag == false)
+	{
+			EnemyBalkan* bullet = new EnemyBalkan();
+			bullet->BaseInitialize(referenceGameObjects);
+			bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+			addGameObjects.push_back(bullet);
+			timeFlag = true;
+	}
+	else
+	{
+		time++;
+		if (time <= 5)return;
+		timeFlag = false;
+		time = 0;
+	}
 }
 
 void Enemy::HitAction(GameObject* gameObject)

@@ -11,7 +11,6 @@ EnemyBullet::~EnemyBullet()
 void EnemyBullet::Initialize(XMFLOAT2 pos, int number)
 {
 	objectMember = GameObject::ENEMYBULLET;
-	objectAge = GameObject::ANCIENT;
 	position = { pos.x,pos.y };
 	r = 32;
 	this->number = number;

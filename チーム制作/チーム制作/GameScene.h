@@ -14,6 +14,7 @@ public:
 		CLEA,
 		OVER,
 	};
+
 public:
 	/// <summary>
 	/// コンストクラタ

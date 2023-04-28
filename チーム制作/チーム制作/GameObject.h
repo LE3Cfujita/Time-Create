@@ -15,8 +15,9 @@ public:
 		PLAYER,//ƒvƒŒƒCƒ„[
 		PLAYERBULLET,//ƒvƒŒƒCƒ„[‚Ì’e
 		ENEMY,//“G
-		ENEMYBULLET,//“G‚Ì’e
-		ENEMYFIRE,//“G‚Ì‰Î
+		ENEMYBULLET,//“G‚Ì’e(ŒÃ‘ã)
+		ENEMYFIRE,//“G‚Ì‰Î(ŒÃ‘ã)
+		ENEMYBALKAN,//“G‚Ìƒoƒ‹ƒJƒ“(Œ»‘ã)
 	};
 	enum OBJAGE
 	{
@@ -171,6 +172,7 @@ public:
 
 	void SetDeathFlag(bool deathFlag) { this->deathFlag = deathFlag; }
 
+	void SetObjAge(OBJAGE* objAge) { this->objectAge = objectAge; }
 
 	/// <summary>
 	/// 

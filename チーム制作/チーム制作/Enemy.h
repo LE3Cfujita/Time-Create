@@ -2,6 +2,7 @@
 #include"GameObject.h"
 #include "EnemyBullet.h"
 #include"EnemyFire.h"
+#include"EnemyBalkan.h"
 class Enemy : public GameObject
 {
 
@@ -20,6 +21,7 @@ private:
 	void Move();
 	void BulletAttack();//’eUŒ‚
 	void FireAttack();//‰ÎUŒ‚
+	void BalkanAttack();//ƒoƒ‹ƒJƒ“UŒ‚
 
 	void HitAction(GameObject* gameObject);
 
