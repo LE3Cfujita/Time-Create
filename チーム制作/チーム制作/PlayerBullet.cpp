@@ -10,21 +10,21 @@ PlayerBullet::~PlayerBullet()
 
 void PlayerBullet::Initialize(XMFLOAT2 pos)
 {
-	objectMember = GameObject::PLAYERBULLET;
-	objectAge = GameObject::ANCIENT;
-	position = { pos.x,pos.y };
+	objectMember = GameObject::PLAYERBULLET;//ÉvÉåÉCÉÑÅ[íe
+	position = { pos.x,pos.y-32 };
 	r = 16;
-	color = GetColor(0,0,0);
+
+	bullet = LoadGraph("Resource/PlayerBullet.png"); // ï`âÊ
 }
 
 void PlayerBullet::Update()
 {
-	Move();
+	Move();//à⁄ìÆ
 }
 
 void PlayerBullet::Draw()
 {
-	DrawCircle(position.x, position.y, r,color, true);
+	DrawGraph(position.x, position.y,bullet, true);
 }
 
 void PlayerBullet::Move()

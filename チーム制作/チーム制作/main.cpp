@@ -1,5 +1,7 @@
 #include "DxLib.h"
 #include"GameScene.h"
+#include <stdlib.h>
+#include <time.h>
 
 const char TITLE[] = "デス摩天楼";
 
@@ -9,6 +11,7 @@ const int WIN_HEIGHT = 720;//ウィンドウ縦幅
 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
+	srand((unsigned int)time(NULL));
 	ChangeWindowMode(TRUE);						//ウィンドウモードに設定
 	//ウィンドウサイズを手動では変更できず、かつウィンドウサイズに合わせて拡大できないようにする
 	SetWindowSizeChangeEnableFlag(FALSE, FALSE);

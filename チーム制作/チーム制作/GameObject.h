@@ -15,7 +15,9 @@ public:
 		PLAYER,//プレイヤー
 		PLAYERBULLET,//プレイヤーの弾
 		ENEMY,//敵
-		ENEMYBULLET,//敵の弾
+		ENEMYBULLET,//敵の弾(古代)
+		ENEMYFIRE,//敵の火(古代)
+		ENEMYBALKAN,//敵のバルカン(現代)
 	};
 	enum OBJAGE
 	{
@@ -48,8 +50,17 @@ protected:
 	//物理的判定フラグ
 	bool physicsFlag;
 
-	bool timeFlag = false;//falseなら打つ
-	int time = 0;
+	bool timeFlag;//falseならまっすぐ打つ
+	int time;
+
+
+	float ancient;
+
+	int number;
+
+	double angle;
+
+	float bulletSpeed;
 public:
 	GameObject() {}
 	virtual ~GameObject() {
@@ -73,6 +84,13 @@ public:
 		timeFlag = false;//falseなら打つ
 		time = 0;
 
+		ancient = 0;
+
+		number = 0;
+
+		angle = 0;
+		
+		bulletSpeed = 0;
 		std::vector<GameObject*>().swap(addGameObjects);
 		this->referenceGameObjects = referenceGameObjects;
 	}
@@ -154,6 +172,7 @@ public:
 
 	void SetDeathFlag(bool deathFlag) { this->deathFlag = deathFlag; }
 
+	void SetObjAge(OBJAGE* objAge) { this->objectAge = objectAge; }
 
 	/// <summary>
 	/// 

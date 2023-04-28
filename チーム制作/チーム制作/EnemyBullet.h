@@ -7,7 +7,7 @@ public:
 	~EnemyBullet();
 
 	//èâä˙âª
-	void Initialize(XMFLOAT2 pos);
+	void Initialize(XMFLOAT2 pos,int namber);
 
 	void Update();
 
@@ -16,6 +16,6 @@ private:
 
 	void Move();
 
-	float ancient = 0;
+	int bullet;
 };
 

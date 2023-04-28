@@ -16,6 +16,7 @@ void GameScene::Initialize()
 	//画像などのリソースデータの変数宣言と読み込み
 
 	title=LoadGraph("Resource/TITLE.png"); // 描画
+	back=LoadGraph("Resource/PlayeBack.png"); // 描画
 }
 
 void GameScene::Update()
@@ -44,6 +45,7 @@ void GameScene::Draw()
 		DrawGraph(0, 0, title, FALSE);
 		break;
 	case PLAY://ゲームプレイ
+		DrawExtendGraph(0, 0,1280,720, back, FALSE);
 		gameObjectManager->Draw();
 		break;
 	case CLEA://クリア
