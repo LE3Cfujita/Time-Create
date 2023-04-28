@@ -17,7 +17,8 @@ public:
 
 	void Draw();
 private:
-	void Attack();
+	void ANCIENTAttack();
+	void MODERNAttack();
 	void Move();
 	void BulletAttack();//’eUŒ‚
 	void FireAttack();//‰ÎUŒ‚

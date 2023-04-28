@@ -18,6 +18,7 @@ public:
 		ENEMYBULLET,//“G‚Ì’e(ŒÃ‘ã)
 		ENEMYFIRE,//“G‚Ì‰Î(ŒÃ‘ã)
 		ENEMYBALKAN,//“G‚Ìƒoƒ‹ƒJƒ“(Œ»‘ã)
+		ENEMYCANNON,//“G‚Ì‘å–C(Œ»‘ã)
 	};
 	enum OBJAGE
 	{
@@ -52,6 +53,8 @@ protected:
 
 	bool timeFlag;//false‚È‚ç‚Ü‚Á‚·‚®‘Å‚Â
 	int time;
+	bool balkanFlag;
+	int balkanTime;
 
 
 	float ancient;
@@ -83,6 +86,8 @@ public:
 
 		timeFlag = false;//false‚È‚ç‘Å‚Â
 		time = 0;
+		balkanFlag = false;//false‚È‚ç‘Å‚Â
+		balkanTime = 0;
 
 		ancient = 0;
 
