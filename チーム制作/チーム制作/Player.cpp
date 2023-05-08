@@ -12,11 +12,15 @@ Player::~Player()
 void Player::Initialize()
 {
 	objectMember = GameObject::PLAYER;//ÉvÉåÉCÉÑÅ[
-	objectAge = GameObject::ANCIENT;//å√ë„
+	objectAge = GameObject::MODERN;//å√ë„
 	objState = GameObject::IDLE;
 	position = { 300,300 };
 	r = 64;
 	player = LoadGraph("Resource/Player2.png"); // ï`âÊ
+	ancientHP = LoadGraph("Resource/ancienthp.png"); // ï`âÊ
+	modernHP = LoadGraph("Resource/modernHP.png"); // ï`âÊ
+	futureHP = LoadGraph("Resource/ancienthp.png"); // ï`âÊ
+	HP = 10;
 }
 
 void Player::Update()
@@ -28,6 +32,22 @@ void Player::Update()
 
 void Player::Draw()
 {
+	for (int i = 0; i < HP; i++)
+	{
+		if (objectAge == ANCIENT)
+		{
+			DrawGraph(i * 64, 0, ancientHP, TRUE);
+		}
+		else if(objectAge == MODERN)
+		{
+			DrawGraph(i * 64, 0, modernHP, TRUE);
+		}
+		else
+		{
+			DrawGraph(i * 64, 0, futureHP, TRUE);
+		}
+	}
+
 	if (invincibleTime == 0							 ||
 		invincibleTime >= 3  && invincibleTime <= 6  ||
 		invincibleTime >= 9 && invincibleTime <= 12  ||

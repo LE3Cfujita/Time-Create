@@ -182,5 +182,16 @@ void Enemy::HitAction(GameObject* gameObject)
 	{
 		//deathFlag = true;
 		gameObject->SetDeathFlag(true);
+		for (GameObject* gameObject : referenceGameObjects)
+		{
+			if (gameObject->GetObjectAge() == OBJAGE::ANCIENT)
+			{
+				gameObject->SetObjAge(GameObject::OBJAGE::MODERN);
+			}
+			else if (gameObject->GetObjectAge() == OBJAGE::MODERN)
+			{
+				gameObject->SetObjAge(GameObject::OBJAGE::FUTURE);
+			}
+		}
 	}
 }

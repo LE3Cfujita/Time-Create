@@ -20,6 +20,11 @@ private:
 	void HitAction(GameObject* gameObject);
 
 	int player;//•`‰æ—p
+	int ancientHP;//•`‰æ—p
+	int modernHP;//•`‰æ—p
+	int futureHP;//•`‰æ—p
+
+	XMFLOAT2 hpPos = { 0,0 };
 
 	int invincibleFlag = false;
 	int invincibleTime = 0;

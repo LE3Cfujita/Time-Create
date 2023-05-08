@@ -198,14 +198,18 @@ public:
 
 	void SetDeathFlag(bool deathFlag) { this->deathFlag = deathFlag; }
 
-	void SetObjAge(OBJAGE* objAge) { this->objectAge = objectAge; }
+	void SetObjAge(OBJAGE objAge) { this->objectAge = objectAge; }
 
 	void SetCannonFlag(bool cannonFlag) { this->cannonFlag = cannonFlag; }
+
 
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <returns></returns>
 	OBJECTMEMBER GetObjectMenber() { return objectMember; }
+
+
+	OBJAGE GetObjectAge() { return objectAge; }
 };
 

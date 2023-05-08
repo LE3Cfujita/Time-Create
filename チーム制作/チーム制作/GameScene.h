@@ -39,6 +39,9 @@ private:
 	GameState gameState;
 	GameObjectManager* gameObjectManager = nullptr;
 
+
+	XMFLOAT2 backPos = { 0,0 };
+	XMFLOAT2 backPos2 = { 1280,0 };
 	int title;
 	int back;
 	int keyCount = 0;
