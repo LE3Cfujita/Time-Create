@@ -16,6 +16,7 @@ void Enemy::Initialize()
 	position = { 1000,600 };
 	r = 128;
 	enemy = LoadGraph("Resource/Enemy.png"); // •`‰æ
+	time = 100;
 }
 
 void Enemy::Update()
@@ -87,13 +88,14 @@ void Enemy::MODERNAttack()
 	if (move == false)
 	{
 		BalkanAttack();
+		AimAttack();
 		if (time <= 180)return;
 		move = true;
 		time = 0;
 	}
 	else
 	{
-		if (time <= 300)return;
+		if (time <= rand() % 120 + 180)return;
 		move = false;
 		time = 0;
 	}
@@ -162,6 +164,16 @@ void Enemy::BalkanAttack()
 		balkanFlag = false;
 		balkanTime = 0;
 	}
+}
+
+void Enemy::AimAttack()
+{
+	if (cannonFlag == true)return;
+	EnemyCannon* bullet = new EnemyCannon();
+	bullet->BaseInitialize(referenceGameObjects);
+	bullet->Initialize(position);
+	addGameObjects.push_back(bullet);
+	cannonFlag = true;
 }
 
 void Enemy::HitAction(GameObject* gameObject)

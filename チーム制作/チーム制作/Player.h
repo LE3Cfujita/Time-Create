@@ -14,10 +14,14 @@ public:
 
 	void Draw();
 private:
-	void Move();
-	void Attack();
+	void Move();//ˆÚ“®
+	void Attack();//UŒ‚
+	void Invincible();//–³“G
 	void HitAction(GameObject* gameObject);
 
 	int player;//•`‰æ—p
+
+	int invincibleFlag = false;
+	int invincibleTime = 0;
 };
 

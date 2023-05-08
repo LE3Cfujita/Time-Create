@@ -23,11 +23,24 @@ void Player::Update()
 {
 	Move();//ˆÚ“®
 	Attack();//UŒ‚
+	Invincible();
 }
 
 void Player::Draw()
 {
-	DrawExtendGraph(position.x - r, position.y - r, position.x + r, position.y + r, player, TRUE);
+	if (invincibleTime == 0							 ||
+		invincibleTime >= 3  && invincibleTime <= 6  ||
+		invincibleTime >= 9 && invincibleTime <= 12  ||
+		invincibleTime >= 15 && invincibleTime <= 18 ||
+		invincibleTime >= 21 && invincibleTime <= 24 ||
+		invincibleTime >= 27 && invincibleTime <= 30 ||
+		invincibleTime >= 33 && invincibleTime <= 36 || 
+		invincibleTime >= 39 && invincibleTime <= 42 || 
+		invincibleTime >= 45 && invincibleTime <= 48 || 
+		invincibleTime >= 51 && invincibleTime <= 54 )
+	{
+		DrawExtendGraph(position.x - r, position.y - r, position.x + r, position.y + r, player, TRUE);
+	}
 }
 
 void Player::Move()
@@ -88,11 +101,40 @@ void Player::Attack()
 	}
 }
 
+void Player::Invincible()
+{
+	if (invincibleFlag == false)return;
+	invincibleTime++;
+	if (invincibleTime < 60)return;
+	invincibleTime = 0;
+	invincibleFlag = false;
+
+}
+
 void Player::HitAction(GameObject* gameObject)
 {
-	if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBULLET || gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYFIRE)
+	if (invincibleFlag == false)
 	{
-		//deathFlag = true;
-		gameObject->SetDeathFlag(true);
+		if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBULLET ||
+			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYFIRE ||
+			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBALKAN ||
+			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYCANNON)
+		{
+			HP--;
+			invincibleFlag = true;
+			gameObject->SetDeathFlag(true);
+			if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYCANNON)
+			{
+				for (GameObject* gameObject2 : referenceGameObjects)
+				{
+					if (gameObject2->GetObjectMember() != GameObject::ENEMY)continue;
+					{
+						gameObject2->SetCannonFlag(false);
+						break;
+					}
+				}
+				SetCannonFlag(false);
+			}
+		}
 	}
 }
