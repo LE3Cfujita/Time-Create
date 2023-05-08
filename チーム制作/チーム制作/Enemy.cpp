@@ -15,7 +15,7 @@ void Enemy::Initialize()
 	objState = GameObject::IDLE;
 	position = { 1000,600 };
 	r = 128;
-	enemy= LoadGraph("Resource/Enemy.png"); // ï`âÊ
+	enemy = LoadGraph("Resource/Enemy.png"); // ï`âÊ
 }
 
 void Enemy::Update()
@@ -27,10 +27,10 @@ void Enemy::Update()
 	switch (objectAge)
 	{
 	case ANCIENT://å√ë„çUåÇ
-		Attack();
+		ANCIENTAttack();
 		break;
 	case MODERN://åªë„çUåÇ
-		BalkanAttack();
+		MODERNAttack();
 		break;
 	case FUTURE://ñ¢óàçUåÇ
 		break;
@@ -52,7 +52,7 @@ void Enemy::Draw()
 	}
 }
 
-void Enemy::Attack()
+void Enemy::ANCIENTAttack()
 {
 
 	if (timeFlag == false)
@@ -81,13 +81,31 @@ void Enemy::Attack()
 	}
 }
 
+void Enemy::MODERNAttack()
+{
+	time++;
+	if (move == false)
+	{
+		BalkanAttack();
+		if (time <= 180)return;
+		move = true;
+		time = 0;
+	}
+	else
+	{
+		if (time <= 300)return;
+		move = false;
+		time = 0;
+	}
+}
+
 void Enemy::Move()
 {
-	if (position.y-r <= 0)
+	if (position.y - r <= 0)
 	{
 		moveCount = 1;
 	}
-	if (position.y+r >= 720)
+	if (position.y + r >= 720)
 	{
 		moveCount = 0;
 	}
@@ -128,20 +146,21 @@ void Enemy::FireAttack()
 
 void Enemy::BalkanAttack()
 {
-	if (timeFlag == false)
+	if (balkanFlag == false)
 	{
-			EnemyBalkan* bullet = new EnemyBalkan();
-			bullet->BaseInitialize(referenceGameObjects);
-			bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-			addGameObjects.push_back(bullet);
-			timeFlag = true;
+		EnemyBalkan* bullet = new EnemyBalkan();
+		bullet->BaseInitialize(referenceGameObjects);
+		bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+		addGameObjects.push_back(bullet);
+		balkanFlag = true;
+		timeFlag = true;
 	}
 	else
 	{
-		time++;
-		if (time <= 5)return;
-		timeFlag = false;
-		time = 0;
+		balkanTime++;
+		if (balkanTime <= 5)return;
+		balkanFlag = false;
+		balkanTime = 0;
 	}
 }
 
