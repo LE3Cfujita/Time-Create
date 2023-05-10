@@ -13,32 +13,32 @@ void GameScene::Initialize()
 	gameObjectManager->Intialize();
 
 	gameState = TITLE;
-	//‰æ‘œ‚È‚Ç‚ÌƒŠƒ\[ƒXƒf[ƒ^‚Ì•Ï”éŒ¾‚Æ“Ç‚Ýž‚Ý
+	//ï¿½æ‘œï¿½È‚Ç‚Ìƒï¿½ï¿½\ï¿½[ï¿½Xï¿½fï¿½[ï¿½^ï¿½Ì•Ïï¿½ï¿½éŒ¾ï¿½Æ“Ç‚Ýï¿½ï¿½ï¿½
 
-	title=LoadGraph("Resource/TITLE.png"); // •`‰æ
-	ancientback = LoadGraph("Resource/ancientback.png"); // •`‰æ
-	modernback= LoadGraph("Resource/modernback.png"); // •`‰æ
-	futureback=LoadGraph("Resource/futurenack.png"); // •`‰æ
-	clear=LoadGraph("Resource/GameClear.png"); // •`‰æ
-	over=LoadGraph("Resource/GameOver.png"); // •`‰æ
+	title=LoadGraph("Resource/TITLE.png"); // ï¿½`ï¿½ï¿½
+	ancientback = LoadGraph("Resource/ancientback.png"); // ï¿½`ï¿½ï¿½
+	modernback= LoadGraph("Resource/modernback.png"); // ï¿½`ï¿½ï¿½
+	futureback=LoadGraph("Resource/futurenack.png"); // ï¿½`ï¿½ï¿½
+	clear=LoadGraph("Resource/GameClear.png"); // ï¿½`ï¿½ï¿½
+	over=LoadGraph("Resource/GameOver.png"); // ï¿½`ï¿½ï¿½
 }
 
 void GameScene::Update()
 {
 	switch (gameState)
 	{
-	case TITLE://ƒ^ƒCƒgƒ‹
+	case TITLE://ï¿½^ï¿½Cï¿½gï¿½ï¿½
 		ChangeScene();
 		break;
-	case PLAY://ƒQ[ƒ€ƒvƒŒƒC
+	case PLAY://ï¿½Qï¿½[ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½C
 		BackgroundScroll();
 		gameObjectManager->Update();
 		SceneChange();
 		break;
-	case CLEA://ƒNƒŠƒA
+	case CLEA://ï¿½Nï¿½ï¿½ï¿½A
 		ChangeScene();
 		break;
-	case OVER://ƒQ[ƒ€ƒI[ƒo[
+	case OVER://ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½[ï¿½oï¿½[
 		ChangeScene();
 		break;
 	}
@@ -48,18 +48,18 @@ void GameScene::Draw()
 {
 	switch (gameState)
 	{
-	case TITLE://ƒ^ƒCƒgƒ‹
+	case TITLE://ï¿½^ï¿½Cï¿½gï¿½ï¿½
 		DrawGraph(0, 0, title, FALSE);
 		break;
-	case PLAY://ƒQ[ƒ€ƒvƒŒƒC
+	case PLAY://ï¿½Qï¿½[ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½C
 		DrawGraph(backPos.x, backPos.y, modernback, true);
 		DrawGraph(backPos2.x, backPos2.y, modernback, true);
 		gameObjectManager->Draw();
 		break;
-	case CLEA://ƒNƒŠƒA
+	case CLEA://ï¿½Nï¿½ï¿½ï¿½A
 		DrawGraph(0, 0, clear, FALSE);
 		break;
-	case OVER://ƒQ[ƒ€ƒI[ƒo[
+	case OVER://ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½[ï¿½oï¿½[
 		DrawGraph(0, 0, over, FALSE);
 		break;
 	}
@@ -95,14 +95,14 @@ void GameScene::ChangeScene()
 
 void GameScene::ObjCreate()
 {
-	//ƒvƒŒƒCƒ„[
+	//ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[
 	Player* player = nullptr;
 	player = new Player();
 	player->BaseInitialize(gameObjectManager->GetGameObjects());
 	player->Initialize();
 	gameObjectManager->AddGameObject(player);
 
-	//“G
+	//ï¿½G
 	Enemy* enemy = nullptr;
 	enemy = new Enemy();
 	enemy->BaseInitialize(gameObjectManager->GetGameObjects());
@@ -153,6 +153,13 @@ void GameScene::SceneChange()
 		{
 			gameobject->SetObjAge(GameObject::OBJAGE::FUTURE);
 		}
+			if (eHP == 0&&gameobject->GetObjectAge() == GameObject::OBJAGE::FUTURE)
+			{
+				gameState = CLEA;
+			}
+
+		}
+
 	}
 	
 }

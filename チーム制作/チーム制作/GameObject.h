@@ -55,7 +55,7 @@ protected:
 	int time;
 	bool balkanFlag;
 	int balkanTime;
-
+	bool cannonFlag;
 
 	float ancient;
 
@@ -64,6 +64,20 @@ protected:
 	double angle;
 
 	float bulletSpeed;
+	//‘_‚¤
+	int homingTime;
+	int homingCount;
+
+	//‹——£
+	float dx;
+	float dy;
+	float da;
+	float L;
+
+	int HP;//‘Ì—Í
+
+	int animation;
+	int animeount;
 public:
 	GameObject() {}
 	virtual ~GameObject() {
@@ -88,14 +102,26 @@ public:
 		time = 0;
 		balkanFlag = false;//false‚È‚ç‘Å‚Â
 		balkanTime = 0;
+		cannonFlag = false;
 
 		ancient = 0;
+
 
 		number = 0;
 
 		angle = 0;
-		
 		bulletSpeed = 0;
+		homingTime = 0;
+		homingCount = 0;
+
+		dx = 0;
+		dy = 0;
+		da = 0;
+		L = 0;
+
+		animation = 0;
+		animeount = 0;
+
 		std::vector<GameObject*>().swap(addGameObjects);
 		this->referenceGameObjects = referenceGameObjects;
 	}
@@ -177,12 +203,19 @@ public:
 
 	void SetDeathFlag(bool deathFlag) { this->deathFlag = deathFlag; }
 
-	void SetObjAge(OBJAGE* objAge) { this->objectAge = objectAge; }
+	void SetObjAge(OBJAGE objAge) { this->objectAge = objectAge; }
+
+	void SetCannonFlag(bool cannonFlag) { this->cannonFlag = cannonFlag; }
+
+	bool GetHP() { return HP; }
 
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <returns></returns>
 	OBJECTMEMBER GetObjectMenber() { return objectMember; }
+
+
+	OBJAGE GetObjectAge() { return objectAge; }
 };
 

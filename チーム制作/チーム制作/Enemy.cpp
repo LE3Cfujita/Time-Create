@@ -14,7 +14,7 @@ void Enemy::Initialize()
 	objState = GameObject::IDLE;
 	position = { 1400,600 };
 	r = 128;
-	enemy = LoadGraph("Resource/Enemy.png"); // •`‰æ
+	enemy = LoadGraph("Resource/Enemy.png"); // ï¿½`ï¿½ï¿½
 	time = 100;
 	HP = 50;
 	moveCount = true;
@@ -28,13 +28,13 @@ void Enemy::Update()
 	}
 	switch (objectAge)
 	{
-	case ANCIENT://ŒÃ‘ãUŒ‚
+	case ANCIENT://ï¿½Ã‘ï¿½Uï¿½ï¿½
 		ANCIENTAttack();
 		break;
-	case MODERN://Œ»‘ãUŒ‚
+	case MODERN://ï¿½ï¿½ï¿½ï¿½Uï¿½ï¿½
 		MODERNAttack();
 		break;
-	case FUTURE://–¢—ˆUŒ‚
+	case FUTURE://ï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½ï¿½
 		break;
 	}
 }
@@ -43,13 +43,13 @@ void Enemy::Draw()
 {
 	switch (objectAge)
 	{
-	case ANCIENT://ŒÃ‘ãŠG
+	case ANCIENT://ï¿½Ã‘ï¿½G
 		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, enemy, TRUE);
 		break;
-	case MODERN://Œ»‘ãŠG
+	case MODERN://ï¿½ï¿½ï¿½ï¿½G
 		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, enemy, TRUE);
 		break;
-	case FUTURE://–¢—ˆŠG
+	case FUTURE://ï¿½ï¿½ï¿½ï¿½ï¿½G
 		break;
 	}
 }
@@ -62,14 +62,14 @@ void Enemy::ANCIENTAttack()
 		//int rad = rand() % 2;
 		//if (rad == 1)
 		//{
-		//	BulletAttack();//’e
+		//	BulletAttack();//ï¿½e
 		//}
 		//else
 		//{
 		//	FireAttack();
 		//}
-		BulletAttack();//’e
-		FireAttack();//‰Î
+		BulletAttack();//ï¿½e
+		FireAttack();//ï¿½ï¿½
 		move = false;
 	}
 	else
@@ -191,5 +191,16 @@ void Enemy::HitAction(GameObject* gameObject)
 	{
 		//deathFlag = true;
 		gameObject->SetDeathFlag(true);
+		for (GameObject* gameObject : referenceGameObjects)
+		{
+			if (gameObject->GetObjectAge() == OBJAGE::ANCIENT)
+			{
+				gameObject->SetObjAge(GameObject::OBJAGE::MODERN);
+			}
+			else if (gameObject->GetObjectAge() == OBJAGE::MODERN)
+			{
+				gameObject->SetObjAge(GameObject::OBJAGE::FUTURE);
+			}
+		}
 	}
 }

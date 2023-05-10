@@ -11,21 +11,22 @@ Player::~Player()
 
 void Player::Initialize()
 {
-	objectMember = GameObject::PLAYER;//ÉvÉåÉCÉÑÅ[
+	objectMember = GameObject::PLAYER;//ÔøΩvÔøΩÔøΩÔøΩCÔøΩÔøΩÔøΩ[
+	objectAge = GameObject::MODERN;//ÔøΩ√ëÔøΩ
 	objState = GameObject::IDLE;
 	position = { 300,300 };
 	r = 16;
-	player = LoadGraph("Resource/Playeranime.png"); // ï`âÊ
-	ancientHP = LoadGraph("Resource/ancienthp.png"); // ï`âÊ
-	modernHP = LoadGraph("Resource/modernHP.png"); // ï`âÊ
-	futureHP = LoadGraph("Resource/ancienthp.png"); // ï`âÊ
+	player = LoadGraph("Resource/Playeranime.png"); // ÔøΩ`ÔøΩÔøΩ
+	ancientHP = LoadGraph("Resource/ancienthp.png"); // ÔøΩ`ÔøΩÔøΩ
+	modernHP = LoadGraph("Resource/modernHP.png"); // ÔøΩ`ÔøΩÔøΩ
+	futureHP = LoadGraph("Resource/ancienthp.png"); // ÔøΩ`ÔøΩÔøΩ
 	HP = 10;
 }
 
 void Player::Update()
 {
-	Move();//à⁄ìÆ
-	Attack();//çUåÇ
+	Move();//ÔøΩ⁄ìÔøΩ
+	Attack();//ÔøΩUÔøΩÔøΩ
 	Invincible();
 }
 
@@ -62,7 +63,7 @@ void Player::Draw()
 		DrawRectGraph(position.x - r*2, position.y - r * 2, animeount * 64, 0, 64, 64, player, TRUE, FALSE);
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 		{
-			//ÉAÉjÉÅÅ[ÉVÉáÉì**************************************************
+			//ÔøΩAÔøΩjÔøΩÔøΩÔøΩ[ÔøΩVÔøΩÔøΩÔøΩÔøΩ**************************************************
 			animation = animation + 1;
 
 			if (animation > 3)
@@ -83,19 +84,19 @@ void Player::Move()
 {
 	if (CheckHitKey(KEY_INPUT_D) == 1)
 	{
-		position.x += 5;//âE
+		position.x += 5;//ÔøΩE
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
 	{
-		position.x -= 5;//ç∂
+		position.x -= 5;//ÔøΩÔøΩ
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
-		position.y -= 5;//è„
+		position.y -= 5;//ÔøΩÔøΩ
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
-		position.y += 5;//â∫
+		position.y += 5;//ÔøΩÔøΩ
 	}
 	if (position.x - 32 <= 0)
 	{
@@ -119,7 +120,7 @@ void Player::Attack()
 {
 	if (timeFlag == false)
 	{
-		if (CheckHitKey(KEY_INPUT_SPACE) == 1)//ÉXÉyÅ[ÉXí∑âüÇµÇ≈çUåÇÇµë±ÇØÇÈ
+		if (CheckHitKey(KEY_INPUT_SPACE) == 1)//ÔøΩXÔøΩyÔøΩ[ÔøΩXÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ≈çUÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
 		{
 			PlayerBullet* bullet = new PlayerBullet();
 			bullet->BaseInitialize(referenceGameObjects);

@@ -14,10 +14,19 @@ public:
 
 	void Draw();
 private:
-	void Move();
-	void Attack();
+	void Move();//ˆÚ“®
+	void Attack();//UŒ‚
+	void Invincible();//–³“G
 	void HitAction(GameObject* gameObject);
 
 	int player;//•`‰æ—p
+	int ancientHP;//•`‰æ—p
+	int modernHP;//•`‰æ—p
+	int futureHP;//•`‰æ—p
+
+	XMFLOAT2 hpPos = { 0,0 };
+
+	int invincibleFlag = false;
+	int invincibleTime = 0;
 };
 

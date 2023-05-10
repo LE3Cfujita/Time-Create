@@ -8,7 +8,7 @@ public:
 	~EnemyCannon();
 
 	//èâä˙âª
-	void Initialize(XMFLOAT2 pos, int number);
+	void Initialize(XMFLOAT2 pos);
 
 	void Update();
 
@@ -16,6 +16,8 @@ public:
 private:
 
 	void Move();
+
+	void Distance(XMFLOAT2 pos);
 
 	int bullet;
 };
