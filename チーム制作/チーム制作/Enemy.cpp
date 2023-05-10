@@ -17,6 +17,7 @@ void Enemy::Initialize()
 	r = 128;
 	enemy = LoadGraph("Resource/Enemy.png"); // •`‰æ
 	time = 100;
+	HP = 50;
 }
 
 void Enemy::Update()

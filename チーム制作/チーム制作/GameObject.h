@@ -75,7 +75,9 @@ protected:
 	float L;
 
 	int HP;//‘Ì—Í
-	
+
+	int animation;
+	int animeount;
 public:
 	GameObject() {}
 	virtual ~GameObject() {
@@ -104,6 +106,7 @@ public:
 
 		ancient = 0;
 
+
 		number = 0;
 
 		angle = 0;
@@ -116,6 +119,8 @@ public:
 		da = 0;
 		L = 0;
 
+		animation = 0;
+		animeount = 0;
 
 		std::vector<GameObject*>().swap(addGameObjects);
 		this->referenceGameObjects = referenceGameObjects;
@@ -202,6 +207,7 @@ public:
 
 	void SetCannonFlag(bool cannonFlag) { this->cannonFlag = cannonFlag; }
 
+	bool GetHP() { return HP; }
 
 	/// <summary>
 	/// 

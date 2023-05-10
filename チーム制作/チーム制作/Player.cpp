@@ -15,8 +15,8 @@ void Player::Initialize()
 	objectAge = GameObject::MODERN;//ŒÃ‘ã
 	objState = GameObject::IDLE;
 	position = { 300,300 };
-	r = 64;
-	player = LoadGraph("Resource/Player2.png"); // •`‰æ
+	r = 16;
+	player = LoadGraph("Resource/Playeranime.png"); // •`‰æ
 	ancientHP = LoadGraph("Resource/ancienthp.png"); // •`‰æ
 	modernHP = LoadGraph("Resource/modernHP.png"); // •`‰æ
 	futureHP = LoadGraph("Resource/ancienthp.png"); // •`‰æ
@@ -38,7 +38,7 @@ void Player::Draw()
 		{
 			DrawGraph(i * 64, 0, ancientHP, TRUE);
 		}
-		else if(objectAge == MODERN)
+		else if (objectAge == MODERN)
 		{
 			DrawGraph(i * 64, 0, modernHP, TRUE);
 		}
@@ -48,18 +48,35 @@ void Player::Draw()
 		}
 	}
 
-	if (invincibleTime == 0							 ||
-		invincibleTime >= 3  && invincibleTime <= 6  ||
-		invincibleTime >= 9 && invincibleTime <= 12  ||
+	if (invincibleTime == 0 ||
+		invincibleTime >= 3 && invincibleTime <= 6 ||
+		invincibleTime >= 9 && invincibleTime <= 12 ||
 		invincibleTime >= 15 && invincibleTime <= 18 ||
 		invincibleTime >= 21 && invincibleTime <= 24 ||
 		invincibleTime >= 27 && invincibleTime <= 30 ||
-		invincibleTime >= 33 && invincibleTime <= 36 || 
-		invincibleTime >= 39 && invincibleTime <= 42 || 
-		invincibleTime >= 45 && invincibleTime <= 48 || 
-		invincibleTime >= 51 && invincibleTime <= 54 )
+		invincibleTime >= 33 && invincibleTime <= 36 ||
+		invincibleTime >= 39 && invincibleTime <= 42 ||
+		invincibleTime >= 45 && invincibleTime <= 48 ||
+		invincibleTime >= 51 && invincibleTime <= 54)
 	{
-		DrawExtendGraph(position.x - r, position.y - r, position.x + r, position.y + r, player, TRUE);
+		//DrawExtendGraph(position.x - r, position.y - r, position.x + r, position.y + r, player, TRUE);
+		DrawRectGraph(position.x - r*2, position.y - r * 2, animeount * 64, 0, 64, 64, player, TRUE, FALSE);
+		if (CheckHitKey(KEY_INPUT_SPACE) == 1)
+		{
+			//ƒAƒjƒ[ƒVƒ‡ƒ“**************************************************
+			animation = animation + 1;
+
+			if (animation > 3)
+			{
+				animeount = animeount + 1;
+				animation = 0;
+				if (animeount >= 3)
+				{
+					animeount = 0;
+				}
+			}
+			DrawRectGraph(position.x - r*2, position.y - r * 2, animeount * 64, 0, 64, 64, player, TRUE, FALSE);
+		}
 	}
 }
 
