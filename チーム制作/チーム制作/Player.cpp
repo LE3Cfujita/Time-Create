@@ -12,22 +12,71 @@ Player::~Player()
 void Player::Initialize()
 {
 	objectMember = GameObject::PLAYER;//ÉvÉåÉCÉÑÅ[
-	objectAge = GameObject::ANCIENT;//å√ë„
 	objState = GameObject::IDLE;
 	position = { 300,300 };
-	r = 64;
-	player = LoadGraph("Resource/Player2.png"); // ï`âÊ
+	r = 16;
+	player = LoadGraph("Resource/Playeranime.png"); // ï`âÊ
+	ancientHP = LoadGraph("Resource/ancienthp.png"); // ï`âÊ
+	modernHP = LoadGraph("Resource/modernHP.png"); // ï`âÊ
+	futureHP = LoadGraph("Resource/ancienthp.png"); // ï`âÊ
+	HP = 10;
 }
 
 void Player::Update()
 {
 	Move();//à⁄ìÆ
 	Attack();//çUåÇ
+	Invincible();
 }
 
 void Player::Draw()
 {
-	DrawExtendGraph(position.x - r, position.y - r, position.x + r, position.y + r, player, TRUE);
+	for (int i = 0; i < HP; i++)
+	{
+		if (objectAge == ANCIENT)
+		{
+			DrawGraph(i * 64, 0, ancientHP, TRUE);
+		}
+		else if (objectAge == MODERN)
+		{
+			DrawGraph(i * 64, 0, modernHP, TRUE);
+		}
+		else
+		{
+			DrawGraph(i * 64, 0, futureHP, TRUE);
+		}
+	}
+
+	if (invincibleTime == 0 ||
+		invincibleTime >= 3 && invincibleTime <= 6 ||
+		invincibleTime >= 9 && invincibleTime <= 12 ||
+		invincibleTime >= 15 && invincibleTime <= 18 ||
+		invincibleTime >= 21 && invincibleTime <= 24 ||
+		invincibleTime >= 27 && invincibleTime <= 30 ||
+		invincibleTime >= 33 && invincibleTime <= 36 ||
+		invincibleTime >= 39 && invincibleTime <= 42 ||
+		invincibleTime >= 45 && invincibleTime <= 48 ||
+		invincibleTime >= 51 && invincibleTime <= 54)
+	{
+		//DrawExtendGraph(position.x - r, position.y - r, position.x + r, position.y + r, player, TRUE);
+		DrawRectGraph(position.x - r*2, position.y - r * 2, animeount * 64, 0, 64, 64, player, TRUE, FALSE);
+		if (CheckHitKey(KEY_INPUT_SPACE) == 1)
+		{
+			//ÉAÉjÉÅÅ[ÉVÉáÉì**************************************************
+			animation = animation + 1;
+
+			if (animation > 3)
+			{
+				animeount = animeount + 1;
+				animation = 0;
+				if (animeount >= 3)
+				{
+					animeount = 0;
+				}
+			}
+			DrawRectGraph(position.x - r*2, position.y - r * 2, animeount * 64, 0, 64, 64, player, TRUE, FALSE);
+		}
+	}
 }
 
 void Player::Move()
@@ -88,11 +137,40 @@ void Player::Attack()
 	}
 }
 
+void Player::Invincible()
+{
+	if (invincibleFlag == false)return;
+	invincibleTime++;
+	if (invincibleTime < 60)return;
+	invincibleTime = 0;
+	invincibleFlag = false;
+
+}
+
 void Player::HitAction(GameObject* gameObject)
 {
-	if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBULLET || gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYFIRE)
+	if (invincibleFlag == false)
 	{
-		//deathFlag = true;
-		gameObject->SetDeathFlag(true);
+		if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBULLET ||
+			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYFIRE ||
+			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBALKAN ||
+			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYCANNON)
+		{
+			HP--;
+			invincibleFlag = true;
+			gameObject->SetDeathFlag(true);
+			if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYCANNON)
+			{
+				for (GameObject* gameObject2 : referenceGameObjects)
+				{
+					if (gameObject2->GetObjectMember() != GameObject::ENEMY)continue;
+					{
+						gameObject2->SetCannonFlag(false);
+						break;
+					}
+				}
+				SetCannonFlag(false);
+			}
+		}
 	}
 }

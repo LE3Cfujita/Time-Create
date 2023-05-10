@@ -11,11 +11,13 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	objectMember = GameObject::ENEMY;
-	objectAge = GameObject::MODERN;
 	objState = GameObject::IDLE;
-	position = { 1000,600 };
+	position = { 1400,600 };
 	r = 128;
 	enemy = LoadGraph("Resource/Enemy.png"); // •`‰æ
+	time = 100;
+	HP = 50;
+	moveCount = true;
 }
 
 void Enemy::Update()
@@ -87,13 +89,14 @@ void Enemy::MODERNAttack()
 	if (move == false)
 	{
 		BalkanAttack();
+		AimAttack();
 		if (time <= 180)return;
 		move = true;
 		time = 0;
 	}
 	else
 	{
-		if (time <= 300)return;
+		if (time <= rand() % 120 + 180)return;
 		move = false;
 		time = 0;
 	}
@@ -116,6 +119,14 @@ void Enemy::Move()
 	else
 	{
 		position.y += 3;
+	}
+	if (moveCount == true)
+	{
+		position.x -= 10;
+	}
+	if (position.x <= 1100)
+	{
+		moveCount == false;
 	}
 }
 
@@ -162,6 +173,16 @@ void Enemy::BalkanAttack()
 		balkanFlag = false;
 		balkanTime = 0;
 	}
+}
+
+void Enemy::AimAttack()
+{
+	if (cannonFlag == true)return;
+	EnemyCannon* bullet = new EnemyCannon();
+	bullet->BaseInitialize(referenceGameObjects);
+	bullet->Initialize(position);
+	addGameObjects.push_back(bullet);
+	cannonFlag = true;
 }
 
 void Enemy::HitAction(GameObject* gameObject)

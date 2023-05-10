@@ -3,6 +3,7 @@
 #include "EnemyBullet.h"
 #include"EnemyFire.h"
 #include"EnemyBalkan.h"
+#include"EnemyCannon.h"
 class Enemy : public GameObject
 {
 
@@ -23,6 +24,7 @@ private:
 	void BulletAttack();//’eUŒ‚
 	void FireAttack();//‰ÎUŒ‚
 	void BalkanAttack();//ƒoƒ‹ƒJƒ“UŒ‚
+	void AimAttack();//‘_‚¤UŒ‚
 
 	void HitAction(GameObject* gameObject);
 
@@ -31,5 +33,6 @@ private:
 	int enemy;
 
 	bool move = true;
+	bool moveCount = true;
 };
 
