@@ -77,7 +77,7 @@ protected:
 	int HP;//‘Ì—Í
 
 	int animation;
-	int animeount;
+	int animeCount;
 public:
 	GameObject() {}
 	virtual ~GameObject() {
@@ -120,7 +120,7 @@ public:
 		L = 0;
 
 		animation = 0;
-		animeount = 0;
+		animeCount = 0;
 
 		std::vector<GameObject*>().swap(addGameObjects);
 		this->referenceGameObjects = referenceGameObjects;
@@ -214,6 +214,9 @@ public:
 	void SetCannonFlag(bool cannonFlag) { this->cannonFlag = cannonFlag; }
 
 	bool GetHP() { return HP; }
+
+
+	void SetAnimation(int animeCount) { this->animeCount = animeCount; }
 
 };
 

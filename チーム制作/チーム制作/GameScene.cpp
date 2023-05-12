@@ -163,8 +163,14 @@ void GameScene::SceneChange()
 					objectAge = MODERN;
 					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
 					{
-						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)continue;
-						gameobject2->SetDeathFlag(true);
+						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
+						{
+							gameobject2->SetAnimation(0);
+						}
+						else
+						{
+							gameobject2->SetDeathFlag(true);
+						}
 					}
 					createFlag = false;
 					backFlag = false;
@@ -174,8 +180,14 @@ void GameScene::SceneChange()
 					objectAge = FUTURE;
 					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
 					{
-						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)continue;
-						gameobject2->SetDeathFlag(true);
+						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
+						{
+							gameobject2->SetAnimation(0);
+						}
+						else
+						{
+							gameobject2->SetDeathFlag(true);
+						}
 					}
 					createFlag = false;
 					backFlag = false;
@@ -186,7 +198,6 @@ void GameScene::SceneChange()
 					objectAge = ANCIENT;
 					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
 					{
-						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)continue;
 						gameobject2->SetDeathFlag(true);
 					}
 					createFlag = false;

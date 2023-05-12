@@ -16,7 +16,8 @@ void Player::Initialize()
 	objState = GameObject::IDLE;
 	position = { 300,300 };
 	r = 8;
-	player = LoadGraph("Resource/Playeranime.png"); // �`��
+	playerAncient = LoadGraph("Resource/Playeranime.png"); // �`��
+	playerModern = LoadGraph("Resource/PlayerModern.png"); // �`��
 	ancientHP = LoadGraph("Resource/ancienthp.png"); // �`��
 	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
 	futureHP = LoadGraph("Resource/ancienthp.png"); // �`��
@@ -59,23 +60,18 @@ void Player::Draw()
 		invincibleTime >= 45 && invincibleTime <= 48 ||
 		invincibleTime >= 51 && invincibleTime <= 54)
 	{
-		//DrawExtendGraph(position.x - r, position.y - r, position.x + r, position.y + r, player, TRUE);
-		DrawRectGraph(position.x - r*2, position.y - r * 2, animeount * 64, 0, 64, 64, player, TRUE, FALSE);
+		if (objectAge == ANCIENT)
+		{
+			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
+		}
+		else
+		{
+			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerModern, TRUE, FALSE);
+		}
+		
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 		{
-			//�A�j���[�V����**************************************************
-			animation = animation + 1;
-
-			if (animation > 3)
-			{
-				animeount = animeount + 1;
-				animation = 0;
-				if (animeount >= 3)
-				{
-					animeount = 0;
-				}
-			}
-			DrawRectGraph(position.x - r*2, position.y - r * 2, animeount * 64, 0, 64, 64, player, TRUE, FALSE);
+			Animation();
 		}
 	}
 }
@@ -183,5 +179,37 @@ void Player::HitAction(GameObject* gameObject)
 				SetCannonFlag(false);
 			}
 		}
+	}
+}
+
+void Player::Animation()
+{
+	animation = animation + 1;
+
+	if (objectAge == ANCIENT)
+	{
+		if (animation > 3)
+		{
+			animeCount = animeCount + 1;
+			animation = 0;
+			if (animeCount >= 3)
+			{
+				animeCount = 0;
+			}
+		}
+		DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
+	}
+	else
+	{
+		if (animation > 2)
+		{
+			animeCount = animeCount + 1;
+			animation = 0;
+			if (animeCount >= 2)
+			{
+				animeCount = 0;
+			}
+		}
+		DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerModern, TRUE, FALSE);
 	}
 }
