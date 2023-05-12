@@ -56,13 +56,18 @@ private:
 
 	XMFLOAT2 backPos = { 0,0 };
 	XMFLOAT2 backPos2 = { 1280,0 };
+	XMFLOAT2 changePos = { 1280,0 };
 	int title;
 	int ancientback;
 	int modernback;
 	int futureback;
+	int changeback;
 	int clear;
 	int over;
 	int keyCount = 0;
+	bool changeFlag = false;
+	bool backFlag = false;
+	bool flagCount = false;
 	bool createFlag = false;
 };
 

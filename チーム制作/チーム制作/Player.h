@@ -1,6 +1,7 @@
 #pragma once
 #include"GameObject.h"
 #include"PlayerBullet.h"
+#include"PlayerModernBullet.h"
 class Player : public GameObject
 {
 public:

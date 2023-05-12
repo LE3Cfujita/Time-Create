@@ -18,6 +18,7 @@ void GameScene::Initialize()
 	ancientback = LoadGraph("Resource/ancientback.png"); // �`��
 	modernback = LoadGraph("Resource/modernback.png"); // �`��
 	futureback = LoadGraph("Resource/futurenack.png"); // �`��
+	changeback = LoadGraph("Resource/ageChange.png");
 	clear = LoadGraph("Resource/GameClear.png"); // �`��
 	over = LoadGraph("Resource/GameOver.png"); // �`��
 	objectAge == ANCIENT;
@@ -68,6 +69,11 @@ void GameScene::Draw()
 			DrawGraph(backPos2.x, backPos2.y, futureback, true);
 		}
 		gameObjectManager->Draw();
+		if (changeFlag == true)
+		{
+			DrawGraph(changePos.x, changePos.y, changeback, true);
+		}
+
 		break;
 	case CLEA://�N���A
 		DrawGraph(0, 0, clear, FALSE);
@@ -126,7 +132,7 @@ void GameScene::EnemyCreate()
 	enemy->BaseInitialize(gameObjectManager->GetGameObjects());
 	enemy->Initialize();
 	gameObjectManager->AddGameObject(enemy);
-	createFlag = 1;
+	createFlag = true;
 }
 
 void GameScene::SceneChange()
@@ -146,40 +152,71 @@ void GameScene::SceneChange()
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::ENEMY)
 		{
 			eHP = gameobject->GetHP();
-			if (eHP == 0 && gameobject->GetObjectAge() == GameObject::OBJAGE::ANCIENT)
+			if (eHP == 0)
 			{
-				objectAge = MODERN;
-				createFlag = false;
-				gameobject->SetDeathFlag(true);
+				changeFlag = true;
 			}
-			else if (eHP == 0 && gameobject->GetObjectAge() == GameObject::OBJAGE::MODERN)
+			if (backFlag == true)
 			{
-				objectAge = FUTURE;
-				createFlag = false;
-				gameobject->SetDeathFlag(true);
-			}
-			else if (eHP == 0 && gameobject->GetObjectAge() == GameObject::OBJAGE::FUTURE)
-			{
-				gameState = CLEA;
-				objectAge = ANCIENT;
-				createFlag = false;
-				gameobject->SetDeathFlag(true);
+				if (gameobject->GetObjectAge() == GameObject::OBJAGE::ANCIENT)
+				{
+					objectAge = MODERN;
+					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
+					{
+						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)continue;
+						gameobject2->SetDeathFlag(true);
+					}
+					createFlag = false;
+					backFlag = false;
+				}
+				else if (gameobject->GetObjectAge() == GameObject::OBJAGE::MODERN)
+				{
+					objectAge = FUTURE;
+					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
+					{
+						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)continue;
+						gameobject2->SetDeathFlag(true);
+					}
+					createFlag = false;
+					backFlag = false;
+				}
+				else if (gameobject->GetObjectAge() == GameObject::OBJAGE::FUTURE)
+				{
+					gameState = CLEA;
+					objectAge = ANCIENT;
+					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
+					{
+						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)continue;
+						gameobject2->SetDeathFlag(true);
+					}
+					createFlag = false;
+					backFlag = false;
+				}
+				gameObjectManager->Update();
 			}
 		}
-		if (objectAge == ANCIENT)
+		if (changePos.x <= 0)
 		{
-			EnemyCreate();
-			gameobject->SetObjAge(GameObject::OBJAGE::ANCIENT);
-		}
-		else if (objectAge == MODERN)
-		{
-			EnemyCreate();
-			gameobject->SetObjAge(GameObject::OBJAGE::MODERN);
-		}
-		else if (objectAge == FUTURE)
-		{
-			EnemyCreate();
-			gameobject->SetObjAge(GameObject::OBJAGE::FUTURE);
+			if (flagCount == false)
+			{
+				backFlag = true;
+				flagCount = true;
+			}
+			if (objectAge == ANCIENT)
+			{
+				EnemyCreate();
+				gameobject->SetObjAge(GameObject::OBJAGE::ANCIENT);
+			}
+			else if (objectAge == MODERN)
+			{
+				EnemyCreate();
+				gameobject->SetObjAge(GameObject::OBJAGE::MODERN);
+			}
+			else if (objectAge == FUTURE)
+			{
+				EnemyCreate();
+				gameobject->SetObjAge(GameObject::OBJAGE::FUTURE);
+			}
 		}
 	}
 }
@@ -195,5 +232,13 @@ void GameScene::BackgroundScroll()
 	if (backPos2.x <= -1280)
 	{
 		backPos2.x = 1280;
+	}
+	if (changeFlag == false)return;
+	changePos.x -= 30;
+	if (changePos.x <= -1280)
+	{
+		changeFlag = false;
+		flagCount = false;
+		changePos.x = 1280;
 	}
 }

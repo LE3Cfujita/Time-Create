@@ -12,10 +12,10 @@ Player::~Player()
 void Player::Initialize()
 {
 	objectMember = GameObject::PLAYER;//�v���C���[
-	objectAge = GameObject::MODERN;//�Ñ�
+	objectAge = GameObject::ANCIENT;//�Ñ�
 	objState = GameObject::IDLE;
 	position = { 300,300 };
-	r = 16;
+	r = 8;
 	player = LoadGraph("Resource/Playeranime.png"); // �`��
 	ancientHP = LoadGraph("Resource/ancienthp.png"); // �`��
 	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
@@ -122,10 +122,20 @@ void Player::Attack()
 	{
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
 		{
-			PlayerBullet* bullet = new PlayerBullet();
-			bullet->BaseInitialize(referenceGameObjects);
-			bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-			addGameObjects.push_back(bullet);
+			if (objectAge == ANCIENT)
+			{
+				PlayerBullet* bullet = new PlayerBullet();
+				bullet->BaseInitialize(referenceGameObjects);
+				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+				addGameObjects.push_back(bullet);
+			}
+			else
+			{
+				PlayerModernBullet* bullet = new PlayerModernBullet();
+				bullet->BaseInitialize(referenceGameObjects);
+				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+				addGameObjects.push_back(bullet);
+			}
 			timeFlag = true;
 		}
 	}

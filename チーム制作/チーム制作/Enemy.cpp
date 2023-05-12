@@ -11,6 +11,7 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	objectMember = GameObject::ENEMY;
+	objectAge = GameObject::ANCIENT;
 	objState = GameObject::IDLE;
 	position = { 1400,600 };
 	r = 128;
@@ -195,9 +196,5 @@ void Enemy::HitAction(GameObject* gameObject)
 	{
 		HP--;
 		gameObject->SetDeathFlag(true);
-		if (HP <= 0)
-		{
-			objState = DEATH;
-		}
 	}
 }
