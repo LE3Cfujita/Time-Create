@@ -33,6 +33,6 @@ private:
 	int enemy;
 
 	bool move = true;
-	bool moveCount = true;
+	bool moveFlag = true;
 };
 

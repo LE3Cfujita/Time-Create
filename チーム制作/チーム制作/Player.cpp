@@ -152,15 +152,15 @@ void Player::HitAction(GameObject* gameObject)
 {
 	if (invincibleFlag == false)
 	{
-		if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBULLET ||
-			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYFIRE ||
-			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBALKAN ||
-			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYCANNON)
+		if (gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBULLET ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYFIRE ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBALKAN ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON)
 		{
 			HP--;
 			invincibleFlag = true;
 			gameObject->SetDeathFlag(true);
-			if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYCANNON)
+			if (gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON)
 			{
 				for (GameObject* gameObject2 : referenceGameObjects)
 				{

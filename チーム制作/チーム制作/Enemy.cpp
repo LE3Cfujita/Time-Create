@@ -17,7 +17,8 @@ void Enemy::Initialize()
 	enemy = LoadGraph("Resource/Enemy.png"); // �`��
 	time = 100;
 	HP = 50;
-	moveCount = true;
+	moveFlag = true;
+	timeFlag = true;
 }
 
 void Enemy::Update()
@@ -35,6 +36,7 @@ void Enemy::Update()
 		MODERNAttack();
 		break;
 	case FUTURE://�����U��
+		ANCIENTAttack();
 		break;
 	}
 }
@@ -120,13 +122,14 @@ void Enemy::Move()
 	{
 		position.y += 3;
 	}
-	if (moveCount == true)
+	if (moveFlag == true)
 	{
-		position.x -= 10;
+		position.x -= 5;
+		move = true;
 	}
 	if (position.x <= 1100)
 	{
-		moveCount == false;
+		moveFlag = false;
 	}
 }
 
@@ -187,20 +190,13 @@ void Enemy::AimAttack()
 
 void Enemy::HitAction(GameObject* gameObject)
 {
-	if (gameObject->GetObjectMenber() == OBJECTMEMBER::PLAYERBULLET)
+	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
 	{
-		//deathFlag = true;
+		HP--;
 		gameObject->SetDeathFlag(true);
-		for (GameObject* gameObject : referenceGameObjects)
+		if (HP <= 0)
 		{
-			if (gameObject->GetObjectAge() == OBJAGE::ANCIENT)
-			{
-				gameObject->SetObjAge(GameObject::OBJAGE::MODERN);
-			}
-			else if (gameObject->GetObjectAge() == OBJAGE::MODERN)
-			{
-				gameObject->SetObjAge(GameObject::OBJAGE::FUTURE);
-			}
+			objState = DEATH;
 		}
 	}
 }

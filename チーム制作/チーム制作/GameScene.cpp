@@ -13,14 +13,14 @@ void GameScene::Initialize()
 	gameObjectManager->Intialize();
 
 	gameState = TITLE;
-	//�摜�Ȃǂ̃��\�[�X�f�[�^�̕ϐ��錾�Ɠǂݍ���
 
-	title=LoadGraph("Resource/TITLE.png"); // �`��
+	title = LoadGraph("Resource/TITLE.png"); // �`��
 	ancientback = LoadGraph("Resource/ancientback.png"); // �`��
-	modernback= LoadGraph("Resource/modernback.png"); // �`��
-	futureback=LoadGraph("Resource/futurenack.png"); // �`��
-	clear=LoadGraph("Resource/GameClear.png"); // �`��
-	over=LoadGraph("Resource/GameOver.png"); // �`��
+	modernback = LoadGraph("Resource/modernback.png"); // �`��
+	futureback = LoadGraph("Resource/futurenack.png"); // �`��
+	clear = LoadGraph("Resource/GameClear.png"); // �`��
+	over = LoadGraph("Resource/GameOver.png"); // �`��
+	objectAge == ANCIENT;
 }
 
 void GameScene::Update()
@@ -52,8 +52,21 @@ void GameScene::Draw()
 		DrawGraph(0, 0, title, FALSE);
 		break;
 	case PLAY://�Q�[���v���C
-		DrawGraph(backPos.x, backPos.y, modernback, true);
-		DrawGraph(backPos2.x, backPos2.y, modernback, true);
+		if (objectAge == ANCIENT)
+		{
+			DrawGraph(backPos.x, backPos.y, ancientback, true);
+			DrawGraph(backPos2.x, backPos2.y, ancientback, true);
+		}
+		if (objectAge == MODERN)
+		{
+			DrawGraph(backPos.x, backPos.y, modernback, true);
+			DrawGraph(backPos2.x, backPos2.y, modernback, true);
+		}
+		if (objectAge == FUTURE)
+		{
+			DrawGraph(backPos.x, backPos.y, futureback, true);
+			DrawGraph(backPos2.x, backPos2.y, futureback, true);
+		}
 		gameObjectManager->Draw();
 		break;
 	case CLEA://�N���A
@@ -68,14 +81,14 @@ void GameScene::Draw()
 
 void GameScene::ChangeScene()
 {
-	if (CheckHitKey(KEY_INPUT_SPACE) == 1&& keyCount==0)
+	if (CheckHitKey(KEY_INPUT_SPACE) == 1 && keyCount == 0)
 	{
 		if (gameState == TITLE)
 		{
 			gameState = PLAY;
-			ObjCreate();
+			PlayerCreate();
 		}
-		else if (gameState == CLEA|| gameState == OVER)
+		else if (gameState == CLEA || gameState == OVER)
 		{
 			for (GameObject* gameobject : gameObjectManager->GetGameObjects())
 			{
@@ -93,21 +106,27 @@ void GameScene::ChangeScene()
 
 }
 
-void GameScene::ObjCreate()
+void GameScene::PlayerCreate()
 {
-	//�v���C���[
+	//プレイヤー生成
 	Player* player = nullptr;
 	player = new Player();
 	player->BaseInitialize(gameObjectManager->GetGameObjects());
 	player->Initialize();
 	gameObjectManager->AddGameObject(player);
+	EnemyCreate();
+}
 
-	//�G
+void GameScene::EnemyCreate()
+{
+	//敵生成
+	if (createFlag == true)return;
 	Enemy* enemy = nullptr;
 	enemy = new Enemy();
 	enemy->BaseInitialize(gameObjectManager->GetGameObjects());
 	enemy->Initialize();
 	gameObjectManager->AddGameObject(enemy);
+	createFlag = 1;
 }
 
 void GameScene::SceneChange()
@@ -115,7 +134,7 @@ void GameScene::SceneChange()
 	int pHP = 0;
 	int eHP = 0;
 	for (GameObject* gameobject : gameObjectManager->GetGameObjects())
-	{		
+	{
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
 		{
 			pHP = gameobject->GetHP();
@@ -130,38 +149,39 @@ void GameScene::SceneChange()
 			if (eHP == 0 && gameobject->GetObjectAge() == GameObject::OBJAGE::ANCIENT)
 			{
 				objectAge = MODERN;
+				createFlag = false;
+				gameobject->SetDeathFlag(true);
 			}
 			else if (eHP == 0 && gameobject->GetObjectAge() == GameObject::OBJAGE::MODERN)
 			{
 				objectAge = FUTURE;
+				createFlag = false;
+				gameobject->SetDeathFlag(true);
 			}
-			else if (eHP == 0&&gameobject->GetObjectAge() == GameObject::OBJAGE::FUTURE)
+			else if (eHP == 0 && gameobject->GetObjectAge() == GameObject::OBJAGE::FUTURE)
 			{
 				gameState = CLEA;
 				objectAge = ANCIENT;
+				createFlag = false;
+				gameobject->SetDeathFlag(true);
 			}
 		}
 		if (objectAge == ANCIENT)
 		{
+			EnemyCreate();
 			gameobject->SetObjAge(GameObject::OBJAGE::ANCIENT);
 		}
 		else if (objectAge == MODERN)
 		{
+			EnemyCreate();
 			gameobject->SetObjAge(GameObject::OBJAGE::MODERN);
 		}
 		else if (objectAge == FUTURE)
 		{
+			EnemyCreate();
 			gameobject->SetObjAge(GameObject::OBJAGE::FUTURE);
 		}
-			if (eHP == 0&&gameobject->GetObjectAge() == GameObject::OBJAGE::FUTURE)
-			{
-				gameState = CLEA;
-			}
-
-		}
-
 	}
-	
 }
 
 void GameScene::BackgroundScroll()

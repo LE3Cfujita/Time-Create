@@ -41,7 +41,9 @@ public:
 
 	void ChangeScene();//シーン切り替え
 
-	void ObjCreate();
+	void PlayerCreate();
+
+	void EnemyCreate();
 
 	void SceneChange();//ゲーム中シーン切り替え
 
@@ -61,6 +63,6 @@ private:
 	int clear;
 	int over;
 	int keyCount = 0;
-
+	bool createFlag = false;
 };
 

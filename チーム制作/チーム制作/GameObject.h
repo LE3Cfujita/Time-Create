@@ -138,8 +138,14 @@ public:
 
 	std::vector<GameObject*> referenceGameObjects;
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
 	OBJECTMEMBER GetObjectMember() { return objectMember; }
-	OBJAGE GetObjectState() { return objectAge; }
+
+
+	OBJAGE GetObjectAge() { return objectAge; }
 
 	/// <summary>
 	/// ˆÊ’uŽæ“¾
@@ -203,19 +209,11 @@ public:
 
 	void SetDeathFlag(bool deathFlag) { this->deathFlag = deathFlag; }
 
-	void SetObjAge(OBJAGE objAge) { this->objectAge = objectAge; }
+	void SetObjAge(OBJAGE objAge) { this->objectAge = objAge; }
 
 	void SetCannonFlag(bool cannonFlag) { this->cannonFlag = cannonFlag; }
 
 	bool GetHP() { return HP; }
 
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <returns></returns>
-	OBJECTMEMBER GetObjectMenber() { return objectMember; }
-
-
-	OBJAGE GetObjectAge() { return objectAge; }
 };
 
