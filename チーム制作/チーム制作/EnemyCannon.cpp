@@ -11,7 +11,7 @@ EnemyCannon::~EnemyCannon()
 void EnemyCannon::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::ENEMYCANNON;
-	position = { pos.x,pos.y};
+	position = { pos.x - r,pos.y - r };
 	r = 64;
 	bullet = LoadGraph("Resource/EnemyCannon.png"); // •`‰æ
 	bulletSpeed = 15;

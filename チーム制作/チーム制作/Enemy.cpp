@@ -16,6 +16,7 @@ void Enemy::Initialize()
 	position = { 1400,600 };
 	r = 128;
 	ancientEnemy = LoadGraph("Resource/Enemy.png"); // �`��
+	modernEnemy = LoadGraph("Resource/EnemyModern.png");
 	time = 100;
 	HP = 50;
 	moveFlag = true;
@@ -50,10 +51,10 @@ void Enemy::Draw()
 		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, ancientEnemy, TRUE);
 		break;
 	case MODERN://����G
-		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, ancientEnemy, TRUE);
+		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, modernEnemy, TRUE);
 		break;
 	case FUTURE://�����G
-		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, ancientEnemy, TRUE);
+		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, modernEnemy, TRUE);
 		break;
 	}
 }

@@ -31,6 +31,7 @@ private:
 	int moveCount = 0;//0‚Ìê‡ãˆÚ“®
 
 	int ancientEnemy;
+	int modernEnemy;
 
 	bool move = true;
 	bool moveFlag = true;
