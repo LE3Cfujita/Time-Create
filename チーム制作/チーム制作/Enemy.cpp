@@ -14,11 +14,12 @@ void Enemy::Initialize()
 	objState = GameObject::IDLE;
 	position = { 1400,600 };
 	r = 128;
-	enemy = LoadGraph("Resource/Enemy.png"); // �`��
+	ancientEnemy = LoadGraph("Resource/Enemy.png"); // �`��
 	time = 100;
 	HP = 50;
 	moveFlag = true;
 	timeFlag = true;
+	move = true;
 }
 
 void Enemy::Update()
@@ -36,7 +37,6 @@ void Enemy::Update()
 		MODERNAttack();
 		break;
 	case FUTURE://�����U��
-		ANCIENTAttack();
 		break;
 	}
 }
@@ -46,12 +46,13 @@ void Enemy::Draw()
 	switch (objectAge)
 	{
 	case ANCIENT://�Ñ�G
-		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, enemy, TRUE);
+		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, ancientEnemy, TRUE);
 		break;
 	case MODERN://����G
-		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, enemy, TRUE);
+		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, ancientEnemy, TRUE);
 		break;
 	case FUTURE://�����G
+		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, ancientEnemy, TRUE);
 		break;
 	}
 }
