@@ -22,6 +22,7 @@ void GameScene::Initialize()
 	clear = LoadGraph("Resource/GameClear.png"); // �`��
 	over = LoadGraph("Resource/GameOver.png"); // �`��
 	objectAge == ANCIENT;
+	createFlag = false;
 }
 
 void GameScene::Update()
@@ -102,6 +103,7 @@ void GameScene::ChangeScene()
 			}
 			gameState = TITLE;
 			gameObjectManager->Update();
+			Initialize();
 		}
 		keyCount = 1;
 	}
