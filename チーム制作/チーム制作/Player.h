@@ -1,6 +1,7 @@
 #pragma once
 #include"GameObject.h"
 #include"PlayerBullet.h"
+#include"PlayerModernBullet.h"
 class Player : public GameObject
 {
 public:
@@ -18,8 +19,11 @@ private:
 	void Attack();//UŒ‚
 	void Invincible();//–³“G
 	void HitAction(GameObject* gameObject);
+	void Animation();
 
-	int player;//•`‰æ—p
+
+	int playerAncient;//•`‰æ—p
+	int playerModern;
 	int ancientHP;//•`‰æ—p
 	int modernHP;//•`‰æ—p
 	int futureHP;//•`‰æ—p

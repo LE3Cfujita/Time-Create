@@ -41,7 +41,9 @@ public:
 
 	void ChangeScene();//シーン切り替え
 
-	void ObjCreate();
+	void PlayerCreate();
+
+	void EnemyCreate();
 
 	void SceneChange();//ゲーム中シーン切り替え
 
@@ -54,13 +56,18 @@ private:
 
 	XMFLOAT2 backPos = { 0,0 };
 	XMFLOAT2 backPos2 = { 1280,0 };
+	XMFLOAT2 changePos = { 1280,0 };
 	int title;
 	int ancientback;
 	int modernback;
 	int futureback;
+	int changeback;
 	int clear;
 	int over;
 	int keyCount = 0;
-
+	bool changeFlag = false;
+	bool backFlag = false;
+	bool flagCount = false;
+	bool createFlag = false;
 };
 

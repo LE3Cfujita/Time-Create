@@ -12,11 +12,12 @@ Player::~Player()
 void Player::Initialize()
 {
 	objectMember = GameObject::PLAYER;//�v���C���[
-	objectAge = GameObject::MODERN;//�Ñ�
+	objectAge = GameObject::ANCIENT;//�Ñ�
 	objState = GameObject::IDLE;
 	position = { 300,300 };
-	r = 16;
-	player = LoadGraph("Resource/Playeranime.png"); // �`��
+	r = 8;
+	playerAncient = LoadGraph("Resource/Playeranime.png"); // �`��
+	playerModern = LoadGraph("Resource/PlayerModern.png"); // �`��
 	ancientHP = LoadGraph("Resource/ancienthp.png"); // �`��
 	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
 	futureHP = LoadGraph("Resource/ancienthp.png"); // �`��
@@ -59,23 +60,18 @@ void Player::Draw()
 		invincibleTime >= 45 && invincibleTime <= 48 ||
 		invincibleTime >= 51 && invincibleTime <= 54)
 	{
-		//DrawExtendGraph(position.x - r, position.y - r, position.x + r, position.y + r, player, TRUE);
-		DrawRectGraph(position.x - r*2, position.y - r * 2, animeount * 64, 0, 64, 64, player, TRUE, FALSE);
+		if (objectAge == ANCIENT)
+		{
+			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
+		}
+		else
+		{
+			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerModern, TRUE, FALSE);
+		}
+		
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 		{
-			//�A�j���[�V����**************************************************
-			animation = animation + 1;
-
-			if (animation > 3)
-			{
-				animeount = animeount + 1;
-				animation = 0;
-				if (animeount >= 3)
-				{
-					animeount = 0;
-				}
-			}
-			DrawRectGraph(position.x - r*2, position.y - r * 2, animeount * 64, 0, 64, 64, player, TRUE, FALSE);
+			Animation();
 		}
 	}
 }
@@ -122,10 +118,20 @@ void Player::Attack()
 	{
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
 		{
-			PlayerBullet* bullet = new PlayerBullet();
-			bullet->BaseInitialize(referenceGameObjects);
-			bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-			addGameObjects.push_back(bullet);
+			if (objectAge == ANCIENT)
+			{
+				PlayerBullet* bullet = new PlayerBullet();
+				bullet->BaseInitialize(referenceGameObjects);
+				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+				addGameObjects.push_back(bullet);
+			}
+			else
+			{
+				PlayerModernBullet* bullet = new PlayerModernBullet();
+				bullet->BaseInitialize(referenceGameObjects);
+				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+				addGameObjects.push_back(bullet);
+			}
 			timeFlag = true;
 		}
 	}
@@ -152,15 +158,15 @@ void Player::HitAction(GameObject* gameObject)
 {
 	if (invincibleFlag == false)
 	{
-		if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBULLET ||
-			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYFIRE ||
-			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYBALKAN ||
-			gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYCANNON)
+		if (gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBULLET ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYFIRE ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBALKAN ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON)
 		{
 			HP--;
 			invincibleFlag = true;
 			gameObject->SetDeathFlag(true);
-			if (gameObject->GetObjectMenber() == OBJECTMEMBER::ENEMYCANNON)
+			if (gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON)
 			{
 				for (GameObject* gameObject2 : referenceGameObjects)
 				{
@@ -173,5 +179,37 @@ void Player::HitAction(GameObject* gameObject)
 				SetCannonFlag(false);
 			}
 		}
+	}
+}
+
+void Player::Animation()
+{
+	animation = animation + 1;
+
+	if (objectAge == ANCIENT)
+	{
+		if (animation > 3)
+		{
+			animeCount = animeCount + 1;
+			animation = 0;
+			if (animeCount >= 3)
+			{
+				animeCount = 0;
+			}
+		}
+		DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
+	}
+	else
+	{
+		if (animation > 2)
+		{
+			animeCount = animeCount + 1;
+			animation = 0;
+			if (animeCount >= 2)
+			{
+				animeCount = 0;
+			}
+		}
+		DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerModern, TRUE, FALSE);
 	}
 }

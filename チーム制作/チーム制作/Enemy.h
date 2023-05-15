@@ -30,9 +30,10 @@ private:
 
 	int moveCount = 0;//0‚Ìê‡ãˆÚ“®
 
-	int enemy;
+	int ancientEnemy;
+	int modernEnemy;
 
 	bool move = true;
-	bool moveCount = true;
+	bool moveFlag = true;
 };
 

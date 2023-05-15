@@ -11,13 +11,17 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	objectMember = GameObject::ENEMY;
+	objectAge = GameObject::ANCIENT;
 	objState = GameObject::IDLE;
 	position = { 1400,600 };
 	r = 128;
-	enemy = LoadGraph("Resource/Enemy.png"); // �`��
+	ancientEnemy = LoadGraph("Resource/Enemy.png"); // �`��
+	modernEnemy = LoadGraph("Resource/EnemyModern.png");
 	time = 100;
 	HP = 50;
-	moveCount = true;
+	moveFlag = true;
+	timeFlag = true;
+	move = true;
 }
 
 void Enemy::Update()
@@ -44,12 +48,13 @@ void Enemy::Draw()
 	switch (objectAge)
 	{
 	case ANCIENT://�Ñ�G
-		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, enemy, TRUE);
+		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, ancientEnemy, TRUE);
 		break;
 	case MODERN://����G
-		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, enemy, TRUE);
+		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, modernEnemy, TRUE);
 		break;
 	case FUTURE://�����G
+		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, modernEnemy, TRUE);
 		break;
 	}
 }
@@ -120,13 +125,14 @@ void Enemy::Move()
 	{
 		position.y += 3;
 	}
-	if (moveCount == true)
+	if (moveFlag == true)
 	{
-		position.x -= 10;
+		position.x -= 5;
+		move = true;
 	}
 	if (position.x <= 1100)
 	{
-		moveCount == false;
+		moveFlag = false;
 	}
 }
 
@@ -187,20 +193,9 @@ void Enemy::AimAttack()
 
 void Enemy::HitAction(GameObject* gameObject)
 {
-	if (gameObject->GetObjectMenber() == OBJECTMEMBER::PLAYERBULLET)
+	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
 	{
-		//deathFlag = true;
+		HP--;
 		gameObject->SetDeathFlag(true);
-		for (GameObject* gameObject : referenceGameObjects)
-		{
-			if (gameObject->GetObjectAge() == OBJAGE::ANCIENT)
-			{
-				gameObject->SetObjAge(GameObject::OBJAGE::MODERN);
-			}
-			else if (gameObject->GetObjectAge() == OBJAGE::MODERN)
-			{
-				gameObject->SetObjAge(GameObject::OBJAGE::FUTURE);
-			}
-		}
 	}
 }

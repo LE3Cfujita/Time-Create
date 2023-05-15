@@ -77,7 +77,7 @@ protected:
 	int HP;//‘Ì—Í
 
 	int animation;
-	int animeount;
+	int animeCount;
 public:
 	GameObject() {}
 	virtual ~GameObject() {
@@ -120,7 +120,7 @@ public:
 		L = 0;
 
 		animation = 0;
-		animeount = 0;
+		animeCount = 0;
 
 		std::vector<GameObject*>().swap(addGameObjects);
 		this->referenceGameObjects = referenceGameObjects;
@@ -138,8 +138,14 @@ public:
 
 	std::vector<GameObject*> referenceGameObjects;
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
 	OBJECTMEMBER GetObjectMember() { return objectMember; }
-	OBJAGE GetObjectState() { return objectAge; }
+
+
+	OBJAGE GetObjectAge() { return objectAge; }
 
 	/// <summary>
 	/// ˆÊ’uŽæ“¾
@@ -203,19 +209,14 @@ public:
 
 	void SetDeathFlag(bool deathFlag) { this->deathFlag = deathFlag; }
 
-	void SetObjAge(OBJAGE objAge) { this->objectAge = objectAge; }
+	void SetObjAge(OBJAGE objAge) { this->objectAge = objAge; }
 
 	void SetCannonFlag(bool cannonFlag) { this->cannonFlag = cannonFlag; }
 
 	bool GetHP() { return HP; }
 
-	/// <summary>
-	/// 
-	/// </summary>
-	/// <returns></returns>
-	OBJECTMEMBER GetObjectMenber() { return objectMember; }
 
+	void SetAnimation(int animeCount) { this->animeCount = animeCount; }
 
-	OBJAGE GetObjectAge() { return objectAge; }
 };
 
