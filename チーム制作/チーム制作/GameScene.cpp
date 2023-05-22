@@ -21,7 +21,7 @@ void GameScene::Initialize()
 	changeback = LoadGraph("Resource/ageChange.png");
 	clear = LoadGraph("Resource/GameClear.png"); // �`��
 	over = LoadGraph("Resource/GameOver.png"); // �`��
-	objectAge == ANCIENT;
+	objectAge == FUTURE;
 	createFlag = false;
 }
 

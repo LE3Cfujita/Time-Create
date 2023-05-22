@@ -19,6 +19,7 @@ public:
 		ENEMYFIRE,//“G‚Ì‰Î(ŒÃ‘ã)
 		ENEMYBALKAN,//“G‚Ìƒoƒ‹ƒJƒ“(Œ»‘ã)
 		ENEMYCANNON,//“G‚Ì‘å–C(Œ»‘ã)
+		ENEMYBEAM,//“G‚Ìƒr[ƒ€(–¢—ˆ)
 	};
 	enum OBJAGE
 	{
@@ -76,6 +77,14 @@ protected:
 
 	int HP;//‘Ì—Í
 
+
+	bool move;
+	bool beamFlag;
+	bool predictionFlag;
+	bool beamCount;
+
+	int beamCT = 0;
+
 	int animation;
 	int animeCount;
 public:
@@ -118,6 +127,12 @@ public:
 		dy = 0;
 		da = 0;
 		L = 0;
+
+
+		move = true;
+		beamFlag = false;
+		predictionFlag = false;
+		beamCount = false;
 
 		animation = 0;
 		animeCount = 0;
@@ -217,6 +232,12 @@ public:
 
 
 	void SetAnimation(int animeCount) { this->animeCount = animeCount; }
+
+
+	void SetMove(bool move) { this->move = move; }
+	void SetBeamFlag(bool beamFlag) { this->beamFlag = beamFlag; }
+	void SetPredictionFlag(bool predictionFlag) { this->predictionFlag = predictionFlag; }
+	void SetBeamCount(bool beamCount) { this->beamCount = beamCount; }
 
 };
 

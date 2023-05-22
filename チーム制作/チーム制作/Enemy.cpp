@@ -17,8 +17,9 @@ void Enemy::Initialize()
 	r = 128;
 	ancientEnemy = LoadGraph("Resource/Enemy.png"); // �`��
 	modernEnemy = LoadGraph("Resource/EnemyModern.png");
+	prediction = LoadGraph("Resource/prediction.png");
 	time = 100;
-	HP = 50;
+	HP = 10;
 	moveFlag = true;
 	timeFlag = true;
 	move = true;
@@ -39,6 +40,7 @@ void Enemy::Update()
 		MODERNAttack();
 		break;
 	case FUTURE://�����U��
+		FUTUREAttack();
 		break;
 	}
 }
@@ -55,6 +57,10 @@ void Enemy::Draw()
 		break;
 	case FUTURE://�����G
 		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, modernEnemy, TRUE);
+		if (predictionFlag == true)
+		{
+			DrawGraph(position.x - 1100, position.y - 260, prediction, TRUE);
+		}
 		break;
 	}
 }
@@ -104,6 +110,22 @@ void Enemy::MODERNAttack()
 		if (time <= rand() % 120 + 180)return;
 		move = false;
 		time = 0;
+	}
+}
+
+void Enemy::FUTUREAttack()
+{
+	if (move == true)
+	{
+		beamCT++;
+	}
+	if (beamCT >= 300)
+	{
+		if (position.y >= 340 && position.y <= 380)
+		{
+			BeamAttack();
+			move = false;
+		}
 	}
 }
 
@@ -189,6 +211,28 @@ void Enemy::AimAttack()
 	bullet->Initialize(position);
 	addGameObjects.push_back(bullet);
 	cannonFlag = true;
+}
+
+void Enemy::BeamAttack()
+{
+	if (beamCount == true)return;
+	if (beamFlag == false)
+	{
+		predictionFlag = true;
+		predictionTime++;
+		if (predictionTime < 60)return;
+		beamFlag = true;
+		predictionTime = 0;
+	}
+	else
+	{
+		EnemyBeam* bullet = new EnemyBeam();
+		bullet->BaseInitialize(referenceGameObjects);
+		bullet->Initialize(position);
+		addGameObjects.push_back(bullet);
+		beamCount = true;
+		beamCT = 0;
+	}
 }
 
 void Enemy::HitAction(GameObject* gameObject)

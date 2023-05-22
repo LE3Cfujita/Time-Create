@@ -4,6 +4,7 @@
 #include"EnemyFire.h"
 #include"EnemyBalkan.h"
 #include"EnemyCannon.h"
+#include"EnemyBeam.h"
 class Enemy : public GameObject
 {
 
@@ -20,11 +21,14 @@ public:
 private:
 	void ANCIENTAttack();
 	void MODERNAttack();
+	void FUTUREAttack();
 	void Move();
 	void BulletAttack();//’eUŒ‚
 	void FireAttack();//‰ÎUŒ‚
 	void BalkanAttack();//ƒoƒ‹ƒJƒ“UŒ‚
 	void AimAttack();//‘_‚¤UŒ‚
+	void BeamAttack();
+
 
 	void HitAction(GameObject* gameObject);
 
@@ -32,8 +36,9 @@ private:
 
 	int ancientEnemy;
 	int modernEnemy;
+	int prediction;
 
-	bool move = true;
 	bool moveFlag = true;
+	int predictionTime = 0;
 };
 
