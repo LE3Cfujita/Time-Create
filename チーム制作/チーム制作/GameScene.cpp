@@ -34,6 +34,7 @@ void GameScene::Update()
 		break;
 	case PLAY://�Q�[���v���C
 		BackgroundScroll();
+		PBCollision();
 		gameObjectManager->Update();
 		SceneChange();
 		break;
@@ -253,5 +254,52 @@ void GameScene::BackgroundScroll()
 		changeFlag = false;
 		flagCount = false;
 		changePos.x = 1280;
+	}
+}
+
+void GameScene::PBCollision()
+{
+	for (GameObject* gameobject : gameObjectManager->GetGameObjects())
+	{
+		if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
+		int HP = gameobject->GetHP();
+		XMFLOAT2 pos = gameobject->GetPosition();
+		float r = gameobject->GetRadius();
+		XMFLOAT2 pos2 = { pos.x + r * 2,pos.y + r * 2 };
+		for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
+		{
+			if (gameobject2->GetObjectMember() != GameObject::OBJECTMEMBER::ENEMYBEAM)continue;
+			XMFLOAT2 epos = gameobject2->GetPosition();
+			XMFLOAT2 epos2 = gameobject2->GetPosition2();
+			if (pos.x <= epos.x && pos2.x > epos.x)
+			{
+				if (pos.y <= epos2.y && pos2.y >= epos2.y)
+				{
+					gameobject->SetHP(HP--);
+				}
+				if (pos.y >= epos2.y && pos.y <= epos.y)
+				{
+					gameobject->SetHP(HP--);
+				}
+			}
+			if (pos.x >= epos.x && pos.x <= epos2.x)
+			{
+				if (pos.y <= epos2.y && pos2.y >= epos2.y)
+				{
+					gameobject->SetHP(HP--);
+				}
+				if (pos.y >= epos2.y && pos.y <= epos.y)
+				{
+					gameobject->SetHP(HP--);
+				}
+			}
+			if (pos.x >= epos.x && pos2.x <= epos2.x)
+			{
+				if (pos.y >= epos2.y && pos2.y <= epos.y)
+				{
+					gameobject->SetHP(HP--);
+				}
+			}
+		}
 	}
 }

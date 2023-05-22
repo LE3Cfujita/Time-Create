@@ -43,6 +43,7 @@ protected:
 	OBJAGE objectAge;
 	OBJSTATE objState;
 	XMFLOAT2 position;
+	XMFLOAT2 position2;
 	//移動量
 	XMFLOAT2 vel;
 	float r;//半径
@@ -100,6 +101,7 @@ public:
 
 		deathFlag = false;
 		position = { 0,0 };
+		position2 = { 0,0 };
 		vel = { 0,0 };
 		physicsFlag = false;
 		actionFlag = false;
@@ -167,6 +169,7 @@ public:
 	/// </summary>
 	/// <returns>位置</returns>
 	XMFLOAT2 GetPosition() { return position; }
+	XMFLOAT2 GetPosition2() { return position2; }
 
 	/// <summary>
 	/// 位置セット
@@ -228,6 +231,7 @@ public:
 
 	void SetCannonFlag(bool cannonFlag) { this->cannonFlag = cannonFlag; }
 
+	void SetHP(int HP) { this->HP = HP; }
 	bool GetHP() { return HP; }
 
 

@@ -159,7 +159,7 @@ void Player::HitAction(GameObject* gameObject)
 	if (invincibleFlag == false)
 	{
 		if (gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBULLET ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYFIRE ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYFIRE   ||
 			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBALKAN ||
 			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON)
 		{
