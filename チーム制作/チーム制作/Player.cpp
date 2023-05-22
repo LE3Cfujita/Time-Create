@@ -18,6 +18,7 @@ void Player::Initialize()
 	r = 8;
 	playerAncient = LoadGraph("Resource/Playeranime.png"); // �`��
 	playerModern = LoadGraph("Resource/PlayerModern.png"); // �`��
+	playerFuture = LoadGraph("Resource/PlayerFuture.png"); // �`��
 	ancientHP = LoadGraph("Resource/ancienthp.png"); // �`��
 	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
 	futureHP = LoadGraph("Resource/ancienthp.png"); // �`��
@@ -64,11 +65,26 @@ void Player::Draw()
 		{
 			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
 		}
-		else
+		else if (objectAge == MODERN)
 		{
 			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerModern, TRUE, FALSE);
 		}
-		
+		else
+		{
+			animation = animation + 1;
+			if (animation > 2)
+			{
+				animeCount = animeCount + 1;
+				animation = 0;
+				if (animeCount >= 2)
+				{
+					animeCount = 0;
+				}
+			}
+			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerFuture, TRUE, FALSE);
+
+		}
+
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 		{
 			Animation();
@@ -159,7 +175,7 @@ void Player::HitAction(GameObject* gameObject)
 	if (invincibleFlag == false)
 	{
 		if (gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBULLET ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYFIRE   ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYFIRE ||
 			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBALKAN ||
 			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON)
 		{
@@ -199,7 +215,7 @@ void Player::Animation()
 		}
 		DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
 	}
-	else
+	else if (objectAge == MODERN)
 	{
 		if (animation > 2)
 		{

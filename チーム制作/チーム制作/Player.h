@@ -24,6 +24,7 @@ private:
 
 	int playerAncient;//•`‰æ—p
 	int playerModern;
+	int playerFuture;
 	int ancientHP;//•`‰æ—p
 	int modernHP;//•`‰æ—p
 	int futureHP;//•`‰æ—p

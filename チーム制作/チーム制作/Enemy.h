@@ -28,13 +28,14 @@ private:
 	void BalkanAttack();//ƒoƒ‹ƒJƒ“UŒ‚
 	void AimAttack();//‘_‚¤UŒ‚
 	void BeamAttack();
-
+	void Animation();
 
 	void HitAction(GameObject* gameObject);
 
 	int moveCount = 0;//0‚Ìê‡ãˆÚ“®
 
 	int ancientEnemy;
+	int ancientEnemyanime;
 	int modernEnemy;
 	int prediction;
 

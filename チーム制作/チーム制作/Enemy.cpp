@@ -13,9 +13,10 @@ void Enemy::Initialize()
 	objectMember = GameObject::ENEMY;
 	objectAge = GameObject::ANCIENT;
 	objState = GameObject::IDLE;
-	position = { 1400,600 };
+	position = { 1000,600 };
 	r = 128;
 	ancientEnemy = LoadGraph("Resource/Enemy.png"); // �`��
+	ancientEnemyanime = LoadGraph("Resource/EnemyAnime.png"); // �`��
 	modernEnemy = LoadGraph("Resource/EnemyModern.png");
 	prediction = LoadGraph("Resource/prediction.png");
 	time = 100;
@@ -50,7 +51,7 @@ void Enemy::Draw()
 	switch (objectAge)
 	{
 	case ANCIENT://�Ñ�G
-		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, ancientEnemy, TRUE);
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 336, 0, 336, 192, ancientEnemyanime, TRUE, FALSE);
 		break;
 	case MODERN://����G
 		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, modernEnemy, TRUE);
@@ -68,8 +69,10 @@ void Enemy::Draw()
 void Enemy::ANCIENTAttack()
 {
 
+	
 	if (timeFlag == false)
 	{
+		Animation();
 		//int rad = rand() % 2;
 		//if (rad == 1)
 		//{
@@ -79,9 +82,6 @@ void Enemy::ANCIENTAttack()
 		//{
 		//	FireAttack();
 		//}
-		BulletAttack();//�e
-		FireAttack();//��
-		move = false;
 	}
 	else
 	{
@@ -166,7 +166,6 @@ void Enemy::BulletAttack()
 		bullet->BaseInitialize(referenceGameObjects);
 		bullet->Initialize(position, i);
 		addGameObjects.push_back(bullet);
-		timeFlag = true;
 	}
 
 }
@@ -179,7 +178,6 @@ void Enemy::FireAttack()
 	bullet->BaseInitialize(referenceGameObjects);
 	bullet->Initialize(position, 1);
 	addGameObjects.push_back(bullet);
-	timeFlag = true;
 	//}
 }
 
@@ -233,6 +231,26 @@ void Enemy::BeamAttack()
 		beamCount = true;
 		beamCT = 0;
 	}
+}
+
+void Enemy::Animation()
+{
+	animation = animation + 1;
+
+	if (animation > 4)
+	{
+		animeCount = animeCount + 1;
+		animation = 0;
+		if (animeCount >= 4)
+		{
+			timeFlag = true;
+			BulletAttack();//�e
+			FireAttack();//��
+			move = false;
+			animeCount = 0;
+		}
+	}
+	DrawRectGraph(position.x - r, position.y - r, animeCount * 336, 0, 336, 192, ancientEnemyanime, TRUE, FALSE);
 }
 
 void Enemy::HitAction(GameObject* gameObject)
