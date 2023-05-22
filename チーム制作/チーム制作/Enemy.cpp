@@ -20,7 +20,7 @@ void Enemy::Initialize()
 	modernEnemy = LoadGraph("Resource/EnemyModern.png");
 	prediction = LoadGraph("Resource/prediction.png");
 	time = 100;
-	HP = 20;
+	HP = 2;
 	moveFlag = true;
 	timeFlag = true;
 	move = true;
@@ -30,7 +30,7 @@ void Enemy::Update()
 {
 	if (move == true)
 	{
-		//Move();
+		Move();
 	}
 	switch (objectAge)
 	{

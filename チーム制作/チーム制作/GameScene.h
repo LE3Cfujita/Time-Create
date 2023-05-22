@@ -51,6 +51,9 @@ public:
 	void BackgroundScroll();//îwåiÉXÉNÉçÅ[Éã
 
 	void PBCollision();
+
+	void Invincible();
+
 private:
 	GameState gameState;
 	OBJAGE objectAge;
@@ -72,5 +75,7 @@ private:
 	bool backFlag = false;
 	bool flagCount = false;
 	bool createFlag = false;
+	bool invincibleFlag = false;
+	int invincibleTime = 0;
 };
 

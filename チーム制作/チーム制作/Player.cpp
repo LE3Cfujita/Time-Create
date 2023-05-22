@@ -81,7 +81,7 @@ void Player::Draw()
 					animeCount = 0;
 				}
 			}
-			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerFuture, TRUE, FALSE);
+			DrawRectGraph(position.x - r * 2, position.y - r, animeCount * 64, 0, 64, 64, playerFuture, TRUE, FALSE);
 
 		}
 
@@ -122,9 +122,9 @@ void Player::Move()
 	{
 		position.x = 1280 - 32;
 	}
-	if (position.y + r >= 720)
+	if (position.y + r * 4 >= 720)
 	{
-		position.y = 720 - r;
+		position.y = 720 - r * 4;
 	}
 }
 
