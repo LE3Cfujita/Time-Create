@@ -13,14 +13,14 @@ void Enemy::Initialize()
 	objectMember = GameObject::ENEMY;
 	objectAge = GameObject::ANCIENT;
 	objState = GameObject::IDLE;
-	position = { 1000,600 };
-	r = 128;
+	position = { 1000,300 };
+	r = 64;
 	ancientEnemy = LoadGraph("Resource/Enemy.png"); // �`��
 	ancientEnemyanime = LoadGraph("Resource/EnemyAnime.png"); // �`��
 	modernEnemy = LoadGraph("Resource/EnemyModern.png");
 	prediction = LoadGraph("Resource/prediction.png");
 	time = 100;
-	HP = 2;
+	HP = 20;
 	moveFlag = true;
 	timeFlag = true;
 	move = true;
@@ -30,7 +30,7 @@ void Enemy::Update()
 {
 	if (move == true)
 	{
-		Move();
+		//Move();
 	}
 	switch (objectAge)
 	{
@@ -51,7 +51,7 @@ void Enemy::Draw()
 	switch (objectAge)
 	{
 	case ANCIENT://�Ñ�G
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 336, 0, 336, 192, ancientEnemyanime, TRUE, FALSE);
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 295, 0, 295, 150, ancientEnemyanime, TRUE, FALSE);
 		break;
 	case MODERN://����G
 		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, modernEnemy, TRUE);
@@ -69,7 +69,7 @@ void Enemy::Draw()
 void Enemy::ANCIENTAttack()
 {
 
-	
+
 	if (timeFlag == false)
 	{
 		Animation();
@@ -250,7 +250,6 @@ void Enemy::Animation()
 			animeCount = 0;
 		}
 	}
-	DrawRectGraph(position.x - r, position.y - r, animeCount * 336, 0, 336, 192, ancientEnemyanime, TRUE, FALSE);
 }
 
 void Enemy::HitAction(GameObject* gameObject)
