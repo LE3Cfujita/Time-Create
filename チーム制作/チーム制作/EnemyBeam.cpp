@@ -11,7 +11,8 @@ EnemyBeam::~EnemyBeam()
 void EnemyBeam::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::ENEMYBEAM;
-	position = { pos.x - 100,pos.y - 260 };
+	position = { pos.x - 100,pos.y + 260 };
+	position2 = { pos.x - 100,pos.y - 260 };
 	bullet = LoadGraph("Resource/EnemyBeam.png"); // •`‰æ
 	bulletSpeed = 15;
 }
@@ -23,13 +24,12 @@ void EnemyBeam::Update()
 
 void EnemyBeam::Draw()
 {
-	//DrawExtendGraph(position.x - size_x, position.y, position.x, position.y, bullet, TRUE);
-	DrawExtendGraph(position.x - size_x, position.y + 520, position.x - size_x2, position.y, bullet, TRUE);
+	DrawExtendGraph(position.x, position.y, position2.x, position2.y, bullet, TRUE);
 }
 
 void EnemyBeam::Move()
 {
-
+	position.x -= 20;
 	size_x += 20;
 	if (size_x >= 1100)
 	{
@@ -41,6 +41,7 @@ void EnemyBeam::Move()
 				break;
 			}
 		}
+		position2.x -= 20;
 		size_x2 += 20;
 	}
 	if (size_x2 >= 1100)

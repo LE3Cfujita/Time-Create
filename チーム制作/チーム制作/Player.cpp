@@ -18,6 +18,7 @@ void Player::Initialize()
 	r = 8;
 	playerAncient = LoadGraph("Resource/Playeranime.png"); // �`��
 	playerModern = LoadGraph("Resource/PlayerModern.png"); // �`��
+	playerFuture = LoadGraph("Resource/PlayerFuture.png"); // �`��
 	ancientHP = LoadGraph("Resource/ancienthp.png"); // �`��
 	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
 	futureHP = LoadGraph("Resource/ancienthp.png"); // �`��
@@ -64,11 +65,26 @@ void Player::Draw()
 		{
 			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
 		}
-		else
+		else if (objectAge == MODERN)
 		{
 			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerModern, TRUE, FALSE);
 		}
-		
+		else
+		{
+			animation = animation + 1;
+			if (animation > 2)
+			{
+				animeCount = animeCount + 1;
+				animation = 0;
+				if (animeCount >= 2)
+				{
+					animeCount = 0;
+				}
+			}
+			DrawRectGraph(position.x - r * 2, position.y - r, animeCount * 64, 0, 64, 64, playerFuture, TRUE, FALSE);
+
+		}
+
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 		{
 			Animation();
@@ -106,9 +122,9 @@ void Player::Move()
 	{
 		position.x = 1280 - 32;
 	}
-	if (position.y + r >= 720)
+	if (position.y + r * 4 >= 720)
 	{
-		position.y = 720 - r;
+		position.y = 720 - r * 4;
 	}
 }
 
@@ -199,7 +215,7 @@ void Player::Animation()
 		}
 		DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
 	}
-	else
+	else if (objectAge == MODERN)
 	{
 		if (animation > 2)
 		{

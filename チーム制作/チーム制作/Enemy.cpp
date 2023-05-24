@@ -13,13 +13,14 @@ void Enemy::Initialize()
 	objectMember = GameObject::ENEMY;
 	objectAge = GameObject::ANCIENT;
 	objState = GameObject::IDLE;
-	position = { 1400,600 };
-	r = 128;
+	position = { 1000,300 };
+	r = 64;
 	ancientEnemy = LoadGraph("Resource/Enemy.png"); // �`��
+	ancientEnemyanime = LoadGraph("Resource/EnemyAnime.png"); // �`��
 	modernEnemy = LoadGraph("Resource/EnemyModern.png");
 	prediction = LoadGraph("Resource/prediction.png");
 	time = 100;
-	HP = 10;
+	HP = 5;
 	moveFlag = true;
 	timeFlag = true;
 	move = true;
@@ -50,7 +51,7 @@ void Enemy::Draw()
 	switch (objectAge)
 	{
 	case ANCIENT://�Ñ�G
-		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, ancientEnemy, TRUE);
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 295, 0, 295, 150, ancientEnemyanime, TRUE, FALSE);
 		break;
 	case MODERN://����G
 		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, modernEnemy, TRUE);
@@ -68,8 +69,10 @@ void Enemy::Draw()
 void Enemy::ANCIENTAttack()
 {
 
+
 	if (timeFlag == false)
 	{
+		Animation();
 		//int rad = rand() % 2;
 		//if (rad == 1)
 		//{
@@ -79,9 +82,6 @@ void Enemy::ANCIENTAttack()
 		//{
 		//	FireAttack();
 		//}
-		BulletAttack();//�e
-		FireAttack();//��
-		move = false;
 	}
 	else
 	{
@@ -166,7 +166,6 @@ void Enemy::BulletAttack()
 		bullet->BaseInitialize(referenceGameObjects);
 		bullet->Initialize(position, i);
 		addGameObjects.push_back(bullet);
-		timeFlag = true;
 	}
 
 }
@@ -179,7 +178,6 @@ void Enemy::FireAttack()
 	bullet->BaseInitialize(referenceGameObjects);
 	bullet->Initialize(position, 1);
 	addGameObjects.push_back(bullet);
-	timeFlag = true;
 	//}
 }
 
@@ -232,6 +230,25 @@ void Enemy::BeamAttack()
 		addGameObjects.push_back(bullet);
 		beamCount = true;
 		beamCT = 0;
+	}
+}
+
+void Enemy::Animation()
+{
+	animation = animation + 1;
+
+	if (animation > 4)
+	{
+		animeCount = animeCount + 1;
+		animation = 0;
+		if (animeCount >= 4)
+		{
+			timeFlag = true;
+			BulletAttack();//�e
+			FireAttack();//��
+			move = false;
+			animeCount = 0;
+		}
 	}
 }
 

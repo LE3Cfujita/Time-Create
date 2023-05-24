@@ -4,6 +4,7 @@
 #include"Enemy.h"
 #include"GameObjectManager.h"
 #include"DxLib.h"
+#include"Collision.h"
 class GameScene
 {
 public:
@@ -48,11 +49,16 @@ public:
 	void SceneChange();//ゲーム中シーン切り替え
 
 	void BackgroundScroll();//背景スクロール
+
+	void PBCollision();
+
+	void Invincible();
+
 private:
 	GameState gameState;
 	OBJAGE objectAge;
 	GameObjectManager* gameObjectManager = nullptr;
-
+	Collision* collision = nullptr;
 
 	XMFLOAT2 backPos = { 0,0 };
 	XMFLOAT2 backPos2 = { 1280,0 };
@@ -69,5 +75,7 @@ private:
 	bool backFlag = false;
 	bool flagCount = false;
 	bool createFlag = false;
+	bool invincibleFlag = false;
+	int invincibleTime = 0;
 };
 
