@@ -15,7 +15,7 @@ void Player::Initialize()
 	objectAge = GameObject::ANCIENT;//�Ñ�
 	objState = GameObject::IDLE;
 	position = { 300,300 };
-	r = 8;
+	r = 32;
 	playerAncient = LoadGraph("Resource/Playeranime.png"); // �`��
 	playerModern = LoadGraph("Resource/PlayerModern.png"); // �`��
 	playerFuture = LoadGraph("Resource/PlayerFuture.png"); // �`��
@@ -63,11 +63,11 @@ void Player::Draw()
 	{
 		if (objectAge == ANCIENT)
 		{
-			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
+			DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, playerAncient, TRUE, FALSE);
 		}
 		else if (objectAge == MODERN)
 		{
-			DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerModern, TRUE, FALSE);
+			DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, playerModern, TRUE, FALSE);
 		}
 		else
 		{
@@ -81,7 +81,7 @@ void Player::Draw()
 					animeCount = 0;
 				}
 			}
-			DrawRectGraph(position.x - r * 2, position.y - r, animeCount * 64, 0, 64, 64, playerFuture, TRUE, FALSE);
+			DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, playerFuture, TRUE, FALSE);
 
 		}
 
@@ -122,9 +122,9 @@ void Player::Move()
 	{
 		position.x = 1280 - 32;
 	}
-	if (position.y + r * 4 >= 720)
+	if (position.y + r >= 720)
 	{
-		position.y = 720 - r * 4;
+		position.y = 720 - r;
 	}
 }
 
@@ -213,7 +213,7 @@ void Player::Animation()
 				animeCount = 0;
 			}
 		}
-		DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
 	}
 	else if (objectAge == MODERN)
 	{
@@ -226,6 +226,6 @@ void Player::Animation()
 				animeCount = 0;
 			}
 		}
-		DrawRectGraph(position.x - r * 2, position.y - r * 2, animeCount * 64, 0, 64, 64, playerModern, TRUE, FALSE);
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, playerModern, TRUE, FALSE);
 	}
 }
