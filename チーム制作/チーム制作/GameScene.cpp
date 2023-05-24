@@ -268,7 +268,7 @@ void GameScene::PBCollision()
 			int HP = gameobject->GetHP();
 			XMFLOAT2 pos = gameobject->GetPosition();
 			float r = gameobject->GetRadius();
-			XMFLOAT2 pos2 = { pos.x + r * 2,pos.y + r * 2 };
+			XMFLOAT2 pos2 = { pos.x * 2,pos.y + r * 2 };
 			for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
 			{
 				if (gameobject2->GetObjectMember() != GameObject::OBJECTMEMBER::ENEMYBEAM)continue;
@@ -283,8 +283,8 @@ void GameScene::PBCollision()
 						invincibleFlag = true;
 						break;
 					}
-					else if (pos.y >= epos2.y && pos.y <= epos.y &&
-						pos2.y >= epos2.y, pos2.y >= epos.y)
+					if (pos.y >= epos2.y && pos.y <= epos.y &&
+						pos2.y >= epos.y && pos2.y >= epos2.y)
 					{
 						gameobject->SetHP(HP--);
 						invincibleFlag = true;
@@ -300,8 +300,8 @@ void GameScene::PBCollision()
 						invincibleFlag = true;
 						break;
 					}
-					else if (pos.y >= epos2.y && pos.y <= epos.y &&
-						pos2.y >= epos2.y, pos2.y >= epos.y)
+					if (pos.y >= epos2.y && pos.y <= epos.y &&
+						pos2.y >= epos.y && pos2.y >= epos2.y)
 					{
 						gameobject->SetHP(HP--);
 						invincibleFlag = true;

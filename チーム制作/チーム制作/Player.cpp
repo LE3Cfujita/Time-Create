@@ -15,7 +15,7 @@ void Player::Initialize()
 	objectAge = GameObject::ANCIENT;//�Ñ�
 	objState = GameObject::IDLE;
 	position = { 300,300 };
-	r = 32;
+	r = 16;
 	playerAncient = LoadGraph("Resource/Playeranime.png"); // �`��
 	playerModern = LoadGraph("Resource/PlayerModern.png"); // �`��
 	playerFuture = LoadGraph("Resource/PlayerFuture.png"); // �`��
