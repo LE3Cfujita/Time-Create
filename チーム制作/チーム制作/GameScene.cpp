@@ -279,11 +279,13 @@ void GameScene::PBCollision()
 					{
 						gameobject->SetHP(HP--);
 						invincibleFlag = true;
+						break;
 					}
 					if (pos.y >= epos2.y && pos.y <= epos.y)
 					{
 						gameobject->SetHP(HP--);
 						invincibleFlag = true;
+						break;
 					}
 				}
 				if (pos.x >= epos.x && pos.x <= epos2.x)
@@ -292,11 +294,13 @@ void GameScene::PBCollision()
 					{
 						gameobject->SetHP(HP--);
 						invincibleFlag = true;
+						break;
 					}
 					if (pos.y >= epos2.y && pos.y <= epos.y)
 					{
 						gameobject->SetHP(HP--);
 						invincibleFlag = true;
+						break;
 					}
 				}
 				if (pos.x >= epos.x && pos2.x <= epos2.x)
@@ -305,6 +309,7 @@ void GameScene::PBCollision()
 					{
 						gameobject->SetHP(HP--);
 						invincibleFlag = true;
+						break;
 					}
 				}
 			}
