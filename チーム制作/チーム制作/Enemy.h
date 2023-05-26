@@ -37,6 +37,7 @@ private:
 	int ancientEnemy;
 	int ancientEnemyanime;
 	int modernEnemy;
+	int futureEnemy;
 	int prediction;
 
 	bool moveFlag = true;

@@ -11,7 +11,7 @@ PlayerModernBullet::~PlayerModernBullet()
 void PlayerModernBullet::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::PLAYERBULLET;//ÉvÉåÉCÉÑÅ[íe
-	position = { pos.x + r,pos.y };
+	position = { pos.x + r,pos.y - 16 };
 	r = 16;
 
 	bullet = LoadGraph("Resource/modernBullet.png"); // ï`âÊ

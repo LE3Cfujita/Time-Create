@@ -11,7 +11,7 @@ PlayerBullet::~PlayerBullet()
 void PlayerBullet::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::PLAYERBULLET;//ÉvÉåÉCÉÑÅ[íe
-	position = { pos.x,pos.y-32 };
+	position = { pos.x,pos.y - 16 };
 	r = 16;
 
 	bullet = LoadGraph("Resource/PlayerBullet.png"); // ï`âÊ
@@ -24,7 +24,7 @@ void PlayerBullet::Update()
 
 void PlayerBullet::Draw()
 {
-	DrawGraph(position.x, position.y,bullet, true);
+	DrawGraph(position.x, position.y, bullet, true);
 }
 
 void PlayerBullet::Move()

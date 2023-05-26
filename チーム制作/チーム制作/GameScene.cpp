@@ -35,6 +35,7 @@ void GameScene::Update()
 	case PLAY://�Q�[���v���C
 		BackgroundScroll();
 		PBCollision();
+		Invincible();
 		gameObjectManager->Update();
 		SceneChange();
 		break;
@@ -267,7 +268,7 @@ void GameScene::PBCollision()
 			int HP = gameobject->GetHP();
 			XMFLOAT2 pos = gameobject->GetPosition();
 			float r = gameobject->GetRadius();
-			XMFLOAT2 pos2 = { pos.x + r * 2,pos.y + r * 2 };
+			XMFLOAT2 pos2 = { pos.x * 2,pos.y + r * 2 };
 			for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
 			{
 				if (gameobject2->GetObjectMember() != GameObject::OBJECTMEMBER::ENEMYBEAM)continue;
@@ -275,37 +276,32 @@ void GameScene::PBCollision()
 				XMFLOAT2 epos2 = gameobject2->GetPosition2();
 				if (pos.x <= epos.x && pos2.x > epos.x)
 				{
-					if (pos.y <= epos2.y && pos2.y >= epos2.y)
+					if (pos.y <= epos2.y && pos.y <= epos.y &&
+						pos2.y >= epos2.y && pos2.y <= epos.y)
 					{
 						gameobject->SetHP(HP--);
 						invincibleFlag = true;
 						break;
 					}
-					if (pos.y >= epos2.y && pos.y <= epos.y)
-					{
-						gameobject->SetHP(HP--);
-						invincibleFlag = true;
-						break;
-					}
-				}
-				if (pos.x >= epos.x && pos.x <= epos2.x)
-				{
-					if (pos.y <= epos2.y && pos2.y >= epos2.y)
-					{
-						gameobject->SetHP(HP--);
-						invincibleFlag = true;
-						break;
-					}
-					if (pos.y >= epos2.y && pos.y <= epos.y)
+					if (pos.y >= epos2.y && pos.y <= epos.y &&
+						pos2.y >= epos.y && pos2.y >= epos2.y)
 					{
 						gameobject->SetHP(HP--);
 						invincibleFlag = true;
 						break;
 					}
 				}
-				if (pos.x >= epos.x && pos2.x <= epos2.x)
+				else if (pos.x >= epos.x && pos.x <= epos2.x)
 				{
-					if (pos.y >= epos2.y && pos2.y <= epos.y)
+					if (pos.y <= epos2.y && pos.y <= epos.y &&
+						pos2.y >= epos2.y && pos2.y <= epos.y)
+					{
+						gameobject->SetHP(HP--);
+						invincibleFlag = true;
+						break;
+					}
+					if (pos.y >= epos2.y && pos.y <= epos.y &&
+						pos2.y >= epos.y && pos2.y >= epos2.y)
 					{
 						gameobject->SetHP(HP--);
 						invincibleFlag = true;

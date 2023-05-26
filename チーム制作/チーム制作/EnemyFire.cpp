@@ -36,7 +36,8 @@ void EnemyFire::Update()
 
 void EnemyFire::Draw()
 {
-	DrawExtendGraph(position.x - r, position.y - r, position.x + r, position.y + r, bullet, TRUE);
+	DrawGraph(position.x, position.y, bullet, TRUE);
+	//DrawExtendGraph(position.x - r, position.y - 16, position.x + r, position.y + 16, bullet, TRUE);
 }
 
 void EnemyFire::Move()
