@@ -21,7 +21,7 @@ void GameScene::Initialize()
 	changeback = LoadGraph("Resource/ageChange.png");
 	clear = LoadGraph("Resource/GameClear.png"); // �`��
 	over = LoadGraph("Resource/GameOver.png"); // �`��
-	objectAge == FUTURE;
+	objectAge = ANCIENT;
 	createFlag = false;
 }
 
@@ -148,7 +148,7 @@ void GameScene::SceneChange()
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
 		{
 			pHP = gameobject->GetHP();
-			if (pHP == 0)
+			if (pHP <= 0)
 			{
 				gameState = OVER;
 			}
@@ -156,7 +156,7 @@ void GameScene::SceneChange()
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::ENEMY)
 		{
 			eHP = gameobject->GetHP();
-			if (eHP == 0)
+			if (eHP <= 0)
 			{
 				changeFlag = true;
 			}
@@ -260,45 +260,46 @@ void GameScene::BackgroundScroll()
 
 void GameScene::PBCollision()
 {
-	if (invincibleFlag == false)
+	for (GameObject* gameobject : gameObjectManager->GetGameObjects())
 	{
-		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
+		if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
+		XMFLOAT2 pos = gameobject->GetPosition();
+		float r = gameobject->GetRadius();
+		XMFLOAT2 pos2 = { pos.x + r * 2,pos.y + r * 2 };
+		int HP = gameobject->GetHP();
+		for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
 		{
-			if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
-			int HP = gameobject->GetHP();
-			XMFLOAT2 pos = gameobject->GetPosition();
-			float r = gameobject->GetRadius();
-			XMFLOAT2 pos2 = { pos.x * 2,pos.y + r * 2 };
-			for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
+			if (gameobject2->GetObjectMember() != GameObject::OBJECTMEMBER::ENEMYBEAM)continue;
+			XMFLOAT2 epos = gameobject2->GetPosition();
+			XMFLOAT2 epos2 = gameobject2->GetPosition2();
+
+			if (invincibleFlag == false)
 			{
-				if (gameobject2->GetObjectMember() != GameObject::OBJECTMEMBER::ENEMYBEAM)continue;
-				XMFLOAT2 epos = gameobject2->GetPosition();
-				XMFLOAT2 epos2 = gameobject2->GetPosition2();
 				if (pos.x <= epos.x && pos2.x > epos.x)
 				{
 					if (pos.y <= epos2.y && pos.y <= epos.y &&
 						pos2.y >= epos2.y && pos2.y <= epos.y)
 					{
-						gameobject->SetHP(HP--);
+						gameobject->SetHP(HP - 1);
 						invincibleFlag = true;
 						break;
 					}
 					if (pos.y >= epos2.y && pos.y <= epos.y &&
 						pos2.y >= epos.y && pos2.y >= epos2.y)
 					{
-						gameobject->SetHP(HP--);
+						gameobject->SetHP(HP - 1);
 						invincibleFlag = true;
 						break;
 					}
 					if (pos.y >= epos2.y && pos.y <= epos.y &&
-						pos2.y>=epos2.y&&pos2.y<=epos.y)
+						pos2.y >= epos2.y && pos2.y <= epos.y)
 					{
-						gameobject->SetHP(HP--);
+						gameobject->SetHP(HP - 1);
 						invincibleFlag = true;
 						break;
 					}
 				}
-				else if (pos.x >= epos.x && pos.x <= epos2.x)
+				if (pos.x >= epos.x && pos.x <= epos2.x)
 				{
 					if (pos.y <= epos2.y && pos.y <= epos.y &&
 						pos2.y >= epos2.y && pos2.y <= epos.y)
