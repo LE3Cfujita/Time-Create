@@ -330,9 +330,9 @@ void GameScene::PBCollision()
 
 void GameScene::Invincible()
 {
-	if (invincibleFlag == false)return;
+	if (invincibleFlag != true)return;
 	invincibleTime++;
-	if (invincibleTime < 60)return;
+	if (invincibleTime < 20)return;
 	invincibleTime = 0;
 	invincibleFlag = false;
 }
