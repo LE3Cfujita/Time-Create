@@ -22,7 +22,7 @@ void Player::Initialize()
 	ancientHP = LoadGraph("Resource/ancienthp.png"); // �`��
 	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
 	futureHP = LoadGraph("Resource/ancienthp.png"); // �`��
-	HP = 10;
+	HP = 4;
 }
 
 void Player::Update()

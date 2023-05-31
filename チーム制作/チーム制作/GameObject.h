@@ -130,7 +130,7 @@ public:
 		da = 0;
 		L = 0;
 
-
+		HP = 10;
 		move = true;
 		beamFlag = false;
 		predictionFlag = false;
@@ -232,7 +232,7 @@ public:
 	void SetCannonFlag(bool cannonFlag) { this->cannonFlag = cannonFlag; }
 
 	void SetHP(int HP) { this->HP = HP; }
-	bool GetHP() { return HP; }
+	int GetHP() { return HP; }
 
 
 	void SetAnimation(int animeCount) { this->animeCount = animeCount; }
