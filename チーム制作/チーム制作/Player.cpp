@@ -141,9 +141,16 @@ void Player::Attack()
 				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
 				addGameObjects.push_back(bullet);
 			}
-			else
+			else if(objectAge==MODERN)
 			{
 				PlayerModernBullet* bullet = new PlayerModernBullet();
+				bullet->BaseInitialize(referenceGameObjects);
+				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+				addGameObjects.push_back(bullet);
+			}
+			else
+			{
+				PlayerFutureBullet* bullet = new PlayerFutureBullet();
 				bullet->BaseInitialize(referenceGameObjects);
 				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
 				addGameObjects.push_back(bullet);
