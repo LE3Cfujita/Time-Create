@@ -13,7 +13,7 @@ void Enemy::Initialize()
 	objectMember = GameObject::ENEMY;
 	objectAge = GameObject::ANCIENT;
 	objState = GameObject::IDLE;
-	position = { 1000,300 };
+	position = { 1400,600 };
 	r = 64;
 	ancientEnemy = LoadGraph("Resource/Enemy.png"); // �`��
 	ancientEnemyanime = LoadGraph("Resource/EnemyAnime.png"); // �`��
@@ -21,7 +21,7 @@ void Enemy::Initialize()
 	futureEnemy = LoadGraph("Resource/EnemyFuture.png");
 	prediction = LoadGraph("Resource/prediction.png");
 	time = 100;
-	HP = 2;
+	HP = 50;
 	moveFlag = true;
 	timeFlag = true;
 	move = true;
@@ -58,7 +58,7 @@ void Enemy::Draw()
 		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, modernEnemy, TRUE);
 		break;
 	case FUTURE://�����G
-		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, futureEnemy, TRUE);
+		DrawGraph(position.x - 174, position.y - 96, futureEnemy, TRUE);
 		if (predictionFlag == true)
 		{
 			DrawGraph(position.x - 1100, position.y - 260, prediction, TRUE);

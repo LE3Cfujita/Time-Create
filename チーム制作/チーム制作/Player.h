@@ -2,6 +2,7 @@
 #include"GameObject.h"
 #include"PlayerBullet.h"
 #include"PlayerModernBullet.h"
+#include"PlayerFutureBullet.h"
 class Player : public GameObject
 {
 public:

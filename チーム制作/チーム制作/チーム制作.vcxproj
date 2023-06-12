@@ -151,6 +151,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
+    <ClCompile Include="PlayerFutureBullet.cpp" />
     <ClCompile Include="PlayerModernBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBullet.h" />
+    <ClInclude Include="PlayerFutureBullet.h" />
     <ClInclude Include="PlayerModernBullet.h" />
     <ClInclude Include="XMFLOAT_Helper.h" />
   </ItemGroup>

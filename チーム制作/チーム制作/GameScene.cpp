@@ -299,26 +299,52 @@ void GameScene::PBCollision()
 						break;
 					}
 				}
-				if (pos.x >= epos.x && pos.x <= epos2.x)
+				if (pos.x >= epos.x && pos.x <= epos2.x &&
+					pos2.x<epos.x && pos2.x>epos2.x)
 				{
 					if (pos.y <= epos2.y && pos.y <= epos.y &&
 						pos2.y >= epos2.y && pos2.y <= epos.y)
 					{
-						gameobject->SetHP(HP--);
+						gameobject->SetHP(HP - 1);
 						invincibleFlag = true;
 						break;
 					}
 					if (pos.y >= epos2.y && pos.y <= epos.y &&
 						pos2.y >= epos.y && pos2.y >= epos2.y)
 					{
-						gameobject->SetHP(HP--);
+						gameobject->SetHP(HP - 1);
 						invincibleFlag = true;
 						break;
 					}
 					if (pos.y >= epos2.y && pos.y <= epos.y &&
 						pos2.y >= epos2.y && pos2.y <= epos.y)
 					{
-						gameobject->SetHP(HP--);
+						gameobject->SetHP(HP - 1);
+						invincibleFlag = true;
+						break;
+					}
+				}
+				if (pos.x >= epos.x && pos.x <= epos2.x &&
+					pos2.x >= epos.x && pos2.x <= epos2.x)
+				{
+					if (pos.y <= epos2.y && pos.y <= epos.y &&
+						pos2.y >= epos2.y && pos2.y <= epos.y)
+					{
+						gameobject->SetHP(HP - 1);
+						invincibleFlag = true;
+						break;
+					}
+					if (pos.y >= epos2.y && pos.y <= epos.y &&
+						pos2.y >= epos.y && pos2.y >= epos2.y)
+					{
+						gameobject->SetHP(HP - 1);
+						invincibleFlag = true;
+						break;
+					}
+					if (pos.y >= epos2.y && pos.y <= epos.y &&
+						pos2.y >= epos2.y && pos2.y <= epos.y)
+					{
+						gameobject->SetHP(HP - 1);
 						invincibleFlag = true;
 						break;
 					}
