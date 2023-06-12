@@ -1,0 +1,19 @@
+﻿  Enemy.cpp
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(55,44): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(55,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(58,83): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(58,67): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(58,51): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(58,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(61,42): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(61,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(64,44): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(64,25): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コード生成しています。
+  1 of 278 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  コード生成が終了しました。
+  チーム制作.vcxproj -> C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\x64\Release\チーム制作.exe

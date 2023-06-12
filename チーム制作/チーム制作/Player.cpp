@@ -22,7 +22,7 @@ void Player::Initialize()
 	ancientHP = LoadGraph("Resource/ancienthp.png"); // �`��
 	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
 	futureHP = LoadGraph("Resource/ancienthp.png"); // �`��
-	HP = 4;
+	HP = 10;
 }
 
 void Player::Update()
@@ -122,9 +122,9 @@ void Player::Move()
 	{
 		position.x = 1280 - 32;
 	}
-	if (position.y + r >= 720)
+	if (position.y + r * 3 >= 720)
 	{
-		position.y = 720 - r;
+		position.y = 720 - r * 3;
 	}
 }
 
@@ -141,7 +141,7 @@ void Player::Attack()
 				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
 				addGameObjects.push_back(bullet);
 			}
-			else if(objectAge==MODERN)
+			else if (objectAge == MODERN)
 			{
 				PlayerModernBullet* bullet = new PlayerModernBullet();
 				bullet->BaseInitialize(referenceGameObjects);

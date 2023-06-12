@@ -13,7 +13,7 @@ void EnemyBalkan::Initialize(XMFLOAT2 pos)
 	objectMember = GameObject::ENEMYBALKAN;//“Gƒoƒ‹ƒJƒ“
 	position = { pos.x - 32,pos.y - 32 };
 	r = 8;
-	bullet = LoadGraph("Resource/EnemyFire.png"); // •`‰æ
+	bullet = LoadGraph("Resource/EnemyBalkan.png"); // •`‰æ
 	bulletSpeed = rand() % 5 - 3;
 }
 
