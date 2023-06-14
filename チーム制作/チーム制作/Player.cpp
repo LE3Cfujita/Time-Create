@@ -21,7 +21,7 @@ void Player::Initialize()
 	playerFuture = LoadGraph("Resource/PlayerFuture.png"); // �`��
 	ancientHP = LoadGraph("Resource/ancienthp.png"); // �`��
 	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
-	futureHP = LoadGraph("Resource/ancienthp.png"); // �`��
+	futureHP = LoadGraph("Resource/futureHP.png"); // �`��
 	HP = 10;
 }
 
@@ -85,10 +85,7 @@ void Player::Draw()
 
 		}
 
-		if (CheckHitKey(KEY_INPUT_SPACE) == 1)
-		{
 			Animation();
-		}
 	}
 }
 
@@ -118,9 +115,9 @@ void Player::Move()
 	{
 		position.y = 0 + r;
 	}
-	if (position.x + 32 >= 1280)
+	if (position.x + 32 >= 850)
 	{
-		position.x = 1280 - 32;
+		position.x = 850 - 32;
 	}
 	if (position.y + r * 3 >= 720)
 	{
@@ -136,6 +133,7 @@ void Player::Attack()
 		{
 			if (objectAge == ANCIENT)
 			{
+				animationFlag = true;
 				PlayerBullet* bullet = new PlayerBullet();
 				bullet->BaseInitialize(referenceGameObjects);
 				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
@@ -143,6 +141,7 @@ void Player::Attack()
 			}
 			else if (objectAge == MODERN)
 			{
+				animationFlag = true;
 				PlayerModernBullet* bullet = new PlayerModernBullet();
 				bullet->BaseInitialize(referenceGameObjects);
 				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
@@ -150,6 +149,7 @@ void Player::Attack()
 			}
 			else
 			{
+				animationFlag = true;
 				PlayerFutureBullet* bullet = new PlayerFutureBullet();
 				bullet->BaseInitialize(referenceGameObjects);
 				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
@@ -161,9 +161,17 @@ void Player::Attack()
 	else
 	{
 		time++;
-		if (time <= 5)return;
-		timeFlag = false;
-		time = 0;
+		
+		if (time >= 5 && objectAge==MODERN)
+		{
+			timeFlag = false;
+			time = 0;
+		}
+		else if (time >= 20 && objectAge!=MODERN)
+		{
+			timeFlag = false;
+			time = 0;
+		}
 	}
 }
 
@@ -207,6 +215,7 @@ void Player::HitAction(GameObject* gameObject)
 
 void Player::Animation()
 {
+	if (animationFlag == false)return;
 	animation = animation + 1;
 
 	if (objectAge == ANCIENT)
@@ -218,6 +227,7 @@ void Player::Animation()
 			if (animeCount >= 3)
 			{
 				animeCount = 0;
+				animationFlag = false;
 			}
 		}
 		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
@@ -231,6 +241,7 @@ void Player::Animation()
 			if (animeCount >= 2)
 			{
 				animeCount = 0;
+				animationFlag = false;
 			}
 		}
 		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, playerModern, TRUE, FALSE);

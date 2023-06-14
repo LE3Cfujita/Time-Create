@@ -169,7 +169,8 @@ void GameScene::SceneChange()
 					{
 						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
 						{
-							gameobject2->SetAnimation(0);
+							gameobject2->SetAnimation(0); 
+							gameobject2->SetPosition({ 300, 300 });
 						}
 						else
 						{
@@ -187,6 +188,7 @@ void GameScene::SceneChange()
 						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
 						{
 							gameobject2->SetAnimation(0);
+							gameobject2->SetPosition({ 300, 300 });
 						}
 						else
 						{

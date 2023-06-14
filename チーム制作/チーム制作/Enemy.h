@@ -5,6 +5,8 @@
 #include"EnemyBalkan.h"
 #include"EnemyCannon.h"
 #include"EnemyBeam.h"
+#include "EnemyEntourage.h"
+#include"HitEffect.h"
 class Enemy : public GameObject
 {
 
@@ -29,6 +31,8 @@ private:
 	void AimAttack();//‘_‚¤UŒ‚
 	void BeamAttack();
 	void Animation();
+	void EntourageCreate();//æ‚èŠª‚«¢Š«
+	void Effect();
 
 	void HitAction(GameObject* gameObject);
 
@@ -41,6 +45,7 @@ private:
 	int prediction;
 
 	bool moveFlag = true;
+	bool createFlag = false;
 	int predictionTime = 0;
 };
 

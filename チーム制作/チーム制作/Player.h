@@ -34,5 +34,7 @@ private:
 
 	int invincibleFlag = false;
 	int invincibleTime = 0;
+
+	bool animationFlag = false;
 };
 

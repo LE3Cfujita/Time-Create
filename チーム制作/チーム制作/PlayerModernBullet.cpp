@@ -10,7 +10,7 @@ PlayerModernBullet::~PlayerModernBullet()
 
 void PlayerModernBullet::Initialize(XMFLOAT2 pos)
 {
-	objectMember = GameObject::PLAYERBULLET;//プレイヤー弾
+	objectMember = GameObject::MODERNBBULLET;//プレイヤー弾
 	position = { pos.x + r,pos.y - 16 };
 	r = 16;
 

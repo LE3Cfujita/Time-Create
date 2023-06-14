@@ -59,7 +59,7 @@ void EnemyCannon::Move()
 void EnemyCannon::Distance(XMFLOAT2 pos)
 {
 	homingTime++;
-	if (homingTime >= 20)
+	if (homingTime >= 10)
 	{
 		homingTime = 0;
 		homingCount = 1;

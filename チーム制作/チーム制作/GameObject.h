@@ -14,12 +14,16 @@ public:
 		NONEMEMBER,//初期
 		PLAYER,//プレイヤー
 		PLAYERBULLET,//プレイヤーの弾
+		MODERNBBULLET,//現代のプレイヤー弾
+		FUTUREBULLET,//未来のプレイヤー
 		ENEMY,//敵
+		ENEMYENTOURAGE,//雑魚敵
 		ENEMYBULLET,//敵の弾(古代)
 		ENEMYFIRE,//敵の火(古代)
 		ENEMYBALKAN,//敵のバルカン(現代)
 		ENEMYCANNON,//敵の大砲(現代)
 		ENEMYBEAM,//敵のビーム(未来)
+		HITEFFECT,//ヒットエフェクト
 	};
 	enum OBJAGE
 	{
@@ -76,7 +80,7 @@ protected:
 	float da;
 	float L;
 
-	int HP;//体力
+	float HP;//体力
 
 
 	bool move;
