@@ -21,7 +21,7 @@ void Enemy::Initialize()
 	futureEnemy = LoadGraph("Resource/EnemyFuture.png");
 	prediction = LoadGraph("Resource/prediction.png");
 	time = 100;
-	HP = 50;
+	HP = 10;
 	moveFlag = true;
 	timeFlag = true;
 	move = true;
@@ -119,6 +119,10 @@ void Enemy::FUTUREAttack()
 	if (move == true)
 	{
 		beamCT++;
+	}
+	if (beamCT == 150)
+	{
+		EntourageCreate();
 	}
 	if (beamCT >= 300)
 	{
@@ -253,11 +257,45 @@ void Enemy::Animation()
 	}
 }
 
+void Enemy::EntourageCreate()
+{
+	if (createFlag == true)return;
+	for (int i = 1; i <= 8; i++)
+	{
+		EnemyEntourage* entourage = new EnemyEntourage();
+		entourage->BaseInitialize(referenceGameObjects);
+		entourage->Initialize(position, i);
+		addGameObjects.push_back(entourage);
+		createFlag = true;
+	}
+}
+
+void Enemy::Effect()
+{
+	HitEffect* effect = new HitEffect();
+	effect->BaseInitialize(referenceGameObjects);
+	effect->Initialize(position);
+	addGameObjects.push_back(effect);
+}
+
 void Enemy::HitAction(GameObject* gameObject)
 {
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
 	{
+		Effect();
 		HP--;
+		gameObject->SetDeathFlag(true);
+	}
+	else if (gameObject->GetObjectMember() == OBJECTMEMBER::MODERNBBULLET)
+	{
+		Effect();
+		HP -= 0.25;
+		gameObject->SetDeathFlag(true);
+	}
+	else if (gameObject->GetObjectMember() == OBJECTMEMBER::FUTUREBULLET)
+	{
+		Effect();
+		HP -= 0.25;
 		gameObject->SetDeathFlag(true);
 	}
 }
