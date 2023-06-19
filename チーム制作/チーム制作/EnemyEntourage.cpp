@@ -12,8 +12,8 @@ void EnemyEntourage::Initialize(XMFLOAT2 pos, int number)
 {
 	objectMember = GameObject::ENEMYENTOURAGE;
 	objectAge = GameObject::ANCIENT;
-	position = {900,pos.y };
-	HP = 10;
+	position = { 900,pos.y };
+	HP = 1;
 	this->number = number;
 	r = 29;
 	enemy = LoadGraph("Resource/EnemyFutureAnime.png");
@@ -22,6 +22,19 @@ void EnemyEntourage::Initialize(XMFLOAT2 pos, int number)
 void EnemyEntourage::Update()
 {
 	Move();
+	if (HP <= 0)
+	{
+		deathFlag = true;
+		for (GameObject* gameObject : referenceGameObjects)
+		{
+			if (gameObject->GetObjectMember() != GameObject::ENEMY)continue;
+			{
+				int number = gameObject->GetNumber();
+ 				gameObject->SetNumber(number -= 1);
+				break;
+			}
+		}
+	}
 }
 
 void EnemyEntourage::Draw()
@@ -59,7 +72,7 @@ void EnemyEntourage::HitAction(GameObject* gameObject)
 	else if (gameObject->GetObjectMember() == OBJECTMEMBER::FUTUREBULLET)
 	{
 		Effect();
-		HP -= 0.25;
+		HP -= 1;
 		gameObject->SetDeathFlag(true);
 	}
 }
@@ -71,4 +84,9 @@ void EnemyEntourage::Effect()
 	effect->BaseInitialize(referenceGameObjects);
 	effect->Initialize(position);
 	addGameObjects.push_back(effect);
+}
+
+void EnemyEntourage::Attack()
+{
+
 }
