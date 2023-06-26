@@ -20,6 +20,8 @@ public:
 	void HitAction(GameObject* gameObject);
 
 	void Effect();
+
+	void Attack();
 private:
 	int moveCount = 0;//0‚Ìê‡ãˆÚ“®
 	bool moveFlag = true;

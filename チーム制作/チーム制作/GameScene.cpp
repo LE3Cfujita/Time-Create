@@ -21,6 +21,13 @@ void GameScene::Initialize()
 	changeback = LoadGraph("Resource/ageChange.png");
 	clear = LoadGraph("Resource/GameClear.png"); // �`��
 	over = LoadGraph("Resource/GameOver.png"); // �`��
+	yajirusi = LoadGraph("Resource/sentaku.png"); // �`��
+
+	ancientBGM = LoadSoundMem("Resource/ancientBGM.mp3");
+	modernBGM = LoadSoundMem("Resource/modernBGM.mp3");
+	futureBGM = LoadSoundMem("Resource/Shining_star.mp3");
+	overBGM = LoadSoundMem("Resource/failed.mp3");
+
 	objectAge = ANCIENT;
 	createFlag = false;
 }
@@ -29,10 +36,11 @@ void GameScene::Update()
 {
 	switch (gameState)
 	{
-	case TITLE://�^�C�g��
+	case TITLE:
 		ChangeScene();
 		break;
-	case PLAY://�Q�[���v���C
+	case PLAY:
+		BGM();
 		BackgroundScroll();
 		PBCollision();
 		Invincible();
@@ -42,8 +50,11 @@ void GameScene::Update()
 	case CLEA://�N���A
 		ChangeScene();
 		break;
-	case OVER://�Q�[���I�[�o�[
+	case OVER:
+		StopSoundFile();
 		ChangeScene();
+		break;
+	case EXPLANATION:
 		break;
 	}
 }
@@ -54,6 +65,7 @@ void GameScene::Draw()
 	{
 	case TITLE://�^�C�g��
 		DrawGraph(0, 0, title, FALSE);
+		DrawGraph(yajirusiPos.x, yajirusiPos.y, yajirusi, FALSE);
 		break;
 	case PLAY://�Q�[���v���C
 		if (objectAge == ANCIENT)
@@ -83,6 +95,8 @@ void GameScene::Draw()
 		break;
 	case OVER://�Q�[���I�[�o�[
 		DrawGraph(0, 0, over, FALSE);
+	case EXPLANATION:
+
 		break;
 	}
 
@@ -90,12 +104,40 @@ void GameScene::Draw()
 
 void GameScene::ChangeScene()
 {
+	if (CheckHitKey(KEY_INPUT_UP) == 1 && hitButton == false ||
+		CheckHitKey(KEY_INPUT_DOWN) == 1 && hitButton == false)
+	{
+		if (start == true)
+		{
+			start = false;
+			yajirusiPos = { 450,560 };
+		}
+		else
+		{
+			start = true;
+			yajirusiPos = { 450,480 };
+		}
+		hitButton = true;
+	}
+	else if (CheckHitKey(KEY_INPUT_UP) == 0 &&
+		CheckHitKey(KEY_INPUT_DOWN) == 0)
+	{
+		hitButton = false;
+	}
+
 	if (CheckHitKey(KEY_INPUT_SPACE) == 1 && keyCount == 0)
 	{
 		if (gameState == TITLE)
 		{
-			gameState = PLAY;
-			PlayerCreate();
+			if (start = true)
+			{
+				gameState = PLAY;
+				PlayerCreate();
+			}
+			else
+			{
+				gameState = EXPLANATION;
+			}
 		}
 		else if (gameState == CLEA || gameState == OVER)
 		{
@@ -150,7 +192,20 @@ void GameScene::SceneChange()
 			pHP = gameobject->GetHP();
 			if (pHP <= 0)
 			{
+				if (objectAge == ANCIENT && CheckSoundMem(ancientBGM) == 1)
+				{
+					StopSoundMem(ancientBGM);
+				}
+				else if (objectAge == MODERN && CheckSoundMem(modernBGM) == 1)
+				{
+					StopSoundMem(modernBGM);
+				}
+				else if (objectAge == FUTURE && CheckSoundMem(futureBGM) == 1)
+				{
+					StopSoundMem(futureBGM);
+				}
 				gameState = OVER;
+				PlaySoundMem(overBGM, DX_PLAYTYPE_LOOP, TRUE);
 			}
 		}
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::ENEMY)
@@ -169,7 +224,7 @@ void GameScene::SceneChange()
 					{
 						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
 						{
-							gameobject2->SetAnimation(0); 
+							gameobject2->SetAnimation(0);
 							gameobject2->SetPosition({ 300, 300 });
 						}
 						else
@@ -214,6 +269,12 @@ void GameScene::SceneChange()
 		}
 		if (changePos.x <= 0)
 		{
+			if (changePos.x >= -30)
+			{
+				StopSoundMem(ancientBGM);
+				StopSoundMem(modernBGM);
+				StopSoundMem(futureBGM);
+			}
 			if (flagCount == false)
 			{
 				backFlag = true;
@@ -251,6 +312,7 @@ void GameScene::BackgroundScroll()
 		backPos2.x = 1280;
 	}
 	if (changeFlag == false)return;
+	volume -= 3;
 	changePos.x -= 30;
 	if (changePos.x <= -1280)
 	{
@@ -258,6 +320,10 @@ void GameScene::BackgroundScroll()
 		flagCount = false;
 		changePos.x = 1280;
 	}
+	ChangeVolumeSoundMem(volume, ancientBGM);
+	ChangeVolumeSoundMem(volume, modernBGM);
+	ChangeVolumeSoundMem(volume, futureBGM);
+	ChangeVolumeSoundMem(volume, overBGM);
 }
 
 void GameScene::PBCollision()
@@ -363,4 +429,24 @@ void GameScene::Invincible()
 	if (invincibleTime < 20)return;
 	invincibleTime = 0;
 	invincibleFlag = false;
+}
+
+void GameScene::BGM()
+{
+	if (objectAge == ANCIENT && CheckSoundMem(ancientBGM) == 0)
+	{
+		PlaySoundMem(ancientBGM, DX_PLAYTYPE_LOOP, TRUE);
+	}
+	else if (objectAge == MODERN && CheckSoundMem(modernBGM) == 0)
+	{
+		PlaySoundMem(modernBGM, DX_PLAYTYPE_LOOP, TRUE);
+	}
+	else if (objectAge == FUTURE && CheckSoundMem(futureBGM) == 0)
+	{
+		PlaySoundMem(futureBGM, DX_PLAYTYPE_LOOP, TRUE);
+	}
+	if (volume <= 0)
+	{
+		volume = 200;
+	}
 }

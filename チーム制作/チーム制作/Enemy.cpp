@@ -21,10 +21,11 @@ void Enemy::Initialize()
 	futureEnemy = LoadGraph("Resource/EnemyFuture.png");
 	prediction = LoadGraph("Resource/prediction.png");
 	time = 100;
-	HP = 10;
+	HP = 1;
 	moveFlag = true;
 	timeFlag = true;
 	move = true;
+	beamCT = 0;
 }
 
 void Enemy::Update()
@@ -122,6 +123,7 @@ void Enemy::FUTUREAttack()
 	}
 	if (beamCT == 150)
 	{
+		if (number != 0)return;
 		EntourageCreate();
 	}
 	if (beamCT >= 300)
@@ -130,6 +132,7 @@ void Enemy::FUTUREAttack()
 		{
 			BeamAttack();
 			move = false;
+			createFlag = false;
 		}
 	}
 }
@@ -267,6 +270,7 @@ void Enemy::EntourageCreate()
 		entourage->Initialize(position, i);
 		addGameObjects.push_back(entourage);
 		createFlag = true;
+		number = 8;
 	}
 }
 
