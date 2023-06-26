@@ -26,6 +26,7 @@ void GameScene::Initialize()
 	ancientBGM = LoadSoundMem("Resource/ancientBGM.mp3");
 	modernBGM = LoadSoundMem("Resource/modernBGM.mp3");
 	futureBGM = LoadSoundMem("Resource/Shining_star.mp3");
+	overBGM = LoadSoundMem("Resource/failed.mp3");
 
 	objectAge = ANCIENT;
 	createFlag = false;
@@ -51,7 +52,6 @@ void GameScene::Update()
 		break;
 	case OVER:
 		StopSoundFile();
-		LoadSoundMem("Resource/failed.png");
 		ChangeScene();
 		break;
 	case EXPLANATION:
@@ -192,7 +192,20 @@ void GameScene::SceneChange()
 			pHP = gameobject->GetHP();
 			if (pHP <= 0)
 			{
+				if (objectAge == ANCIENT && CheckSoundMem(ancientBGM) == 1)
+				{
+					StopSoundMem(ancientBGM);
+				}
+				else if (objectAge == MODERN && CheckSoundMem(modernBGM) == 1)
+				{
+					StopSoundMem(modernBGM);
+				}
+				else if (objectAge == FUTURE && CheckSoundMem(futureBGM) == 1)
+				{
+					StopSoundMem(futureBGM);
+				}
 				gameState = OVER;
+				PlaySoundMem(overBGM, DX_PLAYTYPE_LOOP, TRUE);
 			}
 		}
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::ENEMY)
@@ -310,6 +323,7 @@ void GameScene::BackgroundScroll()
 	ChangeVolumeSoundMem(volume, ancientBGM);
 	ChangeVolumeSoundMem(volume, modernBGM);
 	ChangeVolumeSoundMem(volume, futureBGM);
+	ChangeVolumeSoundMem(volume, overBGM);
 }
 
 void GameScene::PBCollision()
@@ -433,6 +447,6 @@ void GameScene::BGM()
 	}
 	if (volume <= 0)
 	{
-		volume = 255;
+		volume = 200;
 	}
 }

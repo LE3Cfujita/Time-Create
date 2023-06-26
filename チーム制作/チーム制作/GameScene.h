@@ -78,8 +78,9 @@ private:
 	int ancientBGM;
 	int modernBGM;
 	int futureBGM;
+	int overBGM;
 
-	int volume = 255;
+	int volume = 200;
 
 	int keyCount = 0;
 	bool changeFlag = false;
