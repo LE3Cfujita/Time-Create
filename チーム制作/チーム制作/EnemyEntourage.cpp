@@ -22,6 +22,8 @@ void EnemyEntourage::Initialize(XMFLOAT2 pos, int number)
 void EnemyEntourage::Update()
 {
 	Move();
+	Attack();
+
 	if (HP <= 0)
 	{
 		deathFlag = true;

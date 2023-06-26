@@ -14,22 +14,12 @@ void GameScene::Initialize()
 
 	gameState = TITLE;
 
-	title = LoadGraph("Resource/TITLE.png"); // �`��
-	ancientback = LoadGraph("Resource/ancientback.png"); // �`��
-	modernback = LoadGraph("Resource/modernback.png"); // �`��
-	futureback = LoadGraph("Resource/futurenack.png"); // �`��
-	changeback = LoadGraph("Resource/ageChange.png");
-	clear = LoadGraph("Resource/GameClear.png"); // �`��
-	over = LoadGraph("Resource/GameOver.png"); // �`��
-	yajirusi = LoadGraph("Resource/sentaku.png"); // �`��
-
-	ancientBGM = LoadSoundMem("Resource/ancientBGM.mp3");
-	modernBGM = LoadSoundMem("Resource/modernBGM.mp3");
-	futureBGM = LoadSoundMem("Resource/Shining_star.mp3");
-	overBGM = LoadSoundMem("Resource/failed.mp3");
-
 	objectAge = ANCIENT;
 	createFlag = false;
+
+	if (loadFlag != false)return;
+	LoadResource();
+
 }
 
 void GameScene::Update()
@@ -55,6 +45,7 @@ void GameScene::Update()
 		ChangeScene();
 		break;
 	case EXPLANATION:
+		ChangeScene();
 		break;
 	}
 }
@@ -64,8 +55,11 @@ void GameScene::Draw()
 	switch (gameState)
 	{
 	case TITLE://�^�C�g��
-		DrawGraph(0, 0, title, FALSE);
-		DrawGraph(yajirusiPos.x, yajirusiPos.y, yajirusi, FALSE);
+		DrawGraph(backPos.x, backPos.y, ancientback, true);
+		DrawGraph(backPos2.x, backPos2.y, modernback, true);
+		DrawGraph(backPos3.x, backPos3.y, futureback, true);
+		DrawGraph(0, 0, title, TRUE);
+		DrawGraph(yajirusiPos.x, yajirusiPos.y, yajirusi, true);
 		break;
 	case PLAY://�Q�[���v���C
 		if (objectAge == ANCIENT)
@@ -95,8 +89,12 @@ void GameScene::Draw()
 		break;
 	case OVER://�Q�[���I�[�o�[
 		DrawGraph(0, 0, over, FALSE);
+		break;
 	case EXPLANATION:
-
+		DrawGraph(backPos.x, backPos.y, ancientback, true);
+		DrawGraph(backPos2.x, backPos2.y, modernback, true);
+		DrawGraph(backPos3.x, backPos3.y, futureback, true);
+		DrawGraph(setumeiPos.x, setumeiPos.y, setumei, true);
 		break;
 	}
 
@@ -104,6 +102,9 @@ void GameScene::Draw()
 
 void GameScene::ChangeScene()
 {
+	backPos.x -= 5;
+	backPos2.x -= 5;
+	backPos3.x -= 5;
 	if (CheckHitKey(KEY_INPUT_UP) == 1 && hitButton == false ||
 		CheckHitKey(KEY_INPUT_DOWN) == 1 && hitButton == false)
 	{
@@ -129,10 +130,13 @@ void GameScene::ChangeScene()
 	{
 		if (gameState == TITLE)
 		{
-			if (start = true)
+			if (start == true)
 			{
 				gameState = PLAY;
 				PlayerCreate();
+				backPos = { 0,0 };
+				backPos2 = { 1280,0 };
+				backPos3 = { 2569,0 };
 			}
 			else
 			{
@@ -148,6 +152,10 @@ void GameScene::ChangeScene()
 			gameState = TITLE;
 			gameObjectManager->Update();
 			Initialize();
+		}
+		else if (gameState == EXPLANATION)
+		{
+			gameState = TITLE;
 		}
 		keyCount = 1;
 	}
@@ -449,4 +457,24 @@ void GameScene::BGM()
 	{
 		volume = 200;
 	}
+}
+
+void GameScene::LoadResource()
+{
+
+	title = LoadGraph("Resource/TITLE.png"); // �`��
+	ancientback = LoadGraph("Resource/ancientback.png"); // �`��
+	modernback = LoadGraph("Resource/modernback.png"); // �`��
+	futureback = LoadGraph("Resource/futurenack.png"); // �`��
+	changeback = LoadGraph("Resource/ageChange.png");
+	clear = LoadGraph("Resource/GameClear.png"); // �`��
+	over = LoadGraph("Resource/GameOver.png"); // �`��
+	yajirusi = LoadGraph("Resource/sentaku.png"); // �`��
+	setumei = LoadGraph("Resource/setumei.png"); // �`��
+
+	ancientBGM = LoadSoundMem("Resource/ancientBGM.mp3");
+	modernBGM = LoadSoundMem("Resource/modernBGM.mp3");
+	futureBGM = LoadSoundMem("Resource/Shining_star.mp3");
+	overBGM = LoadSoundMem("Resource/failed.mp3");
+	loadFlag = true;
 }
