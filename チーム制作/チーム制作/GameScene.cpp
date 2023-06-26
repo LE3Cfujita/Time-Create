@@ -105,6 +105,18 @@ void GameScene::ChangeScene()
 	backPos.x -= 5;
 	backPos2.x -= 5;
 	backPos3.x -= 5;
+	if (backPos.x <= -1280)
+	{
+		backPos.x = 2560;
+	}
+	if (backPos2.x <= -1280)
+	{
+		backPos2.x = 2560;
+	}
+	if (backPos3.x <= -1280)
+	{
+		backPos3.x = 2560;
+	}
 	if (CheckHitKey(KEY_INPUT_UP) == 1 && hitButton == false ||
 		CheckHitKey(KEY_INPUT_DOWN) == 1 && hitButton == false)
 	{
@@ -191,14 +203,11 @@ void GameScene::EnemyCreate()
 
 void GameScene::SceneChange()
 {
-	int pHP = 0;
-	int eHP = 0;
 	for (GameObject* gameobject : gameObjectManager->GetGameObjects())
 	{
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
 		{
-			pHP = gameobject->GetHP();
-			if (pHP <= 0)
+			if (gameobject->GetObjectState()== GameObject::OBJSTATE::DEATH)
 			{
 				if (objectAge == ANCIENT && CheckSoundMem(ancientBGM) == 1)
 				{
@@ -218,8 +227,7 @@ void GameScene::SceneChange()
 		}
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::ENEMY)
 		{
-			eHP = gameobject->GetHP();
-			if (eHP <= 0)
+			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
 			{
 				changeFlag = true;
 			}

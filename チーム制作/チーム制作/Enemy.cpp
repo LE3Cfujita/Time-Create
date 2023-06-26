@@ -30,26 +30,39 @@ void Enemy::Initialize()
 
 void Enemy::Update()
 {
-	if (move == true)
+
+	if (objState == EFFECT)
 	{
-		Move();
+		DownEffect();
 	}
-	switch (objectAge)
+	else
 	{
-	case ANCIENT://�Ñ�U��
-		ANCIENTAttack();
-		break;
-	case MODERN://����U��
-		MODERNAttack();
-		break;
-	case FUTURE://�����U��
-		FUTUREAttack();
-		break;
+		if (HP <= 0)
+		{
+			objState = EFFECT;
+		}
+		if (move == true)
+		{
+			Move();
+		}
+		switch (objectAge)
+		{
+		case ANCIENT://�Ñ�U��
+			ANCIENTAttack();
+			break;
+		case MODERN://����U��
+			MODERNAttack();
+			break;
+		case FUTURE://�����U��
+			FUTUREAttack();
+			break;
+		}
 	}
 }
 
 void Enemy::Draw()
 {
+	if (objState == EFFECT)return;
 	switch (objectAge)
 	{
 	case ANCIENT://�Ñ�G
@@ -282,8 +295,18 @@ void Enemy::Effect()
 	addGameObjects.push_back(effect);
 }
 
+void Enemy::DownEffect()
+{
+	DownEffec* effect = new DownEffec();
+	effect->BaseInitialize(referenceGameObjects);
+	effect->Initialize(position);
+	addGameObjects.push_back(effect);
+}
+
 void Enemy::HitAction(GameObject* gameObject)
 {
+	if (objState == EFFECT || objState == DEATH)return;
+
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
 	{
 		Effect();

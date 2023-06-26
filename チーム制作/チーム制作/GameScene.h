@@ -67,7 +67,7 @@ private:
 
 	XMFLOAT2 backPos = { 0,0 };
 	XMFLOAT2 backPos2 = { 1280,0 };
-	XMFLOAT2 backPos3 = { 2569,0 };
+	XMFLOAT2 backPos3 = { 2560,0 };
 	XMFLOAT2 changePos = { 1280,0 };
 	XMFLOAT2 setumeiPos = { 0,0 };
 	XMFLOAT2 yajirusiPos = { 450,480 };

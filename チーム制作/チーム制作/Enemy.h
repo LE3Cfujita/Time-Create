@@ -7,6 +7,7 @@
 #include"EnemyBeam.h"
 #include "EnemyEntourage.h"
 #include"HitEffect.h"
+#include "DownEffec.h"
 class Enemy : public GameObject
 {
 
@@ -33,6 +34,7 @@ private:
 	void Animation();
 	void EntourageCreate();//æ‚èŠª‚«¢Š«
 	void Effect();
+	void DownEffect();
 
 	void HitAction(GameObject* gameObject);
 

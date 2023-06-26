@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="DownEffec.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBalkan.cpp" />
     <ClCompile Include="EnemyBeam.cpp" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="DownEffec.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBalkan.h" />
     <ClInclude Include="EnemyBeam.h" />

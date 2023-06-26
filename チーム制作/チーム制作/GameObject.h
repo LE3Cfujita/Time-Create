@@ -38,6 +38,7 @@ public:
 		ATTACK,		//攻撃
 		DEATH,		//死亡
 		ALIVE,		//生産
+		EFFECT,		//志望エフェクト
 		NONESTATE,	//なし
 	};
 
@@ -172,6 +173,8 @@ public:
 
 
 	OBJAGE GetObjectAge() { return objectAge; }
+	OBJSTATE GetObjectState() { return objState; }
+	OBJSTATE SetObjectState(OBJSTATE objState) { return objState; }
 
 	/// <summary>
 	/// 位置取得
