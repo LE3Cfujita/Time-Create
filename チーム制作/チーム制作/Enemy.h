@@ -48,6 +48,7 @@ private:
 
 	bool moveFlag = true;
 	bool createFlag = false;
+	bool effectFlag = false;
 	int predictionTime = 0;
 };
 

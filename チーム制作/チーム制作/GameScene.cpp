@@ -30,7 +30,6 @@ void GameScene::Update()
 		ChangeScene();
 		break;
 	case PLAY:
-		BGM();
 		BackgroundScroll();
 		PBCollision();
 		Invincible();
@@ -191,6 +190,7 @@ void GameScene::PlayerCreate()
 
 void GameScene::EnemyCreate()
 {
+	BGM();
 	//敵生成
 	if (createFlag == true)return;
 	Enemy* enemy = nullptr;
@@ -207,7 +207,7 @@ void GameScene::SceneChange()
 	{
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
 		{
-			if (gameobject->GetObjectState()== GameObject::OBJSTATE::DEATH)
+			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
 			{
 				if (objectAge == ANCIENT && CheckSoundMem(ancientBGM) == 1)
 				{
@@ -285,12 +285,6 @@ void GameScene::SceneChange()
 		}
 		if (changePos.x <= 0)
 		{
-			if (changePos.x >= -30)
-			{
-				StopSoundMem(ancientBGM);
-				StopSoundMem(modernBGM);
-				StopSoundMem(futureBGM);
-			}
 			if (flagCount == false)
 			{
 				backFlag = true;
@@ -451,14 +445,20 @@ void GameScene::BGM()
 {
 	if (objectAge == ANCIENT && CheckSoundMem(ancientBGM) == 0)
 	{
+		StopSoundMem(modernBGM);
+		StopSoundMem(futureBGM);
 		PlaySoundMem(ancientBGM, DX_PLAYTYPE_LOOP, TRUE);
 	}
 	else if (objectAge == MODERN && CheckSoundMem(modernBGM) == 0)
 	{
+		StopSoundMem(ancientBGM);
+		StopSoundMem(futureBGM);
 		PlaySoundMem(modernBGM, DX_PLAYTYPE_LOOP, TRUE);
 	}
 	else if (objectAge == FUTURE && CheckSoundMem(futureBGM) == 0)
 	{
+		StopSoundMem(ancientBGM);
+		StopSoundMem(modernBGM);
 		PlaySoundMem(futureBGM, DX_PLAYTYPE_LOOP, TRUE);
 	}
 	if (volume <= 0)

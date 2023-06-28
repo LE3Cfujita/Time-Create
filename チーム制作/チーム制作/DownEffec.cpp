@@ -28,15 +28,13 @@ void DownEffec::Update()
 void DownEffec::Draw()
 {
 	animation = animation + 1;
-
+	a += 1;
 	if (animation > 7)
 	{
 		animeCount = animeCount + 1;
 		animation = 0;
 		if (animeCount >= 7)
 		{
-			timeFlag = true;
-			move = false;
 			animeCount = 0;
 			deathFlag = true;
 			for (GameObject* gameObject : referenceGameObjects)

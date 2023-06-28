@@ -33,12 +33,14 @@ void Enemy::Update()
 
 	if (objState == EFFECT)
 	{
+		if (effectFlag != false)return;
 		DownEffect();
 	}
 	else
 	{
 		if (HP <= 0)
 		{
+			if (effectFlag != false)return;
 			objState = EFFECT;
 		}
 		if (move == true)
@@ -62,7 +64,7 @@ void Enemy::Update()
 
 void Enemy::Draw()
 {
-	if (objState == EFFECT)return;
+	if (objState == EFFECT || objState == DEATH)return;
 	switch (objectAge)
 	{
 	case ANCIENT://�Ñ�G
@@ -301,6 +303,7 @@ void Enemy::DownEffect()
 	effect->BaseInitialize(referenceGameObjects);
 	effect->Initialize(position);
 	addGameObjects.push_back(effect);
+	effectFlag = true;
 }
 
 void Enemy::HitAction(GameObject* gameObject)

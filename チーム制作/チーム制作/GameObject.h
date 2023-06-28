@@ -174,7 +174,7 @@ public:
 
 	OBJAGE GetObjectAge() { return objectAge; }
 	OBJSTATE GetObjectState() { return objState; }
-	OBJSTATE SetObjectState(OBJSTATE objState) { return objState; }
+	void SetObjectState(OBJSTATE objState) { this->objState = objState; }
 
 	/// <summary>
 	/// ˆÊ’uŽæ“¾
