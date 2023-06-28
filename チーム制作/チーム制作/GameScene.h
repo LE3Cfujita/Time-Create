@@ -57,6 +57,8 @@ public:
 
 	void BGM();
 
+	void LoadResource();
+
 private:
 	GameState gameState;
 	OBJAGE objectAge;
@@ -65,7 +67,9 @@ private:
 
 	XMFLOAT2 backPos = { 0,0 };
 	XMFLOAT2 backPos2 = { 1280,0 };
+	XMFLOAT2 backPos3 = { 2560,0 };
 	XMFLOAT2 changePos = { 1280,0 };
+	XMFLOAT2 setumeiPos = { 0,0 };
 	XMFLOAT2 yajirusiPos = { 450,480 };
 	int title;
 	int ancientback;
@@ -74,6 +78,7 @@ private:
 	int changeback;
 	int clear;
 	int over;
+	int setumei;
 	int yajirusi;
 	int ancientBGM;
 	int modernBGM;
@@ -90,6 +95,7 @@ private:
 	bool invincibleFlag = false;
 	bool start = true;
 	bool hitButton = false;
+	bool loadFlag = false;
 	int invincibleTime = 0;
 };
 

@@ -30,6 +30,10 @@ void Player::Update()
 	Move();//�ړ�
 	Attack();//�U��
 	Invincible();
+	if (HP <= 0)
+	{
+		objState = DEATH;
+	}
 }
 
 void Player::Draw()

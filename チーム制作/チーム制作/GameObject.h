@@ -38,6 +38,7 @@ public:
 		ATTACK,		//UŒ‚
 		DEATH,		//Ž€–S
 		ALIVE,		//¶ŽY
+		EFFECT,		//Žu–]ƒGƒtƒFƒNƒg
 		NONESTATE,	//‚È‚µ
 	};
 
@@ -172,6 +173,8 @@ public:
 
 
 	OBJAGE GetObjectAge() { return objectAge; }
+	OBJSTATE GetObjectState() { return objState; }
+	void SetObjectState(OBJSTATE objState) { this->objState = objState; }
 
 	/// <summary>
 	/// ˆÊ’uŽæ“¾
