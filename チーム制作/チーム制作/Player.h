@@ -3,6 +3,7 @@
 #include"PlayerBullet.h"
 #include"PlayerModernBullet.h"
 #include"PlayerFutureBullet.h"
+#include"PlayerCharge.h"
 class Player : public GameObject
 {
 public:
@@ -36,5 +37,9 @@ private:
 	int invincibleTime = 0;
 
 	bool animationFlag = false;
+
+	bool hitButton = false;
+
+	int chargeTime = 0;
 };
 

@@ -222,6 +222,9 @@ void GameScene::SceneChange()
 					StopSoundMem(futureBGM);
 				}
 				gameState = OVER;
+				backPos = { 0,0 };
+				backPos2 = { 1280,0 };
+				backPos3 = { 2560,0 };
 				PlaySoundMem(overBGM, DX_PLAYTYPE_LOOP, TRUE);
 			}
 		}
@@ -271,6 +274,9 @@ void GameScene::SceneChange()
 				}
 				else if (gameobject->GetObjectAge() == GameObject::OBJAGE::FUTURE)
 				{
+					backPos = { 0,0 };
+					backPos2 = { 1280,0 };
+					backPos3 = { 2560,0 };
 					gameState = CLEA;
 					objectAge = ANCIENT;
 					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
