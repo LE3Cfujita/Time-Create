@@ -137,11 +137,14 @@ void Player::Attack()
 		{
 			if (objectAge == ANCIENT)
 			{
+				if (hitButton == true)return;
 				animationFlag = true;
 				PlayerBullet* bullet = new PlayerBullet();
 				bullet->BaseInitialize(referenceGameObjects);
 				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
 				addGameObjects.push_back(bullet);
+				hitButton = true;
+				timeFlag = true;
 			}
 			else if (objectAge == MODERN)
 			{
@@ -150,16 +153,37 @@ void Player::Attack()
 				bullet->BaseInitialize(referenceGameObjects);
 				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
 				addGameObjects.push_back(bullet);
+				timeFlag = true;
 			}
 			else
 			{
-				animationFlag = true;
-				PlayerFutureBullet* bullet = new PlayerFutureBullet();
-				bullet->BaseInitialize(referenceGameObjects);
-				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-				addGameObjects.push_back(bullet);
+				chargeTime++;
+				hitButton = true;
 			}
-			timeFlag = true;
+		}
+		else
+		{
+			if (hitButton == true && objectAge == FUTURE)
+			{
+				if (chargeTime >= 120)
+				{
+					animationFlag = true;
+					PlayerCharge* bullet = new PlayerCharge();
+					bullet->BaseInitialize(referenceGameObjects);
+					bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+					addGameObjects.push_back(bullet);
+				}
+				else
+				{
+					animationFlag = true;
+					PlayerFutureBullet* bullet = new PlayerFutureBullet();
+					bullet->BaseInitialize(referenceGameObjects);
+					bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+					addGameObjects.push_back(bullet);
+				}
+				chargeTime = 0;
+			}
+			hitButton = false;
 		}
 	}
 	else
