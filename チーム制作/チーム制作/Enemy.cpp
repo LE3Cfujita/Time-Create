@@ -21,7 +21,7 @@ void Enemy::Initialize()
 	futureEnemy = LoadGraph("Resource/EnemyFuture.png");
 	prediction = LoadGraph("Resource/prediction.png");
 	time = 100;
-	HP = 1;
+	HP = 10;
 	moveFlag = true;
 	timeFlag = true;
 	move = true;

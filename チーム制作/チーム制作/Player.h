@@ -30,13 +30,17 @@ private:
 	int ancientHP;//•`‰æ—p
 	int modernHP;//•`‰æ—p
 	int futureHP;//•`‰æ—p
+	int charge;
 
 	XMFLOAT2 hpPos = { 0,0 };
 
-	int invincibleFlag = false;
+	bool invincibleFlag = false;
 	int invincibleTime = 0;
-
 	bool animationFlag = false;
+
+	bool chargeFlag = false;
+	int chargeAnimation = 0;
+	int chargeAnimationCount = 0;
 
 	bool hitButton = false;
 
