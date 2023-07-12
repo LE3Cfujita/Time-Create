@@ -22,6 +22,7 @@ void Player::Initialize()
 	ancientHP = LoadGraph("Resource/ancienthp.png"); // �`��
 	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
 	futureHP = LoadGraph("Resource/futureHP.png"); // �`��
+	charge = LoadGraph("Resource/PlayerCharge.png");
 	HP = 10;
 }
 
@@ -87,9 +88,30 @@ void Player::Draw()
 			}
 			DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, playerFuture, TRUE, FALSE);
 
-		}
+			if (chargeFlag == true)
+			{
+				chargeAnimation = chargeAnimation + 1;
+				if (chargeAnimation > 2)
+				{
+					if (chargeTime >= 120)
+					{
+						chargeAnimationCount = 0;
+					}
+					else
+					{
+						chargeAnimationCount = chargeAnimationCount + 1;
+						chargeAnimation = 0;
+						if (chargeAnimationCount >= 2)
+						{
+							chargeAnimationCount = 0;
+						}
+					}
+				}
+				DrawRectGraph(position.x + r, position.y, chargeAnimationCount * 32, 0, 32, 32, charge, TRUE, FALSE);
 
-			Animation();
+			}
+		}
+		Animation();
 	}
 }
 
@@ -159,6 +181,7 @@ void Player::Attack()
 			{
 				chargeTime++;
 				hitButton = true;
+				chargeFlag = true;
 			}
 		}
 		else
@@ -184,21 +207,22 @@ void Player::Attack()
 				chargeTime = 0;
 			}
 			hitButton = false;
+			chargeFlag = false;
 		}
 	}
 	else
 	{
-		time++;
-		
-		if (time >= 5 && objectAge==MODERN)
+		timer++;
+
+		if (timer >= 5 && objectAge == MODERN)
 		{
 			timeFlag = false;
-			time = 0;
+			timer = 0;
 		}
-		else if (time >= 20 && objectAge!=MODERN)
+		else if (timer >= 20 && objectAge != MODERN)
 		{
 			timeFlag = false;
-			time = 0;
+			timer = 0;
 		}
 	}
 }
@@ -220,7 +244,8 @@ void Player::HitAction(GameObject* gameObject)
 		if (gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBULLET ||
 			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYFIRE ||
 			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBALKAN ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON)
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENTOURAGEBULLET)
 		{
 			HP--;
 			invincibleFlag = true;

@@ -1,5 +1,7 @@
 #include "EnemyEntourage.h"
 
+using namespace std;
+
 EnemyEntourage::EnemyEntourage()
 {
 }
@@ -10,6 +12,7 @@ EnemyEntourage::~EnemyEntourage()
 
 void EnemyEntourage::Initialize(XMFLOAT2 pos, int number)
 {
+	srand((unsigned int)time(NULL));
 	objectMember = GameObject::ENEMYENTOURAGE;
 	objectAge = GameObject::ANCIENT;
 	position = { 900,pos.y };
@@ -22,8 +25,11 @@ void EnemyEntourage::Initialize(XMFLOAT2 pos, int number)
 void EnemyEntourage::Update()
 {
 	Move();
-	Attack();
-
+	int attack = rand() % 50 + 1;
+	if (attack == 1)
+	{
+		Attack();
+	}
 	if (HP <= 0)
 	{
 		deathFlag = true;
@@ -32,7 +38,7 @@ void EnemyEntourage::Update()
 			if (gameObject->GetObjectMember() != GameObject::ENEMY)continue;
 			{
 				int number = gameObject->GetNumber();
- 				gameObject->SetNumber(number -= 1);
+				gameObject->SetNumber(number -= 1);
 				break;
 			}
 		}
@@ -90,5 +96,8 @@ void EnemyEntourage::Effect()
 
 void EnemyEntourage::Attack()
 {
-
+	EntourageBullet* bullet = new EntourageBullet();
+	bullet->BaseInitialize(referenceGameObjects);
+	bullet->Initialize(position);
+	addGameObjects.push_back(bullet);
 }

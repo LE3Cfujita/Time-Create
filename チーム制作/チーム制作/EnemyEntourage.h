@@ -1,6 +1,10 @@
 #pragma once
 #include"GameObject.h"
 #include"HitEffect.h"
+#include"EntourageBullet.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 class EnemyEntourage : public GameObject
 {
 

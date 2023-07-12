@@ -148,7 +148,7 @@
     <ClCompile Include="EnemyCannon.cpp" />
     <ClCompile Include="EnemyEntourage.cpp" />
     <ClCompile Include="EnemyFire.cpp" />
-    <ClCompile Include="EntourageAttack.cpp" />
+    <ClCompile Include="EntourageBullet.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="HitEffect.cpp" />
@@ -169,7 +169,7 @@
     <ClInclude Include="EnemyCannon.h" />
     <ClInclude Include="EnemyEntourage.h" />
     <ClInclude Include="EnemyFire.h" />
-    <ClInclude Include="EntourageAttack.h" />
+    <ClInclude Include="EntourageBullet.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GameScene.h" />

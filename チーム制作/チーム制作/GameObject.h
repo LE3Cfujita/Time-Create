@@ -23,6 +23,7 @@ public:
 		ENEMYBALKAN,//敵のバルカン(現代)
 		ENEMYCANNON,//敵の大砲(現代)
 		ENEMYBEAM,//敵のビーム(未来)
+		ENTOURAGEBULLET,//雑魚敵の攻撃
 		HITEFFECT,//ヒットエフェクト
 	};
 	enum OBJAGE
@@ -59,7 +60,7 @@ protected:
 	bool physicsFlag;
 
 	bool timeFlag;//falseならまっすぐ打つ
-	int time;
+	int timer;
 	bool balkanFlag;
 	int balkanTime;
 	bool cannonFlag;
@@ -117,7 +118,7 @@ public:
 		color = 0;
 
 		timeFlag = false;//falseなら打つ
-		time = 0;
+		timer = 0;
 		balkanFlag = false;//falseなら打つ
 		balkanTime = 0;
 		cannonFlag = false;
