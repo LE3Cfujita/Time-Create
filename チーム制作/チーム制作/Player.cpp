@@ -212,17 +212,17 @@ void Player::Attack()
 	}
 	else
 	{
-		time++;
+		timer++;
 
-		if (time >= 5 && objectAge == MODERN)
+		if (timer >= 5 && objectAge == MODERN)
 		{
 			timeFlag = false;
-			time = 0;
+			timer = 0;
 		}
-		else if (time >= 20 && objectAge != MODERN)
+		else if (timer >= 20 && objectAge != MODERN)
 		{
 			timeFlag = false;
-			time = 0;
+			timer = 0;
 		}
 	}
 }
@@ -244,7 +244,8 @@ void Player::HitAction(GameObject* gameObject)
 		if (gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBULLET ||
 			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYFIRE ||
 			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBALKAN ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON)
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::ENTOURAGEBULLET)
 		{
 			HP--;
 			invincibleFlag = true;

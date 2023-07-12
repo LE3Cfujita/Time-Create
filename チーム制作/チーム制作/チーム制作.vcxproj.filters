@@ -66,10 +66,10 @@
     <ClCompile Include="DownEffec.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="EntourageAttack.cpp">
+    <ClCompile Include="PlayerCharge.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerCharge.cpp">
+    <ClCompile Include="EntourageBullet.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -128,10 +128,10 @@
     <ClInclude Include="DownEffec.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="EntourageAttack.h">
+    <ClInclude Include="PlayerCharge.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerCharge.h">
+    <ClInclude Include="EntourageBullet.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

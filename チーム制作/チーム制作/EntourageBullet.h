@@ -1,10 +1,11 @@
 #pragma once
 #include"GameObject.h"
-class EntourageAttack : public GameObject
+class EntourageBullet : public GameObject
 {
+
 public:
-	EntourageAttack();
-	~EntourageAttack();
+	EntourageBullet();
+	~EntourageBullet();
 
 	//èâä˙âª
 	void Initialize(XMFLOAT2 pos);
@@ -13,6 +14,9 @@ public:
 
 	void Draw();
 
+	void Move();
+
+	void Distance(XMFLOAT2 pos);
 private:
 	int bullet;
 };

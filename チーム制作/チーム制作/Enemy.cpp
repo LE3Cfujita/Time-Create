@@ -20,7 +20,7 @@ void Enemy::Initialize()
 	modernEnemy = LoadGraph("Resource/EnemyModern.png");
 	futureEnemy = LoadGraph("Resource/EnemyFuture.png");
 	prediction = LoadGraph("Resource/prediction.png");
-	time = 100;
+	timer = 100;
 	HP = 10;
 	moveFlag = true;
 	timeFlag = true;
@@ -102,31 +102,31 @@ void Enemy::ANCIENTAttack()
 	}
 	else
 	{
-		time++;
-		if (time <= 60)return;
+		timer++;
+		if (timer <= 60)return;
 		move = true;
-		if (time <= 180)return;
+		if (timer <= 180)return;
 		timeFlag = false;
-		time = 0;
+		timer = 0;
 	}
 }
 
 void Enemy::MODERNAttack()
 {
-	time++;
+	timer++;
 	if (move == false)
 	{
 		BalkanAttack();
 		AimAttack();
-		if (time <= 180)return;
+		if (timer <= 180)return;
 		move = true;
-		time = 0;
+		timer = 0;
 	}
 	else
 	{
-		if (time <= rand() % 120 + 180)return;
+		if (timer <= rand() % 120 + 180)return;
 		move = false;
-		time = 0;
+		timer = 0;
 	}
 }
 
