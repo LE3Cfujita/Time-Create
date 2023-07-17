@@ -30,7 +30,10 @@ private:
 	int ancientHP;//•`‰æ—p
 	int modernHP;//•`‰æ—p
 	int futureHP;//•`‰æ—p
+	int chargeSE;
 	int charge;
+	int tuujouSE;
+	int attackSE;
 
 	XMFLOAT2 hpPos = { 0,0 };
 

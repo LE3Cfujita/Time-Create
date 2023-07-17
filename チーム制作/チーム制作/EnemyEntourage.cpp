@@ -25,7 +25,7 @@ void EnemyEntourage::Initialize(XMFLOAT2 pos, int number)
 void EnemyEntourage::Update()
 {
 	Move();
-	int attack = rand() % 50 + 1;
+	int attack = rand() % 100 + 1;
 	if (attack == 1)
 	{
 		Attack();

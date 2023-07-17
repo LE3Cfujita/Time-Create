@@ -23,6 +23,9 @@ void Player::Initialize()
 	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
 	futureHP = LoadGraph("Resource/futureHP.png"); // �`��
 	charge = LoadGraph("Resource/PlayerCharge.png");
+	chargeSE = LoadSoundMem("Resource/charge.mp3");
+	tuujouSE = LoadSoundMem("Resource/tuujou.mp3");
+	attackSE = LoadSoundMem("Resource/2.mp3");
 	HP = 10;
 }
 
@@ -96,6 +99,10 @@ void Player::Draw()
 					if (chargeTime >= 120)
 					{
 						chargeAnimationCount = 0;
+						if (CheckSoundMem(chargeSE) == FALSE)
+						{
+							PlaySoundMem(chargeSE, DX_PLAYTYPE_BACK, TRUE);
+						}
 					}
 					else
 					{
@@ -190,6 +197,7 @@ void Player::Attack()
 			{
 				if (chargeTime >= 120)
 				{
+					PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
 					animationFlag = true;
 					PlayerCharge* bullet = new PlayerCharge();
 					bullet->BaseInitialize(referenceGameObjects);
@@ -198,6 +206,7 @@ void Player::Attack()
 				}
 				else
 				{
+					PlaySoundMem(tuujouSE, DX_PLAYTYPE_BACK, TRUE);
 					animationFlag = true;
 					PlayerFutureBullet* bullet = new PlayerFutureBullet();
 					bullet->BaseInitialize(referenceGameObjects);
@@ -250,18 +259,16 @@ void Player::HitAction(GameObject* gameObject)
 			HP--;
 			invincibleFlag = true;
 			gameObject->SetDeathFlag(true);
-			if (gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON)
+			if (gameObject->GetObjectMember() != OBJECTMEMBER::ENEMYCANNON)return;
+			for (GameObject* gameObject2 : referenceGameObjects)
 			{
-				for (GameObject* gameObject2 : referenceGameObjects)
+				if (gameObject2->GetObjectMember() != GameObject::ENEMY)continue;
 				{
-					if (gameObject2->GetObjectMember() != GameObject::ENEMY)continue;
-					{
-						gameObject2->SetCannonFlag(false);
-						break;
-					}
+					gameObject2->SetCannonFlag(false);
+					break;
 				}
-				SetCannonFlag(false);
 			}
+			SetCannonFlag(false);
 		}
 	}
 }

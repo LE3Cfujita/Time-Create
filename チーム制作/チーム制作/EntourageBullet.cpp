@@ -38,7 +38,7 @@ void EntourageBullet::Move()
 			break;
 		}
 	}
-	Distance(pos);
+	Distance({ pos.x,pos.y + 16 });
 	//’e‚ÌˆÚ“®
 	position.x += (dx / L) * bulletSpeed;
 	position.y += (dy / L) * bulletSpeed;
