@@ -30,7 +30,8 @@ private:
 	int ancientHP;//•`‰æ—p
 	int modernHP;//•`‰æ—p
 	int futureHP;//•`‰æ—p
-	int chargeSE;
+	int chargedSE;
+	int chargeingSE;
 	int charge;
 	int tuujouSE;
 	int attackSE;

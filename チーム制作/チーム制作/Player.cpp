@@ -23,9 +23,10 @@ void Player::Initialize()
 	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
 	futureHP = LoadGraph("Resource/futureHP.png"); // �`��
 	charge = LoadGraph("Resource/PlayerCharge.png");
-	chargeSE = LoadSoundMem("Resource/charge.mp3");
+	chargedSE = LoadSoundMem("Resource/charge.mp3");
 	tuujouSE = LoadSoundMem("Resource/tuujou.mp3");
 	attackSE = LoadSoundMem("Resource/2.mp3");
+	chargeingSE = LoadSoundMem("Resource/chargeing.mp3");
 	HP = 10;
 }
 
@@ -99,9 +100,9 @@ void Player::Draw()
 					if (chargeTime >= 120)
 					{
 						chargeAnimationCount = 0;
-						if (CheckSoundMem(chargeSE) == FALSE)
+						if (CheckSoundMem(chargedSE) == FALSE)
 						{
-							PlaySoundMem(chargeSE, DX_PLAYTYPE_BACK, TRUE);
+							PlaySoundMem(chargedSE, DX_PLAYTYPE_BACK, TRUE);
 						}
 					}
 					else
@@ -186,6 +187,10 @@ void Player::Attack()
 			}
 			else
 			{
+				if (CheckSoundMem(chargeingSE) == FALSE)
+				{
+					PlaySoundMem(chargeingSE, DX_PLAYTYPE_BACK, TRUE);
+				}
 				chargeTime++;
 				hitButton = true;
 				chargeFlag = true;
@@ -195,6 +200,10 @@ void Player::Attack()
 		{
 			if (hitButton == true && objectAge == FUTURE)
 			{
+				if (CheckSoundMem(chargeingSE) == TRUE)
+				{
+					StopSoundMem(chargeingSE);
+				}
 				if (chargeTime >= 120)
 				{
 					PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
