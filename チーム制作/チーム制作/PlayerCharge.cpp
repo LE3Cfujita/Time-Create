@@ -14,7 +14,7 @@ void PlayerCharge::Initialize(XMFLOAT2 pos)
 	objectMember = GameObject::PLAYERBULLET;
 	position = { pos.x + r,pos.y };
 	r = 64;
-	bullet = LoadGraph("Resource/EnemyCannon.png"); // •`‰æ
+	bullet = LoadGraph("Resource/chargeShot.png"); // •`‰æ
 	bulletSpeed = 15;
 }
 
