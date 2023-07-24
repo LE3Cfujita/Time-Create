@@ -27,6 +27,9 @@ void Player::Initialize()
 	tuujouSE = LoadSoundMem("Resource/tuujou.mp3");
 	attackSE = LoadSoundMem("Resource/2.mp3");
 	chargeingSE = LoadSoundMem("Resource/chargeing.mp3");
+	gendaiAttackSE = LoadSoundMem("Resource/gendaiPlayerSE.mp4");
+	kodaiAttackSE = LoadSoundMem("Resource/playershot_kodai.mp3");
+	damageSE = LoadSoundMem("Resource/playerdamage.mp3");
 	HP = 10;
 }
 
@@ -168,6 +171,10 @@ void Player::Attack()
 			if (objectAge == ANCIENT)
 			{
 				if (hitButton == true)return;
+				if (CheckSoundMem(kodaiAttackSE) == FALSE)
+				{
+					PlaySoundMem(kodaiAttackSE, DX_PLAYTYPE_BACK, TRUE);
+				}
 				animationFlag = true;
 				PlayerBullet* bullet = new PlayerBullet();
 				bullet->BaseInitialize(referenceGameObjects);
@@ -178,6 +185,10 @@ void Player::Attack()
 			}
 			else if (objectAge == MODERN)
 			{
+				if (CheckSoundMem(gendaiAttackSE) == FALSE)
+				{
+					PlaySoundMem(gendaiAttackSE, DX_PLAYTYPE_BACK, TRUE);
+				}
 				animationFlag = true;
 				PlayerModernBullet* bullet = new PlayerModernBullet();
 				bullet->BaseInitialize(referenceGameObjects);
@@ -198,6 +209,14 @@ void Player::Attack()
 		}
 		else
 		{
+			if (CheckSoundMem(kodaiAttackSE) == TRUE)
+			{
+				StopSoundMem(kodaiAttackSE);
+			}
+			if (CheckSoundMem(gendaiAttackSE) == TRUE)
+			{
+				StopSoundMem(gendaiAttackSE);
+			}
 			if (hitButton == true && objectAge == FUTURE)
 			{
 				if (CheckSoundMem(chargeingSE) == TRUE)
@@ -265,6 +284,7 @@ void Player::HitAction(GameObject* gameObject)
 			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON ||
 			gameObject->GetObjectMember() == OBJECTMEMBER::ENTOURAGEBULLET)
 		{
+			PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
 			HP--;
 			invincibleFlag = true;
 			gameObject->SetDeathFlag(true);

@@ -35,6 +35,9 @@ private:
 	int charge;
 	int tuujouSE;
 	int attackSE;
+	int kodaiAttackSE;
+	int gendaiAttackSE;
+	int damageSE;
 
 	XMFLOAT2 hpPos = { 0,0 };
 
@@ -49,5 +52,6 @@ private:
 	bool hitButton = false;
 
 	int chargeTime = 0;
+	int pushTime = 0;
 };
 

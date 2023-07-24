@@ -20,6 +20,7 @@ void Enemy::Initialize()
 	modernEnemy = LoadGraph("Resource/EnemyModern.png");
 	futureEnemy = LoadGraph("Resource/EnemyFuture.png");
 	prediction = LoadGraph("Resource/prediction.png");
+	beamSE = LoadSoundMem("Resource/UFObeam.mp3");
 	timer = 100;
 	HP = 5;
 	moveFlag = true;
@@ -240,6 +241,10 @@ void Enemy::BeamAttack()
 	if (beamFlag == false)
 	{
 		predictionFlag = true;
+		if (CheckSoundMem(beamSE) == FALSE)
+		{
+			PlaySoundMem(beamSE, DX_PLAYTYPE_BACK, TRUE);
+		}
 		predictionTime++;
 		if (predictionTime < 60)return;
 		beamFlag = true;
