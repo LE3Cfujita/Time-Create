@@ -12,7 +12,6 @@ void Enemy::Initialize()
 {
 	objectMember = GameObject::ENEMY;
 	objectAge = GameObject::ANCIENT;
-	objState = GameObject::IDLE;
 	position = { 1400,600 };
 	r = 64;
 	ancientEnemy = LoadGraph("Resource/Enemy.png"); // �`��
@@ -25,7 +24,7 @@ void Enemy::Initialize()
 	cannonSE = LoadSoundMem("Resource/gendaiEnemySE.mp3");
 	dieSE = LoadSoundMem("Resource/enemyDIE.mp3");
 	timer = 100;
-	HP = 5;
+	HP = 50;
 	moveFlag = true;
 	timeFlag = true;
 	move = true;
@@ -94,15 +93,6 @@ void Enemy::ANCIENTAttack()
 	if (timeFlag == false)
 	{
 		Animation();
-		//int rad = rand() % 2;
-		//if (rad == 1)
-		//{
-		//	BulletAttack();//�e
-		//}
-		//else
-		//{
-		//	FireAttack();
-		//}
 	}
 	else
 	{
