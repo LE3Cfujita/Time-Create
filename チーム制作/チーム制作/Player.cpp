@@ -288,16 +288,6 @@ void Player::HitAction(GameObject* gameObject)
 			HP--;
 			invincibleFlag = true;
 			gameObject->SetDeathFlag(true);
-			if (gameObject->GetObjectMember() != OBJECTMEMBER::ENEMYCANNON)return;
-			for (GameObject* gameObject2 : referenceGameObjects)
-			{
-				if (gameObject2->GetObjectMember() != GameObject::ENEMY)continue;
-				{
-					gameObject2->SetCannonFlag(false);
-					break;
-				}
-			}
-			SetCannonFlag(false);
 		}
 	}
 }

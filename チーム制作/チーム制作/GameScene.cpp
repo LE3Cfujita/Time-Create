@@ -27,6 +27,10 @@ void GameScene::Update()
 	switch (gameState)
 	{
 	case TITLE:
+		if (CheckSoundMem(titleBGM) == 0)
+		{
+			PlaySoundMem(titleBGM, DX_PLAYTYPE_LOOP, TRUE);
+		}
 		ChangeScene();
 		break;
 	case PLAY:
@@ -148,6 +152,7 @@ void GameScene::ChangeScene()
 			if (start == true)
 			{
 				gameState = PLAY;
+				StopSoundMem(titleBGM);
 				PlayerCreate();
 				backPos = { 0,0 };
 				backPos2 = { 1280,0 };
@@ -166,6 +171,7 @@ void GameScene::ChangeScene()
 			}
 			gameState = TITLE;
 			gameObjectManager->Update();
+			overFlag = false;
 			Initialize();
 		}
 		else if (gameState == EXPLANATION)
@@ -229,7 +235,12 @@ void GameScene::SceneChange()
 				backPos = { 0,0 };
 				backPos2 = { 1280,0 };
 				backPos3 = { 2560,0 };
-				PlaySoundMem(overBGM, DX_PLAYTYPE_LOOP, TRUE);
+				if (overFlag == false)
+				{
+					PlaySoundMem(overBGM, DX_MOVIEPLAYTYPE_NORMAL, TRUE);
+					overFlag = true;
+				}
+
 			}
 		}
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::ENEMY)
@@ -490,6 +501,7 @@ void GameScene::LoadResource()
 	yajirusi = LoadGraph("Resource/sentaku.png"); // �`��
 	setumei = LoadGraph("Resource/setumei.png"); // �`��
 
+	titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
 	ancientBGM = LoadSoundMem("Resource/ancientBGM.mp3");
 	modernBGM = LoadSoundMem("Resource/modernBGM.mp3");
 	futureBGM = LoadSoundMem("Resource/Shining_star.mp3");
