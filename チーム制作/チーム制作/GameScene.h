@@ -80,10 +80,12 @@ private:
 	int over;
 	int setumei;
 	int yajirusi;
+	int titleBGM;
 	int ancientBGM;
 	int modernBGM;
 	int futureBGM;
 	int overBGM;
+	bool overFlag = false;
 	int ketteiSE;
 
 	int volume = 200;

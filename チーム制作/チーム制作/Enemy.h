@@ -47,6 +47,8 @@ private:
 	int prediction;
 	int beamSE;
 	int fireSE;
+	int cannonSE;
+	int dieSE;
 
 	bool moveFlag = true;
 	bool createFlag = false;
