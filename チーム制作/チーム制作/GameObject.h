@@ -28,6 +28,7 @@ public:
 	};
 	enum OBJAGE
 	{
+		STAND,
 		ANCIENT,//ŒÃ‘ã
 		MODERN,//Œ»‘ã
 		FUTURE,//–¢—ˆ

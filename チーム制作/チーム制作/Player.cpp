@@ -13,7 +13,6 @@ void Player::Initialize()
 {
 	objectMember = GameObject::PLAYER;//�v���C���[
 	objectAge = GameObject::ANCIENT;//�Ñ�
-	objState = GameObject::IDLE;
 	position = { 300,300 };
 	r = 16;
 	playerAncient = LoadGraph("Resource/Playeranime.png"); // �`��

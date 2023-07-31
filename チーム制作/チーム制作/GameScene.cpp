@@ -41,6 +41,10 @@ void GameScene::Update()
 		SceneChange();
 		break;
 	case CLEA://�N���A
+		if (CheckSoundMem(clearBGM) == false)
+		{
+			PlaySoundMem(clearBGM, DX_PLAYTYPE_LOOP, TRUE);
+		}
 		ChangeScene();
 		break;
 	case OVER:
@@ -151,6 +155,7 @@ void GameScene::ChangeScene()
 		{
 			if (start == true)
 			{
+				volume = 200;
 				gameState = PLAY;
 				StopSoundMem(titleBGM);
 				PlayerCreate();
@@ -171,6 +176,10 @@ void GameScene::ChangeScene()
 			}
 			gameState = TITLE;
 			gameObjectManager->Update();
+			if (CheckSoundMem(clearBGM) == true)
+			{
+				StopSoundMem(clearBGM);
+			}
 			overFlag = false;
 			Initialize();
 		}
@@ -293,7 +302,8 @@ void GameScene::SceneChange()
 					backPos2 = { 1280,0 };
 					backPos3 = { 2560,0 };
 					gameState = CLEA;
-					objectAge = ANCIENT;
+					objectAge = STAND;
+					StopSoundMem(futureBGM);
 					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
 					{
 						gameobject2->SetDeathFlag(true);
@@ -343,7 +353,6 @@ void GameScene::BackgroundScroll()
 		backPos2.x = 1280;
 	}
 	if (changeFlag == false)return;
-	volume -= 3;
 	changePos.x -= 30;
 	if (changePos.x <= -1280)
 	{
@@ -351,10 +360,7 @@ void GameScene::BackgroundScroll()
 		flagCount = false;
 		changePos.x = 1280;
 	}
-	ChangeVolumeSoundMem(volume, ancientBGM);
-	ChangeVolumeSoundMem(volume, modernBGM);
-	ChangeVolumeSoundMem(volume, futureBGM);
-	ChangeVolumeSoundMem(volume, overBGM);
+
 }
 
 void GameScene::PBCollision()
@@ -482,15 +488,11 @@ void GameScene::BGM()
 		StopSoundMem(modernBGM);
 		PlaySoundMem(futureBGM, DX_PLAYTYPE_LOOP, TRUE);
 	}
-	if (volume <= 0)
-	{
-		volume = 200;
-	}
 }
 
 void GameScene::LoadResource()
 {
-
+	volume = 200;
 	title = LoadGraph("Resource/TITLE.png"); // �`��
 	ancientback = LoadGraph("Resource/ancientback.png"); // �`��
 	modernback = LoadGraph("Resource/modernback.png"); // �`��
@@ -506,6 +508,13 @@ void GameScene::LoadResource()
 	modernBGM = LoadSoundMem("Resource/modernBGM.mp3");
 	futureBGM = LoadSoundMem("Resource/Shining_star.mp3");
 	overBGM = LoadSoundMem("Resource/failed.mp3");
+	clearBGM = LoadSoundMem("Resource/gameClear.mp3");
 	ketteiSE = LoadSoundMem("Resource/ketteiSE.mp3");
 	loadFlag = true;
+	ChangeVolumeSoundMem(volume, ancientBGM);
+	ChangeVolumeSoundMem(volume, modernBGM);
+	ChangeVolumeSoundMem(volume, futureBGM);
+	ChangeVolumeSoundMem(volume, overBGM);
+	ChangeVolumeSoundMem(volume, clearBGM);
+	ChangeVolumeSoundMem(volume, titleBGM);
 }

@@ -19,6 +19,7 @@ public:
 
 	enum OBJAGE
 	{
+		STAND,
 		ANCIENT,//ŒÃ‘ã
 		MODERN,//Œ»‘ã
 		FUTURE,//–¢—ˆ
@@ -85,6 +86,7 @@ private:
 	int modernBGM;
 	int futureBGM;
 	int overBGM;
+	int clearBGM;
 	bool overFlag = false;
 	int ketteiSE;
 
