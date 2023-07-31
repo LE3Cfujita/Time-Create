@@ -21,6 +21,7 @@ void Enemy::Initialize()
 	futureEnemy = LoadGraph("Resource/EnemyFuture.png");
 	prediction = LoadGraph("Resource/prediction.png");
 	beamSE = LoadSoundMem("Resource/UFObeam.mp3");
+	fireSE = LoadSoundMem("Resource/fireSE.mp3");
 	timer = 100;
 	HP = 5;
 	moveFlag = true;
@@ -198,6 +199,10 @@ void Enemy::FireAttack()
 {
 	/*	for (int i = 0; i < 2; i++)
 		{*/
+	if (CheckSoundMem(fireSE) == FALSE)
+	{
+		PlaySoundMem(fireSE, DX_PLAYTYPE_BACK, TRUE);
+	}
 	EnemyFire* bullet = new EnemyFire();
 	bullet->BaseInitialize(referenceGameObjects);
 	bullet->Initialize(position, 1);

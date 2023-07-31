@@ -139,6 +139,10 @@ void GameScene::ChangeScene()
 
 	if (CheckHitKey(KEY_INPUT_SPACE) == 1 && keyCount == 0)
 	{
+		if (CheckSoundMem(ketteiSE) == FALSE)
+		{
+			PlaySoundMem(ketteiSE, DX_PLAYTYPE_BACK, TRUE);
+		}
 		if (gameState == TITLE)
 		{
 			if (start == true)
@@ -490,5 +494,6 @@ void GameScene::LoadResource()
 	modernBGM = LoadSoundMem("Resource/modernBGM.mp3");
 	futureBGM = LoadSoundMem("Resource/Shining_star.mp3");
 	overBGM = LoadSoundMem("Resource/failed.mp3");
+	ketteiSE = LoadSoundMem("Resource/ketteiSE.mp3");
 	loadFlag = true;
 }

@@ -84,6 +84,7 @@ private:
 	int modernBGM;
 	int futureBGM;
 	int overBGM;
+	int ketteiSE;
 
 	int volume = 200;
 

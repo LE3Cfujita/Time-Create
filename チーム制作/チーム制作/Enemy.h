@@ -46,6 +46,7 @@ private:
 	int futureEnemy;
 	int prediction;
 	int beamSE;
+	int fireSE;
 
 	bool moveFlag = true;
 	bool createFlag = false;
