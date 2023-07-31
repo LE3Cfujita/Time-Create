@@ -22,6 +22,8 @@ void Enemy::Initialize()
 	prediction = LoadGraph("Resource/prediction.png");
 	beamSE = LoadSoundMem("Resource/UFObeam.mp3");
 	fireSE = LoadSoundMem("Resource/fireSE.mp3");
+	cannonSE = LoadSoundMem("Resource/gendaiEnemySE.mp3");
+	dieSE = LoadSoundMem("Resource/enemyDIE.mp3");
 	timer = 100;
 	HP = 5;
 	moveFlag = true;
@@ -129,6 +131,7 @@ void Enemy::MODERNAttack()
 		if (timer <= rand() % 120 + 180)return;
 		move = false;
 		timer = 0;
+		cannonFlag = false;
 	}
 }
 
@@ -238,6 +241,10 @@ void Enemy::AimAttack()
 	bullet->Initialize(position);
 	addGameObjects.push_back(bullet);
 	cannonFlag = true;
+	if (CheckSoundMem(cannonSE) == FALSE)
+	{
+		PlaySoundMem(cannonSE, DX_PLAYTYPE_BACK, TRUE);
+	}
 }
 
 void Enemy::BeamAttack()
@@ -314,6 +321,10 @@ void Enemy::DownEffect()
 	effect->Initialize(position);
 	addGameObjects.push_back(effect);
 	effectFlag = true;
+	if (CheckSoundMem(dieSE) == FALSE)
+	{
+		PlaySoundMem(dieSE, DX_PLAYTYPE_BACK, TRUE);
+	}
 }
 
 void Enemy::HitAction(GameObject* gameObject)

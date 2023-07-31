@@ -45,14 +45,6 @@ void EnemyCannon::Move()
 	if (position.x <= -10)
 	{
 		deathFlag = true;
-		for (GameObject* gameObject : referenceGameObjects)
-		{
-			if (gameObject->GetObjectMember() != GameObject::ENEMY)continue;
-			{
-				gameObject->SetCannonFlag(false);
-				break;
-			}
-		}
 	}
 }
 
