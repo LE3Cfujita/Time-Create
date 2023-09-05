@@ -14,7 +14,7 @@ void DownEffec::Initialize(XMFLOAT2 pos)
 	for (GameObject* gameObject : referenceGameObjects)
 	{
 		if (gameObject->GetObjectMember() != GameObject::ENEMY)continue;
-		objectAge = gameObject->GetObjectAge();
+		objectStage = gameObject->GetObjectAge();
 	}
 	position = pos;
 	r = 155;

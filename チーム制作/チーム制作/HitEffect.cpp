@@ -14,7 +14,7 @@ void HitEffect::Initialize(XMFLOAT2 pos)
 	for (GameObject* gameObject : referenceGameObjects)
 	{
 		if (gameObject->GetObjectMember() != GameObject::ENEMY)continue;
-		objectAge = gameObject->GetObjectAge();
+		objectStage = gameObject->GetObjectAge();
 	}
 	position = pos;
 	r = 16;
@@ -44,15 +44,15 @@ void HitEffect::Draw()
 		}
 	}
 
-	if (objectAge == ANCIENT)
+	if (objectStage == FIRSTSTAGE)
 	{
 		DrawRectGraph(position.x - r, position.y - r, animeCount * 32, 0, 32, 32, effect1, TRUE, FALSE);
 	}
-	if (objectAge == MODERN)
+	if (objectStage == MODERN)
 	{
 		DrawRectGraph(position.x - r, position.y - r, animeCount * 32, 0, 32, 32, effect2, TRUE, FALSE);
 	}
-	if (objectAge == FUTURE)
+	if (objectStage == FUTURE)
 	{
 		DrawRectGraph(position.x - r, position.y - r, animeCount * 32, 0, 32, 32, effect3, TRUE, FALSE);
 	}

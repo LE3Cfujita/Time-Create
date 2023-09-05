@@ -14,7 +14,7 @@ void EnemyEntourage::Initialize(XMFLOAT2 pos, int number)
 {
 	srand((unsigned int)time(NULL));
 	objectMember = GameObject::ENEMYENTOURAGE;
-	objectAge = GameObject::ANCIENT;
+	objectStage = GameObject::FIRSTSTAGE;
 	position = { 900,pos.y };
 	HP = 1;
 	this->number = number;

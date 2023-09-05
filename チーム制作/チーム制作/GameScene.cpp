@@ -37,6 +37,7 @@ void GameScene::Update()
 		BackgroundScroll();
 		PBCollision();
 		Invincible();
+		Form();
 		gameObjectManager->Update();
 		SceneChange();
 		break;
@@ -204,7 +205,8 @@ void GameScene::PlayerCreate()
 		Player* player = nullptr;
 		player = new Player();
 		player->BaseInitialize(gameObjectManager->GetGameObjects());
-		player->Initialize({ (float)300,(float)200 + 100 * i });
+		player->Initialize({ (float)300,(float)200 + 100 * i }, i);
+		player->Resource(playerGraph);
 		pNumber++;
 		gameObjectManager->AddGameObject(player);
 	}
@@ -230,8 +232,10 @@ void GameScene::EnemyCreate()
 			Enemy* enemy = nullptr;
 			enemy = new Enemy();
 			enemy->BaseInitialize(gameObjectManager->GetGameObjects());
-			enemy->Initialize({ (float)720 + 100 * x,(float)200 + 100 * y }, slime);
+			enemy->Initialize({ (float)720 + 100 * x,(float)200 + 100 * y });
+			enemy->Resource(slimeGraph);
 			gameObjectManager->AddGameObject(enemy);
+			sNumber++;
 		}
 	}
 	createFlag = true;
@@ -276,11 +280,15 @@ void GameScene::SceneChange()
 		{
 			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
 			{
+				int count = gameobject->GetDeathCount();
+				sNumber -= count;
+				gameobject->SetDeathFlag(true);
+				if (sNumber != 0)return;
 				changeFlag = true;
 			}
 			if (backFlag == true)
 			{
-				if (gameobject->GetObjectAge() == GameObject::OBJAGE::ANCIENT)
+				if (gameobject->GetObjectAge() == GameObject::STAGE::FIRSTSTAGE)
 				{
 					objectAge = MODERN;
 					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
@@ -298,7 +306,7 @@ void GameScene::SceneChange()
 					createFlag = false;
 					backFlag = false;
 				}
-				else if (gameobject->GetObjectAge() == GameObject::OBJAGE::MODERN)
+				else if (gameobject->GetObjectAge() == GameObject::STAGE::MODERN)
 				{
 					objectAge = FUTURE;
 					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
@@ -316,7 +324,7 @@ void GameScene::SceneChange()
 					createFlag = false;
 					backFlag = false;
 				}
-				else if (gameobject->GetObjectAge() == GameObject::OBJAGE::FUTURE)
+				else if (gameobject->GetObjectAge() == GameObject::STAGE::FUTURE)
 				{
 					backPos = { 0,0 };
 					backPos2 = { 1280,0 };
@@ -344,17 +352,17 @@ void GameScene::SceneChange()
 			if (objectAge == ANCIENT)
 			{
 				EnemyCreate();
-				gameobject->SetObjAge(GameObject::OBJAGE::ANCIENT);
+				gameobject->SetObjAge(GameObject::STAGE::FIRSTSTAGE);
 			}
 			else if (objectAge == MODERN)
 			{
 				EnemyCreate();
-				gameobject->SetObjAge(GameObject::OBJAGE::MODERN);
+				gameobject->SetObjAge(GameObject::STAGE::MODERN);
 			}
 			else if (objectAge == FUTURE)
 			{
 				EnemyCreate();
-				gameobject->SetObjAge(GameObject::OBJAGE::FUTURE);
+				gameobject->SetObjAge(GameObject::STAGE::FUTURE);
 			}
 		}
 	}
@@ -512,7 +520,7 @@ void GameScene::BGM()
 
 void GameScene::LoadResource()
 {
-	volume = 200;
+	//背景絵
 	title = LoadGraph("Resource/TITLE.png"); // �`��
 	ancientback = LoadGraph("Resource/ancientback.png"); // �`��
 	modernback = LoadGraph("Resource/modernback.png"); // �`��
@@ -523,6 +531,13 @@ void GameScene::LoadResource()
 	yajirusi = LoadGraph("Resource/sentaku.png"); // �`��
 	setumei = LoadGraph("Resource/setumei.png"); // �`��
 
+	//キャラクター絵
+	playerGraph = LoadGraph("Resource/Playeranime.png");
+	slimeGraph = LoadGraph("Resource/EnemySlimeAnime.png");
+
+	//弾絵
+
+	//音関係
 	titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
 	ancientBGM = LoadSoundMem("Resource/ancientBGM.mp3");
 	modernBGM = LoadSoundMem("Resource/modernBGM.mp3");
@@ -531,9 +546,7 @@ void GameScene::LoadResource()
 	clearBGM = LoadSoundMem("Resource/gameClear.mp3");
 	ketteiSE = LoadSoundMem("Resource/ketteiSE.mp3");
 	loadFlag = true;
-
-	slime = LoadGraph("Resource/EnemySlimeAnime.png");
-
+	volume = 200;
 	ChangeVolumeSoundMem(volume, ancientBGM);
 	ChangeVolumeSoundMem(volume, modernBGM);
 	ChangeVolumeSoundMem(volume, futureBGM);

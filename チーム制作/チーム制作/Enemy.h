@@ -1,7 +1,7 @@
 #pragma once
 #include"GameObject.h"
 #include "EnemyBullet.h"
-#include"EnemyFire.h"
+#include"SlimeBullet.h"
 #include"EnemyBalkan.h"
 #include"EnemyCannon.h"
 #include"EnemyBeam.h"
@@ -16,11 +16,13 @@ public:
 	~Enemy();
 
 	//‰Šú‰»
-	void Initialize(XMFLOAT2 pos,int graph);
+	void Initialize(XMFLOAT2 pos);
 
 	void Update();
 
 	void Draw();
+
+	void Resource(int graph);
 
 private:
 	void ANCIENTAttack();
@@ -41,10 +43,7 @@ private:
 
 	int moveCount = 0;//0‚Ìê‡ãˆÚ“®
 
-	int ancientEnemy;
-	int ancientEnemySlimeAnime;
-	int modernEnemy;
-	int futureEnemy;
+	int slimeEnemy;
 	int prediction;
 	int beamSE;
 	int fireSE;

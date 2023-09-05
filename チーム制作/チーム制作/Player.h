@@ -11,24 +11,23 @@ public:
 	~Player();
 
 	//‰Šú‰»
-	void Initialize(XMFLOAT2 pos);
+	void Initialize(XMFLOAT2 pos,int number);
 
 	void Update();
 
 	void Draw();
+
+	void Resource(int graph);
+
 private:
 	void Move();//ˆÚ“®
 	void Attack();//UŒ‚
 	void Invincible();//–³“G
 	void HitAction(GameObject* gameObject);
 	void Animation();
+	void Formation();
 
-	int playerAncient;//•`‰æ—p
-	int playerModern;
-	int playerFuture;
-	int ancientHP;//•`‰æ—p
-	int modernHP;//•`‰æ—p
-	int futureHP;//•`‰æ—p
+	int player;//•`‰æ—p
 	int chargedSE;
 	int chargeingSE;
 	int charge;
@@ -52,5 +51,7 @@ private:
 
 	int chargeTime = 0;
 	int pushTime = 0;
+
+	int number;//ƒLƒƒƒ‰”Ô†
 };
 

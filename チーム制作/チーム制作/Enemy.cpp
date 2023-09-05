@@ -8,16 +8,16 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::Initialize(XMFLOAT2 pos,int graph)
+void Enemy::Resource(int graph)
+{
+	slimeEnemy = graph;//画像読み込み
+}
+void Enemy::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::ENEMY;
-	objectAge = GameObject::ANCIENT;
+	objectStage = GameObject::FIRSTSTAGE;
 	position = { pos.x,pos.y };
-	r = 64;
-	ancientEnemySlimeAnime = graph;
-	//ancientEnemySlimeAnime = LoadGraph("Resource/EnemySlimeAnime.png"); // �`��
-	
-	
+	r = 16;
 	/*modernEnemy = LoadGraph("Resource/EnemyModern.png");
 	futureEnemy = LoadGraph("Resource/EnemyFuture.png");
 	prediction = LoadGraph("Resource/prediction.png");
@@ -26,7 +26,7 @@ void Enemy::Initialize(XMFLOAT2 pos,int graph)
 	cannonSE = LoadSoundMem("Resource/gendaiEnemySE.mp3");
 	dieSE = LoadSoundMem("Resource/enemyDIE.mp3");*/
 	timer = 100;
-	HP = 2;
+	HP = 1;
 	moveFlag = true;
 	timeFlag = true;
 	move = true;
@@ -35,26 +35,18 @@ void Enemy::Initialize(XMFLOAT2 pos,int graph)
 
 void Enemy::Update()
 {
-
-	if (objState == EFFECT)
-	{
-		if (effectFlag != false)return;
-		DownEffect();
-	}
-	else
-	{
 		if (HP <= 0)
 		{
-			if (effectFlag != false)return;
-			objState = EFFECT;
+			objState = DEATH;
+			deathCount = 1;
 		}
 		if (move == true)
 		{
 			//Move();
 		}
-		switch (objectAge)
+		switch (objectStage)
 		{
-		case ANCIENT://�Ñ�U��
+		case FIRSTSTAGE://�Ñ�U��
 			ANCIENTAttack();
 			break;
 		case MODERN://����U��
@@ -64,30 +56,20 @@ void Enemy::Update()
 			FUTUREAttack();
 			break;
 		}
-	}
 }
 
 void Enemy::Draw()
 {
 	if (objState == EFFECT || objState == DEATH)return;
-	switch (objectAge)
+	switch (objectStage)
 	{
-	case ANCIENT://�Ñ�G
+	case FIRSTSTAGE://�Ñ�G
 		r = 16;
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 32, 0, 32, 16, ancientEnemySlimeAnime, TRUE, FALSE);
-		break;
-	case MODERN://����G
-		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, modernEnemy, TRUE);
-		break;
-	case FUTURE://�����G
-		DrawGraph(position.x - 174, position.y - 96, futureEnemy, TRUE);
-		if (predictionFlag == true)
-		{
-			DrawGraph(position.x - 1100, position.y - 260, prediction, TRUE);
-		}
+		DrawRectGraph(position.x - r, position.y, animeCount * 32, 0, 32, 16, slimeEnemy, TRUE, FALSE);
 		break;
 	}
 }
+
 
 void Enemy::ANCIENTAttack()
 {
@@ -193,17 +175,14 @@ void Enemy::BulletAttack()
 
 void Enemy::FireAttack()
 {
-	/*	for (int i = 0; i < 2; i++)
-		{*/
 	if (CheckSoundMem(fireSE) == FALSE)
 	{
 		PlaySoundMem(fireSE, DX_PLAYTYPE_BACK, TRUE);
 	}
-	EnemyFire* bullet = new EnemyFire();
+	SlimeBullet* bullet = new SlimeBullet();
 	bullet->BaseInitialize(referenceGameObjects);
 	bullet->Initialize(position, 1);
 	addGameObjects.push_back(bullet);
-	//}
 }
 
 void Enemy::BalkanAttack()

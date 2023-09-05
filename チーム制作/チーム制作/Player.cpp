@@ -9,19 +9,18 @@ Player::~Player()
 
 }
 
-void Player::Initialize(XMFLOAT2 pos)
+void Player::Resource(int graph)
+{
+	player = graph;//画像読み込み
+}
+
+void Player::Initialize(XMFLOAT2 pos,int number)
 {
 	objectMember = GameObject::PLAYER;//�v���C���[
-	objectAge = GameObject::ANCIENT;//�Ñ�
+	objectStage = GameObject::FIRSTSTAGE;//�Ñ�
 	position = { pos.x,pos.y };
 	r = 16;
-	playerAncient = LoadGraph("Resource/Playeranime.png"); // �`��
-	playerModern = LoadGraph("Resource/PlayerModern.png"); // �`��
-	playerFuture = LoadGraph("Resource/PlayerFuture.png"); // �`��
-	ancientHP = LoadGraph("Resource/ancienthp.png"); // �`��
-	modernHP = LoadGraph("Resource/modernHP.png"); // �`��
-	futureHP = LoadGraph("Resource/futureHP.png"); // �`��
-	charge = LoadGraph("Resource/PlayerCharge.png");
+	this->number = number;
 	chargedSE = LoadSoundMem("Resource/charge.mp3");
 	tuujouSE = LoadSoundMem("Resource/tuujou.mp3");
 	attackSE = LoadSoundMem("Resource/2.mp3");
@@ -31,6 +30,7 @@ void Player::Initialize(XMFLOAT2 pos)
 	damageSE = LoadSoundMem("Resource/playerdamage.mp3");
 	HP = 1;
 }
+
 
 void Player::Update()
 {
@@ -42,26 +42,11 @@ void Player::Update()
 		objState = DEATH;
 		deathCount = 1;
 	}
+	Formation();
 }
 
 void Player::Draw()
 {
-	for (int i = 0; i < HP; i++)
-	{
-		if (objectAge == ANCIENT)
-		{
-			DrawGraph(i * 64, 0, ancientHP, TRUE);
-		}
-		else if (objectAge == MODERN)
-		{
-			DrawGraph(i * 64, 0, modernHP, TRUE);
-		}
-		else
-		{
-			DrawGraph(i * 64, 0, futureHP, TRUE);
-		}
-	}
-
 	if (invincibleTime == 0 ||
 		invincibleTime >= 3 && invincibleTime <= 6 ||
 		invincibleTime >= 9 && invincibleTime <= 12 ||
@@ -73,55 +58,7 @@ void Player::Draw()
 		invincibleTime >= 45 && invincibleTime <= 48 ||
 		invincibleTime >= 51 && invincibleTime <= 54)
 	{
-		if (objectAge == ANCIENT)
-		{
-			DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, playerAncient, TRUE, FALSE);
-		}
-		else if (objectAge == MODERN)
-		{
-			DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, playerModern, TRUE, FALSE);
-		}
-		else
-		{
-			animation = animation + 1;
-			if (animation > 2)
-			{
-				animeCount = animeCount + 1;
-				animation = 0;
-				if (animeCount >= 2)
-				{
-					animeCount = 0;
-				}
-			}
-			DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, playerFuture, TRUE, FALSE);
-
-			if (chargeFlag == true)
-			{
-				chargeAnimation = chargeAnimation + 1;
-				if (chargeAnimation > 2)
-				{
-					if (chargeTime >= 120)
-					{
-						chargeAnimationCount = 0;
-						if (CheckSoundMem(chargedSE) == FALSE)
-						{
-							PlaySoundMem(chargedSE, DX_PLAYTYPE_BACK, TRUE);
-						}
-					}
-					else
-					{
-						chargeAnimationCount = chargeAnimationCount + 1;
-						chargeAnimation = 0;
-						if (chargeAnimationCount >= 2)
-						{
-							chargeAnimationCount = 0;
-						}
-					}
-				}
-				DrawRectGraph(position.x + r, position.y, chargeAnimationCount * 32, 0, 32, 32, charge, TRUE, FALSE);
-
-			}
-		}
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, player, TRUE, FALSE);
 		Animation();
 	}
 }
@@ -176,7 +113,7 @@ void Player::Attack()
 	{
 		if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
 		{
-			if (objectAge == ANCIENT)
+			if (objectStage == FIRSTSTAGE)
 			{
 				if (hitButton == true)return;
 				if (CheckSoundMem(kodaiAttackSE) == FALSE)
@@ -191,7 +128,7 @@ void Player::Attack()
 				hitButton = true;
 				timeFlag = true;
 			}
-			else if (objectAge == MODERN)
+			else if (objectStage == MODERN)
 			{
 				if (CheckSoundMem(gendaiAttackSE) == FALSE)
 				{
@@ -225,7 +162,7 @@ void Player::Attack()
 			{
 				StopSoundMem(gendaiAttackSE);
 			}
-			if (hitButton == true && objectAge == FUTURE)
+			if (hitButton == true && objectStage == FUTURE)
 			{
 				if (CheckSoundMem(chargeingSE) == TRUE)
 				{
@@ -259,12 +196,12 @@ void Player::Attack()
 	{
 		timer++;
 
-		if (timer >= 5 && objectAge == MODERN)
+		if (timer >= 5 && objectStage == MODERN)
 		{
 			timeFlag = false;
 			timer = 0;
 		}
-		else if (timer >= 20 && objectAge != MODERN)
+		else if (timer >= 20 && objectStage != MODERN)
 		{
 			timeFlag = false;
 			timer = 0;
@@ -309,7 +246,7 @@ void Player::Animation()
 	if (animationFlag == false)return;
 	animation = animation + 1;
 
-	if (objectAge == ANCIENT)
+	if (objectStage == FIRSTSTAGE)
 	{
 		if (animation > 3)
 		{
@@ -321,20 +258,53 @@ void Player::Animation()
 				animationFlag = false;
 			}
 		}
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, playerAncient, TRUE, FALSE);
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, player, TRUE, FALSE);
 	}
-	else if (objectAge == MODERN)
+	
+}
+
+void Player::Formation()
+{
+	if (CheckHitKey(KEY_INPUT_Z) == 1)
 	{
-		if (animation > 2)
+		switch (number)
 		{
-			animeCount = animeCount + 1;
-			animation = 0;
-			if (animeCount >= 2)
-			{
-				animeCount = 0;
-				animationFlag = false;
-			}
+		case 0:
+			position = { 100,300 };
+			break;
+		case 1:
+			position = { 200,300 };
+			break;
+		case 2:
+			position = { 300,300 };
+			break;
+		case 3:
+			position = { 400,300 };
+			break;
+		case 4:
+			position = { 500,300 };
+			break;
 		}
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, playerModern, TRUE, FALSE);
+	}
+	if (CheckHitKey(KEY_INPUT_X) == 1)
+	{
+		switch (number)
+		{
+		case 0:
+			position = { 100,100 };
+			break;
+		case 1:
+			position = { 100,200 };
+			break;
+		case 2:
+			position = { 100,300 };
+			break;
+		case 3:
+			position = { 100,400 };
+			break;
+		case 4:
+			position = { 100,500 };
+			break;
+		}
 	}
 }
