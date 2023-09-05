@@ -130,35 +130,43 @@ void Player::Move()
 {
 	if (CheckHitKey(KEY_INPUT_D) == 1)
 	{
+		position2 = position;
 		position.x += 5;//�E
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
 	{
+		position2 = position;
 		position.x -= 5;//��
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
+		position2 = position;
 		position.y -= 5;//��
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
+		position2 = position;
 		position.y += 5;//��
 	}
 	if (position.x - 32 <= 0)
 	{
 		position.x = 32;
+		position2 = position;
 	}
 	if (position.y - r <= 0)
 	{
 		position.y = 0 + r;
+		position2 = position;
 	}
 	if (position.x + 32 >= 850)
 	{
 		position.x = 850 - 32;
+		position2 = position;
 	}
 	if (position.y + r * 3 >= 720)
 	{
 		position.y = 720 - r * 3;
+		position2 = position;
 	}
 }
 
@@ -289,6 +297,10 @@ void Player::HitAction(GameObject* gameObject)
 			invincibleFlag = true;
 			gameObject->SetDeathFlag(true);
 		}
+	}
+	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYER)
+	{
+		position = position2;
 	}
 }
 

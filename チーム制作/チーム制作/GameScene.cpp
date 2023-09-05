@@ -199,12 +199,12 @@ void GameScene::ChangeScene()
 void GameScene::PlayerCreate()
 {
 	//プレイヤー生成
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		Player* player = nullptr;
 		player = new Player();
 		player->BaseInitialize(gameObjectManager->GetGameObjects());
-		player->Initialize({ (float)300,(float)200 * i });
+		player->Initialize({ (float)300,(float)200 + 100 * i });
 		pNumber++;
 		gameObjectManager->AddGameObject(player);
 	}
