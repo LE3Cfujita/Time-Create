@@ -102,5 +102,6 @@ private:
 	bool hitButton = false;
 	bool loadFlag = false;
 	int invincibleTime = 0;
+	int pNumber = 0;
 };
 
