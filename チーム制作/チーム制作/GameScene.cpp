@@ -208,19 +208,32 @@ void GameScene::PlayerCreate()
 		pNumber++;
 		gameObjectManager->AddGameObject(player);
 	}
-	EnemyCreate();
+	for (int x = 0; x < 5; x++)
+	{
+		for (int y = 0; y < 5; y++)
+		{
+			EnemyCreate();
+		}
+	}
+	BGM();
 }
 
 void GameScene::EnemyCreate()
 {
-	BGM();
 	//敵生成
+
 	if (createFlag == true)return;
-	Enemy* enemy = nullptr;
-	enemy = new Enemy();
-	enemy->BaseInitialize(gameObjectManager->GetGameObjects());
-	enemy->Initialize();
-	gameObjectManager->AddGameObject(enemy);
+	for (int x = 0; x < 5; x++)
+	{
+		for (int y = 0; y < 5; y++)
+		{
+			Enemy* enemy = nullptr;
+			enemy = new Enemy();
+			enemy->BaseInitialize(gameObjectManager->GetGameObjects());
+			enemy->Initialize({ (float)720 + 100 * x,(float)200 + 100 * y }, slime);
+			gameObjectManager->AddGameObject(enemy);
+		}
+	}
 	createFlag = true;
 }
 
@@ -518,6 +531,9 @@ void GameScene::LoadResource()
 	clearBGM = LoadSoundMem("Resource/gameClear.mp3");
 	ketteiSE = LoadSoundMem("Resource/ketteiSE.mp3");
 	loadFlag = true;
+
+	slime = LoadGraph("Resource/EnemySlimeAnime.png");
+
 	ChangeVolumeSoundMem(volume, ancientBGM);
 	ChangeVolumeSoundMem(volume, modernBGM);
 	ChangeVolumeSoundMem(volume, futureBGM);

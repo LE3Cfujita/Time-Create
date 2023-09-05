@@ -8,23 +8,25 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::Initialize()
+void Enemy::Initialize(XMFLOAT2 pos,int graph)
 {
 	objectMember = GameObject::ENEMY;
 	objectAge = GameObject::ANCIENT;
-	position = { 1400,600 };
+	position = { pos.x,pos.y };
 	r = 64;
-	ancientEnemy = LoadGraph("Resource/Enemy.png"); // �`��
-	ancientEnemyanime = LoadGraph("Resource/EnemyAnime.png"); // �`��
-	modernEnemy = LoadGraph("Resource/EnemyModern.png");
+	ancientEnemySlimeAnime = graph;
+	//ancientEnemySlimeAnime = LoadGraph("Resource/EnemySlimeAnime.png"); // �`��
+	
+	
+	/*modernEnemy = LoadGraph("Resource/EnemyModern.png");
 	futureEnemy = LoadGraph("Resource/EnemyFuture.png");
 	prediction = LoadGraph("Resource/prediction.png");
 	beamSE = LoadSoundMem("Resource/UFObeam.mp3");
 	fireSE = LoadSoundMem("Resource/fireSE.mp3");
 	cannonSE = LoadSoundMem("Resource/gendaiEnemySE.mp3");
-	dieSE = LoadSoundMem("Resource/enemyDIE.mp3");
+	dieSE = LoadSoundMem("Resource/enemyDIE.mp3");*/
 	timer = 100;
-	HP = 50;
+	HP = 2;
 	moveFlag = true;
 	timeFlag = true;
 	move = true;
@@ -48,7 +50,7 @@ void Enemy::Update()
 		}
 		if (move == true)
 		{
-			Move();
+			//Move();
 		}
 		switch (objectAge)
 		{
@@ -71,7 +73,8 @@ void Enemy::Draw()
 	switch (objectAge)
 	{
 	case ANCIENT://�Ñ�G
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 295, 0, 295, 150, ancientEnemyanime, TRUE, FALSE);
+		r = 16;
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 32, 0, 32, 16, ancientEnemySlimeAnime, TRUE, FALSE);
 		break;
 	case MODERN://����G
 		DrawExtendGraph(position.x - r - 16, position.y - r, position.x + r, position.y + r, modernEnemy, TRUE);
@@ -267,14 +270,14 @@ void Enemy::Animation()
 {
 	animation = animation + 1;
 
-	if (animation > 4)
+	if (animation > 5)
 	{
 		animeCount = animeCount + 1;
 		animation = 0;
-		if (animeCount >= 4)
+		if (animeCount >= 5)
 		{
 			timeFlag = true;
-			BulletAttack();//�e
+			//BulletAttack();//�e
 			FireAttack();//��
 			move = false;
 			animeCount = 0;

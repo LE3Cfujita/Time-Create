@@ -16,11 +16,12 @@ public:
 	~Enemy();
 
 	//‰Šú‰»
-	void Initialize();
+	void Initialize(XMFLOAT2 pos,int graph);
 
 	void Update();
 
 	void Draw();
+
 private:
 	void ANCIENTAttack();
 	void MODERNAttack();
@@ -41,7 +42,7 @@ private:
 	int moveCount = 0;//0‚Ìê‡ãˆÚ“®
 
 	int ancientEnemy;
-	int ancientEnemyanime;
+	int ancientEnemySlimeAnime;
 	int modernEnemy;
 	int futureEnemy;
 	int prediction;

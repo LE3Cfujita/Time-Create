@@ -72,6 +72,7 @@ private:
 	XMFLOAT2 changePos = { 1280,0 };
 	XMFLOAT2 setumeiPos = { 0,0 };
 	XMFLOAT2 yajirusiPos = { 450,480 };
+	int slime;
 	int title;
 	int ancientback;
 	int modernback;
