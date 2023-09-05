@@ -11,7 +11,7 @@ public:
 	~Player();
 
 	//‰Šú‰»
-	void Initialize();
+	void Initialize(XMFLOAT2 pos);
 
 	void Update();
 
@@ -22,7 +22,6 @@ private:
 	void Invincible();//–³“G
 	void HitAction(GameObject* gameObject);
 	void Animation();
-
 
 	int playerAncient;//•`‰æ—p
 	int playerModern;

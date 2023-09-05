@@ -9,11 +9,11 @@ Player::~Player()
 
 }
 
-void Player::Initialize()
+void Player::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::PLAYER;//�v���C���[
 	objectAge = GameObject::ANCIENT;//�Ñ�
-	position = { 300,300 };
+	position = { pos.x,pos.y };
 	r = 16;
 	playerAncient = LoadGraph("Resource/Playeranime.png"); // �`��
 	playerModern = LoadGraph("Resource/PlayerModern.png"); // �`��
@@ -29,7 +29,7 @@ void Player::Initialize()
 	gendaiAttackSE = LoadSoundMem("Resource/gendaiPlayerSE.mp4");
 	kodaiAttackSE = LoadSoundMem("Resource/playershot_kodai.mp3");
 	damageSE = LoadSoundMem("Resource/playerdamage.mp3");
-	HP = 10;
+	HP = 1;
 }
 
 void Player::Update()
@@ -40,6 +40,7 @@ void Player::Update()
 	if (HP <= 0)
 	{
 		objState = DEATH;
+		deathCount = 1;
 	}
 }
 

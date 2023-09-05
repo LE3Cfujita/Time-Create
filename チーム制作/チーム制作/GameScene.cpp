@@ -199,11 +199,15 @@ void GameScene::ChangeScene()
 void GameScene::PlayerCreate()
 {
 	//プレイヤー生成
-	Player* player = nullptr;
-	player = new Player();
-	player->BaseInitialize(gameObjectManager->GetGameObjects());
-	player->Initialize();
-	gameObjectManager->AddGameObject(player);
+	for (int i = 0; i < 3; i++)
+	{
+		Player* player = nullptr;
+		player = new Player();
+		player->BaseInitialize(gameObjectManager->GetGameObjects());
+		player->Initialize({ (float)300,(float)200 * i });
+		pNumber++;
+		gameObjectManager->AddGameObject(player);
+	}
 	EnemyCreate();
 }
 
@@ -224,9 +228,13 @@ void GameScene::SceneChange()
 {
 	for (GameObject* gameobject : gameObjectManager->GetGameObjects())
 	{
-		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
+		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER &&
+			gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
 		{
-			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
+			int count = gameobject->GetDeathCount();
+			pNumber -= count;
+			gameobject->SetDeathFlag(true);
+			if (pNumber == 0)
 			{
 				if (objectAge == ANCIENT && CheckSoundMem(ancientBGM) == 1)
 				{
@@ -249,7 +257,6 @@ void GameScene::SceneChange()
 					PlaySoundMem(overBGM, DX_MOVIEPLAYTYPE_NORMAL, TRUE);
 					overFlag = true;
 				}
-
 			}
 		}
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::ENEMY)

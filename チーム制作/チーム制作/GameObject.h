@@ -96,6 +96,7 @@ protected:
 	int animation;
 	int animeCount;
 
+	int deathCount;
 
 public:
 	GameObject() {}
@@ -148,6 +149,7 @@ public:
 		animation = 0;
 		animeCount = 0;
 
+		deathCount = 0;
 
 		number = 0;
 
@@ -259,5 +261,7 @@ public:
 	void SetPredictionFlag(bool predictionFlag) { this->predictionFlag = predictionFlag; }
 	void SetBeamCount(bool beamCount) { this->beamCount = beamCount; }
 
+
+	int GetDeathCount() { return deathCount; }
 };
 
