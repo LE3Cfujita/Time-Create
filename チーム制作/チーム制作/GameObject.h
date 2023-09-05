@@ -30,8 +30,7 @@ public:
 	{
 		STAND,
 		FIRSTSTAGE,//1ステージ目
-		MODERN,//現代
-		FUTURE,//未来
+		SECONDSTAGE,//現代
 	};
 	enum OBJSTATE
 	{
@@ -40,7 +39,7 @@ public:
 		ATTACK,		//攻撃
 		DEATH,		//死亡
 		ALIVE,		//生産
-		EFFECT,		//志望エフェクト
+		EFFECT,		//死亡エフェクト
 		NONESTATE,	//なし
 	};
 

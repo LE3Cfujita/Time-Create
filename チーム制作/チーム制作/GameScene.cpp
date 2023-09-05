@@ -37,7 +37,6 @@ void GameScene::Update()
 		BackgroundScroll();
 		PBCollision();
 		Invincible();
-		Form();
 		gameObjectManager->Update();
 		SceneChange();
 		break;
@@ -232,7 +231,7 @@ void GameScene::EnemyCreate()
 			Enemy* enemy = nullptr;
 			enemy = new Enemy();
 			enemy->BaseInitialize(gameObjectManager->GetGameObjects());
-			enemy->Initialize({ (float)720 + 100 * x,(float)200 + 100 * y });
+			enemy->Initialize({ (float)720 + 100 * x,(float)150 + 100 * y });
 			enemy->Resource(slimeGraph);
 			gameObjectManager->AddGameObject(enemy);
 			sNumber++;

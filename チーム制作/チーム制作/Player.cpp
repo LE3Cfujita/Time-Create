@@ -16,8 +16,8 @@ void Player::Resource(int graph)
 
 void Player::Initialize(XMFLOAT2 pos,int number)
 {
-	objectMember = GameObject::PLAYER;//�v���C���[
-	objectStage = GameObject::FIRSTSTAGE;//�Ñ�
+	objectMember = GameObject::PLAYER;
+	objectStage = GameObject::FIRSTSTAGE;
 	position = { pos.x,pos.y };
 	r = 16;
 	this->number = number;
