@@ -14,7 +14,7 @@ void GameScene::Initialize()
 
 	gameState = TITLE;
 
-	objectAge = ANCIENT;
+	objectAge = FIRSTSTAGE;
 	createFlag = false;
 
 	if (loadFlag != false)return;
@@ -63,26 +63,15 @@ void GameScene::Draw()
 	{
 	case TITLE://�^�C�g��
 		DrawGraph(backPos.x, backPos.y, ancientback, true);
-		DrawGraph(backPos2.x, backPos2.y, modernback, true);
-		DrawGraph(backPos3.x, backPos3.y, futureback, true);
+		DrawGraph(backPos2.x, backPos2.y, ancientback, true);
 		DrawGraph(0, 0, title, TRUE);
 		DrawGraph(yajirusiPos.x, yajirusiPos.y, yajirusi, true);
 		break;
 	case PLAY://�Q�[���v���C
-		if (objectAge == ANCIENT)
+		if (objectAge == FIRSTSTAGE)
 		{
 			DrawGraph(backPos.x, backPos.y, ancientback, true);
 			DrawGraph(backPos2.x, backPos2.y, ancientback, true);
-		}
-		if (objectAge == MODERN)
-		{
-			DrawGraph(backPos.x, backPos.y, modernback, true);
-			DrawGraph(backPos2.x, backPos2.y, modernback, true);
-		}
-		if (objectAge == FUTURE)
-		{
-			DrawGraph(backPos.x, backPos.y, futureback, true);
-			DrawGraph(backPos2.x, backPos2.y, futureback, true);
 		}
 		gameObjectManager->Draw();
 		if (changeFlag == true)
@@ -99,8 +88,6 @@ void GameScene::Draw()
 		break;
 	case EXPLANATION:
 		DrawGraph(backPos.x, backPos.y, ancientback, true);
-		DrawGraph(backPos2.x, backPos2.y, modernback, true);
-		DrawGraph(backPos3.x, backPos3.y, futureback, true);
 		DrawGraph(setumeiPos.x, setumeiPos.y, setumei, true);
 		break;
 	}
@@ -114,15 +101,11 @@ void GameScene::ChangeScene()
 	backPos3.x -= 5;
 	if (backPos.x <= -1280)
 	{
-		backPos.x = 2560;
+		backPos.x = 1280;
 	}
 	if (backPos2.x <= -1280)
 	{
-		backPos2.x = 2560;
-	}
-	if (backPos3.x <= -1280)
-	{
-		backPos3.x = 2560;
+		backPos2.x = 1280;
 	}
 	if (CheckHitKey(KEY_INPUT_UP) == 1 && hitButton == false ||
 		CheckHitKey(KEY_INPUT_DOWN) == 1 && hitButton == false)
@@ -155,6 +138,7 @@ void GameScene::ChangeScene()
 		{
 			if (start == true)
 			{
+				flagCount = false;
 				volume = 200;
 				gameState = PLAY;
 				StopSoundMem(titleBGM);
@@ -174,6 +158,8 @@ void GameScene::ChangeScene()
 			{
 				gameobject->SetDeathFlag(true);
 			}
+			pNumber = 0;
+			sNumber = 0;
 			gameState = TITLE;
 			gameObjectManager->Update();
 			if (CheckSoundMem(clearBGM) == true)
@@ -199,28 +185,38 @@ void GameScene::ChangeScene()
 void GameScene::PlayerCreate()
 {
 	//プレイヤー生成
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		Player* player = nullptr;
 		player = new Player();
 		player->BaseInitialize(gameObjectManager->GetGameObjects());
-		player->Initialize({ (float)300,(float)200 * i });
+		player->Initialize({ (float)300,(float)200 + 100 * i }, i);
+		player->Resource(playerGraph);
 		pNumber++;
 		gameObjectManager->AddGameObject(player);
 	}
 	EnemyCreate();
+	BGM();
 }
 
 void GameScene::EnemyCreate()
 {
-	BGM();
 	//敵生成
+
 	if (createFlag == true)return;
-	Enemy* enemy = nullptr;
-	enemy = new Enemy();
-	enemy->BaseInitialize(gameObjectManager->GetGameObjects());
-	enemy->Initialize();
-	gameObjectManager->AddGameObject(enemy);
+	for (int x = 0; x < 5; x++)
+	{
+		for (int y = 0; y < 5; y++)
+		{
+			Enemy* enemy = nullptr;
+			enemy = new Enemy();
+			enemy->BaseInitialize(gameObjectManager->GetGameObjects());
+			enemy->Initialize({ (float)720 + 100 * x,(float)150 + 100 * y });
+			enemy->Resource(slimeGraph);
+			gameObjectManager->AddGameObject(enemy);
+			sNumber++;
+		}
+	}
 	createFlag = true;
 }
 
@@ -228,6 +224,7 @@ void GameScene::SceneChange()
 {
 	for (GameObject* gameobject : gameObjectManager->GetGameObjects())
 	{
+		//ゲームオーバー
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER &&
 			gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
 		{
@@ -236,17 +233,9 @@ void GameScene::SceneChange()
 			gameobject->SetDeathFlag(true);
 			if (pNumber == 0)
 			{
-				if (objectAge == ANCIENT && CheckSoundMem(ancientBGM) == 1)
+				if (objectAge == FIRSTSTAGE && CheckSoundMem(ancientBGM) == 1)
 				{
 					StopSoundMem(ancientBGM);
-				}
-				else if (objectAge == MODERN && CheckSoundMem(modernBGM) == 1)
-				{
-					StopSoundMem(modernBGM);
-				}
-				else if (objectAge == FUTURE && CheckSoundMem(futureBGM) == 1)
-				{
-					StopSoundMem(futureBGM);
 				}
 				gameState = OVER;
 				backPos = { 0,0 };
@@ -259,67 +248,25 @@ void GameScene::SceneChange()
 				}
 			}
 		}
+		//次のステージ又はゲームクリア
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::ENEMY)
 		{
 			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
 			{
+				int count = gameobject->GetDeathCount();
+				sNumber -= count;
+				gameobject->SetDeathFlag(true);
+				if (sNumber != 0)return;
 				changeFlag = true;
 			}
-			if (backFlag == true)
-			{
-				if (gameobject->GetObjectAge() == GameObject::OBJAGE::ANCIENT)
-				{
-					objectAge = MODERN;
-					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
-					{
-						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
-						{
-							gameobject2->SetAnimation(0);
-							gameobject2->SetPosition({ 300, 300 });
-						}
-						else
-						{
-							gameobject2->SetDeathFlag(true);
-						}
-					}
-					createFlag = false;
-					backFlag = false;
-				}
-				else if (gameobject->GetObjectAge() == GameObject::OBJAGE::MODERN)
-				{
-					objectAge = FUTURE;
-					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
-					{
-						if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
-						{
-							gameobject2->SetAnimation(0);
-							gameobject2->SetPosition({ 300, 300 });
-						}
-						else
-						{
-							gameobject2->SetDeathFlag(true);
-						}
-					}
-					createFlag = false;
-					backFlag = false;
-				}
-				else if (gameobject->GetObjectAge() == GameObject::OBJAGE::FUTURE)
-				{
-					backPos = { 0,0 };
-					backPos2 = { 1280,0 };
-					backPos3 = { 2560,0 };
-					gameState = CLEA;
-					objectAge = STAND;
-					StopSoundMem(futureBGM);
-					for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
-					{
-						gameobject2->SetDeathFlag(true);
-					}
-					createFlag = false;
-					backFlag = false;
-				}
-				gameObjectManager->Update();
-			}
+		}
+		if (backFlag == true)
+		{
+			backFlag = false;
+			changeFlag = false;
+			gameState = CLEA;
+			gameObjectManager->Update();
+			changePos.x = 1280;
 		}
 		if (changePos.x <= 0)
 		{
@@ -328,20 +275,10 @@ void GameScene::SceneChange()
 				backFlag = true;
 				flagCount = true;
 			}
-			if (objectAge == ANCIENT)
+			if (objectAge == FIRSTSTAGE)
 			{
 				EnemyCreate();
-				gameobject->SetObjAge(GameObject::OBJAGE::ANCIENT);
-			}
-			else if (objectAge == MODERN)
-			{
-				EnemyCreate();
-				gameobject->SetObjAge(GameObject::OBJAGE::MODERN);
-			}
-			else if (objectAge == FUTURE)
-			{
-				EnemyCreate();
-				gameobject->SetObjAge(GameObject::OBJAGE::FUTURE);
+				gameobject->SetObjAge(GameObject::STAGE::FIRSTSTAGE);
 			}
 		}
 	}
@@ -477,39 +414,32 @@ void GameScene::Invincible()
 
 void GameScene::BGM()
 {
-	if (objectAge == ANCIENT && CheckSoundMem(ancientBGM) == 0)
+	if (objectAge == FIRSTSTAGE && CheckSoundMem(ancientBGM) == 0)
 	{
 		StopSoundMem(modernBGM);
 		StopSoundMem(futureBGM);
 		PlaySoundMem(ancientBGM, DX_PLAYTYPE_LOOP, TRUE);
 	}
-	else if (objectAge == MODERN && CheckSoundMem(modernBGM) == 0)
-	{
-		StopSoundMem(ancientBGM);
-		StopSoundMem(futureBGM);
-		PlaySoundMem(modernBGM, DX_PLAYTYPE_LOOP, TRUE);
-	}
-	else if (objectAge == FUTURE && CheckSoundMem(futureBGM) == 0)
-	{
-		StopSoundMem(ancientBGM);
-		StopSoundMem(modernBGM);
-		PlaySoundMem(futureBGM, DX_PLAYTYPE_LOOP, TRUE);
-	}
 }
 
 void GameScene::LoadResource()
 {
-	volume = 200;
+	//背景絵
 	title = LoadGraph("Resource/TITLE.png"); // �`��
 	ancientback = LoadGraph("Resource/ancientback.png"); // �`��
-	modernback = LoadGraph("Resource/modernback.png"); // �`��
-	futureback = LoadGraph("Resource/futurenack.png"); // �`��
 	changeback = LoadGraph("Resource/ageChange.png");
 	clear = LoadGraph("Resource/GameClear.png"); // �`��
 	over = LoadGraph("Resource/GameOver.png"); // �`��
 	yajirusi = LoadGraph("Resource/sentaku.png"); // �`��
 	setumei = LoadGraph("Resource/setumei.png"); // �`��
 
+	//キャラクター絵
+	playerGraph = LoadGraph("Resource/Playeranime.png");
+	slimeGraph = LoadGraph("Resource/EnemySlimeAnime.png");
+
+	//弾絵
+
+	//音関係
 	titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
 	ancientBGM = LoadSoundMem("Resource/ancientBGM.mp3");
 	modernBGM = LoadSoundMem("Resource/modernBGM.mp3");
@@ -518,6 +448,7 @@ void GameScene::LoadResource()
 	clearBGM = LoadSoundMem("Resource/gameClear.mp3");
 	ketteiSE = LoadSoundMem("Resource/ketteiSE.mp3");
 	loadFlag = true;
+	volume = 200;
 	ChangeVolumeSoundMem(volume, ancientBGM);
 	ChangeVolumeSoundMem(volume, modernBGM);
 	ChangeVolumeSoundMem(volume, futureBGM);

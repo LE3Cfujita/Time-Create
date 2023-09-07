@@ -1,8 +1,6 @@
 #pragma once
 #include"GameObject.h"
 #include"PlayerBullet.h"
-#include"PlayerModernBullet.h"
-#include"PlayerFutureBullet.h"
 #include"PlayerCharge.h"
 class Player : public GameObject
 {
@@ -11,27 +9,23 @@ public:
 	~Player();
 
 	//‰Šú‰»
-	void Initialize(XMFLOAT2 pos);
+	void Initialize(XMFLOAT2 pos,int number);
 
 	void Update();
 
 	void Draw();
+
+	void Resource(int graph);
+
 private:
 	void Move();//ˆÚ“®
 	void Attack();//UŒ‚
 	void Invincible();//–³“G
 	void HitAction(GameObject* gameObject);
 	void Animation();
+	void Formation();
 
-	int playerAncient;//•`‰æ—p
-	int playerModern;
-	int playerFuture;
-	int ancientHP;//•`‰æ—p
-	int modernHP;//•`‰æ—p
-	int futureHP;//•`‰æ—p
-	int chargedSE;
-	int chargeingSE;
-	int charge;
+	int player;//•`‰æ—p
 	int tuujouSE;
 	int attackSE;
 	int kodaiAttackSE;
@@ -52,5 +46,7 @@ private:
 
 	int chargeTime = 0;
 	int pushTime = 0;
+
+	int number;//ƒLƒƒƒ‰”Ô†
 };
 

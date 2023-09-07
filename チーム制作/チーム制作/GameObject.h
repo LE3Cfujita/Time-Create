@@ -26,12 +26,11 @@ public:
 		ENTOURAGEBULLET,//雑魚敵の攻撃
 		HITEFFECT,//ヒットエフェクト
 	};
-	enum OBJAGE
+	enum STAGE
 	{
 		STAND,
-		ANCIENT,//古代
-		MODERN,//現代
-		FUTURE,//未来
+		FIRSTSTAGE,//1ステージ目
+		SECONDSTAGE,//現代
 	};
 	enum OBJSTATE
 	{
@@ -40,14 +39,14 @@ public:
 		ATTACK,		//攻撃
 		DEATH,		//死亡
 		ALIVE,		//生産
-		EFFECT,		//志望エフェクト
+		EFFECT,		//死亡エフェクト
 		NONESTATE,	//なし
 	};
 
 protected:
 	bool deathFlag;
 	OBJECTMEMBER objectMember;
-	OBJAGE objectAge;
+	STAGE objectStage;
 	OBJSTATE objState;
 	XMFLOAT2 position;
 	XMFLOAT2 position2;
@@ -106,7 +105,7 @@ public:
 	void BaseInitialize(std::vector<GameObject*> referenceGameObjects)
 	{
 		objectMember = OBJECTMEMBER::NONEMEMBER;
-		objectAge = OBJAGE::ANCIENT;
+		objectStage = STAGE::FIRSTSTAGE;
 		objState = OBJSTATE::IDLE;
 
 		deathFlag = false;
@@ -165,6 +164,8 @@ public:
 
 	virtual void HitAction(GameObject* gameObject) {}
 
+	virtual void Resource(){}
+
 	std::vector<GameObject*> addGameObjects;
 
 	std::vector<GameObject*> referenceGameObjects;
@@ -176,7 +177,7 @@ public:
 	OBJECTMEMBER GetObjectMember() { return objectMember; }
 
 
-	OBJAGE GetObjectAge() { return objectAge; }
+	STAGE GetObjectAge() { return objectStage; }
 	OBJSTATE GetObjectState() { return objState; }
 	void SetObjectState(OBJSTATE objState) { this->objState = objState; }
 
@@ -243,7 +244,7 @@ public:
 
 	void SetDeathFlag(bool deathFlag) { this->deathFlag = deathFlag; }
 
-	void SetObjAge(OBJAGE objAge) { this->objectAge = objAge; }
+	void SetObjAge(STAGE objAge) { this->objectStage = objAge; }
 
 	void SetCannonFlag(bool cannonFlag) { this->cannonFlag = cannonFlag; }
 

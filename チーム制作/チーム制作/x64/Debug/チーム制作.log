@@ -1,158 +1,31 @@
-﻿  DownEffec.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\DownEffec.cpp(48,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\DownEffec.cpp(48,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  Enemy.cpp
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(74,44): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(74,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(77,83): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(77,67): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(77,51): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(77,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(80,42): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(80,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(83,44): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Enemy.cpp(83,25): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  EnemyBalkan.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyBalkan.cpp(17,27): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyBalkan.cpp(27,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyBalkan.cpp(27,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  EnemyBeam.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyBeam.cpp(27,64): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyBeam.cpp(27,51): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyBeam.cpp(27,38): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyBeam.cpp(27,26): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  EnemyBullet.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyBullet.cpp(30,36): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyBullet.cpp(30,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  EnemyCannon.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyCannon.cpp(27,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyCannon.cpp(27,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyCannon.cpp(66,11): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  EnemyEntourage.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyEntourage.cpp(50,39): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyEntourage.cpp(50,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyEntourage.cpp(55,27): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-  EnemyFire.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyFire.cpp(29,28): warning C4244: '=': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyFire.cpp(39,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EnemyFire.cpp(39,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  EntourageBullet.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EntourageBullet.cpp(27,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EntourageBullet.cpp(27,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\EntourageBullet.cpp(75,11): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  GameObjectManager.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-  GameScene.cpp
+﻿  GameScene.cpp
 C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
 C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(252,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(65,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(65,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(66,33): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(66,21): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(67,33): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(67,21): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(69,39): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(69,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(74,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(74,21): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(75,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(75,22): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(79,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(79,21): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(80,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(80,22): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(84,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(84,21): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(85,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(85,22): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(90,36): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(90,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(101,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(101,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(102,33): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(102,21): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(103,33): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(103,21): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(104,37): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(104,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(179,35): warning C4805: '==': 演算中の 'int' 型と 'bool' 型の混用は安全ではありません
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(395,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(402,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(409,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(420,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(427,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(434,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(445,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(452,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(459,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-  HitEffect.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\HitEffect.cpp(49,44): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\HitEffect.cpp(49,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\HitEffect.cpp(53,44): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\HitEffect.cpp(53,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\HitEffect.cpp(57,44): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\HitEffect.cpp(57,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  Player.cpp
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(78,45): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(78,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(82,45): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(82,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(96,45): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(96,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(121,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(121,30): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(312,44): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(312,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(326,44): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\Player.cpp(326,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  PlayerBullet.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\PlayerBullet.cpp(27,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\PlayerBullet.cpp(27,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  PlayerCharge.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\PlayerCharge.cpp(28,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\PlayerCharge.cpp(28,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  PlayerFutureBullet.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\PlayerFutureBullet.cpp(27,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\PlayerFutureBullet.cpp(27,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  PlayerModernBullet.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\PlayerModernBullet.cpp(27,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\PlayerModernBullet.cpp(27,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  main.cpp
-C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(251,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-  コードを生成中...
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(68,39): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(68,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(73,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(73,21): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(74,34): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(74,22): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(79,36): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(79,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(90,31): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(90,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(91,37): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(91,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(165,35): warning C4805: '==': 演算中の 'int' 型と 'bool' 型の混用は安全ではありません
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(332,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(339,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(346,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(357,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(364,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(371,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(382,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(389,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(396,28): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
   チーム制作.vcxproj -> C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\x64\Debug\チーム制作.exe

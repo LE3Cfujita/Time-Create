@@ -20,9 +20,7 @@ public:
 	enum OBJAGE
 	{
 		STAND,
-		ANCIENT,//古代
-		MODERN,//現代
-		FUTURE,//未来
+		FIRSTSTAGE,//古代
 	};
 
 public:
@@ -60,6 +58,7 @@ public:
 
 	void LoadResource();
 
+
 private:
 	GameState gameState;
 	OBJAGE objectAge;
@@ -72,15 +71,23 @@ private:
 	XMFLOAT2 changePos = { 1280,0 };
 	XMFLOAT2 setumeiPos = { 0,0 };
 	XMFLOAT2 yajirusiPos = { 450,480 };
+	//背景絵
 	int title;
 	int ancientback;
-	int modernback;
-	int futureback;
 	int changeback;
 	int clear;
 	int over;
 	int setumei;
 	int yajirusi;
+
+	//キャラクター絵
+	int playerGraph;//プレイヤー絵
+	int slimeGraph;//スライム絵
+
+	//弾絵
+	int slimeBullet;//スライムの弾の絵
+
+	//音関係
 	int titleBGM;
 	int ancientBGM;
 	int modernBGM;
@@ -92,6 +99,7 @@ private:
 
 	int volume = 200;
 
+	//変数
 	int keyCount = 0;
 	bool changeFlag = false;
 	bool backFlag = false;
@@ -102,6 +110,8 @@ private:
 	bool hitButton = false;
 	bool loadFlag = false;
 	int invincibleTime = 0;
-	int pNumber = 0;
+
+	int pNumber = 0;//プレイヤーの残り人数
+	int sNumber = 0;//スライムの残り数
 };
 
