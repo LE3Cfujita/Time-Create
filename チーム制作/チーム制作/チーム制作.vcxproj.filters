@@ -33,9 +33,6 @@
     <ClCompile Include="GameObjectManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBullet.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SlimeBullet.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -51,7 +48,7 @@
     <ClCompile Include="PlayerCharge.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="EntourageBullet.cpp">
+    <ClCompile Include="BossEnemy.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,9 +74,6 @@
     <ClInclude Include="XMFLOAT_Helper.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBullet.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SlimeBullet.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -95,7 +89,7 @@
     <ClInclude Include="PlayerCharge.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="EntourageBullet.h">
+    <ClInclude Include="BossEnemy.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

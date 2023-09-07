@@ -66,42 +66,54 @@ void Player::Move()
 	if (CheckHitKey(KEY_INPUT_D) == 1)
 	{
 		position2 = position;
-		position.x += 5;//�E
+		position.x += 5;
+		if (position.x + 32 >= 850)
+		{
+			position.x = 850 - 32;
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
 	{
 		position2 = position;
-		position.x -= 5;//��
+		position.x -= 5;
+		if (position.x - 32 <= 0)
+		{
+			position.x = 32;
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
 		position2 = position;
-		position.y -= 5;//��
+		position.y -= 5;
+		if (position.y - r <= 0)
+		{
+			position.y = 0 + r;
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
 		position2 = position;
-		position.y += 5;//��
+		position.y += 5;
+		if (position.y + r * 3 >= 720)
+		{
+			position.y = 720 - r * 3;
+		}
 	}
 	if (position.x - 32 <= 0)
 	{
 		position.x = 32;
-		position2 = position;
 	}
 	if (position.y - r <= 0)
 	{
 		position.y = 0 + r;
-		position2 = position;
 	}
 	if (position.x + 32 >= 850)
 	{
 		position.x = 850 - 32;
-		position2 = position;
 	}
 	if (position.y + r * 3 >= 720)
 	{
 		position.y = 720 - r * 3;
-		position2 = position;
 	}
 }
 
@@ -153,11 +165,8 @@ void Player::HitAction(GameObject* gameObject)
 {
 	if (invincibleFlag == false)
 	{
-		if (gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBULLET ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYFIRE ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBALKAN ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENTOURAGEBULLET)
+		if (gameObject->GetObjectMember() == OBJECTMEMBER::SLIMEBULLET ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::BOSSBULLET)
 		{
 			PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
 			HP--;

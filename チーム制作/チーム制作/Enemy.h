@@ -1,6 +1,5 @@
 #pragma once
 #include"GameObject.h"
-#include "EnemyBullet.h"
 #include"SlimeBullet.h"
 #include"HitEffect.h"
 #include "DownEffec.h"
@@ -23,7 +22,6 @@ public:
 private:
 	void ANCIENTAttack();
 	void Move();
-	void BulletAttack();//íeçUåÇ
 	void FireAttack();//âŒçUåÇ
 	void Animation();
 	void Effect();

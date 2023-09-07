@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Player.h"
 #include"Enemy.h"
+#include"BossEnemy.h"
 #include"GameObjectManager.h"
 #include"DxLib.h"
 #include"Collision.h"
@@ -20,7 +21,8 @@ public:
 	enum OBJAGE
 	{
 		STAND,
-		FIRSTSTAGE,//古代
+		FIRSTSTAGE,//1ステージ目
+		SECONDSTAGE//2ステージ目
 	};
 
 public:
@@ -50,7 +52,7 @@ public:
 
 	void BackgroundScroll();//背景スクロール
 
-	void PBCollision();
+	//void PBCollision();
 
 	void Invincible();
 

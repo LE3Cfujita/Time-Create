@@ -35,7 +35,7 @@ void GameScene::Update()
 		break;
 	case PLAY:
 		BackgroundScroll();
-		PBCollision();
+		//PBCollision();
 		Invincible();
 		gameObjectManager->Update();
 		SceneChange();
@@ -68,13 +68,13 @@ void GameScene::Draw()
 		DrawGraph(yajirusiPos.x, yajirusiPos.y, yajirusi, true);
 		break;
 	case PLAY://�Q�[���v���C
-		if (objectAge == FIRSTSTAGE)
+		if (objectAge == FIRSTSTAGE || objectAge == SECONDSTAGE)
 		{
 			DrawGraph(backPos.x, backPos.y, ancientback, true);
 			DrawGraph(backPos2.x, backPos2.y, ancientback, true);
 		}
 		gameObjectManager->Draw();
-		if (changeFlag == true)
+		if (changeFlag == true)//objectAge == FIRSTSTAGE
 		{
 			DrawGraph(changePos.x, changePos.y, changeback, true);
 		}
@@ -249,7 +249,7 @@ void GameScene::SceneChange()
 			}
 		}
 		//次のステージ又はゲームクリア
-		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::ENEMY)
+		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::SLIME)
 		{
 			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
 			{
@@ -264,9 +264,16 @@ void GameScene::SceneChange()
 		{
 			backFlag = false;
 			changeFlag = false;
-			gameState = CLEA;
+			if (objectAge == SECONDSTAGE)
+			{
+				gameState = CLEA;
+				changePos.x = 1280;
+			}
+			else
+			{
+				objectAge = SECONDSTAGE;
+			}
 			gameObjectManager->Update();
-			changePos.x = 1280;
 		}
 		if (changePos.x <= 0)
 		{
@@ -306,102 +313,103 @@ void GameScene::BackgroundScroll()
 	}
 
 }
-
-void GameScene::PBCollision()
-{
-	for (GameObject* gameobject : gameObjectManager->GetGameObjects())
-	{
-		if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
-		XMFLOAT2 pos = gameobject->GetPosition();
-		float r = gameobject->GetRadius();
-		XMFLOAT2 pos2 = { pos.x + r * 2,pos.y + r * 2 };
-		int HP = gameobject->GetHP();
-		for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
-		{
-			if (gameobject2->GetObjectMember() != GameObject::OBJECTMEMBER::ENEMYBEAM)continue;
-			XMFLOAT2 epos = gameobject2->GetPosition();
-			XMFLOAT2 epos2 = gameobject2->GetPosition2();
-
-			if (invincibleFlag == false)
-			{
-				if (pos.x <= epos.x && pos2.x > epos.x)
-				{
-					if (pos.y <= epos2.y && pos.y <= epos.y &&
-						pos2.y >= epos2.y && pos2.y <= epos.y)
-					{
-						gameobject->SetHP(HP - 1);
-						invincibleFlag = true;
-						break;
-					}
-					if (pos.y >= epos2.y && pos.y <= epos.y &&
-						pos2.y >= epos.y && pos2.y >= epos2.y)
-					{
-						gameobject->SetHP(HP - 1);
-						invincibleFlag = true;
-						break;
-					}
-					if (pos.y >= epos2.y && pos.y <= epos.y &&
-						pos2.y >= epos2.y && pos2.y <= epos.y)
-					{
-						gameobject->SetHP(HP - 1);
-						invincibleFlag = true;
-						break;
-					}
-				}
-				if (pos.x >= epos.x && pos.x <= epos2.x &&
-					pos2.x<epos.x && pos2.x>epos2.x)
-				{
-					if (pos.y <= epos2.y && pos.y <= epos.y &&
-						pos2.y >= epos2.y && pos2.y <= epos.y)
-					{
-						gameobject->SetHP(HP - 1);
-						invincibleFlag = true;
-						break;
-					}
-					if (pos.y >= epos2.y && pos.y <= epos.y &&
-						pos2.y >= epos.y && pos2.y >= epos2.y)
-					{
-						gameobject->SetHP(HP - 1);
-						invincibleFlag = true;
-						break;
-					}
-					if (pos.y >= epos2.y && pos.y <= epos.y &&
-						pos2.y >= epos2.y && pos2.y <= epos.y)
-					{
-						gameobject->SetHP(HP - 1);
-						invincibleFlag = true;
-						break;
-					}
-				}
-				if (pos.x >= epos.x && pos.x <= epos2.x &&
-					pos2.x >= epos.x && pos2.x <= epos2.x)
-				{
-					if (pos.y <= epos2.y && pos.y <= epos.y &&
-						pos2.y >= epos2.y && pos2.y <= epos.y)
-					{
-						gameobject->SetHP(HP - 1);
-						invincibleFlag = true;
-						break;
-					}
-					if (pos.y >= epos2.y && pos.y <= epos.y &&
-						pos2.y >= epos.y && pos2.y >= epos2.y)
-					{
-						gameobject->SetHP(HP - 1);
-						invincibleFlag = true;
-						break;
-					}
-					if (pos.y >= epos2.y && pos.y <= epos.y &&
-						pos2.y >= epos2.y && pos2.y <= epos.y)
-					{
-						gameobject->SetHP(HP - 1);
-						invincibleFlag = true;
-						break;
-					}
-				}
-			}
-		}
-	}
-}
+//
+//
+//void GameScene::PBCollision()
+//{
+//	for (GameObject* gameobject : gameObjectManager->GetGameObjects())
+//	{
+//		if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
+//		XMFLOAT2 pos = gameobject->GetPosition();
+//		float r = gameobject->GetRadius();
+//		XMFLOAT2 pos2 = { pos.x + r * 2,pos.y + r * 2 };
+//		int HP = gameobject->GetHP();
+//		for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
+//		{
+//			if (gameobject2->GetObjectMember() != GameObject::OBJECTMEMBER::ENEMYBEAM)continue;
+//			XMFLOAT2 epos = gameobject2->GetPosition();
+//			XMFLOAT2 epos2 = gameobject2->GetPosition2();
+//
+//			if (invincibleFlag == false)
+//			{
+//				if (pos.x <= epos.x && pos2.x > epos.x)
+//				{
+//					if (pos.y <= epos2.y && pos.y <= epos.y &&
+//						pos2.y >= epos2.y && pos2.y <= epos.y)
+//					{
+//						gameobject->SetHP(HP - 1);
+//						invincibleFlag = true;
+//						break;
+//					}
+//					if (pos.y >= epos2.y && pos.y <= epos.y &&
+//						pos2.y >= epos.y && pos2.y >= epos2.y)
+//					{
+//						gameobject->SetHP(HP - 1);
+//						invincibleFlag = true;
+//						break;
+//					}
+//					if (pos.y >= epos2.y && pos.y <= epos.y &&
+//						pos2.y >= epos2.y && pos2.y <= epos.y)
+//					{
+//						gameobject->SetHP(HP - 1);
+//						invincibleFlag = true;
+//						break;
+//					}
+//				}
+//				if (pos.x >= epos.x && pos.x <= epos2.x &&
+//					pos2.x<epos.x && pos2.x>epos2.x)
+//				{
+//					if (pos.y <= epos2.y && pos.y <= epos.y &&
+//						pos2.y >= epos2.y && pos2.y <= epos.y)
+//					{
+//						gameobject->SetHP(HP - 1);
+//						invincibleFlag = true;
+//						break;
+//					}
+//					if (pos.y >= epos2.y && pos.y <= epos.y &&
+//						pos2.y >= epos.y && pos2.y >= epos2.y)
+//					{
+//						gameobject->SetHP(HP - 1);
+//						invincibleFlag = true;
+//						break;
+//					}
+//					if (pos.y >= epos2.y && pos.y <= epos.y &&
+//						pos2.y >= epos2.y && pos2.y <= epos.y)
+//					{
+//						gameobject->SetHP(HP - 1);
+//						invincibleFlag = true;
+//						break;
+//					}
+//				}
+//				if (pos.x >= epos.x && pos.x <= epos2.x &&
+//					pos2.x >= epos.x && pos2.x <= epos2.x)
+//				{
+//					if (pos.y <= epos2.y && pos.y <= epos.y &&
+//						pos2.y >= epos2.y && pos2.y <= epos.y)
+//					{
+//						gameobject->SetHP(HP - 1);
+//						invincibleFlag = true;
+//						break;
+//					}
+//					if (pos.y >= epos2.y && pos.y <= epos.y &&
+//						pos2.y >= epos.y && pos2.y >= epos2.y)
+//					{
+//						gameobject->SetHP(HP - 1);
+//						invincibleFlag = true;
+//						break;
+//					}
+//					if (pos.y >= epos2.y && pos.y <= epos.y &&
+//						pos2.y >= epos2.y && pos2.y <= epos.y)
+//					{
+//						gameobject->SetHP(HP - 1);
+//						invincibleFlag = true;
+//						break;
+//					}
+//				}
+//			}
+//		}
+//	}
+//}
 
 void GameScene::Invincible()
 {
@@ -449,10 +457,10 @@ void GameScene::LoadResource()
 	ketteiSE = LoadSoundMem("Resource/ketteiSE.mp3");
 	loadFlag = true;
 	volume = 200;
-	ChangeVolumeSoundMem(volume, ancientBGM);
+	/*ChangeVolumeSoundMem(volume, ancientBGM);
 	ChangeVolumeSoundMem(volume, modernBGM);
 	ChangeVolumeSoundMem(volume, futureBGM);
 	ChangeVolumeSoundMem(volume, overBGM);
 	ChangeVolumeSoundMem(volume, clearBGM);
-	ChangeVolumeSoundMem(volume, titleBGM);
+	ChangeVolumeSoundMem(volume, titleBGM);*/
 }

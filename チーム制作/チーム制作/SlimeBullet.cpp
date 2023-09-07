@@ -15,7 +15,7 @@ void SlimeBullet::Resource()
 
 void SlimeBullet::Initialize(XMFLOAT2 pos,int number)
 {
-	objectMember = GameObject::ENEMYFIRE;
+	objectMember = GameObject::SLIMEBULLET;
 
 	r = 32;
 	this->number = number;

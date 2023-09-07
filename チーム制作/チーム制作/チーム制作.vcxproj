@@ -139,12 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BossEnemy.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="DownEffec.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="SlimeBullet.cpp" />
-    <ClCompile Include="EntourageBullet.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="HitEffect.cpp" />
@@ -154,12 +153,11 @@
     <ClCompile Include="PlayerCharge.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BossEnemy.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="DownEffec.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="SlimeBullet.h" />
-    <ClInclude Include="EntourageBullet.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GameScene.h" />

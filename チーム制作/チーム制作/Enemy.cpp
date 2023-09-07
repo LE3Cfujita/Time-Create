@@ -14,12 +14,11 @@ void Enemy::Resource(int graph)
 }
 void Enemy::Initialize(XMFLOAT2 pos)
 {
-	objectMember = GameObject::ENEMY;
+	objectMember = GameObject::SLIME;
 	objectStage = GameObject::FIRSTSTAGE;
 	position = { pos.x,pos.y };
 	r = 16;
-	/*
-	prediction = LoadGraph("Resource/prediction.png");
+	/*prediction = LoadGraph("Resource/prediction.png");
 	beamSE = LoadSoundMem("Resource/UFObeam.mp3");
 	fireSE = LoadSoundMem("Resource/fireSE.mp3");
 	cannonSE = LoadSoundMem("Resource/gendaiEnemySE.mp3");
@@ -56,7 +55,7 @@ void Enemy::Draw()
 	if (objState == EFFECT || objState == DEATH)return;
 	switch (objectStage)
 	{
-	case FIRSTSTAGE://�Ñ�G
+	case FIRSTSTAGE:
 		r = 16;
 		DrawRectGraph(position.x - r, position.y, animeCount * 32, 0, 32, 16, slimeEnemy, TRUE, FALSE);
 		break;
@@ -112,17 +111,6 @@ void Enemy::Move()
 	}
 }
 
-void Enemy::BulletAttack()
-{
-	for (int i = 0; i < 3; i++)
-	{
-		EnemyBullet* bullet = new EnemyBullet();
-		bullet->BaseInitialize(referenceGameObjects);
-		bullet->Initialize(position, i);
-		addGameObjects.push_back(bullet);
-	}
-
-}
 
 void Enemy::FireAttack()
 {
@@ -148,7 +136,6 @@ void Enemy::Animation()
 		if (animeCount >= 5)
 		{
 			timeFlag = true;
-			//BulletAttack();//�e
 			FireAttack();//��
 			move = false;
 			animeCount = 0;

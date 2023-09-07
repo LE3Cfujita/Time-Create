@@ -16,14 +16,10 @@ public:
 		PLAYERBULLET,//プレイヤーの弾
 		MODERNBBULLET,//現代のプレイヤー弾
 		FUTUREBULLET,//未来のプレイヤー
-		ENEMY,//敵
-		ENEMYENTOURAGE,//雑魚敵
-		ENEMYBULLET,//敵の弾(古代)
-		ENEMYFIRE,//敵の火(古代)
-		ENEMYBALKAN,//敵のバルカン(現代)
-		ENEMYCANNON,//敵の大砲(現代)
-		ENEMYBEAM,//敵のビーム(未来)
-		ENTOURAGEBULLET,//雑魚敵の攻撃
+		SLIME,//敵
+		BOSSENEMY,//ボス敵
+		SLIMEBULLET,//スライムの攻撃
+		BOSSBULLET,//ボスの攻撃
 		HITEFFECT,//ヒットエフェクト
 	};
 	enum STAGE

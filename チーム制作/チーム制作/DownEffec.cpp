@@ -10,10 +10,10 @@ DownEffec::~DownEffec()
 
 void DownEffec::Initialize(XMFLOAT2 pos)
 {
-	objectMember = GameObject::ENEMY;
+	objectMember = GameObject::SLIME;
 	for (GameObject* gameObject : referenceGameObjects)
 	{
-		if (gameObject->GetObjectMember() != GameObject::ENEMY)continue;
+		if (gameObject->GetObjectMember() != GameObject::SLIME)continue;
 		objectStage = gameObject->GetObjectAge();
 	}
 	position = pos;
@@ -39,7 +39,7 @@ void DownEffec::Draw()
 			deathFlag = true;
 			for (GameObject* gameObject : referenceGameObjects)
 			{
-				if (gameObject->GetObjectMember() != GameObject::ENEMY)continue;
+				if (gameObject->GetObjectMember() != GameObject::SLIME)continue;
 				gameObject->SetObjectState(GameObject::OBJSTATE::DEATH);
 			}
 		}
