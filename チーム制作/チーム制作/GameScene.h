@@ -20,9 +20,7 @@ public:
 	enum OBJAGE
 	{
 		STAND,
-		ANCIENT,//ŒÃ‘ã
-		MODERN,//Œ»‘ã
-		FUTURE,//–¢—ˆ
+		FIRSTSTAGE,//ŒÃ‘ã
 	};
 
 public:
@@ -76,8 +74,6 @@ private:
 	//”wŒiŠG
 	int title;
 	int ancientback;
-	int modernback;
-	int futureback;
 	int changeback;
 	int clear;
 	int over;

@@ -1,8 +1,6 @@
 #pragma once
 #include"GameObject.h"
 #include"PlayerBullet.h"
-#include"PlayerModernBullet.h"
-#include"PlayerFutureBullet.h"
 #include"PlayerCharge.h"
 class Player : public GameObject
 {
@@ -28,9 +26,6 @@ private:
 	void Formation();
 
 	int player;//•`‰æ—p
-	int chargedSE;
-	int chargeingSE;
-	int charge;
 	int tuujouSE;
 	int attackSE;
 	int kodaiAttackSE;

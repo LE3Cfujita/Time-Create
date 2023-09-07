@@ -48,12 +48,4 @@ void HitEffect::Draw()
 	{
 		DrawRectGraph(position.x - r, position.y - r, animeCount * 32, 0, 32, 32, effect1, TRUE, FALSE);
 	}
-	if (objectStage == MODERN)
-	{
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 32, 0, 32, 32, effect2, TRUE, FALSE);
-	}
-	if (objectStage == FUTURE)
-	{
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 32, 0, 32, 32, effect3, TRUE, FALSE);
-	}
 }

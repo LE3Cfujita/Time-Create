@@ -2,10 +2,6 @@
 #include"GameObject.h"
 #include "EnemyBullet.h"
 #include"SlimeBullet.h"
-#include"EnemyBalkan.h"
-#include"EnemyCannon.h"
-#include"EnemyBeam.h"
-#include "EnemyEntourage.h"
 #include"HitEffect.h"
 #include "DownEffec.h"
 class Enemy : public GameObject
@@ -26,16 +22,10 @@ public:
 
 private:
 	void ANCIENTAttack();
-	void MODERNAttack();
-	void FUTUREAttack();
 	void Move();
 	void BulletAttack();//’eUŒ‚
 	void FireAttack();//‰ÎUŒ‚
-	void BalkanAttack();//ƒoƒ‹ƒJƒ“UŒ‚
-	void AimAttack();//‘_‚¤UŒ‚
-	void BeamAttack();
 	void Animation();
-	void EntourageCreate();//æ‚èŠª‚«¢Š«
 	void Effect();
 	void DownEffect();
 

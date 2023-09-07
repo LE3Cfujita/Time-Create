@@ -14,21 +14,19 @@ void Player::Resource(int graph)
 	player = graph;//画像読み込み
 }
 
-void Player::Initialize(XMFLOAT2 pos,int number)
+void Player::Initialize(XMFLOAT2 pos, int number)
 {
 	objectMember = GameObject::PLAYER;
 	objectStage = GameObject::FIRSTSTAGE;
 	position = { pos.x,pos.y };
 	r = 16;
 	this->number = number;
-	chargedSE = LoadSoundMem("Resource/charge.mp3");
-	tuujouSE = LoadSoundMem("Resource/tuujou.mp3");
+	/*tuujouSE = LoadSoundMem("Resource/tuujou.mp3");
 	attackSE = LoadSoundMem("Resource/2.mp3");
-	chargeingSE = LoadSoundMem("Resource/chargeing.mp3");
 	gendaiAttackSE = LoadSoundMem("Resource/gendaiPlayerSE.mp4");
 	kodaiAttackSE = LoadSoundMem("Resource/playershot_kodai.mp3");
-	damageSE = LoadSoundMem("Resource/playerdamage.mp3");
-	HP = 1;
+	damageSE = LoadSoundMem("Resource/playerdamage.mp3");*/
+	HP = 2;
 }
 
 
@@ -109,103 +107,35 @@ void Player::Move()
 
 void Player::Attack()
 {
-	if (timeFlag == false)
+	if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
 	{
-		if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
+		if (objectStage == FIRSTSTAGE)
 		{
-			if (objectStage == FIRSTSTAGE)
+			if (hitButton == true)return;
+			if (CheckSoundMem(kodaiAttackSE) == FALSE)
 			{
-				if (hitButton == true)return;
-				if (CheckSoundMem(kodaiAttackSE) == FALSE)
-				{
-					PlaySoundMem(kodaiAttackSE, DX_PLAYTYPE_BACK, TRUE);
-				}
-				animationFlag = true;
-				PlayerBullet* bullet = new PlayerBullet();
-				bullet->BaseInitialize(referenceGameObjects);
-				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-				addGameObjects.push_back(bullet);
-				hitButton = true;
-				timeFlag = true;
+				PlaySoundMem(kodaiAttackSE, DX_PLAYTYPE_BACK, TRUE);
 			}
-			else if (objectStage == MODERN)
-			{
-				if (CheckSoundMem(gendaiAttackSE) == FALSE)
-				{
-					PlaySoundMem(gendaiAttackSE, DX_PLAYTYPE_BACK, TRUE);
-				}
-				animationFlag = true;
-				PlayerModernBullet* bullet = new PlayerModernBullet();
-				bullet->BaseInitialize(referenceGameObjects);
-				bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-				addGameObjects.push_back(bullet);
-				timeFlag = true;
-			}
-			else
-			{
-				if (CheckSoundMem(chargeingSE) == FALSE)
-				{
-					PlaySoundMem(chargeingSE, DX_PLAYTYPE_BACK, TRUE);
-				}
-				chargeTime++;
-				hitButton = true;
-				chargeFlag = true;
-			}
-		}
-		else
-		{
-			if (CheckSoundMem(kodaiAttackSE) == TRUE)
-			{
-				StopSoundMem(kodaiAttackSE);
-			}
-			if (CheckSoundMem(gendaiAttackSE) == TRUE)
-			{
-				StopSoundMem(gendaiAttackSE);
-			}
-			if (hitButton == true && objectStage == FUTURE)
-			{
-				if (CheckSoundMem(chargeingSE) == TRUE)
-				{
-					StopSoundMem(chargeingSE);
-				}
-				if (chargeTime >= 120)
-				{
-					PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
-					animationFlag = true;
-					PlayerCharge* bullet = new PlayerCharge();
-					bullet->BaseInitialize(referenceGameObjects);
-					bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-					addGameObjects.push_back(bullet);
-				}
-				else
-				{
-					PlaySoundMem(tuujouSE, DX_PLAYTYPE_BACK, TRUE);
-					animationFlag = true;
-					PlayerFutureBullet* bullet = new PlayerFutureBullet();
-					bullet->BaseInitialize(referenceGameObjects);
-					bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-					addGameObjects.push_back(bullet);
-				}
-				chargeTime = 0;
-			}
-			hitButton = false;
-			chargeFlag = false;
+			animationFlag = true;
+			PlayerBullet* bullet = new PlayerBullet();
+			bullet->BaseInitialize(referenceGameObjects);
+			bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+			addGameObjects.push_back(bullet);
+			hitButton = true;
+			timeFlag = true;
 		}
 	}
 	else
 	{
-		timer++;
-
-		if (timer >= 5 && objectStage == MODERN)
+		if (CheckSoundMem(kodaiAttackSE) == TRUE)
 		{
-			timeFlag = false;
-			timer = 0;
+			StopSoundMem(kodaiAttackSE);
 		}
-		else if (timer >= 20 && objectStage != MODERN)
+		if (CheckSoundMem(gendaiAttackSE) == TRUE)
 		{
-			timeFlag = false;
-			timer = 0;
+			StopSoundMem(gendaiAttackSE);
 		}
+		hitButton = false;
 	}
 }
 
@@ -260,7 +190,6 @@ void Player::Animation()
 		}
 		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, player, TRUE, FALSE);
 	}
-	
 }
 
 void Player::Formation()
