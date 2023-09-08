@@ -8,9 +8,11 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::Resource(int graph)
+void Enemy::Resource(int graph, int damage, int se)
 {
 	slimeEnemy = graph;//画像読み込み
+	damageSE = damage;
+	attackSE = se;
 }
 void Enemy::Initialize(XMFLOAT2 pos)
 {
@@ -18,36 +20,26 @@ void Enemy::Initialize(XMFLOAT2 pos)
 	objectStage = GameObject::FIRSTSTAGE;
 	position = { pos.x,pos.y };
 	r = 16;
-	/*prediction = LoadGraph("Resource/prediction.png");
-	beamSE = LoadSoundMem("Resource/UFObeam.mp3");
-	fireSE = LoadSoundMem("Resource/fireSE.mp3");
-	cannonSE = LoadSoundMem("Resource/gendaiEnemySE.mp3");
-	dieSE = LoadSoundMem("Resource/enemyDIE.mp3");*/
 	timer = 100;
 	HP = 1;
 	moveFlag = true;
 	timeFlag = true;
-	move = true;
 	beamCT = 0;
 }
 
 void Enemy::Update()
 {
-		if (HP <= 0)
-		{
-			objState = DEATH;
-			deathCount = 1;
-		}
-		if (move == true)
-		{
-			//Move();
-		}
-		switch (objectStage)
-		{
-		case FIRSTSTAGE://�Ñ�U��
-			ANCIENTAttack();
-			break;
-		}
+	if (HP <= 0)
+	{
+		objState = DEATH;
+		deathCount = 1;
+	}
+	switch (objectStage)
+	{
+	case FIRSTSTAGE://�Ñ�U��
+		ANCIENTAttack();
+		break;
+	}
 }
 
 void Enemy::Draw()
@@ -69,7 +61,11 @@ void Enemy::ANCIENTAttack()
 
 	if (timeFlag == false)
 	{
-		Animation();
+		int a = rand() % 2;
+		if (a == 0)
+		{
+			Animation();
+		}
 	}
 	else
 	{
@@ -114,10 +110,7 @@ void Enemy::Move()
 
 void Enemy::FireAttack()
 {
-	if (CheckSoundMem(fireSE) == FALSE)
-	{
-		PlaySoundMem(fireSE, DX_PLAYTYPE_BACK, TRUE);
-	}
+	PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
 	SlimeBullet* bullet = new SlimeBullet();
 	bullet->BaseInitialize(referenceGameObjects);
 	bullet->Initialize(position, 1);
@@ -158,10 +151,6 @@ void Enemy::DownEffect()
 	effect->Initialize(position);
 	addGameObjects.push_back(effect);
 	effectFlag = true;
-	if (CheckSoundMem(dieSE) == FALSE)
-	{
-		PlaySoundMem(dieSE, DX_PLAYTYPE_BACK, TRUE);
-	}
 }
 
 void Enemy::HitAction(GameObject* gameObject)
@@ -170,20 +159,8 @@ void Enemy::HitAction(GameObject* gameObject)
 
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
 	{
-		Effect();
+		PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
 		HP--;
-		gameObject->SetDeathFlag(true);
-	}
-	else if (gameObject->GetObjectMember() == OBJECTMEMBER::MODERNBBULLET)
-	{
-		Effect();
-		HP -= 0.25;
-		gameObject->SetDeathFlag(true);
-	}
-	else if (gameObject->GetObjectMember() == OBJECTMEMBER::FUTUREBULLET)
-	{
-		Effect();
-		HP -= 0.25;
 		gameObject->SetDeathFlag(true);
 	}
 }

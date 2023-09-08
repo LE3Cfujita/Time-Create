@@ -35,7 +35,6 @@ void GameScene::Update()
 		break;
 	case PLAY:
 		BackgroundScroll();
-		//PBCollision();
 		Invincible();
 		gameObjectManager->Update();
 		SceneChange();
@@ -113,12 +112,12 @@ void GameScene::ChangeScene()
 		if (start == true)
 		{
 			start = false;
-			yajirusiPos = { 450,560 };
+			yajirusiPos = { 770,590 };
 		}
 		else
 		{
 			start = true;
-			yajirusiPos = { 450,480 };
+			yajirusiPos = { 770,490 };
 		}
 		hitButton = true;
 	}
@@ -191,7 +190,7 @@ void GameScene::PlayerCreate()
 		player = new Player();
 		player->BaseInitialize(gameObjectManager->GetGameObjects());
 		player->Initialize({ (float)300,(float)200 + 100 * i }, i);
-		player->Resource(playerGraph);
+		player->Resource(playerGraph, pAttack, kirikae, pDamage);
 		pNumber++;
 		gameObjectManager->AddGameObject(player);
 	}
@@ -204,18 +203,30 @@ void GameScene::EnemyCreate()
 	//敵生成
 
 	if (createFlag == true)return;
-	for (int x = 0; x < 5; x++)
+	if (objectAge == FIRSTSTAGE)
 	{
-		for (int y = 0; y < 5; y++)
+		for (int x = 0; x < 5; x++)
 		{
-			Enemy* enemy = nullptr;
-			enemy = new Enemy();
-			enemy->BaseInitialize(gameObjectManager->GetGameObjects());
-			enemy->Initialize({ (float)720 + 100 * x,(float)150 + 100 * y });
-			enemy->Resource(slimeGraph);
-			gameObjectManager->AddGameObject(enemy);
-			sNumber++;
+			for (int y = 0; y < 5; y++)
+			{
+				Enemy* enemy = nullptr;
+				enemy = new Enemy();
+				enemy->BaseInitialize(gameObjectManager->GetGameObjects());
+				enemy->Initialize({ (float)720 + 100 * x,(float)150 + 100 * y });
+				enemy->Resource(slimeGraph,eDamage,eAttack);
+				gameObjectManager->AddGameObject(enemy);
+				sNumber++;
+			}
 		}
+	}
+	else
+	{
+		BossEnemy* enemy = nullptr;
+		enemy = new BossEnemy();
+		enemy->BaseInitialize(gameObjectManager->GetGameObjects());
+		enemy->Initialize({ (float)1100,(float)300 });
+		enemy->Resource(bossGraph, eDamage, eAttack, slimeGraph);
+		gameObjectManager->AddGameObject(enemy);
 	}
 	createFlag = true;
 }
@@ -272,6 +283,9 @@ void GameScene::SceneChange()
 			else
 			{
 				objectAge = SECONDSTAGE;
+				createFlag = false;
+				EnemyCreate();
+				gameobject->SetObjAge(GameObject::STAGE::SECONDSTAGE);
 			}
 			gameObjectManager->Update();
 		}
@@ -281,11 +295,6 @@ void GameScene::SceneChange()
 			{
 				backFlag = true;
 				flagCount = true;
-			}
-			if (objectAge == FIRSTSTAGE)
-			{
-				EnemyCreate();
-				gameobject->SetObjAge(GameObject::STAGE::FIRSTSTAGE);
 			}
 		}
 	}
@@ -313,103 +322,6 @@ void GameScene::BackgroundScroll()
 	}
 
 }
-//
-//
-//void GameScene::PBCollision()
-//{
-//	for (GameObject* gameobject : gameObjectManager->GetGameObjects())
-//	{
-//		if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
-//		XMFLOAT2 pos = gameobject->GetPosition();
-//		float r = gameobject->GetRadius();
-//		XMFLOAT2 pos2 = { pos.x + r * 2,pos.y + r * 2 };
-//		int HP = gameobject->GetHP();
-//		for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
-//		{
-//			if (gameobject2->GetObjectMember() != GameObject::OBJECTMEMBER::ENEMYBEAM)continue;
-//			XMFLOAT2 epos = gameobject2->GetPosition();
-//			XMFLOAT2 epos2 = gameobject2->GetPosition2();
-//
-//			if (invincibleFlag == false)
-//			{
-//				if (pos.x <= epos.x && pos2.x > epos.x)
-//				{
-//					if (pos.y <= epos2.y && pos.y <= epos.y &&
-//						pos2.y >= epos2.y && pos2.y <= epos.y)
-//					{
-//						gameobject->SetHP(HP - 1);
-//						invincibleFlag = true;
-//						break;
-//					}
-//					if (pos.y >= epos2.y && pos.y <= epos.y &&
-//						pos2.y >= epos.y && pos2.y >= epos2.y)
-//					{
-//						gameobject->SetHP(HP - 1);
-//						invincibleFlag = true;
-//						break;
-//					}
-//					if (pos.y >= epos2.y && pos.y <= epos.y &&
-//						pos2.y >= epos2.y && pos2.y <= epos.y)
-//					{
-//						gameobject->SetHP(HP - 1);
-//						invincibleFlag = true;
-//						break;
-//					}
-//				}
-//				if (pos.x >= epos.x && pos.x <= epos2.x &&
-//					pos2.x<epos.x && pos2.x>epos2.x)
-//				{
-//					if (pos.y <= epos2.y && pos.y <= epos.y &&
-//						pos2.y >= epos2.y && pos2.y <= epos.y)
-//					{
-//						gameobject->SetHP(HP - 1);
-//						invincibleFlag = true;
-//						break;
-//					}
-//					if (pos.y >= epos2.y && pos.y <= epos.y &&
-//						pos2.y >= epos.y && pos2.y >= epos2.y)
-//					{
-//						gameobject->SetHP(HP - 1);
-//						invincibleFlag = true;
-//						break;
-//					}
-//					if (pos.y >= epos2.y && pos.y <= epos.y &&
-//						pos2.y >= epos2.y && pos2.y <= epos.y)
-//					{
-//						gameobject->SetHP(HP - 1);
-//						invincibleFlag = true;
-//						break;
-//					}
-//				}
-//				if (pos.x >= epos.x && pos.x <= epos2.x &&
-//					pos2.x >= epos.x && pos2.x <= epos2.x)
-//				{
-//					if (pos.y <= epos2.y && pos.y <= epos.y &&
-//						pos2.y >= epos2.y && pos2.y <= epos.y)
-//					{
-//						gameobject->SetHP(HP - 1);
-//						invincibleFlag = true;
-//						break;
-//					}
-//					if (pos.y >= epos2.y && pos.y <= epos.y &&
-//						pos2.y >= epos.y && pos2.y >= epos2.y)
-//					{
-//						gameobject->SetHP(HP - 1);
-//						invincibleFlag = true;
-//						break;
-//					}
-//					if (pos.y >= epos2.y && pos.y <= epos.y &&
-//						pos2.y >= epos2.y && pos2.y <= epos.y)
-//					{
-//						gameobject->SetHP(HP - 1);
-//						invincibleFlag = true;
-//						break;
-//					}
-//				}
-//			}
-//		}
-//	}
-//}
 
 void GameScene::Invincible()
 {
@@ -433,8 +345,8 @@ void GameScene::BGM()
 void GameScene::LoadResource()
 {
 	//背景絵
-	title = LoadGraph("Resource/TITLE.png"); // �`��
-	ancientback = LoadGraph("Resource/ancientback.png"); // �`��
+	title = LoadGraph("Resource/title.png"); // �`��
+	ancientback = LoadGraph("Resource/BGjam.png"); // �`��
 	changeback = LoadGraph("Resource/ageChange.png");
 	clear = LoadGraph("Resource/GameClear.png"); // �`��
 	over = LoadGraph("Resource/GameOver.png"); // �`��
@@ -444,17 +356,22 @@ void GameScene::LoadResource()
 	//キャラクター絵
 	playerGraph = LoadGraph("Resource/Playeranime.png");
 	slimeGraph = LoadGraph("Resource/EnemySlimeAnime.png");
+	bossGraph = LoadGraph("Resource/bossEnemy.png");
 
 	//弾絵
 
 	//音関係
 	titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
 	ancientBGM = LoadSoundMem("Resource/ancientBGM.mp3");
-	modernBGM = LoadSoundMem("Resource/modernBGM.mp3");
-	futureBGM = LoadSoundMem("Resource/Shining_star.mp3");
 	overBGM = LoadSoundMem("Resource/failed.mp3");
 	clearBGM = LoadSoundMem("Resource/gameClear.mp3");
-	ketteiSE = LoadSoundMem("Resource/ketteiSE.mp3");
+	ketteiSE = LoadSoundMem("Resource/kettei.mp3");
+	pAttack = LoadSoundMem("Resource/playerBullet.mp3");
+	eAttack = LoadSoundMem("Resource/enemyBullet.mp3");
+	kirikae = LoadSoundMem("Resource/playerkirikae.mp3");
+	pDamage = LoadSoundMem("Resource/playerHit.mp3");
+	eDamage = LoadSoundMem("Resource/enemyHit.mp3");
+
 	loadFlag = true;
 	volume = 200;
 	/*ChangeVolumeSoundMem(volume, ancientBGM);

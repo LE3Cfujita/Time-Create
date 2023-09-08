@@ -17,7 +17,9 @@ public:
 
 	void Draw();
 
-	void Resource(int graph);
+	void Resource(int graph,int damage,int se);
+
+	void HitAction(GameObject* gameObject);
 
 private:
 	void ANCIENTAttack();
@@ -27,16 +29,16 @@ private:
 	void Effect();
 	void DownEffect();
 
-	void HitAction(GameObject* gameObject);
 
 	int moveCount = 0;//0ÇÃèÍçáè„à⁄ìÆ
 
 	int slimeEnemy;
 	int prediction;
-	int beamSE;
+
+	//âπä÷åW
 	int fireSE;
-	int cannonSE;
-	int dieSE;
+	int damageSE;
+	int attackSE;
 
 	bool moveFlag = true;
 	bool createFlag = false;

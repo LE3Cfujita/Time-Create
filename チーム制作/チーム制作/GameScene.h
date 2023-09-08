@@ -52,8 +52,6 @@ public:
 
 	void BackgroundScroll();//”wŒiƒXƒNƒ[ƒ‹
 
-	//void PBCollision();
-
 	void Invincible();
 
 	void BGM();
@@ -72,7 +70,7 @@ private:
 	XMFLOAT2 backPos3 = { 2560,0 };
 	XMFLOAT2 changePos = { 1280,0 };
 	XMFLOAT2 setumeiPos = { 0,0 };
-	XMFLOAT2 yajirusiPos = { 450,480 };
+	XMFLOAT2 yajirusiPos = { 770,490 };
 	//”wŒiŠG
 	int title;
 	int ancientback;
@@ -85,6 +83,7 @@ private:
 	//ƒLƒƒƒ‰ƒNƒ^[ŠG
 	int playerGraph;//ƒvƒŒƒCƒ„[ŠG
 	int slimeGraph;//ƒXƒ‰ƒCƒ€ŠG
+	int bossGraph;
 
 	//’eŠG
 	int slimeBullet;//ƒXƒ‰ƒCƒ€‚Ì’e‚ÌŠG
@@ -98,6 +97,11 @@ private:
 	int clearBGM;
 	bool overFlag = false;
 	int ketteiSE;
+	int pAttack;
+	int eAttack;
+	int kirikae;
+	int pDamage;
+	int eDamage;
 
 	int volume = 200;
 

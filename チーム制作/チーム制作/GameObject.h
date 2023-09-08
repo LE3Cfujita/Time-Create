@@ -4,6 +4,7 @@
 #include"math.h"
 #include <vector>
 #include"DxLib.h"
+#include"stdlib.h"
 
 using namespace DirectX;
 class GameObject
@@ -14,8 +15,6 @@ public:
 		NONEMEMBER,//初期
 		PLAYER,//プレイヤー
 		PLAYERBULLET,//プレイヤーの弾
-		MODERNBBULLET,//現代のプレイヤー弾
-		FUTUREBULLET,//未来のプレイヤー
 		SLIME,//敵
 		BOSSENEMY,//ボス敵
 		SLIMEBULLET,//スライムの攻撃

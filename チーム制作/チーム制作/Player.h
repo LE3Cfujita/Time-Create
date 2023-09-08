@@ -1,7 +1,6 @@
 #pragma once
 #include"GameObject.h"
 #include"PlayerBullet.h"
-#include"PlayerCharge.h"
 class Player : public GameObject
 {
 public:
@@ -9,13 +8,13 @@ public:
 	~Player();
 
 	//‰Šú‰»
-	void Initialize(XMFLOAT2 pos,int number);
+	void Initialize(XMFLOAT2 pos, int number);
 
 	void Update();
 
 	void Draw();
 
-	void Resource(int graph);
+	void Resource(int graph, int se,int kirikae,int damage);
 
 private:
 	void Move();//ˆÚ“®
@@ -26,13 +25,9 @@ private:
 	void Formation();
 
 	int player;//•`‰æ—p
-	int tuujouSE;
 	int attackSE;
-	int kodaiAttackSE;
-	int gendaiAttackSE;
+	int kirikaeSE;
 	int damageSE;
-
-	XMFLOAT2 hpPos = { 0,0 };
 
 	bool invincibleFlag = false;
 	int invincibleTime = 0;

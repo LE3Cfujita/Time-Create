@@ -9,9 +9,12 @@ Player::~Player()
 
 }
 
-void Player::Resource(int graph)
+void Player::Resource(int graph, int se, int kirikae, int damage)
 {
 	player = graph;//画像読み込み
+	attackSE = se;
+	kirikaeSE = kirikae;
+	damageSE = damage;
 }
 
 void Player::Initialize(XMFLOAT2 pos, int number)
@@ -22,7 +25,6 @@ void Player::Initialize(XMFLOAT2 pos, int number)
 	r = 16;
 	this->number = number;
 	/*tuujouSE = LoadSoundMem("Resource/tuujou.mp3");
-	attackSE = LoadSoundMem("Resource/2.mp3");
 	gendaiAttackSE = LoadSoundMem("Resource/gendaiPlayerSE.mp4");
 	kodaiAttackSE = LoadSoundMem("Resource/playershot_kodai.mp3");
 	damageSE = LoadSoundMem("Resource/playerdamage.mp3");*/
@@ -121,32 +123,18 @@ void Player::Attack()
 {
 	if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
 	{
-		if (objectStage == FIRSTSTAGE)
-		{
-			if (hitButton == true)return;
-			if (CheckSoundMem(kodaiAttackSE) == FALSE)
-			{
-				PlaySoundMem(kodaiAttackSE, DX_PLAYTYPE_BACK, TRUE);
-			}
-			animationFlag = true;
-			PlayerBullet* bullet = new PlayerBullet();
-			bullet->BaseInitialize(referenceGameObjects);
-			bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-			addGameObjects.push_back(bullet);
-			hitButton = true;
-			timeFlag = true;
-		}
+		if (hitButton == true)return;
+		PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
+		animationFlag = true;
+		PlayerBullet* bullet = new PlayerBullet();
+		bullet->BaseInitialize(referenceGameObjects);
+		bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+		addGameObjects.push_back(bullet);
+		hitButton = true;
+		timeFlag = true;
 	}
 	else
 	{
-		if (CheckSoundMem(kodaiAttackSE) == TRUE)
-		{
-			StopSoundMem(kodaiAttackSE);
-		}
-		if (CheckSoundMem(gendaiAttackSE) == TRUE)
-		{
-			StopSoundMem(gendaiAttackSE);
-		}
 		hitButton = false;
 	}
 }
@@ -223,6 +211,10 @@ void Player::Formation()
 			position = { 500,300 };
 			break;
 		}
+		if (CheckSoundMem(kirikaeSE) == FALSE)
+		{
+			PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_X) == 1)
 	{
@@ -243,6 +235,10 @@ void Player::Formation()
 		case 4:
 			position = { 100,500 };
 			break;
+		}
+		if (CheckSoundMem(kirikaeSE) == FALSE)
+		{
+			PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
 		}
 	}
 }
