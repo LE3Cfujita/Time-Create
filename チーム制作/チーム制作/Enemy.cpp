@@ -8,47 +8,38 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::Resource(int graph)
+void Enemy::Resource(int graph, int damage, int se)
 {
 	slimeEnemy = graph;//画像読み込み
+	damageSE = damage;
+	attackSE = se;
 }
 void Enemy::Initialize(XMFLOAT2 pos)
 {
-	objectMember = GameObject::ENEMY;
+	objectMember = GameObject::SLIME;
 	objectStage = GameObject::FIRSTSTAGE;
 	position = { pos.x,pos.y };
 	r = 16;
-	/*
-	prediction = LoadGraph("Resource/prediction.png");
-	beamSE = LoadSoundMem("Resource/UFObeam.mp3");
-	fireSE = LoadSoundMem("Resource/fireSE.mp3");
-	cannonSE = LoadSoundMem("Resource/gendaiEnemySE.mp3");
-	dieSE = LoadSoundMem("Resource/enemyDIE.mp3");*/
 	timer = 100;
 	HP = 1;
 	moveFlag = true;
 	timeFlag = true;
-	move = true;
 	beamCT = 0;
 }
 
 void Enemy::Update()
 {
-		if (HP <= 0)
-		{
-			objState = DEATH;
-			deathCount = 1;
-		}
-		if (move == true)
-		{
-			//Move();
-		}
-		switch (objectStage)
-		{
-		case FIRSTSTAGE://�Ñ�U��
-			ANCIENTAttack();
-			break;
-		}
+	if (HP <= 0)
+	{
+		objState = DEATH;
+		deathCount = 1;
+	}
+	switch (objectStage)
+	{
+	case FIRSTSTAGE://�Ñ�U��
+		//ANCIENTAttack();
+		break;
+	}
 }
 
 void Enemy::Draw()
@@ -56,7 +47,7 @@ void Enemy::Draw()
 	if (objState == EFFECT || objState == DEATH)return;
 	switch (objectStage)
 	{
-	case FIRSTSTAGE://�Ñ�G
+	case FIRSTSTAGE:
 		r = 16;
 		DrawRectGraph(position.x - r, position.y, animeCount * 32, 0, 32, 16, slimeEnemy, TRUE, FALSE);
 		break;
@@ -70,7 +61,11 @@ void Enemy::ANCIENTAttack()
 
 	if (timeFlag == false)
 	{
-		Animation();
+		int a = rand() % 2;
+		if (a == 0)
+		{
+			Animation();
+		}
 	}
 	else
 	{
@@ -82,54 +77,9 @@ void Enemy::ANCIENTAttack()
 		timer = 0;
 	}
 }
-
-void Enemy::Move()
-{
-	if (position.y - r <= 0)
-	{
-		moveCount = 1;
-	}
-	if (position.y + r >= 720)
-	{
-		moveCount = 0;
-	}
-	if (moveCount == 0)
-	{
-		position.y -= 3;
-	}
-	else
-	{
-		position.y += 3;
-	}
-	if (moveFlag == true)
-	{
-		position.x -= 5;
-		move = true;
-	}
-	if (position.x <= 1100)
-	{
-		moveFlag = false;
-	}
-}
-
-void Enemy::BulletAttack()
-{
-	for (int i = 0; i < 3; i++)
-	{
-		EnemyBullet* bullet = new EnemyBullet();
-		bullet->BaseInitialize(referenceGameObjects);
-		bullet->Initialize(position, i);
-		addGameObjects.push_back(bullet);
-	}
-
-}
-
 void Enemy::FireAttack()
 {
-	if (CheckSoundMem(fireSE) == FALSE)
-	{
-		PlaySoundMem(fireSE, DX_PLAYTYPE_BACK, TRUE);
-	}
+	PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
 	SlimeBullet* bullet = new SlimeBullet();
 	bullet->BaseInitialize(referenceGameObjects);
 	bullet->Initialize(position, 1);
@@ -148,7 +98,6 @@ void Enemy::Animation()
 		if (animeCount >= 5)
 		{
 			timeFlag = true;
-			//BulletAttack();//�e
 			FireAttack();//��
 			move = false;
 			animeCount = 0;
@@ -171,10 +120,6 @@ void Enemy::DownEffect()
 	effect->Initialize(position);
 	addGameObjects.push_back(effect);
 	effectFlag = true;
-	if (CheckSoundMem(dieSE) == FALSE)
-	{
-		PlaySoundMem(dieSE, DX_PLAYTYPE_BACK, TRUE);
-	}
 }
 
 void Enemy::HitAction(GameObject* gameObject)
@@ -183,20 +128,8 @@ void Enemy::HitAction(GameObject* gameObject)
 
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
 	{
-		Effect();
+		PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
 		HP--;
-		gameObject->SetDeathFlag(true);
-	}
-	else if (gameObject->GetObjectMember() == OBJECTMEMBER::MODERNBBULLET)
-	{
-		Effect();
-		HP -= 0.25;
-		gameObject->SetDeathFlag(true);
-	}
-	else if (gameObject->GetObjectMember() == OBJECTMEMBER::FUTUREBULLET)
-	{
-		Effect();
-		HP -= 0.25;
 		gameObject->SetDeathFlag(true);
 	}
 }

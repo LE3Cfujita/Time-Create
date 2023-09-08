@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Player.h"
 #include"Enemy.h"
+#include"BossEnemy.h"
 #include"GameObjectManager.h"
 #include"DxLib.h"
 #include"Collision.h"
@@ -20,7 +21,8 @@ public:
 	enum OBJAGE
 	{
 		STAND,
-		FIRSTSTAGE,//古代
+		FIRSTSTAGE,//1ステージ目
+		SECONDSTAGE//2ステージ目
 	};
 
 public:
@@ -50,14 +52,13 @@ public:
 
 	void BackgroundScroll();//背景スクロール
 
-	void PBCollision();
-
 	void Invincible();
 
 	void BGM();
 
 	void LoadResource();
 
+	void changeForm();
 
 private:
 	GameState gameState;
@@ -70,7 +71,9 @@ private:
 	XMFLOAT2 backPos3 = { 2560,0 };
 	XMFLOAT2 changePos = { 1280,0 };
 	XMFLOAT2 setumeiPos = { 0,0 };
-	XMFLOAT2 yajirusiPos = { 450,480 };
+	XMFLOAT2 yajirusiPos = { 770,490 };
+
+	XMFLOAT2 formPos = { 0,0 };//プレイヤーのフォーメーションチェンジ時に使う
 	//背景絵
 	int title;
 	int ancientback;
@@ -83,6 +86,7 @@ private:
 	//キャラクター絵
 	int playerGraph;//プレイヤー絵
 	int slimeGraph;//スライム絵
+	int bossGraph;
 
 	//弾絵
 	int slimeBullet;//スライムの弾の絵
@@ -96,6 +100,11 @@ private:
 	int clearBGM;
 	bool overFlag = false;
 	int ketteiSE;
+	int pAttack;
+	int eAttack;
+	int kirikae;
+	int pDamage;
+	int eDamage;
 
 	int volume = 200;
 

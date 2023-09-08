@@ -9,9 +9,12 @@ Player::~Player()
 
 }
 
-void Player::Resource(int graph)
+void Player::Resource(int graph, int se, int kirikae, int damage)
 {
 	player = graph;//画像読み込み
+	attackSE = se;
+	kirikaeSE = kirikae;
+	damageSE = damage;
 }
 
 void Player::Initialize(XMFLOAT2 pos, int number)
@@ -22,7 +25,6 @@ void Player::Initialize(XMFLOAT2 pos, int number)
 	r = 16;
 	this->number = number;
 	/*tuujouSE = LoadSoundMem("Resource/tuujou.mp3");
-	attackSE = LoadSoundMem("Resource/2.mp3");
 	gendaiAttackSE = LoadSoundMem("Resource/gendaiPlayerSE.mp4");
 	kodaiAttackSE = LoadSoundMem("Resource/playershot_kodai.mp3");
 	damageSE = LoadSoundMem("Resource/playerdamage.mp3");*/
@@ -40,7 +42,6 @@ void Player::Update()
 		objState = DEATH;
 		deathCount = 1;
 	}
-	Formation();
 }
 
 void Player::Draw()
@@ -66,42 +67,38 @@ void Player::Move()
 	if (CheckHitKey(KEY_INPUT_D) == 1)
 	{
 		position2 = position;
-		position.x += 5;//�E
+		position.x += 5;
+		if (position.x + 32 >= 850)
+		{
+			position.x = 850 - 32;
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
 	{
 		position2 = position;
-		position.x -= 5;//��
+		position.x -= 5;
+		if (position.x - 32 <= 0)
+		{
+			position.x = 32;
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
 		position2 = position;
-		position.y -= 5;//��
+		position.y -= 5;
+		if (position.y - r <= 0)
+		{
+			position.y = 0 + r;
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
 		position2 = position;
-		position.y += 5;//��
-	}
-	if (position.x - 32 <= 0)
-	{
-		position.x = 32;
-		position2 = position;
-	}
-	if (position.y - r <= 0)
-	{
-		position.y = 0 + r;
-		position2 = position;
-	}
-	if (position.x + 32 >= 850)
-	{
-		position.x = 850 - 32;
-		position2 = position;
-	}
-	if (position.y + r * 3 >= 720)
-	{
-		position.y = 720 - r * 3;
-		position2 = position;
+		position.y += 5;
+		if (position.y + r * 3 >= 720)
+		{
+			position.y = 720 - r * 3;
+		}
 	}
 }
 
@@ -109,32 +106,18 @@ void Player::Attack()
 {
 	if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
 	{
-		if (objectStage == FIRSTSTAGE)
-		{
-			if (hitButton == true)return;
-			if (CheckSoundMem(kodaiAttackSE) == FALSE)
-			{
-				PlaySoundMem(kodaiAttackSE, DX_PLAYTYPE_BACK, TRUE);
-			}
-			animationFlag = true;
-			PlayerBullet* bullet = new PlayerBullet();
-			bullet->BaseInitialize(referenceGameObjects);
-			bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-			addGameObjects.push_back(bullet);
-			hitButton = true;
-			timeFlag = true;
-		}
+		if (hitButton == true)return;
+		PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
+		animationFlag = true;
+		PlayerBullet* bullet = new PlayerBullet();
+		bullet->BaseInitialize(referenceGameObjects);
+		bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+		addGameObjects.push_back(bullet);
+		hitButton = true;
+		timeFlag = true;
 	}
 	else
 	{
-		if (CheckSoundMem(kodaiAttackSE) == TRUE)
-		{
-			StopSoundMem(kodaiAttackSE);
-		}
-		if (CheckSoundMem(gendaiAttackSE) == TRUE)
-		{
-			StopSoundMem(gendaiAttackSE);
-		}
 		hitButton = false;
 	}
 }
@@ -153,11 +136,8 @@ void Player::HitAction(GameObject* gameObject)
 {
 	if (invincibleFlag == false)
 	{
-		if (gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBULLET ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYFIRE ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYBALKAN ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENEMYCANNON ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::ENTOURAGEBULLET)
+		if (gameObject->GetObjectMember() == OBJECTMEMBER::SLIMEBULLET ||
+			gameObject->GetObjectMember() == OBJECTMEMBER::BOSSBULLET)
 		{
 			PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
 			HP--;
@@ -192,48 +172,54 @@ void Player::Animation()
 	}
 }
 
-void Player::Formation()
+void Player::FormationX(XMFLOAT2 pos)
 {
-	if (CheckHitKey(KEY_INPUT_Z) == 1)
+	switch (number)
 	{
-		switch (number)
-		{
-		case 0:
-			position = { 100,300 };
-			break;
-		case 1:
-			position = { 200,300 };
-			break;
-		case 2:
-			position = { 300,300 };
-			break;
-		case 3:
-			position = { 400,300 };
-			break;
-		case 4:
-			position = { 500,300 };
-			break;
-		}
+	case 0:
+		position = { pos.x - 100 * 2,pos.y };
+		break;
+	case 1:
+		position = { pos.x - 100 * 1,pos.y };
+		break;
+	case 2:
+		position = { pos.x,pos.y };
+		break;
+	case 3:
+		position = { pos.x + 100 * 1,pos.y };
+		break;
+	case 4:
+		position = { pos.x + 100 * 2,pos.y };
+		break;
 	}
-	if (CheckHitKey(KEY_INPUT_X) == 1)
+	if (CheckSoundMem(kirikaeSE) == FALSE)
 	{
-		switch (number)
-		{
-		case 0:
-			position = { 100,100 };
-			break;
-		case 1:
-			position = { 100,200 };
-			break;
-		case 2:
-			position = { 100,300 };
-			break;
-		case 3:
-			position = { 100,400 };
-			break;
-		case 4:
-			position = { 100,500 };
-			break;
-		}
+		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
+	}
+}
+
+void Player::FormationZ(XMFLOAT2 pos)
+{
+	switch (number)
+	{
+	case 0:
+		position = { pos.x,pos.y - 100 * 2 };
+		break;
+	case 1:
+		position = { pos.x,pos.y - 100 * 1 };
+		break;
+	case 2:
+		position = { pos.x,pos.y };
+		break;
+	case 3:
+		position = { pos.x,pos.y + 100 * 1 };
+		break;
+	case 4:
+		position = { pos.x,pos.y + 100 * 2 };
+		break;
+	}
+	if (CheckSoundMem(kirikaeSE) == FALSE)
+	{
+		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
 	}
 }

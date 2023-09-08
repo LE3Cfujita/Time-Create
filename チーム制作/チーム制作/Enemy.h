@@ -1,6 +1,5 @@
 #pragma once
 #include"GameObject.h"
-#include "EnemyBullet.h"
 #include"SlimeBullet.h"
 #include"HitEffect.h"
 #include "DownEffec.h"
@@ -18,27 +17,27 @@ public:
 
 	void Draw();
 
-	void Resource(int graph);
+	void Resource(int graph,int damage,int se);
+
+	void HitAction(GameObject* gameObject);
 
 private:
 	void ANCIENTAttack();
-	void Move();
-	void BulletAttack();//íeçUåÇ
 	void FireAttack();//âŒçUåÇ
 	void Animation();
 	void Effect();
 	void DownEffect();
 
-	void HitAction(GameObject* gameObject);
 
 	int moveCount = 0;//0ÇÃèÍçáè„à⁄ìÆ
 
 	int slimeEnemy;
 	int prediction;
-	int beamSE;
+
+	//âπä÷åW
 	int fireSE;
-	int cannonSE;
-	int dieSE;
+	int damageSE;
+	int attackSE;
 
 	bool moveFlag = true;
 	bool createFlag = false;
