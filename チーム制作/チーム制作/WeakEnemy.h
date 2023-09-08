@@ -8,7 +8,7 @@ public:
 	~WeakEnemy();
 
 	//èâä˙âª
-	void Initialize(XMFLOAT2 pos);
+	void Initialize(XMFLOAT2 pos,int number);
 
 	void Update();
 
@@ -19,6 +19,9 @@ public:
 	void HitAction(GameObject* gameObject);
 
 private:
+
+	void Move();
+
 	int enemy;
 	int damageSE;
 	int attackSE;

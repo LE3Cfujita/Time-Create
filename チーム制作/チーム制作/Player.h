@@ -22,7 +22,8 @@ private:
 	void Invincible();//–³“G
 	void HitAction(GameObject* gameObject);
 	void Animation();
-	void Formation();
+	void FormationX(XMFLOAT2 pos);
+	void FormationZ(XMFLOAT2 pos);
 
 	int player;//•`‰æ—p
 	int attackSE;

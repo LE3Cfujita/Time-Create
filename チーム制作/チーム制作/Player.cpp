@@ -42,7 +42,6 @@ void Player::Update()
 		objState = DEATH;
 		deathCount = 1;
 	}
-	Formation();
 }
 
 void Player::Draw()
@@ -189,26 +188,26 @@ void Player::Animation()
 	}
 }
 
-void Player::Formation()
+void Player::FormationX(XMFLOAT2 pos)
 {
-	if (CheckHitKey(KEY_INPUT_Z) == 1)
+	if (CheckHitKey(KEY_INPUT_X) == 1)
 	{
 		switch (number)
 		{
 		case 0:
-			position = { 100,300 };
+			position = { 100,pos.y };
 			break;
 		case 1:
-			position = { 200,300 };
+			position = { 200,pos.y };
 			break;
 		case 2:
-			position = { 300,300 };
+			position = { 300,pos.y };
 			break;
 		case 3:
-			position = { 400,300 };
+			position = { 400,pos.y };
 			break;
 		case 4:
-			position = { 500,300 };
+			position = { 500,pos.y };
 			break;
 		}
 		if (CheckSoundMem(kirikaeSE) == FALSE)
@@ -216,24 +215,29 @@ void Player::Formation()
 			PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
 		}
 	}
-	if (CheckHitKey(KEY_INPUT_X) == 1)
+
+}
+
+void Player::FormationZ(XMFLOAT2 pos)
+{
+	if (CheckHitKey(KEY_INPUT_Z) == 1)
 	{
 		switch (number)
 		{
 		case 0:
-			position = { 100,100 };
+			position = { pos.x,100 };
 			break;
 		case 1:
-			position = { 100,200 };
+			position = { pos.x,200 };
 			break;
 		case 2:
-			position = { 100,300 };
+			position = { pos.x,300 };
 			break;
 		case 3:
-			position = { 100,400 };
+			position = { pos.x,400 };
 			break;
 		case 4:
-			position = { 100,500 };
+			position = { pos.x,500 };
 			break;
 		}
 		if (CheckSoundMem(kirikaeSE) == FALSE)

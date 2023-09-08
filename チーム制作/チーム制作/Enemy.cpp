@@ -77,37 +77,6 @@ void Enemy::ANCIENTAttack()
 		timer = 0;
 	}
 }
-
-void Enemy::Move()
-{
-	if (position.y - r <= 0)
-	{
-		moveCount = 1;
-	}
-	if (position.y + r >= 720)
-	{
-		moveCount = 0;
-	}
-	if (moveCount == 0)
-	{
-		position.y -= 3;
-	}
-	else
-	{
-		position.y += 3;
-	}
-	if (moveFlag == true)
-	{
-		position.x -= 5;
-		move = true;
-	}
-	if (position.x <= 1100)
-	{
-		moveFlag = false;
-	}
-}
-
-
 void Enemy::FireAttack()
 {
 	PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);

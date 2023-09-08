@@ -48,10 +48,15 @@ void BossEnemy::Attack()
 		addGameObjects.push_back(bullet);
 		attackFlag = false;
 
-		int a = rand() % 10;
+		int a = rand() % 15;
 		if (a == 0)
 		{
-			//Summon();
+			Summon();
+			line++;
+			if (line >= 5)
+			{
+				line = 0;
+			}
 		}
 	}
 	else
@@ -70,7 +75,7 @@ void BossEnemy::Summon()
 		WeakEnemy* enemy;
 		enemy = new WeakEnemy();
 		enemy->BaseInitialize(referenceGameObjects);
-		enemy->Initialize({ (float)750,(float)-100 - 100 * i });
+		enemy->Initialize({ (float)750 + 100 * line,(float)-100 - 100 * i }, i);
 		enemy->Resource(weakEnemy, damageSE, attackSE);
 		addGameObjects.push_back(enemy);
 	}

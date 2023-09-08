@@ -23,7 +23,6 @@ public:
 
 private:
 	void ANCIENTAttack();
-	void Move();
 	void FireAttack();//‰ÎUŒ‚
 	void Animation();
 	void Effect();

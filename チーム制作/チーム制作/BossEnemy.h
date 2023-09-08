@@ -37,6 +37,8 @@ private:
 	//•Ï”
 	bool moveFlag = false;
 	bool attackFlag = false;
+
+	int line = 0;
 	//‰¹ŠÖŒW
 	int damageSE;
 	int attackSE;

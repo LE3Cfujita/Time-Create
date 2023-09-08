@@ -133,7 +133,7 @@ void GameScene::ChangeScene()
 		{
 			PlaySoundMem(ketteiSE, DX_PLAYTYPE_BACK, TRUE);
 		}
-		if (gameState == TITLE)
+		if (gameState == TITLE || gameState == EXPLANATION)
 		{
 			if (start == true)
 			{
@@ -167,10 +167,6 @@ void GameScene::ChangeScene()
 			}
 			overFlag = false;
 			Initialize();
-		}
-		else if (gameState == EXPLANATION)
-		{
-			gameState = TITLE;
 		}
 		keyCount = 1;
 	}
@@ -213,7 +209,7 @@ void GameScene::EnemyCreate()
 				enemy = new Enemy();
 				enemy->BaseInitialize(gameObjectManager->GetGameObjects());
 				enemy->Initialize({ (float)720 + 100 * x,(float)150 + 100 * y });
-				enemy->Resource(slimeGraph,eDamage,eAttack);
+				enemy->Resource(slimeGraph, eDamage, eAttack);
 				gameObjectManager->AddGameObject(enemy);
 				sNumber++;
 			}
