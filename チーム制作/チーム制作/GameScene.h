@@ -58,6 +58,7 @@ public:
 
 	void LoadResource();
 
+	void changeForm();
 
 private:
 	GameState gameState;
@@ -71,6 +72,8 @@ private:
 	XMFLOAT2 changePos = { 1280,0 };
 	XMFLOAT2 setumeiPos = { 0,0 };
 	XMFLOAT2 yajirusiPos = { 770,490 };
+
+	XMFLOAT2 formPos = { 0,0 };//プレイヤーのフォーメーションチェンジ時に使う
 	//背景絵
 	int title;
 	int ancientback;

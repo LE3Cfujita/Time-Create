@@ -16,14 +16,14 @@ public:
 
 	void Resource(int graph, int se,int kirikae,int damage);
 
+	void FormationX(XMFLOAT2 pos);
+	void FormationZ(XMFLOAT2 pos);
 private:
 	void Move();//ˆÚ“®
 	void Attack();//UŒ‚
 	void Invincible();//–³“G
 	void HitAction(GameObject* gameObject);
 	void Animation();
-	void FormationX(XMFLOAT2 pos);
-	void FormationZ(XMFLOAT2 pos);
 
 	int player;//•`‰æ—p
 	int attackSE;
@@ -43,6 +43,5 @@ private:
 	int chargeTime = 0;
 	int pushTime = 0;
 
-	int number;//ƒLƒƒƒ‰”Ô†
 };
 

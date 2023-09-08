@@ -100,22 +100,6 @@ void Player::Move()
 			position.y = 720 - r * 3;
 		}
 	}
-	if (position.x - 32 <= 0)
-	{
-		position.x = 32;
-	}
-	if (position.y - r <= 0)
-	{
-		position.y = 0 + r;
-	}
-	if (position.x + 32 >= 850)
-	{
-		position.x = 850 - 32;
-	}
-	if (position.y + r * 3 >= 720)
-	{
-		position.y = 720 - r * 3;
-	}
 }
 
 void Player::Attack()
@@ -190,59 +174,52 @@ void Player::Animation()
 
 void Player::FormationX(XMFLOAT2 pos)
 {
-	if (CheckHitKey(KEY_INPUT_X) == 1)
+	switch (number)
 	{
-		switch (number)
-		{
-		case 0:
-			position = { 100,pos.y };
-			break;
-		case 1:
-			position = { 200,pos.y };
-			break;
-		case 2:
-			position = { 300,pos.y };
-			break;
-		case 3:
-			position = { 400,pos.y };
-			break;
-		case 4:
-			position = { 500,pos.y };
-			break;
-		}
-		if (CheckSoundMem(kirikaeSE) == FALSE)
-		{
-			PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
-		}
+	case 0:
+		position = { pos.x - 100 * 2,pos.y };
+		break;
+	case 1:
+		position = { pos.x - 100 * 1,pos.y };
+		break;
+	case 2:
+		position = { pos.x,pos.y };
+		break;
+	case 3:
+		position = { pos.x + 100 * 1,pos.y };
+		break;
+	case 4:
+		position = { pos.x + 100 * 2,pos.y };
+		break;
 	}
-
+	if (CheckSoundMem(kirikaeSE) == FALSE)
+	{
+		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
+	}
 }
 
 void Player::FormationZ(XMFLOAT2 pos)
 {
-	if (CheckHitKey(KEY_INPUT_Z) == 1)
+	switch (number)
 	{
-		switch (number)
-		{
-		case 0:
-			position = { pos.x,100 };
-			break;
-		case 1:
-			position = { pos.x,200 };
-			break;
-		case 2:
-			position = { pos.x,300 };
-			break;
-		case 3:
-			position = { pos.x,400 };
-			break;
-		case 4:
-			position = { pos.x,500 };
-			break;
-		}
-		if (CheckSoundMem(kirikaeSE) == FALSE)
-		{
-			PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
-		}
+	case 0:
+		position = { pos.x,pos.y - 100 * 2 };
+		break;
+	case 1:
+		position = { pos.x,pos.y - 100 * 1 };
+		break;
+	case 2:
+		position = { pos.x,pos.y };
+		break;
+	case 3:
+		position = { pos.x,pos.y + 100 * 1 };
+		break;
+	case 4:
+		position = { pos.x,pos.y + 100 * 2 };
+		break;
+	}
+	if (CheckSoundMem(kirikaeSE) == FALSE)
+	{
+		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
 	}
 }

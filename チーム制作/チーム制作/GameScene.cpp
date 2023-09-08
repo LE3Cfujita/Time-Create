@@ -36,6 +36,7 @@ void GameScene::Update()
 	case PLAY:
 		BackgroundScroll();
 		Invincible();
+		changeForm();
 		gameObjectManager->Update();
 		SceneChange();
 		break;
@@ -376,4 +377,38 @@ void GameScene::LoadResource()
 	ChangeVolumeSoundMem(volume, overBGM);
 	ChangeVolumeSoundMem(volume, clearBGM);
 	ChangeVolumeSoundMem(volume, titleBGM);*/
+}
+
+void GameScene::changeForm()
+{
+	if (CheckHitKey(KEY_INPUT_X) == 1)
+	{
+		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
+		{
+			//ゲームオーバー
+			if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
+			gameobject->FormationX(formPos);
+		}
+	}
+	else if (CheckHitKey(KEY_INPUT_Z) == 1)
+	{
+		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
+		{
+			//ゲームオーバー
+			if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
+			gameobject->FormationZ(formPos);
+		}
+	}
+	else
+	{
+		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
+		{
+			if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
+			int num = gameobject->GetNumber();
+			if (num == 2)
+			{
+				formPos = gameobject->GetPosition();
+			}
+		}
+	}
 }
