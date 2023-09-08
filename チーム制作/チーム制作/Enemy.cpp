@@ -37,7 +37,7 @@ void Enemy::Update()
 	switch (objectStage)
 	{
 	case FIRSTSTAGE://�Ñ�U��
-		//ANCIENTAttack();
+		ANCIENTAttack();
 		break;
 	}
 }
