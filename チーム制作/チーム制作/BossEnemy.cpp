@@ -48,14 +48,13 @@ void BossEnemy::Attack()
 		addGameObjects.push_back(bullet);
 		attackFlag = false;
 
-		int a = rand() % 2;
+		int a = rand() % 8;
 		if (a == 0)
 		{
-			Summon();
-			line++;
-			if (line >= 5)
+			if (line <= 5)
 			{
-				line = 0;
+				Summon();
+				line++;
 			}
 		}
 	}

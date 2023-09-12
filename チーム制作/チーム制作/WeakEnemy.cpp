@@ -14,12 +14,13 @@ void WeakEnemy::Initialize(XMFLOAT2 pos, int number)
 	objectStage = GameObject::SECONDSTAGE;
 	position = { pos.x,pos.y };
 	this->number = number;
+	HP = 3;
 }
 
 void WeakEnemy::Update()
 {
 	Move();
-	//ANCIENTAttack();
+	ANCIENTAttack();
 }
 
 void WeakEnemy::Draw()
