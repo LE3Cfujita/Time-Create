@@ -1,5 +1,6 @@
 #pragma once
 #include"GameObject.h"
+#include"SlimeBullet.h"
 class WeakEnemy : public GameObject
 {
 
@@ -21,6 +22,9 @@ public:
 private:
 
 	void Move();
+	void ANCIENTAttack();
+	void Animation();
+	void FireAttack();
 
 	int enemy;
 	int damageSE;

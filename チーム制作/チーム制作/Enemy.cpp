@@ -37,7 +37,7 @@ void Enemy::Update()
 	switch (objectStage)
 	{
 	case FIRSTSTAGE://�Ñ�U��
-		//ANCIENTAttack();
+		ANCIENTAttack();
 		break;
 	}
 }
@@ -57,8 +57,6 @@ void Enemy::Draw()
 
 void Enemy::ANCIENTAttack()
 {
-
-
 	if (timeFlag == false)
 	{
 		int a = rand() % 2;

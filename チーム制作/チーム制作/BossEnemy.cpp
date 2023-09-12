@@ -48,7 +48,7 @@ void BossEnemy::Attack()
 		addGameObjects.push_back(bullet);
 		attackFlag = false;
 
-		int a = rand() % 15;
+		int a = rand() % 2;
 		if (a == 0)
 		{
 			Summon();
