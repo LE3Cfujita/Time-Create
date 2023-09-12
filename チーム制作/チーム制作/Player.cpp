@@ -22,20 +22,16 @@ void Player::Initialize(XMFLOAT2 pos, int number)
 	objectMember = GameObject::PLAYER;
 	objectStage = GameObject::FIRSTSTAGE;
 	position = { pos.x,pos.y };
-	r = 16;
+	r = 32;
 	this->number = number;
-	/*tuujouSE = LoadSoundMem("Resource/tuujou.mp3");
-	gendaiAttackSE = LoadSoundMem("Resource/gendaiPlayerSE.mp4");
-	kodaiAttackSE = LoadSoundMem("Resource/playershot_kodai.mp3");
-	damageSE = LoadSoundMem("Resource/playerdamage.mp3");*/
 	HP = 2;
 }
 
 
 void Player::Update()
 {
-	Move();//�ړ�
-	Attack();//�U��
+	Move();
+	Attack();
 	Invincible();
 	if (HP <= 0)
 	{
@@ -66,39 +62,35 @@ void Player::Move()
 {
 	if (CheckHitKey(KEY_INPUT_D) == 1)
 	{
-		position2 = position;
-		position.x += 5;
-		if (position.x + 32 >= 850)
+		if (position.x + r > 650)
 		{
-			position.x = 850 - 32;
+			position.x = 650 - r;
 		}
+		position.x += 5;
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
 	{
-		position2 = position;
-		position.x -= 5;
-		if (position.x - 32 <= 0)
+		if (position.x - r < 0)
 		{
-			position.x = 32;
+			position.x = r;
 		}
+		position.x -= 5;
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
-		position2 = position;
-		position.y -= 5;
-		if (position.y - r <= 0)
+		if (position.y - r < 0)
 		{
 			position.y = 0 + r;
 		}
+		position.y -= 5;
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
-		position2 = position;
-		position.y += 5;
-		if (position.y + r * 3 >= 720)
+		if (position.y + r > 720)
 		{
-			position.y = 720 - r * 3;
+			position.y = 720 - r;
 		}
+		position.y += 5;
 	}
 }
 
@@ -145,11 +137,35 @@ void Player::HitAction(GameObject* gameObject)
 			gameObject->SetDeathFlag(true);
 		}
 	}
+	//プレイヤー同士が触れ合ってる場合
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYER)
 	{
-		position = position2;
+		if (X == true)
+		{
+			if (CheckHitKey(KEY_INPUT_D) == 1)
+			{
+				position.x -= 5;
+			}
+			if (CheckHitKey(KEY_INPUT_A) == 1)
+			{
+				position.x += 5;
+			}
+		}
+		else
+		{
+			if (CheckHitKey(KEY_INPUT_W) == 1)
+			{
+				position.y += 5;
+			}
+			if (CheckHitKey(KEY_INPUT_S) == 1)
+			{
+				position.y -= 5;
+			}
+		}
+		hitFlag = true;
 	}
 }
+
 
 void Player::Animation()
 {
@@ -196,6 +212,7 @@ void Player::FormationX(XMFLOAT2 pos)
 	{
 		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
 	}
+	X = true;
 }
 
 void Player::FormationZ(XMFLOAT2 pos)
@@ -222,4 +239,5 @@ void Player::FormationZ(XMFLOAT2 pos)
 	{
 		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
 	}
+	X = false;
 }

@@ -92,6 +92,8 @@ protected:
 
 	int deathCount;
 
+	bool hitFlag;
+
 public:
 	GameObject() {}
 	virtual ~GameObject() {
@@ -147,6 +149,8 @@ public:
 
 		number = 0;
 
+		hitFlag = false;
+
 		std::vector<GameObject*>().swap(addGameObjects);
 		this->referenceGameObjects = referenceGameObjects;
 	}
@@ -163,6 +167,7 @@ public:
 
 	virtual void FormationX(XMFLOAT2 pos){}
 	virtual void FormationZ(XMFLOAT2 pos){}
+
 
 	std::vector<GameObject*> addGameObjects;
 

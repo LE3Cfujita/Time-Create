@@ -43,5 +43,7 @@ private:
 	int chargeTime = 0;
 	int pushTime = 0;
 
+	bool X = false;
+
 };
 

@@ -1,4 +1,4 @@
-#include "WeakEnemy.h"
+﻿#include "WeakEnemy.h"
 
 WeakEnemy::WeakEnemy()
 {
@@ -14,11 +14,13 @@ void WeakEnemy::Initialize(XMFLOAT2 pos, int number)
 	objectStage = GameObject::SECONDSTAGE;
 	position = { pos.x,pos.y };
 	this->number = number;
+	HP = 3;
 }
 
 void WeakEnemy::Update()
 {
 	Move();
+	ANCIENTAttack();
 }
 
 void WeakEnemy::Draw()
@@ -36,7 +38,7 @@ void WeakEnemy::Draw()
 
 void WeakEnemy::Resource(int graph, int damage, int se)
 {
-	enemy = graph;//�摜�ǂݍ���
+	enemy = graph;//画像読み込み
 	damageSE = damage;
 	attackSE = se;
 }
@@ -82,4 +84,52 @@ void WeakEnemy::Move()
 	da = dy * dy;
 	L = sqrt(da);
 	position.y += (dy / L) * 5;
+}
+
+void WeakEnemy::ANCIENTAttack()
+{
+	if (timeFlag == false)
+	{
+		int a = rand() % 2;
+		if (a == 0)
+		{
+			Animation();
+		}
+	}
+	else
+	{
+		timer++;
+		if (timer <= 60)return;
+		move = true;
+		if (timer <= 180)return;
+		timeFlag = false;
+		timer = 0;
+	}
+}
+
+void WeakEnemy::Animation()
+{
+	animation = animation + 1;
+
+	if (animation > 5)
+	{
+		animeCount = animeCount + 1;
+		animation = 0;
+		if (animeCount >= 5)
+		{
+			timeFlag = true;
+			FireAttack();//��
+			move = false;
+			animeCount = 0;
+		}
+	}
+}
+
+void WeakEnemy::FireAttack()
+{
+	PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
+	SlimeBullet* bullet = new SlimeBullet();
+	bullet->BaseInitialize(referenceGameObjects);
+	bullet->Initialize(position, 1);
+	addGameObjects.push_back(bullet);
 }

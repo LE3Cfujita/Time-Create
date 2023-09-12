@@ -30,7 +30,7 @@ void GameObjectManager::Update()
 		gameObjects[i]->referenceGameObjects = gameObjects;
 		gameObjects[i]->Update();
 
-		#pragma region 衝突判定ここから
+#pragma region 衝突判定ここから
 
 		for (int j = 0; j < gameObjects.size(); j++)
 		{
@@ -38,20 +38,20 @@ void GameObjectManager::Update()
 			if (i == j)
 				continue;
 
-			#pragma region 説明用変数ここから
+#pragma region 説明用変数ここから
 			const XMFLOAT2 axPosition = { gameObjects[i]->GetPosition() };	//オブジェクトAのx成分ポジション
 			const XMFLOAT2 ayPosition = { gameObjects[i]->GetPosition() };	//オブジェクトAのy成分ポジション
-			const XMFLOAT2 axVelocity = { gameObjects[i]->GetVelocity().x, 0.0f};	//オブジェクトAのx成分移動量
-			const XMFLOAT2 ayVelocity = { 0.0f, gameObjects[i]->GetVelocity().y};	//オブジェクトAのy成分移動量
+			const XMFLOAT2 axVelocity = { gameObjects[i]->GetVelocity().x, 0.0f };	//オブジェクトAのx成分移動量
+			const XMFLOAT2 ayVelocity = { 0.0f, gameObjects[i]->GetVelocity().y };	//オブジェクトAのy成分移動量
 			const float aRadius = gameObjects[i]->GetRadius();	//オブジェクトAの半径
 			const bool aPhysicsFlag = gameObjects[i]->GetPhysicsFlag();	//オブジェクトAの物理的判定フラグ
-			const XMFLOAT2 velocityXNone = { 0.0f, gameObjects[i]->GetVelocity().y};	//オブジェクトAのx成分移動量を0にする
-			const XMFLOAT2 velocityYNone = { gameObjects[i]->GetVelocity().x, 0.0f};	//オブジェクトAのy成分移動量を0にする
+			const XMFLOAT2 velocityXNone = { 0.0f, gameObjects[i]->GetVelocity().y };	//オブジェクトAのx成分移動量を0にする
+			const XMFLOAT2 velocityYNone = { gameObjects[i]->GetVelocity().x, 0.0f };	//オブジェクトAのy成分移動量を0にする
 			const XMFLOAT2 bxPosition = { gameObjects[j]->GetPosition() };	//オブジェクトBのx成分ポジション
 			const XMFLOAT2 byPosition = { gameObjects[j]->GetPosition() };	//オブジェクトBのy成分ポジション
 			const float bRadius = gameObjects[j]->GetRadius();	//オブジェクトBの半径
 			const bool bPhysicsFlag = gameObjects[j]->GetPhysicsFlag();	//オブジェクトBの物理的判定フラグ
-			#pragma endregion ここまで
+#pragma endregion ここまで
 
 			//衝突判定_x成分
 			bool hitFlag = false;
@@ -82,7 +82,7 @@ void GameObjectManager::Update()
 			}
 		}
 
-		#pragma endregion ここまで
+#pragma endregion ここまで
 
 		//追加したいゲームオブジェクトがあれば
 		if (gameObjects[i]->addGameObjects.size() != 0)

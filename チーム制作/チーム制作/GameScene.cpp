@@ -252,7 +252,7 @@ void GameScene::SceneChange()
 			gameobject->SetDeathFlag(true);
 			if (pNumber == 0)
 			{
-				if (objectAge == FIRSTSTAGE && CheckSoundMem(ancientBGM) == 1)
+				if (CheckSoundMem(ancientBGM) == 1)
 				{
 					StopSoundMem(ancientBGM);
 				}
@@ -279,6 +279,14 @@ void GameScene::SceneChange()
 				changeFlag = true;
 			}
 		}
+		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::BOSSENEMY)
+		{
+			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
+			{
+				gameobject->SetDeathFlag(true);
+				changeFlag = true;
+			}
+		}
 		if (backFlag == true)
 		{
 			backFlag = false;
@@ -287,13 +295,19 @@ void GameScene::SceneChange()
 			{
 				gameState = CLEA;
 				changePos.x = 1280;
+				if (CheckSoundMem(ancientBGM) == 1)
+				{
+					StopSoundMem(ancientBGM);
+				}
 			}
 			else
 			{
 				objectAge = SECONDSTAGE;
 				createFlag = false;
+				flagCount = false;
 				EnemyCreate();
 				gameobject->SetObjAge(GameObject::STAGE::SECONDSTAGE);
+				changePos.x = 1280;
 			}
 			gameObjectManager->Update();
 		}
@@ -322,13 +336,6 @@ void GameScene::BackgroundScroll()
 	}
 	if (changeFlag == false)return;
 	changePos.x -= 30;
-	if (changePos.x <= -1280)
-	{
-		changeFlag = false;
-		flagCount = false;
-		changePos.x = 1280;
-	}
-
 }
 
 void GameScene::Invincible()
@@ -370,9 +377,9 @@ void GameScene::LoadResource()
 
 	//音関係
 	titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
-	ancientBGM = LoadSoundMem("Resource/ancientBGM.mp3");
-	overBGM = LoadSoundMem("Resource/failed.mp3");
-	clearBGM = LoadSoundMem("Resource/gameClear.mp3");
+	overBGM = LoadSoundMem("Resource/overBGM.mp3");
+	clearBGM = LoadSoundMem("Resource/clearBGM.mp3");
+	ancientBGM = LoadSoundMem("Resource/gameplayBGM.mp3");
 	ketteiSE = LoadSoundMem("Resource/kettei.mp3");
 	pAttack = LoadSoundMem("Resource/playerBullet.mp3");
 	eAttack = LoadSoundMem("Resource/enemyBullet.mp3");
