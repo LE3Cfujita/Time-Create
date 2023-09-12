@@ -252,7 +252,7 @@ void GameScene::SceneChange()
 			gameobject->SetDeathFlag(true);
 			if (pNumber == 0)
 			{
-				if (objectAge == FIRSTSTAGE && CheckSoundMem(ancientBGM) == 1)
+				if (CheckSoundMem(ancientBGM) == 1)
 				{
 					StopSoundMem(ancientBGM);
 				}
@@ -295,6 +295,10 @@ void GameScene::SceneChange()
 			{
 				gameState = CLEA;
 				changePos.x = 1280;
+				if (CheckSoundMem(ancientBGM) == 1)
+				{
+					StopSoundMem(ancientBGM);
+				}
 			}
 			else
 			{
@@ -373,9 +377,9 @@ void GameScene::LoadResource()
 
 	//音関係
 	titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
-	ancientBGM = LoadSoundMem("Resource/ancientBGM.mp3");
-	overBGM = LoadSoundMem("Resource/failed.mp3");
-	clearBGM = LoadSoundMem("Resource/gameClear.mp3");
+	overBGM = LoadSoundMem("Resource/overBGM.mp3");
+	clearBGM = LoadSoundMem("Resource/clearBGM.mp3");
+	ancientBGM = LoadSoundMem("Resource/gameplayBGM.mp3");
 	ketteiSE = LoadSoundMem("Resource/kettei.mp3");
 	pAttack = LoadSoundMem("Resource/playerBullet.mp3");
 	eAttack = LoadSoundMem("Resource/enemyBullet.mp3");

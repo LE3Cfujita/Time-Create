@@ -30,8 +30,8 @@ void Player::Initialize(XMFLOAT2 pos, int number)
 
 void Player::Update()
 {
-	Move();//�ړ�
-	Attack();//�U��
+	Move();
+	Attack();
 	Invincible();
 	if (HP <= 0)
 	{
@@ -66,7 +66,6 @@ void Player::Move()
 		{
 			position.x = 650 - r;
 		}
-		position2 = position;
 		position.x += 5;
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
@@ -75,7 +74,6 @@ void Player::Move()
 		{
 			position.x = r;
 		}
-		position2 = position;
 		position.x -= 5;
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
@@ -84,7 +82,6 @@ void Player::Move()
 		{
 			position.y = 0 + r;
 		}
-		position2 = position;
 		position.y -= 5;
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
@@ -93,11 +90,8 @@ void Player::Move()
 		{
 			position.y = 720 - r;
 		}
-		position2 = position;
 		position.y += 5;
 	}
-
-
 }
 
 void Player::Attack()
@@ -143,11 +137,35 @@ void Player::HitAction(GameObject* gameObject)
 			gameObject->SetDeathFlag(true);
 		}
 	}
+	//プレイヤー同士が触れ合ってる場合
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYER)
 	{
-		position = position2;
+		if (X == true)
+		{
+			if (CheckHitKey(KEY_INPUT_D) == 1)
+			{
+				position.x -= 5;
+			}
+			if (CheckHitKey(KEY_INPUT_A) == 1)
+			{
+				position.x += 5;
+			}
+		}
+		else
+		{
+			if (CheckHitKey(KEY_INPUT_W) == 1)
+			{
+				position.y += 5;
+			}
+			if (CheckHitKey(KEY_INPUT_S) == 1)
+			{
+				position.y -= 5;
+			}
+		}
+		hitFlag = true;
 	}
 }
+
 
 void Player::Animation()
 {
@@ -194,6 +212,7 @@ void Player::FormationX(XMFLOAT2 pos)
 	{
 		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
 	}
+	X = true;
 }
 
 void Player::FormationZ(XMFLOAT2 pos)
@@ -220,4 +239,5 @@ void Player::FormationZ(XMFLOAT2 pos)
 	{
 		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
 	}
+	X = false;
 }
