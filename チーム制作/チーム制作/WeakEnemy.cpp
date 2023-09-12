@@ -21,6 +21,10 @@ void WeakEnemy::Update()
 {
 	Move();
 	ANCIENTAttack();
+	if (HP <= 0)
+	{
+		deathFlag = true;
+	}
 }
 
 void WeakEnemy::Draw()
