@@ -19,7 +19,10 @@ void GameScene::Initialize()
 
 	if (loadFlag != false)return;
 	LoadResource();
-
+	if (CheckSoundMem(titleBGM) == 0)
+	{
+		PlaySoundMem(titleBGM, DX_PLAYTYPE_LOOP, TRUE);
+	}
 }
 
 void GameScene::Update()
