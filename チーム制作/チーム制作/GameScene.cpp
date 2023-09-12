@@ -134,7 +134,7 @@ void GameScene::ChangeScene()
 		{
 			PlaySoundMem(ketteiSE, DX_PLAYTYPE_BACK, TRUE);
 		}
-		if (gameState == TITLE || gameState == EXPLANATION)
+		if (gameState == TITLE)
 		{
 			if (start == true)
 			{
@@ -168,6 +168,17 @@ void GameScene::ChangeScene()
 			}
 			overFlag = false;
 			Initialize();
+		}
+		else if (gameState == EXPLANATION)
+		{
+			flagCount = false;
+			volume = 200;
+			gameState = PLAY;
+			StopSoundMem(titleBGM);
+			PlayerCreate();
+			backPos = { 0,0 };
+			backPos2 = { 1280,0 };
+			backPos3 = { 2569,0 };
 		}
 		keyCount = 1;
 	}
