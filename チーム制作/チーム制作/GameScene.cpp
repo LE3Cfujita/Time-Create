@@ -279,6 +279,14 @@ void GameScene::SceneChange()
 				changeFlag = true;
 			}
 		}
+		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::BOSSENEMY)
+		{
+			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
+			{
+				gameobject->SetDeathFlag(true);
+				changeFlag = true;
+			}
+		}
 		if (backFlag == true)
 		{
 			backFlag = false;
@@ -292,8 +300,10 @@ void GameScene::SceneChange()
 			{
 				objectAge = SECONDSTAGE;
 				createFlag = false;
+				flagCount = false;
 				EnemyCreate();
 				gameobject->SetObjAge(GameObject::STAGE::SECONDSTAGE);
+				changePos.x = 1280;
 			}
 			gameObjectManager->Update();
 		}
@@ -322,13 +332,6 @@ void GameScene::BackgroundScroll()
 	}
 	if (changeFlag == false)return;
 	changePos.x -= 30;
-	if (changePos.x <= -1280)
-	{
-		changeFlag = false;
-		flagCount = false;
-		changePos.x = 1280;
-	}
-
 }
 
 void GameScene::Invincible()
