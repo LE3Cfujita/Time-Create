@@ -19,7 +19,7 @@ void GameScene::Initialize()
 
 	if (loadFlag != false)return;
 	LoadResource();
-	if (CheckSoundMem(titleBGM) == 0)
+	if (CheckSoundMem(titleBGM) == false)
 	{
 		PlaySoundMem(titleBGM, DX_PLAYTYPE_LOOP, TRUE);
 	}
@@ -30,7 +30,7 @@ void GameScene::Update()
 	switch (gameState)
 	{
 	case TITLE:
-		if (CheckSoundMem(titleBGM) == 0)
+		if (CheckSoundMem(titleBGM) == false)
 		{
 			PlaySoundMem(titleBGM, DX_PLAYTYPE_LOOP, TRUE);
 		}
@@ -168,6 +168,10 @@ void GameScene::ChangeScene()
 			if (CheckSoundMem(clearBGM) == true)
 			{
 				StopSoundMem(clearBGM);
+			}
+			if (CheckSoundMem(overBGM) == true)
+			{
+				StopSoundMem(overBGM);
 			}
 			overFlag = false;
 			Initialize();
