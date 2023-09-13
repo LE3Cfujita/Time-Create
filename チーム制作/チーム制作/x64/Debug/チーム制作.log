@@ -19,4 +19,5 @@ C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム
 C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(94,37): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(94,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
 C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(168,35): warning C4805: '==': 演算中の 'int' 型と 'bool' 型の混用は安全ではありません
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameScene.cpp(172,34): warning C4805: '==': 演算中の 'int' 型と 'bool' 型の混用は安全ではありません
   チーム制作.vcxproj -> C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\x64\Debug\チーム制作.exe
