@@ -309,6 +309,17 @@ void GameScene::SceneChange()
 			}
 			else
 			{
+				for (GameObject * gameobject2 : gameObjectManager->GetGameObjects())
+				{
+					if (gameobject2->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
+					{
+						gameobject2->AnimeCount(0);
+					}
+					else
+					{
+						gameobject2->SetDeathFlag(true);
+					}
+				}
 				objectAge = SECONDSTAGE;
 				createFlag = false;
 				flagCount = false;

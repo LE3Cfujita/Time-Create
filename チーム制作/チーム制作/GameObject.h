@@ -265,6 +265,7 @@ public:
 	void SetPredictionFlag(bool predictionFlag) { this->predictionFlag = predictionFlag; }
 	void SetBeamCount(bool beamCount) { this->beamCount = beamCount; }
 
+	void AnimeCount(int count) { animeCount = count; }
 
 	int GetDeathCount() { return deathCount; }
 

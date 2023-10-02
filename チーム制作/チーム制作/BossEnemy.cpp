@@ -86,7 +86,7 @@ void BossEnemy::Initialize(XMFLOAT2 pos)
 	objectStage = GameObject::SECONDSTAGE;
 	position = pos;
 	r = 64;
-	HP = 50;
+	HP = 150;
 	timer = 0;
 }
 
