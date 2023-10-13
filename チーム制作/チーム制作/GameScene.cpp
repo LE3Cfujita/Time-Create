@@ -379,20 +379,21 @@ void GameScene::LoadResource()
 	playerGraph = LoadGraph("Resource/Playeranime.png");
 	slimeGraph = LoadGraph("Resource/EnemySlimeAnime.png");
 	bossGraph = LoadGraph("Resource/bossEnemy.png");
+	recoveryGraph = LoadGraph("Resource/recovery.png");
 
 	//弾絵
 
 	//音関係
-	titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
-	overBGM = LoadSoundMem("Resource/overBGM.mp3");
-	clearBGM = LoadSoundMem("Resource/clearBGM.mp3");
-	ancientBGM = LoadSoundMem("Resource/gameplayBGM.mp3");
-	ketteiSE = LoadSoundMem("Resource/kettei.mp3");
-	pAttack = LoadSoundMem("Resource/playerBullet.mp3");
-	eAttack = LoadSoundMem("Resource/enemyBullet.mp3");
-	kirikae = LoadSoundMem("Resource/playerkirikae.mp3");
-	pDamage = LoadSoundMem("Resource/playerHit.mp3");
-	eDamage = LoadSoundMem("Resource/enemyHit.mp3");
+	//titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
+	//overBGM = LoadSoundMem("Resource/overBGM.mp3");
+	//clearBGM = LoadSoundMem("Resource/clearBGM.mp3");
+	//ancientBGM = LoadSoundMem("Resource/gameplayBGM.mp3");
+	//ketteiSE = LoadSoundMem("Resource/kettei.mp3");
+	//pAttack = LoadSoundMem("Resource/playerBullet.mp3");
+	//eAttack = LoadSoundMem("Resource/enemyBullet.mp3");
+	//kirikae = LoadSoundMem("Resource/playerkirikae.mp3");
+	//pDamage = LoadSoundMem("Resource/playerHit.mp3");
+	//eDamage = LoadSoundMem("Resource/enemyHit.mp3");
 
 	loadFlag = true;
 	volume = 200;
