@@ -25,7 +25,7 @@ void Player::Initialize(XMFLOAT2 pos)
 	r = 32;
 	this->number = number;
 	HP = 10;
-	formationFlag = false;
+	formationFlag = true;
 }
 
 
@@ -192,11 +192,27 @@ void Player::Move()
 	}
 	if (CheckHitKey(KEY_INPUT_X) == 1)
 	{
-		formationFlag = true;
+		formationFlag = false;
+		if (position.x <= 300)
+		{
+			gap = r * 2;
+		}
+		else if (position.x <= 400)
+		{
+			gap = 80;
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_Z) == 1)
 	{
-		formationFlag = false;
+		formationFlag = true;
+		if (position.y >= 500)
+		{
+			gap = r * 2;
+		}
+		else if (position.y >= 400)
+		{
+			gap = 80;
+		}
 	}
 }
 
