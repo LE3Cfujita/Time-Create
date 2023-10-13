@@ -87,6 +87,7 @@ private:
 	int playerGraph;//ƒvƒŒƒCƒ„[ŠG
 	int slimeGraph;//ƒXƒ‰ƒCƒ€ŠG
 	int bossGraph;
+	int recoveryGraph;
 
 	//’eŠG
 	int slimeBullet;//ƒXƒ‰ƒCƒ€‚Ì’e‚ÌŠG

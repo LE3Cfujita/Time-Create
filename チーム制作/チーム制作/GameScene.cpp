@@ -379,6 +379,7 @@ void GameScene::LoadResource()
 	playerGraph = LoadGraph("Resource/Playeranime.png");
 	slimeGraph = LoadGraph("Resource/EnemySlimeAnime.png");
 	bossGraph = LoadGraph("Resource/bossEnemy.png");
+	recoveryGraph = LoadGraph("Resource/recovery.png");
 
 	//弾絵
 

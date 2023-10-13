@@ -26,6 +26,7 @@ void RecoveryItem::Draw()
 
 void RecoveryItem::Resource(int graph, int damage, int se)
 {
+	item = graph;
 }
 
 void RecoveryItem::HitAction(GameObject* gameObject)

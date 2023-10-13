@@ -8,11 +8,12 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::Resource(int graph, int damage, int se)
+void Enemy::Resource(int graph, int damage, int se,int item)
 {
 	slimeEnemy = graph;//画像読み込み
 	damageSE = damage;
 	attackSE = se;
+	this->item = item;
 }
 void Enemy::Initialize(XMFLOAT2 pos)
 {

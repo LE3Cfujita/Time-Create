@@ -17,7 +17,7 @@ public:
 
 	void Draw();
 
-	void Resource(int graph,int damage,int se);
+	void Resource(int graph, int damage, int se, int item);
 
 	void HitAction(GameObject* gameObject);
 
@@ -33,6 +33,7 @@ private:
 
 	int slimeEnemy;
 	int prediction;
+	int item;
 
 	//‰¹ŠÖŒW
 	int fireSE;
