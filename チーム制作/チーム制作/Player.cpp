@@ -25,6 +25,7 @@ void Player::Initialize(XMFLOAT2 pos)
 	r = 32;
 	this->number = number;
 	HP = 10;
+	formationFlag = false;
 }
 
 
@@ -74,19 +75,60 @@ void Player::Move()
 {
 	if (CheckHitKey(KEY_INPUT_D) == 1)
 	{
-		if (position.x + r > 650)
+		if (formationFlag == false)
 		{
-			position.x = 650 - r;
+			if (position.x + r >= 650)
+			{
+				position.x = 650 - r;
+				if (gap <= r * 2)return;
+				gap -= 3;
+			}
+			else if (gap <= 100)
+			{
+				gap += 3;
+				position.x += 3 * drawNumber;
+			}
+			else
+			{
+				position.x += 5;
+			}
 		}
-		position.x += 5;
+		else
+		{
+			position.x += 5;
+			if (position.x + r > 650)
+			{
+				position.x = 650 - r;
+			}
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
 	{
-		if (position.x - r < 0)
+		if (formationFlag == false)
 		{
-			position.x = r;
+			if (position.x - r * 2 - (gap * (drawNumber - 1)) <= 0)
+			{
+				if (gap <= r * 2)return;
+				gap -= 2;
+				position.x -= 2 * drawNumber;
+			}
+			else if (position.x - r - (gap * drawNumber) > 0 && gap <= 100)
+			{
+				gap += 3;
+			}
+			else
+			{
+				position.x -= 5;
+			}
 		}
-		position.x -= 5;
+		else
+		{
+			position.x -= 5;
+			if (position.x - r <= 0)
+			{
+				position.x = r;
+			}
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
@@ -111,6 +153,14 @@ void Player::Move()
 				position.y -= 5;
 			}
 		}
+		else
+		{
+			position.y -= 5;
+			if (position.y - r <= 0)
+			{
+				position.y = 0 + r;
+			}
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
@@ -129,6 +179,14 @@ void Player::Move()
 			else
 			{
 				position.y += 5;
+			}
+		}
+		else
+		{
+			position.y += 5;
+			if (position.y + r >= 720)
+			{
+				position.y = 720 - r;
 			}
 		}
 	}
