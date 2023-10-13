@@ -16,14 +16,13 @@ public:
 
 	void Resource(int graph, int se,int kirikae,int damage);
 
-	void FormationX(XMFLOAT2 pos);
-	void FormationZ(XMFLOAT2 pos);
 private:
 	void Move();//移動
 	void Attack();//攻撃
 	void Invincible();//無敵
 	void HitAction(GameObject* gameObject);
 	void Animation();
+
 
 	int player;//描画用
 	int attackSE;
@@ -34,18 +33,13 @@ private:
 	int invincibleTime = 0;
 	bool animationFlag = false;
 
-	bool chargeFlag = false;
-	int chargeAnimation = 0;
-	int chargeAnimationCount = 0;
-
 	bool hitButton = false;
 
-	int chargeTime = 0;
-	int pushTime = 0;
+	bool formationFlag = false;
 
-	bool X = false;
+	int drawNumber = 5;//キャラクター数
 
-	int drawNumber = 5;
+	int gap = 100;//キャラクター間
 
 };
 

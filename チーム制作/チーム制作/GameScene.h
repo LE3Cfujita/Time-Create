@@ -58,7 +58,6 @@ public:
 
 	void LoadResource();
 
-	void changeForm();
 
 private:
 	GameState gameState;

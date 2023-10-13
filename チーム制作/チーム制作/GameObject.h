@@ -165,9 +165,6 @@ public:
 
 	virtual void Resource(){}
 
-	virtual void FormationX(XMFLOAT2 pos){}
-	virtual void FormationZ(XMFLOAT2 pos){}
-
 
 	std::vector<GameObject*> addGameObjects;
 

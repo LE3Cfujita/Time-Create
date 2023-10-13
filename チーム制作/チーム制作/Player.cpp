@@ -56,7 +56,14 @@ void Player::Draw()
 	{
 		for (int i = 0; i < drawNumber; i++)
 		{
-			DrawRectGraph(position.x - r, position.y - r + (100 * i), animeCount * 64, 0, 64, 62, player, TRUE, FALSE);
+			if (formationFlag == true)
+			{
+				DrawRectGraph(position.x - r, position.y - r + (gap * i), animeCount * 64, 0, 64, 62, player, TRUE, FALSE);
+			}
+			else
+			{
+				DrawRectGraph(position.x - r - (gap * i), position.y - r, animeCount * 64, 0, 64, 62, player, TRUE, FALSE);
+			}
 		}
 		Animation();
 	}
@@ -83,25 +90,61 @@ void Player::Move()
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
-		if (position.y - r < 0)
+		if (formationFlag == true)
 		{
-			position.y = 0 + r;
+			if (position.y - r <= 0)
+			{
+				position.y = 0 + r;
+				if (gap <= r * 2)return;
+				gap -= 3;
+			}
+			else if (position.y - r > 0 && gap <= 100)
+			{
+				position.y -= 2 * drawNumber;
+				if (gap <= 100)
+				{
+					gap += 2;
+				}
+			}
+			else
+			{
+				position.y -= 5;
+			}
 		}
-		position.y -= 5;
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
-		if (position.y + r > 720)
+		if (formationFlag == true)
 		{
-			position.y = 720 - r;
+			if (position.y + r * 2 + (gap * (drawNumber - 1)) >= 720)
+			{
+				if (gap <= r * 2)return;
+				gap -= 2;
+				position.y += 2 * drawNumber;
+			}
+			else if (position.y + r + (gap * drawNumber) < 720 && gap <= 100)
+			{
+				gap += 3;
+			}
+			else
+			{
+				position.y += 5;
+			}
 		}
-		position.y += 5;
+	}
+	if (CheckHitKey(KEY_INPUT_X) == 1)
+	{
+		formationFlag = true;
+	}
+	if (CheckHitKey(KEY_INPUT_Z) == 1)
+	{
+		formationFlag = false;
 	}
 }
 
 void Player::Attack()
 {
-	if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
+	if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 	{
 		if (hitButton == true)return;
 		PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
@@ -110,7 +153,14 @@ void Player::Attack()
 		{
 			PlayerBullet* bullet = new PlayerBullet();
 			bullet->BaseInitialize(referenceGameObjects);
-			bullet->Initialize({ position.x + r / 32,position.y + r / 32 + (100 * i) });
+			if (formationFlag == true)
+			{
+				bullet->Initialize({ position.x + r / 32,position.y + r / 32 + (gap * i) });
+			}
+			else
+			{
+				bullet->Initialize({ position.x + r / 32 - (gap * i),position.y + r / 32 });
+			}
 			addGameObjects.push_back(bullet);
 		}
 		hitButton = true;
@@ -145,33 +195,6 @@ void Player::HitAction(GameObject* gameObject)
 			gameObject->SetDeathFlag(true);
 		}
 	}
-	//プレイヤー同士が触れ合ってる場合
-	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYER)
-	{
-		if (X == true)
-		{
-			if (CheckHitKey(KEY_INPUT_D) == 1)
-			{
-				position.x -= 5;
-			}
-			if (CheckHitKey(KEY_INPUT_A) == 1)
-			{
-				position.x += 5;
-			}
-		}
-		else
-		{
-			if (CheckHitKey(KEY_INPUT_W) == 1)
-			{
-				position.y += 5;
-			}
-			if (CheckHitKey(KEY_INPUT_S) == 1)
-			{
-				position.y -= 5;
-			}
-		}
-		hitFlag = true;
-	}
 }
 
 
@@ -195,56 +218,3 @@ void Player::Animation()
 	}
 }
 
-void Player::FormationX(XMFLOAT2 pos)
-{
-	switch (number)
-	{
-	case 0:
-		position = { pos.x - 100 * 2,pos.y };
-		break;
-	case 1:
-		position = { pos.x - 100 * 1,pos.y };
-		break;
-	case 2:
-		position = { pos.x,pos.y };
-		break;
-	case 3:
-		position = { pos.x + 100 * 1,pos.y };
-		break;
-	case 4:
-		position = { pos.x + 100 * 2,pos.y };
-		break;
-	}
-	if (CheckSoundMem(kirikaeSE) == FALSE)
-	{
-		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
-	}
-	X = true;
-}
-
-void Player::FormationZ(XMFLOAT2 pos)
-{
-	switch (number)
-	{
-	case 0:
-		position = { pos.x,pos.y - 100 * 2 };
-		break;
-	case 1:
-		position = { pos.x,pos.y - 100 * 1 };
-		break;
-	case 2:
-		position = { pos.x,pos.y };
-		break;
-	case 3:
-		position = { pos.x,pos.y + 100 * 1 };
-		break;
-	case 4:
-		position = { pos.x,pos.y + 100 * 2 };
-		break;
-	}
-	if (CheckSoundMem(kirikaeSE) == FALSE)
-	{
-		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
-	}
-	X = false;
-}

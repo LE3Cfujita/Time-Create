@@ -39,7 +39,6 @@ void GameScene::Update()
 	case PLAY:
 		BackgroundScroll();
 		Invincible();
-		//changeForm();
 		gameObjectManager->Update();
 		SceneChange();
 		break;
@@ -380,16 +379,16 @@ void GameScene::LoadResource()
 	//弾絵
 
 	//音関係
-	titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
-	overBGM = LoadSoundMem("Resource/overBGM.mp3");
-	clearBGM = LoadSoundMem("Resource/clearBGM.mp3");
-	ancientBGM = LoadSoundMem("Resource/gameplayBGM.mp3");
-	ketteiSE = LoadSoundMem("Resource/kettei.mp3");
-	pAttack = LoadSoundMem("Resource/playerBullet.mp3");
-	eAttack = LoadSoundMem("Resource/enemyBullet.mp3");
-	kirikae = LoadSoundMem("Resource/playerkirikae.mp3");
-	pDamage = LoadSoundMem("Resource/playerHit.mp3");
-	eDamage = LoadSoundMem("Resource/enemyHit.mp3");
+	//titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
+	//overBGM = LoadSoundMem("Resource/overBGM.mp3");
+	//clearBGM = LoadSoundMem("Resource/clearBGM.mp3");
+	//ancientBGM = LoadSoundMem("Resource/gameplayBGM.mp3");
+	//ketteiSE = LoadSoundMem("Resource/kettei.mp3");
+	//pAttack = LoadSoundMem("Resource/playerBullet.mp3");
+	//eAttack = LoadSoundMem("Resource/enemyBullet.mp3");
+	//kirikae = LoadSoundMem("Resource/playerkirikae.mp3");
+	//pDamage = LoadSoundMem("Resource/playerHit.mp3");
+	//eDamage = LoadSoundMem("Resource/enemyHit.mp3");
 
 	loadFlag = true;
 	volume = 200;
@@ -401,36 +400,3 @@ void GameScene::LoadResource()
 	ChangeVolumeSoundMem(volume, titleBGM);*/
 }
 
-void GameScene::changeForm()
-{
-	if (CheckHitKey(KEY_INPUT_X) == 1)
-	{
-		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
-		{
-			//ゲームオーバー
-			if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
-			gameobject->FormationX(formPos);
-		}
-	}
-	else if (CheckHitKey(KEY_INPUT_Z) == 1)
-	{
-		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
-		{
-			//ゲームオーバー
-			if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
-			gameobject->FormationZ(formPos);
-		}
-	}
-	else
-	{
-		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
-		{
-			if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
-			int num = gameobject->GetNumber();
-			if (num == 2)
-			{
-				formPos = gameobject->GetPosition();
-			}
-		}
-	}
-}
