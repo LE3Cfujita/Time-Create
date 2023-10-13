@@ -17,14 +17,14 @@ void Player::Resource(int graph, int se, int kirikae, int damage)
 	damageSE = damage;
 }
 
-void Player::Initialize(XMFLOAT2 pos, int number)
+void Player::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::PLAYER;
 	objectStage = GameObject::FIRSTSTAGE;
 	position = { pos.x,pos.y };
 	r = 32;
 	this->number = number;
-	HP = 2;
+	HP = 10;
 }
 
 
@@ -42,6 +42,7 @@ void Player::Update()
 
 void Player::Draw()
 {
+
 	if (invincibleTime == 0 ||
 		invincibleTime >= 3 && invincibleTime <= 6 ||
 		invincibleTime >= 9 && invincibleTime <= 12 ||
@@ -53,11 +54,15 @@ void Player::Draw()
 		invincibleTime >= 45 && invincibleTime <= 48 ||
 		invincibleTime >= 51 && invincibleTime <= 54)
 	{
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, player, TRUE, FALSE);
+		for (int i = 0; i < drawNumber; i++)
+		{
+			DrawRectGraph(position.x - r, position.y - r + (100 * i), animeCount * 64, 0, 64, 62, player, TRUE, FALSE);
+		}
 		Animation();
 	}
+	if (HP % 2 != 0)return;
+	drawNumber = HP / 2;
 }
-
 void Player::Move()
 {
 	if (CheckHitKey(KEY_INPUT_D) == 1)
@@ -101,10 +106,13 @@ void Player::Attack()
 		if (hitButton == true)return;
 		PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
 		animationFlag = true;
-		PlayerBullet* bullet = new PlayerBullet();
-		bullet->BaseInitialize(referenceGameObjects);
-		bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-		addGameObjects.push_back(bullet);
+		for (int i = 0; i < drawNumber; i++)
+		{
+			PlayerBullet* bullet = new PlayerBullet();
+			bullet->BaseInitialize(referenceGameObjects);
+			bullet->Initialize({ position.x + r / 32,position.y + r / 32 + (100 * i) });
+			addGameObjects.push_back(bullet);
+		}
 		hitButton = true;
 		timeFlag = true;
 	}
@@ -184,7 +192,6 @@ void Player::Animation()
 				animationFlag = false;
 			}
 		}
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, player, TRUE, FALSE);
 	}
 }
 

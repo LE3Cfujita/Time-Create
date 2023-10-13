@@ -39,7 +39,7 @@ void GameScene::Update()
 	case PLAY:
 		BackgroundScroll();
 		Invincible();
-		changeForm();
+		//changeForm();
 		gameObjectManager->Update();
 		SceneChange();
 		break;
@@ -199,16 +199,13 @@ void GameScene::ChangeScene()
 void GameScene::PlayerCreate()
 {
 	//プレイヤー生成
-	for (int i = 0; i < 5; i++)
-	{
-		Player* player = nullptr;
-		player = new Player();
-		player->BaseInitialize(gameObjectManager->GetGameObjects());
-		player->Initialize({ (float)300,(float)200 + 100 * i }, i);
-		player->Resource(playerGraph, pAttack, kirikae, pDamage);
-		pNumber++;
-		gameObjectManager->AddGameObject(player);
-	}
+	Player* player = nullptr;
+	player = new Player();
+	player->BaseInitialize(gameObjectManager->GetGameObjects());
+	player->Initialize({ (float)300,(float)200});
+	player->Resource(playerGraph, pAttack, kirikae, pDamage);
+	pNumber++;
+	gameObjectManager->AddGameObject(player);
 	EnemyCreate();
 	BGM();
 }

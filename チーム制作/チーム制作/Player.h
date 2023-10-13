@@ -8,7 +8,7 @@ public:
 	~Player();
 
 	//‰Šú‰»
-	void Initialize(XMFLOAT2 pos, int number);
+	void Initialize(XMFLOAT2 pos);
 
 	void Update();
 
@@ -44,6 +44,8 @@ private:
 	int pushTime = 0;
 
 	bool X = false;
+
+	int drawNumber = 5;
 
 };
 

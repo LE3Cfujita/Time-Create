@@ -77,7 +77,7 @@ protected:
 	float da;
 	float L;
 
-	float HP;//‘Ì—Í
+	int HP;//‘Ì—Í
 
 
 	bool move;
