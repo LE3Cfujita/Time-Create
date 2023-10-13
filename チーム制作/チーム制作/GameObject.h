@@ -20,12 +20,13 @@ public:
 		SLIMEBULLET,//スライムの攻撃
 		BOSSBULLET,//ボスの攻撃
 		HITEFFECT,//ヒットエフェクト
+		RECOVERY,
 	};
 	enum STAGE
 	{
 		STAND,
 		FIRSTSTAGE,//1ステージ目
-		SECONDSTAGE,//現代
+		SECONDSTAGE,//2ステージ目
 	};
 	enum OBJSTATE
 	{
