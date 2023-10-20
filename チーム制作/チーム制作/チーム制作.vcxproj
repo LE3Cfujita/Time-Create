@@ -144,6 +144,7 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="DownEffec.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="RecoveryEnemy.cpp" />
     <ClCompile Include="RecoveryItem.cpp" />
     <ClCompile Include="SlimeBullet.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="DownEffec.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="RecoveryEnemy.h" />
     <ClInclude Include="RecoveryItem.h" />
     <ClInclude Include="SlimeBullet.h" />
     <ClInclude Include="GameObject.h" />
