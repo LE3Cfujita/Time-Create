@@ -35,7 +35,7 @@ void RecoveryItem::HitAction(GameObject* gameObject)
 {
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYER)
 	{
-		deathFlag = true;
+		//deathFlag = true;
 	}
 }
 

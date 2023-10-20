@@ -34,6 +34,7 @@ public:
 		MOVE,		//à⁄ìÆ
 		ATTACK,		//çUåÇ
 		DEATH,		//éÄñS
+		TENTATIVE,	//âºéÄñS
 		ALIVE,		//ê∂éY
 		EFFECT,		//éÄñSÉGÉtÉFÉNÉg
 		NONESTATE,	//Ç»Çµ
@@ -164,10 +165,10 @@ public:
 
 	virtual void HitAction(GameObject* gameObject) {}
 
-	virtual void Resource(){}
+	virtual void Resource() {}
 
-	virtual void FormationX(XMFLOAT2 pos){}
-	virtual void FormationZ(XMFLOAT2 pos){}
+	virtual void FormationX(XMFLOAT2 pos) {}
+	virtual void FormationZ(XMFLOAT2 pos) {}
 
 
 	std::vector<GameObject*> addGameObjects;
@@ -268,6 +269,7 @@ public:
 
 
 	int GetDeathCount() { return deathCount; }
+	void SetDeathCount(int count) { deathCount = count; }
 
 };
 

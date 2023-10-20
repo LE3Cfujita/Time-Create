@@ -252,11 +252,12 @@ void GameScene::SceneChange()
 	{
 		//ゲームオーバー
 		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER &&
-			gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
+			gameobject->GetObjectState() == GameObject::OBJSTATE::TENTATIVE)
 		{
 			int count = gameobject->GetDeathCount();
 			pNumber -= count;
-			gameobject->SetDeathFlag(true);
+			gameobject->SetDeathCount(0);
+			//gameobject->SetDeathFlag(true);
 			if (pNumber == 0)
 			{
 				if (CheckSoundMem(ancientBGM) == 1)
