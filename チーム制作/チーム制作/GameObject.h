@@ -96,6 +96,8 @@ protected:
 
 	bool hitFlag;
 
+	bool recoveryFlag;
+
 public:
 	GameObject() {}
 	virtual ~GameObject() {
@@ -152,6 +154,8 @@ public:
 		number = 0;
 
 		hitFlag = false;
+
+		recoveryFlag = false;
 
 		std::vector<GameObject*>().swap(addGameObjects);
 		this->referenceGameObjects = referenceGameObjects;
@@ -271,5 +275,7 @@ public:
 	int GetDeathCount() { return deathCount; }
 	void SetDeathCount(int count) { deathCount = count; }
 
+	bool GetRecoveryFlag() { return recoveryFlag; }
+	void SetRecoveryFlag(bool flag) { recoveryFlag = flag; }
 };
 

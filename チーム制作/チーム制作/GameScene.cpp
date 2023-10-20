@@ -250,28 +250,34 @@ void GameScene::SceneChange()
 {
 	for (GameObject* gameobject : gameObjectManager->GetGameObjects())
 	{
-		//ゲームオーバー
-		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER &&
-			gameobject->GetObjectState() == GameObject::OBJSTATE::TENTATIVE)
+		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
 		{
-			int count = gameobject->GetDeathCount();
-			pNumber -= count;
-			gameobject->SetDeathCount(0);
-			//gameobject->SetDeathFlag(true);
-			if (pNumber == 0)
+			if (gameobject->GetRecoveryFlag() == true)
 			{
-				if (CheckSoundMem(ancientBGM) == 1)
+				pNumber = 5;
+				gameobject->SetRecoveryFlag(false);
+			}
+			if (gameobject->GetObjectState() == GameObject::OBJSTATE::TENTATIVE)
+			{
+				//ゲームオーバー
+				int count = gameobject->GetDeathCount();
+				pNumber -= count;
+				gameobject->SetDeathCount(0);
+				if (pNumber == 0)
 				{
-					StopSoundMem(ancientBGM);
-				}
-				gameState = OVER;
-				backPos = { 0,0 };
-				backPos2 = { 1280,0 };
-				backPos3 = { 2560,0 };
-				if (overFlag == false)
-				{
-					PlaySoundMem(overBGM, DX_MOVIEPLAYTYPE_NORMAL, TRUE);
-					overFlag = true;
+					if (CheckSoundMem(ancientBGM) == 1)
+					{
+						StopSoundMem(ancientBGM);
+					}
+					gameState = OVER;
+					backPos = { 0,0 };
+					backPos2 = { 1280,0 };
+					backPos3 = { 2560,0 };
+					if (overFlag == false)
+					{
+						PlaySoundMem(overBGM, DX_MOVIEPLAYTYPE_NORMAL, TRUE);
+						overFlag = true;
+					}
 				}
 			}
 		}

@@ -159,6 +159,7 @@ void Player::HitAction(GameObject* gameObject)
 				gameobject2->SetObjectState(IDLE);
 				gameobject2->SetHP(2);
 				gameObject->SetDeathFlag(true);
+				recoveryFlag = true;
 			}
 		}
 	}
@@ -262,3 +263,4 @@ void Player::FormationZ(XMFLOAT2 pos)
 	}
 	X = false;
 }
+

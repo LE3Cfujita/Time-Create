@@ -18,6 +18,7 @@ public:
 
 	void FormationX(XMFLOAT2 pos);
 	void FormationZ(XMFLOAT2 pos);
+
 private:
 	void Move();//ˆÚ“®
 	void Attack();//UŒ‚
