@@ -137,6 +137,16 @@ void Player::HitAction(GameObject* gameObject)
 			gameObject->SetDeathFlag(true);
 		}
 	}
+	if (gameObject->GetObjectMember() == OBJECTMEMBER::RECOVERY)
+	{
+		for (GameObject* gameobject2 : referenceGameObjects)
+		{
+			if (gameobject2->GetObjectMember() == OBJECTMEMBER::PLAYER)
+			{
+				HP = 10;
+			}
+		}
+	}
 	//プレイヤー同士が触れ合ってる場合
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYER)
 	{

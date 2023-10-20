@@ -8,7 +8,7 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::Resource(int graph, int damage, int se,int item)
+void Enemy::Resource(int graph, int damage, int se)
 {
 	slimeEnemy = graph;//画像読み込み
 	damageSE = damage;
@@ -34,6 +34,15 @@ void Enemy::Update()
 	{
 		objState = DEATH;
 		deathCount = 1;
+		int a = rand() % 9;
+		if (a == 5)
+		{
+			RecoveryItem* item = new RecoveryItem;
+			item->BaseInitialize(referenceGameObjects);
+			item->Initialize({ position });
+			addGameObjects.push_back(item);
+		}
+
 	}
 	switch (objectStage)
 	{

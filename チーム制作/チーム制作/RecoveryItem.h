@@ -14,7 +14,7 @@ public:
 
 	void Draw();
 
-	void Resource(int graph, int damage, int se);
+	void Resource(int graph);
 
 	void HitAction(GameObject* gameObject);
 

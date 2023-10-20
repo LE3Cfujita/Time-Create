@@ -3,6 +3,7 @@
 #include"SlimeBullet.h"
 #include"HitEffect.h"
 #include "DownEffec.h"
+#include"RecoveryItem.h"
 class Enemy : public GameObject
 {
 
@@ -17,7 +18,7 @@ public:
 
 	void Draw();
 
-	void Resource(int graph, int damage, int se, int item);
+	void Resource(int graph, int damage, int se);
 
 	void HitAction(GameObject* gameObject);
 

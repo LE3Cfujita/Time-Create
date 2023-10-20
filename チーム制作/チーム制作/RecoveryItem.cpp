@@ -13,6 +13,7 @@ void RecoveryItem::Initialize(XMFLOAT2 pos)
 	objectMember = GameObject::RECOVERY;
 	position = pos;
 	r = 16;
+	item = LoadGraph("Resource/recovery.png");
 }
 
 void RecoveryItem::Update()
@@ -22,11 +23,12 @@ void RecoveryItem::Update()
 
 void RecoveryItem::Draw()
 {
+	DrawGraph(position.x, position.y, item, true);
 }
 
-void RecoveryItem::Resource(int graph, int damage, int se)
+void RecoveryItem::Resource(int graph)
 {
-	item = graph;
+	//item = graph;
 }
 
 void RecoveryItem::HitAction(GameObject* gameObject)
