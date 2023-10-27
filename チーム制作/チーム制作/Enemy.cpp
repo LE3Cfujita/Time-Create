@@ -10,10 +10,9 @@ Enemy::~Enemy()
 
 void Enemy::Resource(int graph, int damage, int se)
 {
-	slimeEnemy = graph;//画像読み込み
+ 	slimeEnemy = graph;//画像読み込み
 	damageSE = damage;
 	attackSE = se;
-	this->item = item;
 }
 void Enemy::Initialize(XMFLOAT2 pos)
 {

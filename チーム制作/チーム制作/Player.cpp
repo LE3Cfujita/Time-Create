@@ -24,7 +24,7 @@ void Player::Initialize(XMFLOAT2 pos, int number)
 	position = { pos.x,pos.y };
 	r = 32;
 	this->number = number;
-	HP = 2;
+	HP = 10;
 }
 
 

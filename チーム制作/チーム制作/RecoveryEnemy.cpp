@@ -8,12 +8,13 @@ RecoveryEnemy::~RecoveryEnemy()
 {
 }
 
-void RecoveryEnemy::Initialize()
+void RecoveryEnemy::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::RECOVERYENEMY;
 	HP = 50;
 	r = 32;
 	recovery = LoadGraph("Resource/Playeranime.png");
+	position = pos;
 }
 
 void RecoveryEnemy::Update()
@@ -26,10 +27,70 @@ void RecoveryEnemy::Draw()
 	DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, recovery, TRUE, FALSE);
 }
 
+void RecoveryEnemy::Resource(int bul)
+{
+	this->bul = bul;
+}
+
 void RecoveryEnemy::Move()
 {
-	if (position.y <= 16)moveFlag = true;//true‚¾‚Á‚½‚ç‰ºˆÚ“®
-	if (position.y >= 704)moveFlag = false;//false‚¾‚Á‚½‚çãˆÚ“®
-	if (moveFlag == true)position.y += 5;
-	else position.y -= 5;
+	moveTime++;
+
+	if (moveFlag == false)
+	{
+		if (moveTime >= 300)
+		{
+			moveFlag = true;
+			moveTime = 0;
+			RecoveryItem* item = new RecoveryItem;
+			item->BaseInitialize(referenceGameObjects);
+			item->Initialize({ position });
+			addGameObjects.push_back(item);
+		}
+		Attack();
+		if (position.y <= 16)topFlag = true;//true‚¾‚Á‚½‚ç‰ºˆÚ“®
+		if (position.y >= 704)topFlag = false;//false‚¾‚Á‚½‚çãˆÚ“®
+		if (topFlag == true)position.y += 3;
+		else position.y -= 3;
+	}
+	else
+	{
+		if (moveTime >= 300)
+		{
+			moveFlag = false;
+			moveTime = 0;
+		}
+	}
+}
+
+void RecoveryEnemy::Recovery()
+{
+	time++;
+	if (time >= 30)
+	{
+		HP += 1;
+		time = 0;
+	}
+}
+
+void RecoveryEnemy::Attack()
+{
+	if (attackFlag == false)
+	{
+		RecoveryBullet* bullet = new RecoveryBullet();
+		bullet->BaseInitialize(referenceGameObjects);
+		bullet->Initialize(position);
+		bullet->Resource(bul);
+		addGameObjects.push_back(bullet);
+		attackFlag = true;
+	}
+	else
+	{
+		attackTime++;
+		if (attackTime > 5)
+		{
+			attackFlag = false;
+			attackTime = 0;
+		}
+	}
 }

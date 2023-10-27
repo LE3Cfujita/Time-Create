@@ -3,6 +3,7 @@
 #include "Player.h"
 #include"Enemy.h"
 #include"BossEnemy.h"
+#include"RecoveryEnemy.h"
 #include"GameObjectManager.h"
 #include"DxLib.h"
 #include"Collision.h"
@@ -91,7 +92,8 @@ private:
 	int recoveryGraph;
 
 	//’eŠG
-	int slimeBullet;//ƒXƒ‰ƒCƒ€‚Ì’e‚ÌŠG
+	int recoveryBullet;//ƒXƒ‰ƒCƒ€‚Ì’e‚ÌŠG
+
 
 	//‰¹ŠÖŒW
 	int titleBGM;

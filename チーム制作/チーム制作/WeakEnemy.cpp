@@ -24,6 +24,14 @@ void WeakEnemy::Update()
 	if (HP <= 0)
 	{
 		deathFlag = true;
+		int a = rand() % 9;
+		if (a == 5)
+		{
+			RecoveryItem* item = new RecoveryItem;
+			item->BaseInitialize(referenceGameObjects);
+			item->Initialize({ position });
+			addGameObjects.push_back(item);
+		}
 	}
 }
 
