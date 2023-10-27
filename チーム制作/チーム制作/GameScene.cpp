@@ -305,7 +305,7 @@ void GameScene::SceneChange()
 		{
 			backFlag = false;
 			changeFlag = false;
-			if (objectAge == SECONDSTAGE)
+			if (objectAge == THIRDSTAGE)
 			{
 				gameState = CLEA;
 				changePos.x = 1280;

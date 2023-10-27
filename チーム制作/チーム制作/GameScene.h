@@ -22,7 +22,8 @@ public:
 	{
 		STAND,
 		FIRSTSTAGE,//1ステージ目
-		SECONDSTAGE//2ステージ目
+		SECONDSTAGE,//2ステージ目
+		THIRDSTAGE,//3ステージ目
 	};
 
 public:
