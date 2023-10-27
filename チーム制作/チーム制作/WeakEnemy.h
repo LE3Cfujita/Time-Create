@@ -1,6 +1,7 @@
 #pragma once
 #include"GameObject.h"
 #include"SlimeBullet.h"
+#include"RecoveryItem.h"
 class WeakEnemy : public GameObject
 {
 

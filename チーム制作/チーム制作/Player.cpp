@@ -24,7 +24,7 @@ void Player::Initialize(XMFLOAT2 pos, int number)
 	position = { pos.x,pos.y };
 	r = 32;
 	this->number = number;
-	HP = 5;
+	HP = 10;
 }
 
 
@@ -33,28 +33,36 @@ void Player::Update()
 	Move();
 	Attack();
 	Invincible();
-	if (HP <= 0)
+	if (HP == 0)
 	{
-		objState = DEATH;
+		objState = TENTATIVE;
 		deathCount = 1;
+		HP = -10;
+	}
+	if (CheckHitKey(KEY_INPUT_Q) == 1)
+	{
+		int a = 0;
 	}
 }
 
 void Player::Draw()
 {
-	if (invincibleTime == 0 ||
-		invincibleTime >= 3 && invincibleTime <= 6 ||
-		invincibleTime >= 9 && invincibleTime <= 12 ||
-		invincibleTime >= 15 && invincibleTime <= 18 ||
-		invincibleTime >= 21 && invincibleTime <= 24 ||
-		invincibleTime >= 27 && invincibleTime <= 30 ||
-		invincibleTime >= 33 && invincibleTime <= 36 ||
-		invincibleTime >= 39 && invincibleTime <= 42 ||
-		invincibleTime >= 45 && invincibleTime <= 48 ||
-		invincibleTime >= 51 && invincibleTime <= 54)
+	if (objState != TENTATIVE)
 	{
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, player, TRUE, FALSE);
-		Animation();
+		if (invincibleTime == 0 ||
+			invincibleTime >= 3 && invincibleTime <= 6 ||
+			invincibleTime >= 9 && invincibleTime <= 12 ||
+			invincibleTime >= 15 && invincibleTime <= 18 ||
+			invincibleTime >= 21 && invincibleTime <= 24 ||
+			invincibleTime >= 27 && invincibleTime <= 30 ||
+			invincibleTime >= 33 && invincibleTime <= 36 ||
+			invincibleTime >= 39 && invincibleTime <= 42 ||
+			invincibleTime >= 45 && invincibleTime <= 48 ||
+			invincibleTime >= 51 && invincibleTime <= 54)
+		{
+			DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, player, TRUE, FALSE);
+			Animation();
+		}
 	}
 }
 
@@ -62,7 +70,7 @@ void Player::Move()
 {
 	if (CheckHitKey(KEY_INPUT_D) == 1)
 	{
-		if (position.x + r > 650)
+		if (position.x + r > 650 && objState != TENTATIVE)
 		{
 			position.x = 650 - r;
 		}
@@ -70,7 +78,7 @@ void Player::Move()
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
 	{
-		if (position.x - r < 0)
+		if (position.x - r < 0 && objState != TENTATIVE)
 		{
 			position.x = r;
 		}
@@ -78,7 +86,7 @@ void Player::Move()
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
-		if (position.y - r < 0)
+		if (position.y - r < 0 && objState != TENTATIVE)
 		{
 			position.y = 0 + r;
 		}
@@ -86,7 +94,7 @@ void Player::Move()
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
-		if (position.y + r > 720)
+		if (position.y + r > 720 && objState != TENTATIVE)
 		{
 			position.y = 720 - r;
 		}
@@ -96,21 +104,24 @@ void Player::Move()
 
 void Player::Attack()
 {
-	if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
+	if (objState != TENTATIVE)
 	{
-		if (hitButton == true)return;
-		PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
-		animationFlag = true;
-		PlayerBullet* bullet = new PlayerBullet();
-		bullet->BaseInitialize(referenceGameObjects);
-		bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
-		addGameObjects.push_back(bullet);
-		hitButton = true;
-		timeFlag = true;
-	}
-	else
-	{
-		hitButton = false;
+		if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
+		{
+			if (hitButton == true)return;
+			PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
+			animationFlag = true;
+			PlayerBullet* bullet = new PlayerBullet();
+			bullet->BaseInitialize(referenceGameObjects);
+			bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+			addGameObjects.push_back(bullet);
+			hitButton = true;
+			timeFlag = true;
+		}
+		else
+		{
+			hitButton = false;
+		}
 	}
 }
 
@@ -126,24 +137,29 @@ void Player::Invincible()
 
 void Player::HitAction(GameObject* gameObject)
 {
-	if (invincibleFlag == false)
+	if (objState != TENTATIVE)
 	{
-		if (gameObject->GetObjectMember() == OBJECTMEMBER::SLIMEBULLET ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::BOSSBULLET)
+		if (invincibleFlag == false)
 		{
-			PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
-			HP--;
-			invincibleFlag = true;
-			gameObject->SetDeathFlag(true);
-		}
-	}
-	if (gameObject->GetObjectMember() == OBJECTMEMBER::RECOVERY)
-	{
-		for (GameObject* gameobject2 : referenceGameObjects)
-		{
-			if (gameobject2->GetObjectMember() == OBJECTMEMBER::PLAYER)
+			if (gameObject->GetObjectMember() == OBJECTMEMBER::SLIMEBULLET ||
+				gameObject->GetObjectMember() == OBJECTMEMBER::BOSSBULLET)
 			{
-				HP = 10;
+
+				PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
+				HP--;
+				invincibleFlag = true;
+				gameObject->SetDeathFlag(true);
+			}
+		}
+		if (gameObject->GetObjectMember() == OBJECTMEMBER::RECOVERY)
+		{
+			for (GameObject* gameobject2 : referenceGameObjects)
+			{
+				if (gameobject2->GetObjectMember() != OBJECTMEMBER::PLAYER)continue;
+				gameobject2->SetObjectState(IDLE);
+				gameobject2->SetHP(2);
+				gameObject->SetDeathFlag(true);
+				recoveryFlag = true;
 			}
 		}
 	}
@@ -182,19 +198,15 @@ void Player::Animation()
 	if (animationFlag == false)return;
 	animation = animation + 1;
 
-	if (objectStage == FIRSTSTAGE)
+	if (animation > 3)
 	{
-		if (animation > 3)
+		animeCount = animeCount + 1;
+		animation = 0;
+		if (animeCount >= 3)
 		{
-			animeCount = animeCount + 1;
-			animation = 0;
-			if (animeCount >= 3)
-			{
-				animeCount = 0;
-				animationFlag = false;
-			}
+			animeCount = 0;
+			animationFlag = false;
 		}
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, player, TRUE, FALSE);
 	}
 }
 
@@ -251,3 +263,4 @@ void Player::FormationZ(XMFLOAT2 pos)
 	}
 	X = false;
 }
+

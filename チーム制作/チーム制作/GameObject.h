@@ -17,6 +17,7 @@ public:
 		PLAYERBULLET,//プレイヤーの弾
 		SLIME,//敵
 		BOSSENEMY,//ボス敵
+		RECOVERYENEMY,//横並びでしか倒しきれない敵
 		SLIMEBULLET,//スライムの攻撃
 		BOSSBULLET,//ボスの攻撃
 		HITEFFECT,//ヒットエフェクト
@@ -27,6 +28,7 @@ public:
 		STAND,
 		FIRSTSTAGE,//1ステージ目
 		SECONDSTAGE,//2ステージ目
+		THIRDSTAGE,//3ステージ目
 	};
 	enum OBJSTATE
 	{
@@ -34,6 +36,7 @@ public:
 		MOVE,		//移動
 		ATTACK,		//攻撃
 		DEATH,		//死亡
+		TENTATIVE,	//仮死亡
 		ALIVE,		//生産
 		EFFECT,		//死亡エフェクト
 		NONESTATE,	//なし
@@ -95,6 +98,8 @@ protected:
 
 	bool hitFlag;
 
+	bool recoveryFlag;
+
 public:
 	GameObject() {}
 	virtual ~GameObject() {
@@ -152,6 +157,8 @@ public:
 
 		hitFlag = false;
 
+		recoveryFlag = false;
+
 		std::vector<GameObject*>().swap(addGameObjects);
 		this->referenceGameObjects = referenceGameObjects;
 	}
@@ -164,10 +171,10 @@ public:
 
 	virtual void HitAction(GameObject* gameObject) {}
 
-	virtual void Resource(){}
+	virtual void Resource() {}
 
-	virtual void FormationX(XMFLOAT2 pos){}
-	virtual void FormationZ(XMFLOAT2 pos){}
+	virtual void FormationX(XMFLOAT2 pos) {}
+	virtual void FormationZ(XMFLOAT2 pos) {}
 
 
 	std::vector<GameObject*> addGameObjects;
@@ -268,6 +275,9 @@ public:
 
 
 	int GetDeathCount() { return deathCount; }
+	void SetDeathCount(int count) { deathCount = count; }
 
+	bool GetRecoveryFlag() { return recoveryFlag; }
+	void SetRecoveryFlag(bool flag) { recoveryFlag = flag; }
 };
 

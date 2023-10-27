@@ -3,6 +3,7 @@
 #include "Player.h"
 #include"Enemy.h"
 #include"BossEnemy.h"
+#include"RecoveryEnemy.h"
 #include"GameObjectManager.h"
 #include"DxLib.h"
 #include"Collision.h"
@@ -22,7 +23,8 @@ public:
 	{
 		STAND,
 		FIRSTSTAGE,//1ステージ目
-		SECONDSTAGE//2ステージ目
+		SECONDSTAGE,//2ステージ目
+		THIRDSTAGE,//3ステージ目
 	};
 
 public:
@@ -90,7 +92,8 @@ private:
 	int recoveryGraph;
 
 	//弾絵
-	int slimeBullet;//スライムの弾の絵
+	int recoveryBullet;//スライムの弾の絵
+
 
 	//音関係
 	int titleBGM;

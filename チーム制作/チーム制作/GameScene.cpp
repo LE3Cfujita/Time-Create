@@ -71,11 +71,8 @@ void GameScene::Draw()
 		DrawGraph(yajirusiPos.x, yajirusiPos.y, yajirusi, true);
 		break;
 	case PLAY://�Q�[���v���C
-		if (objectAge == FIRSTSTAGE || objectAge == SECONDSTAGE)
-		{
-			DrawGraph(backPos.x, backPos.y, ancientback, true);
-			DrawGraph(backPos2.x, backPos2.y, ancientback, true);
-		}
+		DrawGraph(backPos.x, backPos.y, ancientback, true);
+		DrawGraph(backPos2.x, backPos2.y, ancientback, true);
 		gameObjectManager->Draw();
 		if (changeFlag == true)//objectAge == FIRSTSTAGE
 		{
@@ -234,13 +231,22 @@ void GameScene::EnemyCreate()
 			}
 		}
 	}
-	else
+	else if (objectAge == SECONDSTAGE)
 	{
 		BossEnemy* enemy = nullptr;
 		enemy = new BossEnemy();
 		enemy->BaseInitialize(gameObjectManager->GetGameObjects());
 		enemy->Initialize({ (float)1100,(float)300 });
 		enemy->Resource(bossGraph, eDamage, eAttack, slimeGraph);
+		gameObjectManager->AddGameObject(enemy);
+	}
+	else
+	{
+		RecoveryEnemy* enemy = nullptr;
+		enemy = new RecoveryEnemy();
+		enemy->BaseInitialize(gameObjectManager->GetGameObjects());
+		enemy->Initialize({ (float)1100,(float)300 });
+		enemy->Resource(recoveryBullet);
 		gameObjectManager->AddGameObject(enemy);
 	}
 	createFlag = true;
@@ -250,27 +256,34 @@ void GameScene::SceneChange()
 {
 	for (GameObject* gameobject : gameObjectManager->GetGameObjects())
 	{
-		//ゲームオーバー
-		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER &&
-			gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
+		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::PLAYER)
 		{
-			int count = gameobject->GetDeathCount();
-			pNumber -= count;
-			gameobject->SetDeathFlag(true);
-			if (pNumber == 0)
+			if (gameobject->GetRecoveryFlag() == true)
 			{
-				if (CheckSoundMem(ancientBGM) == 1)
+				pNumber = 5;
+				gameobject->SetRecoveryFlag(false);
+			}
+			if (gameobject->GetObjectState() == GameObject::OBJSTATE::TENTATIVE)
+			{
+				//ゲームオーバー
+				int count = gameobject->GetDeathCount();
+				pNumber -= count;
+				gameobject->SetDeathCount(0);
+				if (pNumber == 0)
 				{
-					StopSoundMem(ancientBGM);
-				}
-				gameState = OVER;
-				backPos = { 0,0 };
-				backPos2 = { 1280,0 };
-				backPos3 = { 2560,0 };
-				if (overFlag == false)
-				{
-					PlaySoundMem(overBGM, DX_MOVIEPLAYTYPE_NORMAL, TRUE);
-					overFlag = true;
+					if (CheckSoundMem(ancientBGM) == 1)
+					{
+						StopSoundMem(ancientBGM);
+					}
+					gameState = OVER;
+					backPos = { 0,0 };
+					backPos2 = { 1280,0 };
+					backPos3 = { 2560,0 };
+					if (overFlag == false)
+					{
+						PlaySoundMem(overBGM, DX_MOVIEPLAYTYPE_NORMAL, TRUE);
+						overFlag = true;
+					}
 				}
 			}
 		}
@@ -298,7 +311,7 @@ void GameScene::SceneChange()
 		{
 			backFlag = false;
 			changeFlag = false;
-			if (objectAge == SECONDSTAGE)
+			if (objectAge == THIRDSTAGE)
 			{
 				gameState = CLEA;
 				changePos.x = 1280;
@@ -309,11 +322,26 @@ void GameScene::SceneChange()
 			}
 			else
 			{
-				objectAge = SECONDSTAGE;
+				for (GameObject* gameobject2 : gameObjectManager->GetGameObjects())
+				{
+					if (gameobject2->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)
+					{
+						gameobject2->SetDeathFlag(true);
+					}
+				}
+				if (objectAge == FIRSTSTAGE)
+				{
+					objectAge = SECONDSTAGE;//1ステージ目だったら2ステージ目へ
+					gameobject->SetObjAge(GameObject::STAGE::SECONDSTAGE);
+				}
+				else if (objectAge == SECONDSTAGE)
+				{
+					objectAge = THIRDSTAGE;//2ステージ目だったら3ステージ目へ
+					gameobject->SetObjAge(GameObject::STAGE::THIRDSTAGE);
+				}
 				createFlag = false;
 				flagCount = false;
 				EnemyCreate();
-				gameobject->SetObjAge(GameObject::STAGE::SECONDSTAGE);
 				changePos.x = 1280;
 			}
 			gameObjectManager->Update();
@@ -380,6 +408,8 @@ void GameScene::LoadResource()
 	slimeGraph = LoadGraph("Resource/EnemySlimeAnime.png");
 	bossGraph = LoadGraph("Resource/bossEnemy.png");
 	recoveryGraph = LoadGraph("Resource/recovery.png");
+
+	recoveryBullet = LoadGraph("Resource/SlimeEnemyBullet.png");
 
 	//弾絵
 
