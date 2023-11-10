@@ -17,6 +17,8 @@ public:
 	
 	void Resource(int bul);
 
+	void HitAction(GameObject* gameObject);
+
 private:
 	void Move();
 

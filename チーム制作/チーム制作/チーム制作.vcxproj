@@ -147,6 +147,7 @@
     <ClCompile Include="RecoveryBullet.cpp" />
     <ClCompile Include="RecoveryEnemy.cpp" />
     <ClCompile Include="RecoveryItem.cpp" />
+    <ClCompile Include="SimultaneousEnemy.cpp" />
     <ClCompile Include="SlimeBullet.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="RecoveryBullet.h" />
     <ClInclude Include="RecoveryEnemy.h" />
     <ClInclude Include="RecoveryItem.h" />
+    <ClInclude Include="SimultaneousEnemy.h" />
     <ClInclude Include="SlimeBullet.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />

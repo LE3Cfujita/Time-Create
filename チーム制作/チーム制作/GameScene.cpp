@@ -12,9 +12,9 @@ void GameScene::Initialize()
 	gameObjectManager = new GameObjectManager();
 	gameObjectManager->Intialize();
 
-	gameState = TITLE;
+	gameState = PLAY;
 
-	objectAge = FIRSTSTAGE;
+	objectAge = FORTHSTAGE;
 	createFlag = false;
 
 	if (loadFlag != false)return;
@@ -22,6 +22,11 @@ void GameScene::Initialize()
 	if (CheckSoundMem(titleBGM) == false)
 	{
 		PlaySoundMem(titleBGM, DX_PLAYTYPE_LOOP, TRUE);
+	}
+
+	{//デバッグ用
+		PlayerCreate();
+		EnemyCreate();
 	}
 }
 
@@ -240,7 +245,7 @@ void GameScene::EnemyCreate()
 		enemy->Resource(bossGraph, eDamage, eAttack, slimeGraph);
 		gameObjectManager->AddGameObject(enemy);
 	}
-	else
+	else if (objectAge == THIRDSTAGE)
 	{
 		RecoveryEnemy* enemy = nullptr;
 		enemy = new RecoveryEnemy();
@@ -248,6 +253,18 @@ void GameScene::EnemyCreate()
 		enemy->Initialize({ (float)1100,(float)300 });
 		enemy->Resource(recoveryBullet);
 		gameObjectManager->AddGameObject(enemy);
+	}
+	else
+	{
+		for (int i = 1; i <= 2; i++)
+		{
+			SimultaneousEnemy* enemy = nullptr;
+			enemy = new SimultaneousEnemy();
+			enemy->BaseInitialize(gameObjectManager->GetGameObjects());
+			enemy->Initialize({ (float)1100,(float)300 }, i);
+			enemy->Resource(recoveryBullet);
+			gameObjectManager->AddGameObject(enemy);
+		}
 	}
 	createFlag = true;
 }
@@ -299,7 +316,15 @@ void GameScene::SceneChange()
 				changeFlag = true;
 			}
 		}
-		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::BOSSENEMY)
+		else if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::BOSSENEMY)
+		{
+			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
+			{
+				gameobject->SetDeathFlag(true);
+				changeFlag = true;
+			}
+		}
+		else if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::RECOVERYENEMY)
 		{
 			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
 			{
@@ -311,7 +336,7 @@ void GameScene::SceneChange()
 		{
 			backFlag = false;
 			changeFlag = false;
-			if (objectAge == THIRDSTAGE)
+			if (objectAge == FORTHSTAGE)
 			{
 				gameState = CLEA;
 				changePos.x = 1280;
@@ -338,6 +363,11 @@ void GameScene::SceneChange()
 				{
 					objectAge = THIRDSTAGE;//2ステージ目だったら3ステージ目へ
 					gameobject->SetObjAge(GameObject::STAGE::THIRDSTAGE);
+				}
+				else if (objectAge == THIRDSTAGE)
+				{
+					objectAge = FORTHSTAGE;//2ステージ目だったら3ステージ目へ
+					gameobject->SetObjAge(GameObject::STAGE::FORTHSTAGE);
 				}
 				createFlag = false;
 				flagCount = false;

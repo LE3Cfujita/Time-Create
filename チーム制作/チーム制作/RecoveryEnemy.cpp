@@ -20,6 +20,11 @@ void RecoveryEnemy::Initialize(XMFLOAT2 pos)
 void RecoveryEnemy::Update()
 {
 	Move();
+	Recovery();
+	if (HP <= 0)
+	{
+		objState = DEATH;
+	}
 }
 
 void RecoveryEnemy::Draw()
@@ -30,6 +35,16 @@ void RecoveryEnemy::Draw()
 void RecoveryEnemy::Resource(int bul)
 {
 	this->bul = bul;
+}
+
+void RecoveryEnemy::HitAction(GameObject* gameObject)
+{
+	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
+	{
+		//PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
+		HP--;
+		gameObject->SetDeathFlag(true);
+	}
 }
 
 void RecoveryEnemy::Move()
@@ -66,9 +81,9 @@ void RecoveryEnemy::Move()
 void RecoveryEnemy::Recovery()
 {
 	time++;
-	if (time >= 30)
+	if (time >= 60)
 	{
-		HP += 1;
+		HP += 2;
 		time = 0;
 	}
 }
