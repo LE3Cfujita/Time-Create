@@ -8,13 +8,14 @@ SimultaneousEnemy::~SimultaneousEnemy()
 {
 }
 
-void SimultaneousEnemy::Initialize(XMFLOAT2 pos)
+void SimultaneousEnemy::Initialize(XMFLOAT2 pos,int number)
 {
 	objectMember = GameObject::RECOVERYENEMY;
 	HP = 20;
 	r = 32;
 	simultaneous = LoadGraph("Resource/Playeranime.png");
 	position = pos;
+	position.y = position.y * number;
 }
 
 void SimultaneousEnemy::Update()
@@ -33,11 +34,22 @@ void SimultaneousEnemy::Resource(int bul)
 	bullet = bul;
 }
 
+void SimultaneousEnemy::HitAction(GameObject* gameObject)
+{
+	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
+	{
+		//PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
+		HP--;
+		gameObject->SetDeathFlag(true);
+	}
+}
+
 void SimultaneousEnemy::Move()
 {
 	if (HP <= 0)
 	{
 		time++;
+		objState = TENTATIVE;
 	}
 	else
 	{
@@ -49,6 +61,7 @@ void SimultaneousEnemy::Move()
 
 	if (time >= 240)
 	{
+		objState = IDLE;
 		HP = 20;
 		time = 0;
 	}

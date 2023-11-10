@@ -20,7 +20,6 @@ void Player::Resource(int graph, int se, int kirikae, int damage)
 void Player::Initialize(XMFLOAT2 pos, int number)
 {
 	objectMember = GameObject::PLAYER;
-	objectStage = GameObject::FIRSTSTAGE;
 	position = { pos.x,pos.y };
 	r = 32;
 	this->number = number;

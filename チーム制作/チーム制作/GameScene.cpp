@@ -12,9 +12,9 @@ void GameScene::Initialize()
 	gameObjectManager = new GameObjectManager();
 	gameObjectManager->Intialize();
 
-	gameState = TITLE;
+	gameState = PLAY;
 
-	objectAge = FIRSTSTAGE;
+	objectAge = FORTHSTAGE;
 	createFlag = false;
 
 	if (loadFlag != false)return;
@@ -22,6 +22,11 @@ void GameScene::Initialize()
 	if (CheckSoundMem(titleBGM) == false)
 	{
 		PlaySoundMem(titleBGM, DX_PLAYTYPE_LOOP, TRUE);
+	}
+
+	{//デバッグ用
+		PlayerCreate();
+		EnemyCreate();
 	}
 }
 
@@ -240,7 +245,7 @@ void GameScene::EnemyCreate()
 		enemy->Resource(bossGraph, eDamage, eAttack, slimeGraph);
 		gameObjectManager->AddGameObject(enemy);
 	}
-	else if(objectAge==THIRDSTAGE)
+	else if (objectAge == THIRDSTAGE)
 	{
 		RecoveryEnemy* enemy = nullptr;
 		enemy = new RecoveryEnemy();
@@ -251,12 +256,15 @@ void GameScene::EnemyCreate()
 	}
 	else
 	{
-		SimultaneousEnemy* enemy = nullptr;
-		enemy = new SimultaneousEnemy();
-		enemy->BaseInitialize(gameObjectManager->GetGameObjects());
-		enemy->Initialize({ (float)1100,(float)300 });
-		enemy->Resource(recoveryBullet);
-		gameObjectManager->AddGameObject(enemy);
+		for (int i = 1; i <= 2; i++)
+		{
+			SimultaneousEnemy* enemy = nullptr;
+			enemy = new SimultaneousEnemy();
+			enemy->BaseInitialize(gameObjectManager->GetGameObjects());
+			enemy->Initialize({ (float)1100,(float)300 }, i);
+			enemy->Resource(recoveryBullet);
+			gameObjectManager->AddGameObject(enemy);
+		}
 	}
 	createFlag = true;
 }
