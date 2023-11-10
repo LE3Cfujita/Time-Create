@@ -39,10 +39,7 @@ void Player::Update()
 		deathCount = 1;
 		HP = -10;
 	}
-	if (CheckHitKey(KEY_INPUT_Q) == 1)
-	{
-		int a = 0;
-	}
+
 }
 
 void Player::Draw()
@@ -70,7 +67,7 @@ void Player::Move()
 {
 	if (CheckHitKey(KEY_INPUT_D) == 1)
 	{
-		if (position.x + r > 650 && objState != TENTATIVE)
+		if (position.x + r > 650)
 		{
 			position.x = 650 - r;
 		}
@@ -78,7 +75,7 @@ void Player::Move()
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
 	{
-		if (position.x - r < 0 && objState != TENTATIVE)
+		if (position.x - r < 0)
 		{
 			position.x = r;
 		}
@@ -86,7 +83,7 @@ void Player::Move()
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
-		if (position.y - r < 0 && objState != TENTATIVE)
+		if (position.y - r < 0)
 		{
 			position.y = 0 + r;
 		}
@@ -94,7 +91,7 @@ void Player::Move()
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
-		if (position.y + r > 720 && objState != TENTATIVE)
+		if (position.y + r > 720)
 		{
 			position.y = 720 - r;
 		}

@@ -240,10 +240,19 @@ void GameScene::EnemyCreate()
 		enemy->Resource(bossGraph, eDamage, eAttack, slimeGraph);
 		gameObjectManager->AddGameObject(enemy);
 	}
-	else
+	else if(objectAge==THIRDSTAGE)
 	{
 		RecoveryEnemy* enemy = nullptr;
 		enemy = new RecoveryEnemy();
+		enemy->BaseInitialize(gameObjectManager->GetGameObjects());
+		enemy->Initialize({ (float)1100,(float)300 });
+		enemy->Resource(recoveryBullet);
+		gameObjectManager->AddGameObject(enemy);
+	}
+	else
+	{
+		SimultaneousEnemy* enemy = nullptr;
+		enemy = new SimultaneousEnemy();
 		enemy->BaseInitialize(gameObjectManager->GetGameObjects());
 		enemy->Initialize({ (float)1100,(float)300 });
 		enemy->Resource(recoveryBullet);
@@ -299,7 +308,15 @@ void GameScene::SceneChange()
 				changeFlag = true;
 			}
 		}
-		if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::BOSSENEMY)
+		else if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::BOSSENEMY)
+		{
+			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
+			{
+				gameobject->SetDeathFlag(true);
+				changeFlag = true;
+			}
+		}
+		else if (gameobject->GetObjectMember() == GameObject::OBJECTMEMBER::RECOVERYENEMY)
 		{
 			if (gameobject->GetObjectState() == GameObject::OBJSTATE::DEATH)
 			{
@@ -311,7 +328,7 @@ void GameScene::SceneChange()
 		{
 			backFlag = false;
 			changeFlag = false;
-			if (objectAge == THIRDSTAGE)
+			if (objectAge == FORTHSTAGE)
 			{
 				gameState = CLEA;
 				changePos.x = 1280;
@@ -338,6 +355,11 @@ void GameScene::SceneChange()
 				{
 					objectAge = THIRDSTAGE;//2ステージ目だったら3ステージ目へ
 					gameobject->SetObjAge(GameObject::STAGE::THIRDSTAGE);
+				}
+				else if (objectAge == THIRDSTAGE)
+				{
+					objectAge = FORTHSTAGE;//2ステージ目だったら3ステージ目へ
+					gameobject->SetObjAge(GameObject::STAGE::FORTHSTAGE);
 				}
 				createFlag = false;
 				flagCount = false;

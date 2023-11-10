@@ -18,6 +18,7 @@ public:
 		SLIME,//敵
 		BOSSENEMY,//ボス敵
 		RECOVERYENEMY,//横並びでしか倒しきれない敵
+		SIMULTANEOUSENEMY,//縦並びでしか倒せない
 		SLIMEBULLET,//スライムの攻撃
 		BOSSBULLET,//ボスの攻撃
 		HITEFFECT,//ヒットエフェクト
@@ -29,6 +30,7 @@ public:
 		FIRSTSTAGE,//1ステージ目
 		SECONDSTAGE,//2ステージ目
 		THIRDSTAGE,//3ステージ目
+		FORTHSTAGE,//4ステージ目
 	};
 	enum OBJSTATE
 	{

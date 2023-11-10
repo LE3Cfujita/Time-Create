@@ -4,6 +4,7 @@
 #include"Enemy.h"
 #include"BossEnemy.h"
 #include"RecoveryEnemy.h"
+#include"SimultaneousEnemy.h"
 #include"GameObjectManager.h"
 #include"DxLib.h"
 #include"Collision.h"
@@ -25,6 +26,7 @@ public:
 		FIRSTSTAGE,//1ステージ目
 		SECONDSTAGE,//2ステージ目
 		THIRDSTAGE,//3ステージ目
+		FORTHSTAGE,//4ステージ目
 	};
 
 public:
