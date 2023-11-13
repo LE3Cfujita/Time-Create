@@ -23,8 +23,8 @@ C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム
   SimultaneousEnemy.cpp
 C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
 C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(265,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\SimultaneousEnemy.cpp(29,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\SimultaneousEnemy.cpp(29,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\SimultaneousEnemy.cpp(31,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\SimultaneousEnemy.cpp(31,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   main.cpp
 C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
 C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(265,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。

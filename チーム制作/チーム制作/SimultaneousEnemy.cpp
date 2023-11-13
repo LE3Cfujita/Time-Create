@@ -8,7 +8,7 @@ SimultaneousEnemy::~SimultaneousEnemy()
 {
 }
 
-void SimultaneousEnemy::Initialize(XMFLOAT2 pos,int number)
+void SimultaneousEnemy::Initialize(XMFLOAT2 pos, int number)
 {
 	objectMember = GameObject::RECOVERYENEMY;
 	HP = 20;
@@ -16,6 +16,8 @@ void SimultaneousEnemy::Initialize(XMFLOAT2 pos,int number)
 	simultaneous = LoadGraph("Resource/Playeranime.png");
 	position = pos;
 	position.y = position.y * number;
+	moveNumber = number;
+	speed = rand() % 5 + 5;
 }
 
 void SimultaneousEnemy::Update()
@@ -53,10 +55,18 @@ void SimultaneousEnemy::Move()
 	}
 	else
 	{
-		if (position.y <= 16)moveFlag = true;//trueÇæÇ¡ÇΩÇÁâ∫à⁄ìÆ
-		if (position.y >= 704)moveFlag = false;//falseÇæÇ¡ÇΩÇÁè„à⁄ìÆ
-		if (moveFlag == true)position.y += 5;
-		else position.y -= 5;
+		if (moveNumber == 1)
+		{
+			if (position.y <= 16)moveFlag = true;//trueÇæÇ¡ÇΩÇÁâ∫à⁄ìÆ
+			if (position.y >= 360)moveFlag = false;//falseÇæÇ¡ÇΩÇÁè„à⁄ìÆ
+		}
+		else
+		{
+			if (position.y <= 360)moveFlag = true;//trueÇæÇ¡ÇΩÇÁâ∫à⁄ìÆ
+			if (position.y >= 702 - 16)moveFlag = false;//falseÇæÇ¡ÇΩÇÁè„à⁄ìÆ
+		}
+		if (moveFlag == true)position.y += speed;
+		else position.y -= speed;
 	}
 
 	if (time >= 240)

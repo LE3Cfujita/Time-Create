@@ -27,6 +27,9 @@ private:
 	int simultaneous;
 
 	int time = 0;
+	int moveNumber = 0;
+
+	int speed = 0;
 
 	bool moveFlag = false;
 };
