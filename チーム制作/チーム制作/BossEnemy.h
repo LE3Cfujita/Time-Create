@@ -22,6 +22,8 @@ public:
 
 	void HitAction(GameObject* gameObject);
 
+	void Spawn();
+
 private:
 
 	void Move();

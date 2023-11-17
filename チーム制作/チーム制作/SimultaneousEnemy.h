@@ -1,5 +1,6 @@
 #pragma once
 #include"GameObject.h"
+#include"BossNormalBullet.h"
 class SimultaneousEnemy : public GameObject
 {
 
@@ -17,20 +18,25 @@ public:
 	void Resource(int bul);
 
 	void HitAction(GameObject* gameObject);
+
+	void Death();
 private:
 
 	void Move();
 
 	void Attack();
 
+	void Spwan();
+
 	int bullet;
 	int simultaneous;
 
 	int time = 0;
-	int moveNumber = 0;
 
 	int speed = 0;
 
 	bool moveFlag = false;
+	bool attackFlag = false;
+
 };
 

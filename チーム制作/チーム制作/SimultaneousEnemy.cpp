@@ -10,7 +10,7 @@ SimultaneousEnemy::~SimultaneousEnemy()
 
 void SimultaneousEnemy::Initialize(XMFLOAT2 pos, int number)
 {
-	objectMember = GameObject::RECOVERYENEMY;
+	objectMember = GameObject::SIMULTANEOUSENEMY;
 	HP = 20;
 	r = 32;
 	simultaneous = LoadGraph("Resource/Playeranime.png");
@@ -22,8 +22,16 @@ void SimultaneousEnemy::Initialize(XMFLOAT2 pos, int number)
 
 void SimultaneousEnemy::Update()
 {
-	Move();
-	Attack();
+	if (actionFlag == false)
+	{
+		Spwan();
+	}
+	else
+	{
+		Move();
+		Attack();
+		Death();
+	}
 }
 
 void SimultaneousEnemy::Draw()
@@ -43,6 +51,28 @@ void SimultaneousEnemy::HitAction(GameObject* gameObject)
 		//PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
 		HP--;
 		gameObject->SetDeathFlag(true);
+	}
+}
+
+void SimultaneousEnemy::Death()
+{
+	if (objState != TENTATIVE)return;
+	for (GameObject* gameobject : referenceGameObjects)
+	{
+		if (gameobject->GetObjectMember() == OBJECTMEMBER::SIMULTANEOUSENEMY)
+		{
+			if (moveNumber == 1)
+			{
+				if (gameobject->GetMoveNumber() == 2)
+				{
+					if (gameobject->GetObjectState() == TENTATIVE)
+					{
+						objState = DEATH;
+						gameobject->SetObjectState(DEATH);
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -79,4 +109,37 @@ void SimultaneousEnemy::Move()
 
 void SimultaneousEnemy::Attack()
 {
+	if (attackFlag == true)
+	{
+		//PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
+		BossNormalBullet* bullet;
+		bullet = new BossNormalBullet();
+		bullet->BaseInitialize(referenceGameObjects);
+		bullet->Initialize({ position });
+		bullet->Resource();
+		addGameObjects.push_back(bullet);
+		attackFlag = false;
+	}
+	else
+	{
+		timer++;
+		if (timer <= 120)return;
+		attackFlag = true;
+		timer = 0;
+	}
+}
+
+void SimultaneousEnemy::Spwan()
+{
+	dx = 1100 - position.x;
+	if (dx != 0)
+	{
+		da = dx * dx;
+		L = sqrt(da);
+		position.x += (dx / L) * 10;
+	}
+	else
+	{
+		actionFlag = true;
+	}
 }

@@ -10,11 +10,11 @@ Enemy::~Enemy()
 
 void Enemy::Resource(int graph, int damage, int se)
 {
- 	slimeEnemy = graph;//画像読み込み
+	slimeEnemy = graph;//画像読み込み
 	damageSE = damage;
 	attackSE = se;
 }
-void Enemy::Initialize(XMFLOAT2 pos)
+void Enemy::Initialize(XMFLOAT2 pos, int number)
 {
 	objectMember = GameObject::SLIME;
 	objectStage = GameObject::FIRSTSTAGE;
@@ -25,10 +25,12 @@ void Enemy::Initialize(XMFLOAT2 pos)
 	moveFlag = true;
 	timeFlag = true;
 	beamCT = 0;
+	this->number = number;
 }
 
 void Enemy::Update()
 {
+	Spawn();
 	if (HP <= 0)
 	{
 		objState = DEATH;
@@ -43,12 +45,7 @@ void Enemy::Update()
 		}
 
 	}
-	switch (objectStage)
-	{
-	case FIRSTSTAGE://�Ñ�U��
-		ANCIENTAttack();
-		break;
-	}
+	ANCIENTAttack();
 }
 
 void Enemy::Draw()
@@ -66,9 +63,10 @@ void Enemy::Draw()
 
 void Enemy::ANCIENTAttack()
 {
+	if (actionFlag == false)return;
 	if (timeFlag == false)
 	{
-		int a = rand() % 2;
+		int a = rand() % 3;
 		if (a == 0)
 		{
 			Animation();
@@ -131,12 +129,53 @@ void Enemy::DownEffect()
 
 void Enemy::HitAction(GameObject* gameObject)
 {
-	if (objState == EFFECT || objState == DEATH)return;
+	if (objState == EFFECT || objState == DEATH || actionFlag == false)return;
 
-	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
+	if (actionFlag == true && gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
 	{
 		PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
 		HP--;
 		gameObject->SetDeathFlag(true);
 	}
+}
+
+void Enemy::Spawn()
+{
+	switch (number)
+	{
+	case 0:
+		dy = 200 - position.y;
+		if (200 - position.y == 0)number = 100;
+		break;
+	case 1:
+		dy = 300 - position.y;
+		if (300 - position.y == 0)number = 100;
+		break;
+	case 2:
+		dy = 400 - position.y;
+		if (400 - position.y == 0)number = 100;
+	case 3:
+		dy = 500 - position.y;
+		if (500 - position.y == 0)
+			number = 100;
+		break;
+	case 4:
+		dy = 600 - position.y;
+		if (600 - position.y == 0)
+		{
+			number = 100;
+			for (GameObject* gameobject : referenceGameObjects)
+			{
+				if (gameobject->GetObjectMember() == OBJECTMEMBER::SLIME)
+				{
+					gameobject->SetActionFlag(true);
+				}
+			}
+		}
+		break;
+	}
+	if (number >= 5)return;
+	da = dy * dy;
+	L = sqrt(da);
+	position.y += (dy / L) * 5;
 }

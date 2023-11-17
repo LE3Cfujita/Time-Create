@@ -62,7 +62,10 @@ void WeakEnemy::HitAction(GameObject* gameObject)
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
 	{
 		PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
-		HP--;
+		if (actionFlag == true)
+		{
+			HP--;
+		}
 		gameObject->SetDeathFlag(true);
 	}
 }
@@ -89,7 +92,17 @@ void WeakEnemy::Move()
 		break;
 	case 4:
 		dy = 600 - position.y;
-		if (600 - position.y == 0)number = 100;
+		if (600 - position.y == 0)
+		{
+			number = 100;
+			for (GameObject* gameobject : referenceGameObjects)
+			{
+				if (gameobject->GetObjectMember() == OBJECTMEMBER::SLIME)
+				{
+					gameobject->SetActionFlag(true);
+				}
+			}
+		}
 		break;
 	}
 	if (number >= 5)return;
@@ -100,6 +113,7 @@ void WeakEnemy::Move()
 
 void WeakEnemy::ANCIENTAttack()
 {
+	if (actionFlag == false)return;
 	if (timeFlag == false)
 	{
 		int a = rand() % 2;
