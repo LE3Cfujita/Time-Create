@@ -9,12 +9,13 @@ Player::~Player()
 
 }
 
-void Player::Resource(int graph, int se, int kirikae, int damage)
+void Player::Resource(int graph, int se, int kirikae, int damage, int recovery)
 {
 	player = graph;//画像読み込み
 	attackSE = se;
 	kirikaeSE = kirikae;
 	damageSE = damage;
+	recoverySE = recovery;
 }
 
 void Player::Initialize(XMFLOAT2 pos, int number)
@@ -152,6 +153,7 @@ void Player::HitAction(GameObject* gameObject)
 			for (GameObject* gameobject2 : referenceGameObjects)
 			{
 				if (gameobject2->GetObjectMember() != OBJECTMEMBER::PLAYER)continue;
+				PlaySoundMem(recoverySE, DX_PLAYTYPE_BACK, TRUE);
 				gameobject2->SetObjectState(IDLE);
 				gameobject2->SetHP(2);
 				gameObject->SetDeathFlag(true);

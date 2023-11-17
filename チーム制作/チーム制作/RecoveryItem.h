@@ -14,10 +14,6 @@ public:
 
 	void Draw();
 
-	void Resource(int graph);
-
-	void HitAction(GameObject* gameObject);
-
 private:
 	void Move();
 

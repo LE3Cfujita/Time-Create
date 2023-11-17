@@ -106,7 +106,7 @@ private:
 
 	//‰¹ŠÖŒW
 	int titleBGM;
-	int ancientBGM;
+	int playBGM;
 	int modernBGM;
 	int futureBGM;
 	int overBGM;
@@ -118,6 +118,7 @@ private:
 	int kirikae;
 	int pDamage;
 	int eDamage;
+	int recoverySE;
 
 	int volume = 200;
 
