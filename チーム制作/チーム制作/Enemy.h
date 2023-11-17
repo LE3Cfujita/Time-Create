@@ -12,7 +12,7 @@ public:
 	~Enemy();
 
 	//‰Šú‰»
-	void Initialize(XMFLOAT2 pos);
+	void Initialize(XMFLOAT2 pos,int number);
 
 	void Update();
 
@@ -22,6 +22,7 @@ public:
 
 	void HitAction(GameObject* gameObject);
 
+	void Spawn();
 private:
 	void ANCIENTAttack();
 	void FireAttack();//‰ÎUŒ‚

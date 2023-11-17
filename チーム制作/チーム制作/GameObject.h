@@ -98,6 +98,9 @@ protected:
 
 	int deathCount;
 
+
+	int moveNumber = 0;
+
 	bool hitFlag;
 
 	bool recoveryFlag;
@@ -156,6 +159,7 @@ public:
 		deathCount = 0;
 
 		number = 0;
+		moveNumber = 0;
 
 		hitFlag = false;
 
@@ -269,6 +273,8 @@ public:
 	void SetNumber(int number) { this->number = number; }
 	int GetNumber() { return number; }
 
+	int GetMoveNumber() { return moveNumber; }
+
 
 	void SetMove(bool move) { this->move = move; }
 	void SetBeamFlag(bool beamFlag) { this->beamFlag = beamFlag; }
@@ -281,5 +287,6 @@ public:
 
 	bool GetRecoveryFlag() { return recoveryFlag; }
 	void SetRecoveryFlag(bool flag) { recoveryFlag = flag; }
+
 };
 

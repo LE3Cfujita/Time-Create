@@ -15,12 +15,20 @@ void RecoveryEnemy::Initialize(XMFLOAT2 pos)
 	r = 32;
 	recovery = LoadGraph("Resource/Playeranime.png");
 	position = pos;
+	actionFlag = false;
 }
 
 void RecoveryEnemy::Update()
 {
-	Move();
-	Recovery();
+	if (actionFlag == false)
+	{
+		Spwan();
+	}
+	else
+	{
+		Move();
+		Recovery();
+	}
 	if (HP <= 0)
 	{
 		objState = DEATH;
@@ -29,7 +37,14 @@ void RecoveryEnemy::Update()
 
 void RecoveryEnemy::Draw()
 {
-	DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, recovery, TRUE, FALSE);
+	if (actionFlag == true)
+	{
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, recovery, TRUE, FALSE);
+	}
+	else
+	{
+		DrawRotaGraph(position.x, position.y, size, angle, recovery, TRUE, FALSE);
+	}
 }
 
 void RecoveryEnemy::Resource(int bul)
@@ -39,6 +54,7 @@ void RecoveryEnemy::Resource(int bul)
 
 void RecoveryEnemy::HitAction(GameObject* gameObject)
 {
+	if (actionFlag != true)return;
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
 	{
 		//PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
@@ -81,7 +97,7 @@ void RecoveryEnemy::Move()
 void RecoveryEnemy::Recovery()
 {
 	time++;
-	if (time >= 60)
+	if (time >= 30)
 	{
 		HP += 2;
 		time = 0;
@@ -107,5 +123,18 @@ void RecoveryEnemy::Attack()
 			attackFlag = false;
 			attackTime = 0;
 		}
+	}
+}
+
+void RecoveryEnemy::Spwan()
+{
+	if (size < 1)
+	{
+		angle += 0.5;
+		size += 0.02;
+	}
+	else
+	{
+		actionFlag = true;
 	}
 }

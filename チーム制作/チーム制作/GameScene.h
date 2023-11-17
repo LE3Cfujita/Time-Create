@@ -54,6 +54,12 @@ public:
 
 	void SceneChange();//ゲーム中シーン切り替え
 
+	void GameOver(GameObject* gameObject);
+
+	void NextWave(GameObject* gameObject);
+
+	void GameClearToManager(GameObject* gameObject);
+
 	void BackgroundScroll();//背景スクロール
 
 	void Invincible();
@@ -63,6 +69,7 @@ public:
 	void LoadResource();
 
 	void changeForm();
+
 
 private:
 	GameState gameState;

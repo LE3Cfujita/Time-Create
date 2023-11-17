@@ -18,12 +18,27 @@ void BossEnemy::Resource(int graph, int damage, int se, int weak)
 
 void BossEnemy::HitAction(GameObject* gameObject)
 {
-	if (objState == EFFECT || objState == DEATH)return;
+	if (objState == EFFECT || objState == DEATH || actionFlag == false)return;
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
 	{
 		PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
 		HP--;
 		gameObject->SetDeathFlag(true);
+	}
+}
+
+void BossEnemy::Spawn()
+{
+	dx = 1100 - position.x;
+	if (dx != 0)
+	{
+		da = dx * dx;
+		L = sqrt(da);
+		position.x += (dx / L) * 10;
+	}
+	else
+	{
+		actionFlag = true;
 	}
 }
 
@@ -48,7 +63,7 @@ void BossEnemy::Attack()
 		addGameObjects.push_back(bullet);
 		attackFlag = false;
 
-		int a = rand() % 8;
+		int a = rand() % 5;
 		if (a == 0)
 		{
 			if (line <= 5)
@@ -88,17 +103,25 @@ void BossEnemy::Initialize(XMFLOAT2 pos)
 	r = 64;
 	HP = 50;
 	timer = 0;
+	actionFlag = false;
 }
 
 void BossEnemy::Update()
 {
-	if (HP <= 0)
+	if (actionFlag == false)
 	{
-		objState = DEATH;
-		deathCount = 1;
+		Spawn();
 	}
-	Move();
-	Attack();
+	else
+	{
+		if (HP <= 0)
+		{
+			objState = DEATH;
+			deathCount = 1;
+		}
+		Move();
+		Attack();
+	}
 }
 
 void BossEnemy::Draw()

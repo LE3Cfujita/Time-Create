@@ -25,6 +25,8 @@ private:
 	void Recovery();
 
 	void Attack();
+	
+	void Spwan();
 
 	bool topFlag = false;
 	bool moveFlag = false;
@@ -38,5 +40,7 @@ private:
 	int attackTime = 0;
 	int time = 0;
 
+	double size = 0.0;
+	double angle = 0;
 };
 
