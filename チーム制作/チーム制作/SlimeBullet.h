@@ -19,6 +19,8 @@ private:
 
 	void Move();
 
+	void Animation();
+
 	int bullet;
 };
 

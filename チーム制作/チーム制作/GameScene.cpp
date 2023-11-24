@@ -12,9 +12,9 @@ void GameScene::Initialize()
 	gameObjectManager = new GameObjectManager();
 	gameObjectManager->Intialize();
 
-	gameState = PLAY;
+	gameState = TITLE;
 
-	objectAge = FORTHSTAGE;
+	objectAge = STAND;
 	createFlag = false;
 
 	if (loadFlag != false)return;
@@ -25,8 +25,8 @@ void GameScene::Initialize()
 	}
 
 	{//デバッグ用
-		PlayerCreate();
-		EnemyCreate();
+		/*PlayerCreate();
+		EnemyCreate();*/
 	}
 }
 
@@ -69,11 +69,8 @@ void GameScene::Draw()
 {
 	switch (gameState)
 	{
-	case TITLE://�^�C�g��
-		DrawGraph(backPos.x, backPos.y, ancientback, true);
-		DrawGraph(backPos2.x, backPos2.y, ancientback, true);
+	case TITLE:
 		DrawGraph(0, 0, title, TRUE);
-		DrawGraph(yajirusiPos.x, yajirusiPos.y, yajirusi, true);
 		break;
 	case PLAY://�Q�[���v���C
 		DrawGraph(backPos.x, backPos.y, ancientback, true);
@@ -92,7 +89,6 @@ void GameScene::Draw()
 		DrawGraph(0, 0, over, FALSE);
 		break;
 	case EXPLANATION:
-		DrawGraph(backPos.x, backPos.y, ancientback, true);
 		DrawGraph(setumeiPos.x, setumeiPos.y, setumei, true);
 		break;
 	}
@@ -112,88 +108,58 @@ void GameScene::ChangeScene()
 	{
 		backPos2.x = 1280;
 	}
-	if (CheckHitKey(KEY_INPUT_UP) == 1 && hitButton == false ||
-		CheckHitKey(KEY_INPUT_DOWN) == 1 && hitButton == false)
-	{
-		if (start == true)
-		{
-			start = false;
-			yajirusiPos = { 770,590 };
-		}
-		else
-		{
-			start = true;
-			yajirusiPos = { 770,490 };
-		}
-		hitButton = true;
-	}
-	else if (CheckHitKey(KEY_INPUT_UP) == 0 &&
-		CheckHitKey(KEY_INPUT_DOWN) == 0)
-	{
-		hitButton = false;
-	}
 
-	if (CheckHitKey(KEY_INPUT_SPACE) == 1 && keyCount == 0)
+	if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 	{
-		if (CheckSoundMem(ketteiSE) == FALSE)
+		if (keyCount == false)
 		{
-			PlaySoundMem(ketteiSE, DX_PLAYTYPE_BACK, TRUE);
-		}
-		if (gameState == TITLE)
-		{
-			if (start == true)
+			if (CheckSoundMem(ketteiSE) == FALSE)
+			{
+				PlaySoundMem(ketteiSE, DX_PLAYTYPE_BACK, TRUE);
+			}
+			if (gameState == TITLE)
+			{
+				gameState = EXPLANATION;
+			}
+			else if (gameState == EXPLANATION)
 			{
 				flagCount = false;
 				volume = 200;
 				gameState = PLAY;
+				objectAge = FIRSTSTAGE;
 				StopSoundMem(titleBGM);
 				PlayerCreate();
 				backPos = { 0,0 };
 				backPos2 = { 1280,0 };
 				backPos3 = { 2569,0 };
 			}
-			else
+			else if (gameState == CLEA || gameState == OVER)
 			{
-				gameState = EXPLANATION;
+				for (GameObject* gameobject : gameObjectManager->GetGameObjects())
+				{
+					gameobject->SetDeathFlag(true);
+				}
+				pNumber = 0;
+				sNumber = 0;
+				gameState = TITLE;
+				gameObjectManager->Update();
+				if (CheckSoundMem(clearBGM) == true)
+				{
+					StopSoundMem(clearBGM);
+				}
+				if (CheckSoundMem(overBGM) == true)
+				{
+					StopSoundMem(overBGM);
+				}
+				overFlag = false;
+				Initialize();
 			}
+			keyCount = true;
 		}
-		else if (gameState == CLEA || gameState == OVER)
-		{
-			for (GameObject* gameobject : gameObjectManager->GetGameObjects())
-			{
-				gameobject->SetDeathFlag(true);
-			}
-			pNumber = 0;
-			sNumber = 0;
-			gameState = TITLE;
-			gameObjectManager->Update();
-			if (CheckSoundMem(clearBGM) == true)
-			{
-				StopSoundMem(clearBGM);
-			}
-			if (CheckSoundMem(overBGM) == true)
-			{
-				StopSoundMem(overBGM);
-			}
-			overFlag = false;
-			Initialize();
-		}
-		else if (gameState == EXPLANATION)
-		{
-			flagCount = false;
-			volume = 200;
-			gameState = PLAY;
-			StopSoundMem(titleBGM);
-			PlayerCreate();
-			backPos = { 0,0 };
-			backPos2 = { 1280,0 };
-			backPos3 = { 2569,0 };
-		}
-		keyCount = 1;
 	}
-	if (CheckHitKey(KEY_INPUT_SPACE) == 0)
+	else
 	{
-		keyCount = 0;
+		keyCount = false;
 	}
 
 }
@@ -207,7 +173,7 @@ void GameScene::PlayerCreate()
 		player = new Player();
 		player->BaseInitialize(gameObjectManager->GetGameObjects());
 		player->Initialize({ (float)300,(float)200 + 100 * i }, i);
-		player->Resource(playerGraph, pAttack, kirikae, pDamage);
+		player->Resource(playerGraph, pAttack, kirikae, pDamage, recoverySE);
 		pNumber++;
 		gameObjectManager->AddGameObject(player);
 	}
@@ -229,7 +195,7 @@ void GameScene::EnemyCreate()
 				Enemy* enemy = nullptr;
 				enemy = new Enemy();
 				enemy->BaseInitialize(gameObjectManager->GetGameObjects());
-				enemy->Initialize({ (float)720 + 100 * x,(float)-100 - 100 * y },y);
+				enemy->Initialize({ (float)720 + 100 * x,(float)-100 - 100 * y }, y);
 				enemy->Resource(slimeGraph, eDamage, eAttack);
 				gameObjectManager->AddGameObject(enemy);
 				sNumber++;
@@ -254,7 +220,7 @@ void GameScene::EnemyCreate()
 		enemy->Resource(recoveryBullet);
 		gameObjectManager->AddGameObject(enemy);
 	}
-	else if(objectAge==FORTHSTAGE)
+	else if (objectAge == FORTHSTAGE)
 	{
 		for (int i = 1; i <= 2; i++)
 		{
@@ -286,9 +252,9 @@ void GameScene::GameOver(GameObject* gameObject)
 			gameObject->SetDeathCount(0);
 			if (pNumber == 0)
 			{
-				if (CheckSoundMem(ancientBGM) == 1)
+				if (CheckSoundMem(playBGM) == 1)
 				{
-					StopSoundMem(ancientBGM);
+					StopSoundMem(playBGM);
 				}
 				gameState = OVER;
 				backPos = { 0,0 };
@@ -353,9 +319,9 @@ void GameScene::GameClearToManager(GameObject* gameObject)
 		{
 			gameState = CLEA;
 			changePos.x = 1280;
-			if (CheckSoundMem(ancientBGM) == 1)
+			if (CheckSoundMem(playBGM) == 1)
 			{
-				StopSoundMem(ancientBGM);
+				StopSoundMem(playBGM);
 			}
 		}
 		else
@@ -436,19 +402,15 @@ void GameScene::Invincible()
 
 void GameScene::BGM()
 {
-	if (objectAge == FIRSTSTAGE && CheckSoundMem(ancientBGM) == 0)
-	{
-		StopSoundMem(modernBGM);
-		StopSoundMem(futureBGM);
-		PlaySoundMem(ancientBGM, DX_PLAYTYPE_LOOP, TRUE);
-	}
+
+	PlaySoundMem(playBGM, DX_PLAYTYPE_LOOP, TRUE);
 }
 
 void GameScene::LoadResource()
 {
 	//背景絵
 	title = LoadGraph("Resource/title.png"); // �`��
-	ancientback = LoadGraph("Resource/BGjam.png"); // �`��
+	ancientback = LoadGraph("Resource/background.png"); // �`��
 	changeback = LoadGraph("Resource/ageChange.png");
 	clear = LoadGraph("Resource/GameClear.png"); // �`��
 	over = LoadGraph("Resource/GameOver.png"); // �`��
@@ -456,35 +418,40 @@ void GameScene::LoadResource()
 	setumei = LoadGraph("Resource/setumei.png"); // �`��
 
 	//キャラクター絵
-	playerGraph = LoadGraph("Resource/Playeranime.png");
+	playerGraph = LoadGraph("Resource/player.png");
 	slimeGraph = LoadGraph("Resource/EnemySlimeAnime.png");
 	bossGraph = LoadGraph("Resource/bossEnemy.png");
 	recoveryGraph = LoadGraph("Resource/recovery.png");
 
-	recoveryBullet = LoadGraph("Resource/SlimeEnemyBullet.png");
-
 	//弾絵
+	recoveryBullet = LoadGraph("Resource/enemyBullret.png");
 
 	//音関係
-	//titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
-	//overBGM = LoadSoundMem("Resource/overBGM.mp3");
-	//clearBGM = LoadSoundMem("Resource/clearBGM.mp3");
-	//ancientBGM = LoadSoundMem("Resource/gameplayBGM.mp3");
-	//ketteiSE = LoadSoundMem("Resource/kettei.mp3");
-	//pAttack = LoadSoundMem("Resource/playerBullet.mp3");
-	//eAttack = LoadSoundMem("Resource/enemyBullet.mp3");
-	//kirikae = LoadSoundMem("Resource/playerkirikae.mp3");
-	//pDamage = LoadSoundMem("Resource/playerHit.mp3");
-	//eDamage = LoadSoundMem("Resource/enemyHit.mp3");
+	titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
+	overBGM = LoadSoundMem("Resource/overBGM.mp3");
+	clearBGM = LoadSoundMem("Resource/clearBGM.mp3");
+	playBGM = LoadSoundMem("Resource/gameplayBGM.mp3");
+	ketteiSE = LoadSoundMem("Resource/kettei.mp3");
+	pAttack = LoadSoundMem("Resource/playerBullet.mp3");
+	eAttack = LoadSoundMem("Resource/enemyBullet.mp3");
+	kirikae = LoadSoundMem("Resource/playerkirikae.mp3");
+	pDamage = LoadSoundMem("Resource/playerHit.mp3");
+	eDamage = LoadSoundMem("Resource/enemyHit.mp3");
+	recoverySE = LoadSoundMem("Resource/recoverySE.mp3");
 
 	loadFlag = true;
-	volume = 200;
-	/*ChangeVolumeSoundMem(volume, ancientBGM);
-	ChangeVolumeSoundMem(volume, modernBGM);
-	ChangeVolumeSoundMem(volume, futureBGM);
+	volume = 50;
+	ChangeVolumeSoundMem(volume, titleBGM);
 	ChangeVolumeSoundMem(volume, overBGM);
 	ChangeVolumeSoundMem(volume, clearBGM);
-	ChangeVolumeSoundMem(volume, titleBGM);*/
+	ChangeVolumeSoundMem(volume, playBGM);
+	ChangeVolumeSoundMem(volume, ketteiSE);
+	ChangeVolumeSoundMem(volume, pAttack);
+	ChangeVolumeSoundMem(volume, eAttack);
+	ChangeVolumeSoundMem(volume, kirikae);
+	ChangeVolumeSoundMem(100, pDamage);
+	ChangeVolumeSoundMem(volume, eDamage);
+	ChangeVolumeSoundMem(100, recoverySE);
 }
 
 void GameScene::changeForm()

@@ -1,5 +1,6 @@
 #pragma once
 #include"GameObject.h"
+#include"HitEffect.h"
 class PlayerBullet : public GameObject
 {
 public:
@@ -12,8 +13,10 @@ public:
 	void Update();
 
 	void Draw();
-private:
 
+	void HitAction(GameObject* gameObject);
+private:
+	void Animation();
 	void Move();
 
 	int bullet;

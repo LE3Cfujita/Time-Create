@@ -11,9 +11,10 @@ RecoveryEnemy::~RecoveryEnemy()
 void RecoveryEnemy::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::RECOVERYENEMY;
-	HP = 50;
-	r = 32;
-	recovery = LoadGraph("Resource/Playeranime.png");
+	HP = 100;
+	r = 64;
+	recovery = LoadGraph("Resource/healEnemy.png");
+	heal = LoadGraph("Resource/healEffect.png");
 	position = pos;
 	actionFlag = false;
 }
@@ -27,7 +28,6 @@ void RecoveryEnemy::Update()
 	else
 	{
 		Move();
-		Recovery();
 	}
 	if (HP <= 0)
 	{
@@ -39,11 +39,15 @@ void RecoveryEnemy::Draw()
 {
 	if (actionFlag == true)
 	{
-		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, recovery, TRUE, FALSE);
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 128, 0, 128, 128, recovery, TRUE, FALSE);
 	}
 	else
 	{
 		DrawRotaGraph(position.x, position.y, size, angle, recovery, TRUE, FALSE);
+	}
+	if (moveFlag == false)
+	{
+		DrawGraph(position.x, position.y, heal, true);
 	}
 }
 
@@ -86,6 +90,7 @@ void RecoveryEnemy::Move()
 	}
 	else
 	{
+		Recovery();
 		if (moveTime >= 300)
 		{
 			moveFlag = false;
@@ -97,7 +102,7 @@ void RecoveryEnemy::Move()
 void RecoveryEnemy::Recovery()
 {
 	time++;
-	if (time >= 30)
+	if (time >= 15)
 	{
 		HP += 2;
 		time = 0;

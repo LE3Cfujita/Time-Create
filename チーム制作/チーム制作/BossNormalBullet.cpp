@@ -26,12 +26,27 @@ void BossNormalBullet::Update()
 
 void BossNormalBullet::Draw()
 {
-	DrawGraph(position.x, position.y, bullet, TRUE);
+	DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 32, bullet, TRUE, FALSE);
 }
 
 void BossNormalBullet::Resource()
 {
-	bullet = LoadGraph("Resource/SlimeEnemyBullet.png"); // •`‰æ
+	bullet = LoadGraph("Resource/enemyBullret.png"); // •`‰æ
+}
+
+void BossNormalBullet::Animation()
+{
+	animation = animation + 1;
+
+	if (animation > 2)
+	{
+		animeCount = animeCount + 1;
+		animation = 0;
+		if (animeCount >= 2)
+		{
+			animeCount = 0;
+		}
+	}
 }
 
 void BossNormalBullet::Move()

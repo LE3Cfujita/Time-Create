@@ -14,7 +14,7 @@ public:
 
 	void Draw();
 
-	void Resource(int graph, int se,int kirikae,int damage);
+	void Resource(int graph, int se,int kirikae,int damage, int recovery);
 
 	void FormationX(XMFLOAT2 pos);
 	void FormationZ(XMFLOAT2 pos);
@@ -25,11 +25,13 @@ private:
 	void Invincible();//–³“G
 	void HitAction(GameObject* gameObject);
 	void Animation();
+	void Action();
 
 	int player;//•`‰æ—p
 	int attackSE;
 	int kirikaeSE;
 	int damageSE;
+	int recoverySE;
 
 	bool invincibleFlag = false;
 	int invincibleTime = 0;
@@ -46,5 +48,6 @@ private:
 
 	bool X = false;
 
+	bool actionFlag = false;
 };
 

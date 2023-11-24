@@ -26,18 +26,6 @@ void RecoveryItem::Draw()
 	DrawGraph(position.x, position.y, item, true);
 }
 
-void RecoveryItem::Resource(int graph)
-{
-	//item = graph;
-}
-
-void RecoveryItem::HitAction(GameObject* gameObject)
-{
-	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYER)
-	{
-		//deathFlag = true;
-	}
-}
 
 void RecoveryItem::Move()
 {

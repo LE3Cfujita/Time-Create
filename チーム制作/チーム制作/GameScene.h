@@ -106,7 +106,7 @@ private:
 
 	//‰¹ŠÖŒW
 	int titleBGM;
-	int ancientBGM;
+	int playBGM;
 	int modernBGM;
 	int futureBGM;
 	int overBGM;
@@ -118,11 +118,12 @@ private:
 	int kirikae;
 	int pDamage;
 	int eDamage;
+	int recoverySE;
 
 	int volume = 200;
 
 	//•Ï”
-	int keyCount = 0;
+	bool keyCount = false;
 	bool changeFlag = false;
 	bool backFlag = false;
 	bool flagCount = false;

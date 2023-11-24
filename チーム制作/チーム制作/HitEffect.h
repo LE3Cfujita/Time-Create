@@ -12,7 +12,5 @@ public:
 
 	void Draw();
 private:
-	int effect1;
-	int effect2;
-	int effect3;
+	int effect;
 };

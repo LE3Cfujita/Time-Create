@@ -13,7 +13,7 @@ void SimultaneousEnemy::Initialize(XMFLOAT2 pos, int number)
 	objectMember = GameObject::SIMULTANEOUSENEMY;
 	HP = 20;
 	r = 32;
-	simultaneous = LoadGraph("Resource/Playeranime.png");
+	simultaneous = LoadGraph("Resource/allEnemy_New.png");
 	position = pos;
 	position.y = position.y * number;
 	moveNumber = number;
@@ -36,7 +36,7 @@ void SimultaneousEnemy::Update()
 
 void SimultaneousEnemy::Draw()
 {
-	DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 62, simultaneous, TRUE, FALSE);
+	DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, simultaneous, TRUE, FALSE);
 }
 
 void SimultaneousEnemy::Resource(int bul)
@@ -111,13 +111,13 @@ void SimultaneousEnemy::Attack()
 {
 	if (attackFlag == true)
 	{
-		//PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
 		BossNormalBullet* bullet;
 		bullet = new BossNormalBullet();
 		bullet->BaseInitialize(referenceGameObjects);
 		bullet->Initialize({ position });
 		bullet->Resource();
 		addGameObjects.push_back(bullet);
+		RecoveryDrop();
 		attackFlag = false;
 	}
 	else
@@ -142,4 +142,17 @@ void SimultaneousEnemy::Spwan()
 	{
 		actionFlag = true;
 	}
+}
+
+void SimultaneousEnemy::RecoveryDrop()
+{
+	int a = rand() % 5;
+	if (a == 1)
+	{
+		RecoveryItem* item = new RecoveryItem;
+		item->BaseInitialize(referenceGameObjects);
+		item->Initialize({ position });
+		addGameObjects.push_back(item);
+	}
+
 }
