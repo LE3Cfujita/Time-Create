@@ -51,15 +51,8 @@ void Enemy::Update()
 void Enemy::Draw()
 {
 	if (objState == EFFECT || objState == DEATH)return;
-	switch (objectStage)
-	{
-	case FIRSTSTAGE:
-		r = 16;
-		DrawRectGraph(position.x - r, position.y, animeCount * 32, 0, 32, 16, slimeEnemy, TRUE, FALSE);
-		break;
-	}
+	DrawRectGraph(position.x - r, position.y, animeCount * 32, 0, 32, 16, slimeEnemy, TRUE, FALSE);
 }
-
 
 void Enemy::ANCIENTAttack()
 {

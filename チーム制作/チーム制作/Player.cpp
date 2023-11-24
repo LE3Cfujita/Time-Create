@@ -24,7 +24,7 @@ void Player::Initialize(XMFLOAT2 pos, int number)
 	position = { pos.x,pos.y };
 	r = 32;
 	this->number = number;
-	HP = 10;
+	HP = 5;
 }
 
 
@@ -107,10 +107,9 @@ void Player::Attack()
 		{
 			if (hitButton == true)return;
 			PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
-			animationFlag = true;
 			PlayerBullet* bullet = new PlayerBullet();
 			bullet->BaseInitialize(referenceGameObjects);
-			bullet->Initialize({ position.x + r / 32,position.y + r / 32 });
+			bullet->Initialize({ position.x + r / 32,position.y + r });
 			addGameObjects.push_back(bullet);
 			hitButton = true;
 			timeFlag = true;
@@ -155,7 +154,7 @@ void Player::HitAction(GameObject* gameObject)
 				if (gameobject2->GetObjectMember() != OBJECTMEMBER::PLAYER)continue;
 				PlaySoundMem(recoverySE, DX_PLAYTYPE_BACK, TRUE);
 				gameobject2->SetObjectState(IDLE);
-				gameobject2->SetHP(2);
+				gameobject2->SetHP(5);
 				gameObject->SetDeathFlag(true);
 				recoveryFlag = true;
 			}
@@ -193,18 +192,25 @@ void Player::HitAction(GameObject* gameObject)
 
 void Player::Animation()
 {
-	if (animationFlag == false)return;
-	animation = animation + 1;
-
-	if (animation > 3)
+	if (HP == 1)
 	{
-		animeCount = animeCount + 1;
-		animation = 0;
-		if (animeCount >= 3)
-		{
-			animeCount = 0;
-			animationFlag = false;
-		}
+		animeCount = 0;
+	}
+	if (HP == 2)
+	{
+		animeCount = 1;
+	}
+	if (HP == 3)
+	{
+		animeCount = 2;
+	}
+	if (HP == 4)
+	{
+		animeCount = 3;
+	}
+	if (HP == 5)
+	{
+		animeCount = 4;
 	}
 }
 

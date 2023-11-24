@@ -112,6 +112,7 @@ void GameScene::ChangeScene()
 	{
 		backPos2.x = 1280;
 	}
+	/*
 	if (CheckHitKey(KEY_INPUT_UP) == 1 && hitButton == false ||
 		CheckHitKey(KEY_INPUT_DOWN) == 1 && hitButton == false)
 	{
@@ -131,9 +132,9 @@ void GameScene::ChangeScene()
 		CheckHitKey(KEY_INPUT_DOWN) == 0)
 	{
 		hitButton = false;
-	}
+	}*/
 
-	if (CheckHitKey(KEY_INPUT_SPACE) == 1 && keyCount == 0)
+	if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 	{
 		if (CheckSoundMem(ketteiSE) == FALSE)
 		{
@@ -152,10 +153,6 @@ void GameScene::ChangeScene()
 				backPos = { 0,0 };
 				backPos2 = { 1280,0 };
 				backPos3 = { 2569,0 };
-			}
-			else
-			{
-				gameState = EXPLANATION;
 			}
 		}
 		else if (gameState == CLEA || gameState == OVER)
@@ -178,18 +175,6 @@ void GameScene::ChangeScene()
 			}
 			overFlag = false;
 			Initialize();
-		}
-		else if (gameState == EXPLANATION)
-		{
-			flagCount = false;
-			volume = 200;
-			gameState = PLAY;
-			objectAge = FIRSTSTAGE;
-			StopSoundMem(titleBGM);
-			PlayerCreate();
-			backPos = { 0,0 };
-			backPos2 = { 1280,0 };
-			backPos3 = { 2569,0 };
 		}
 		keyCount = 1;
 	}
@@ -231,7 +216,7 @@ void GameScene::EnemyCreate()
 				Enemy* enemy = nullptr;
 				enemy = new Enemy();
 				enemy->BaseInitialize(gameObjectManager->GetGameObjects());
-				enemy->Initialize({ (float)720 + 100 * x,(float)-100 - 100 * y },y);
+				enemy->Initialize({ (float)720 + 100 * x,(float)-100 - 100 * y }, y);
 				enemy->Resource(slimeGraph, eDamage, eAttack);
 				gameObjectManager->AddGameObject(enemy);
 				sNumber++;
@@ -256,7 +241,7 @@ void GameScene::EnemyCreate()
 		enemy->Resource(recoveryBullet);
 		gameObjectManager->AddGameObject(enemy);
 	}
-	else if(objectAge==FORTHSTAGE)
+	else if (objectAge == FORTHSTAGE)
 	{
 		for (int i = 1; i <= 2; i++)
 		{
@@ -446,7 +431,7 @@ void GameScene::LoadResource()
 {
 	//背景絵
 	title = LoadGraph("Resource/title.png"); // �`��
-	ancientback = LoadGraph("Resource/BGjam.png"); // �`��
+	ancientback = LoadGraph("Resource/background.png"); // �`��
 	changeback = LoadGraph("Resource/ageChange.png");
 	clear = LoadGraph("Resource/GameClear.png"); // �`��
 	over = LoadGraph("Resource/GameOver.png"); // �`��
@@ -454,14 +439,13 @@ void GameScene::LoadResource()
 	setumei = LoadGraph("Resource/setumei.png"); // �`��
 
 	//キャラクター絵
-	playerGraph = LoadGraph("Resource/Playeranime.png");
+	playerGraph = LoadGraph("Resource/player.png");
 	slimeGraph = LoadGraph("Resource/EnemySlimeAnime.png");
 	bossGraph = LoadGraph("Resource/bossEnemy.png");
 	recoveryGraph = LoadGraph("Resource/recovery.png");
 
-	recoveryBullet = LoadGraph("Resource/SlimeEnemyBullet.png");
-
 	//弾絵
+	recoveryBullet = LoadGraph("Resource/enemyBullret.png");
 
 	//音関係
 	titleBGM = LoadSoundMem("Resource/titleBGM.mp3");
@@ -474,7 +458,7 @@ void GameScene::LoadResource()
 	kirikae = LoadSoundMem("Resource/playerkirikae.mp3");
 	pDamage = LoadSoundMem("Resource/playerHit.mp3");
 	eDamage = LoadSoundMem("Resource/enemyHit.mp3");
-	recoverySE= LoadSoundMem("Resource/recoverySE.mp3");
+	recoverySE = LoadSoundMem("Resource/recoverySE.mp3");
 
 	loadFlag = true;
 	volume = 50;

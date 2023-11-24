@@ -10,14 +10,14 @@ SlimeBullet::~SlimeBullet()
 
 void SlimeBullet::Resource()
 {
-	bullet = LoadGraph("Resource/SlimeEnemyBullet.png"); // •`‰æ
+	bullet = LoadGraph("Resource/enemyBullret.png"); // •`‰æ
 }
 
 void SlimeBullet::Initialize(XMFLOAT2 pos,int number)
 {
 	objectMember = GameObject::SLIMEBULLET;
 
-	r = 32;
+	r = 16;
 	this->number = number;
 	if (this->number == 0)
 	{
@@ -34,11 +34,12 @@ void SlimeBullet::Initialize(XMFLOAT2 pos,int number)
 void SlimeBullet::Update()
 {
 	Move();
+	Animation();
 }
 
 void SlimeBullet::Draw()
 {
-	DrawGraph(position.x, position.y, bullet, TRUE);
+	DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 32, bullet, TRUE, FALSE);
 }
 
 void SlimeBullet::Move()
@@ -47,5 +48,20 @@ void SlimeBullet::Move()
 	if (position.x <= -10)
 	{
 		deathFlag = true;
+	}
+}
+
+void SlimeBullet::Animation()
+{
+	animation = animation + 1;
+
+	if (animation > 2)
+	{
+		animeCount = animeCount + 1;
+		animation = 0;
+		if (animeCount >= 2)
+		{
+			animeCount = 0;
+		}
 	}
 }

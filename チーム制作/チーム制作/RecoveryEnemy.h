@@ -35,6 +35,7 @@ private:
 
 	int recovery;
 	int bul;
+	int heal;
 
 	int moveTime = 0;
 	int attackTime = 0;

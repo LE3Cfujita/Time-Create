@@ -16,7 +16,7 @@ public:
 
 	void Resource(int bul);
 private:
-
+	void Animation();
 	void Move();
 
 	int bullet;

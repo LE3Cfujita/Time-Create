@@ -23,12 +23,27 @@ void RecoveryBullet::Update()
 
 void RecoveryBullet::Draw()
 {
-	DrawGraph(position.x, position.y, bullet, TRUE);
+	DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 32, bullet, TRUE, FALSE);
 }
 
 void RecoveryBullet::Resource(int bul)
 {
 	bullet = bul;
+}
+
+void RecoveryBullet::Animation()
+{
+	animation = animation + 1;
+
+	if (animation > 2)
+	{
+		animeCount = animeCount + 1;
+		animation = 0;
+		if (animeCount >= 2)
+		{
+			animeCount = 0;
+		}
+	}
 }
 
 void RecoveryBullet::Move()
