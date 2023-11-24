@@ -25,6 +25,7 @@ private:
 	void Invincible();//–³“G
 	void HitAction(GameObject* gameObject);
 	void Animation();
+	void Action();
 
 	int player;//•`‰æ—p
 	int attackSE;
@@ -47,5 +48,6 @@ private:
 
 	bool X = false;
 
+	bool actionFlag = false;
 };
 

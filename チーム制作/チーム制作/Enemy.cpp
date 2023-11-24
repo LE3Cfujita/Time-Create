@@ -21,7 +21,7 @@ void Enemy::Initialize(XMFLOAT2 pos, int number)
 	position = { pos.x,pos.y };
 	r = 16;
 	timer = 100;
-	HP = 1;
+	HP = 4;
 	moveFlag = true;
 	timeFlag = true;
 	beamCT = 0;

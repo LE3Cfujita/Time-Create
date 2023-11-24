@@ -111,13 +111,13 @@ void SimultaneousEnemy::Attack()
 {
 	if (attackFlag == true)
 	{
-		//PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
 		BossNormalBullet* bullet;
 		bullet = new BossNormalBullet();
 		bullet->BaseInitialize(referenceGameObjects);
 		bullet->Initialize({ position });
 		bullet->Resource();
 		addGameObjects.push_back(bullet);
+		RecoveryDrop();
 		attackFlag = false;
 	}
 	else
@@ -142,4 +142,17 @@ void SimultaneousEnemy::Spwan()
 	{
 		actionFlag = true;
 	}
+}
+
+void SimultaneousEnemy::RecoveryDrop()
+{
+	int a = rand() % 5;
+	if (a == 1)
+	{
+		RecoveryItem* item = new RecoveryItem;
+		item->BaseInitialize(referenceGameObjects);
+		item->Initialize({ position });
+		addGameObjects.push_back(item);
+	}
+
 }

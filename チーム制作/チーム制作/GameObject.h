@@ -16,6 +16,7 @@ public:
 		PLAYER,//プレイヤー
 		PLAYERBULLET,//プレイヤーの弾
 		SLIME,//敵
+		WEAKENEMY,//取り巻き
 		BOSSENEMY,//ボス敵
 		RECOVERYENEMY,//横並びでしか倒しきれない敵
 		SIMULTANEOUSENEMY,//縦並びでしか倒せない

@@ -1,6 +1,7 @@
 #pragma once
 #include"GameObject.h"
 #include"BossNormalBullet.h"
+#include"RecoveryItem.h"
 class SimultaneousEnemy : public GameObject
 {
 
@@ -27,6 +28,8 @@ private:
 	void Attack();
 
 	void Spwan();
+
+	void RecoveryDrop();
 
 	int bullet;
 	int simultaneous;

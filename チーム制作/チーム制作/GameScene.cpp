@@ -69,11 +69,8 @@ void GameScene::Draw()
 {
 	switch (gameState)
 	{
-	case TITLE://�^�C�g��
-		DrawGraph(backPos.x, backPos.y, ancientback, true);
-		DrawGraph(backPos2.x, backPos2.y, ancientback, true);
+	case TITLE:
 		DrawGraph(0, 0, title, TRUE);
-		DrawGraph(yajirusiPos.x, yajirusiPos.y, yajirusi, true);
 		break;
 	case PLAY://�Q�[���v���C
 		DrawGraph(backPos.x, backPos.y, ancientback, true);
@@ -92,7 +89,6 @@ void GameScene::Draw()
 		DrawGraph(0, 0, over, FALSE);
 		break;
 	case EXPLANATION:
-		DrawGraph(backPos.x, backPos.y, ancientback, true);
 		DrawGraph(setumeiPos.x, setumeiPos.y, setumei, true);
 		break;
 	}
@@ -112,37 +108,20 @@ void GameScene::ChangeScene()
 	{
 		backPos2.x = 1280;
 	}
-	/*
-	if (CheckHitKey(KEY_INPUT_UP) == 1 && hitButton == false ||
-		CheckHitKey(KEY_INPUT_DOWN) == 1 && hitButton == false)
-	{
-		if (start == true)
-		{
-			start = false;
-			yajirusiPos = { 770,590 };
-		}
-		else
-		{
-			start = true;
-			yajirusiPos = { 770,490 };
-		}
-		hitButton = true;
-	}
-	else if (CheckHitKey(KEY_INPUT_UP) == 0 &&
-		CheckHitKey(KEY_INPUT_DOWN) == 0)
-	{
-		hitButton = false;
-	}*/
 
 	if (CheckHitKey(KEY_INPUT_SPACE) == 1)
 	{
-		if (CheckSoundMem(ketteiSE) == FALSE)
+		if (keyCount == false)
 		{
-			PlaySoundMem(ketteiSE, DX_PLAYTYPE_BACK, TRUE);
-		}
-		if (gameState == TITLE)
-		{
-			if (start == true)
+			if (CheckSoundMem(ketteiSE) == FALSE)
+			{
+				PlaySoundMem(ketteiSE, DX_PLAYTYPE_BACK, TRUE);
+			}
+			if (gameState == TITLE)
+			{
+				gameState = EXPLANATION;
+			}
+			else if (gameState == EXPLANATION)
 			{
 				flagCount = false;
 				volume = 200;
@@ -154,33 +133,33 @@ void GameScene::ChangeScene()
 				backPos2 = { 1280,0 };
 				backPos3 = { 2569,0 };
 			}
+			else if (gameState == CLEA || gameState == OVER)
+			{
+				for (GameObject* gameobject : gameObjectManager->GetGameObjects())
+				{
+					gameobject->SetDeathFlag(true);
+				}
+				pNumber = 0;
+				sNumber = 0;
+				gameState = TITLE;
+				gameObjectManager->Update();
+				if (CheckSoundMem(clearBGM) == true)
+				{
+					StopSoundMem(clearBGM);
+				}
+				if (CheckSoundMem(overBGM) == true)
+				{
+					StopSoundMem(overBGM);
+				}
+				overFlag = false;
+				Initialize();
+			}
+			keyCount = true;
 		}
-		else if (gameState == CLEA || gameState == OVER)
-		{
-			for (GameObject* gameobject : gameObjectManager->GetGameObjects())
-			{
-				gameobject->SetDeathFlag(true);
-			}
-			pNumber = 0;
-			sNumber = 0;
-			gameState = TITLE;
-			gameObjectManager->Update();
-			if (CheckSoundMem(clearBGM) == true)
-			{
-				StopSoundMem(clearBGM);
-			}
-			if (CheckSoundMem(overBGM) == true)
-			{
-				StopSoundMem(overBGM);
-			}
-			overFlag = false;
-			Initialize();
-		}
-		keyCount = 1;
 	}
-	if (CheckHitKey(KEY_INPUT_SPACE) == 0)
+	else
 	{
-		keyCount = 0;
+		keyCount = false;
 	}
 
 }

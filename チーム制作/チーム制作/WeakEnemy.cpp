@@ -10,7 +10,7 @@ WeakEnemy::~WeakEnemy()
 
 void WeakEnemy::Initialize(XMFLOAT2 pos, int number)
 {
-	objectMember = GameObject::SLIME;
+	objectMember = GameObject::WEAKENEMY;
 	objectStage = GameObject::SECONDSTAGE;
 	position = { pos.x,pos.y };
 	this->number = number;

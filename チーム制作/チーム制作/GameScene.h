@@ -123,7 +123,7 @@ private:
 	int volume = 200;
 
 	//•Ï”
-	int keyCount = 0;
+	bool keyCount = false;
 	bool changeFlag = false;
 	bool backFlag = false;
 	bool flagCount = false;

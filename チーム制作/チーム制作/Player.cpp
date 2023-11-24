@@ -30,9 +30,13 @@ void Player::Initialize(XMFLOAT2 pos, int number)
 
 void Player::Update()
 {
-	Move();
-	Attack();
-	Invincible();
+	Action();
+	if (actionFlag == true)
+	{
+		Move();
+		Attack();
+		Invincible();
+	}
 	if (HP == 0)
 	{
 		objState = TENTATIVE;
@@ -141,7 +145,7 @@ void Player::HitAction(GameObject* gameObject)
 				gameObject->GetObjectMember() == OBJECTMEMBER::BOSSBULLET)
 			{
 
-				PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
+			PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
 				HP--;
 				invincibleFlag = true;
 				gameObject->SetDeathFlag(true);
@@ -211,6 +215,20 @@ void Player::Animation()
 	if (HP == 5)
 	{
 		animeCount = 4;
+	}
+}
+
+void Player::Action()
+{
+	for (GameObject* gameObject : referenceGameObjects)
+	{
+		if (gameObject->GetObjectMember() == GameObject::SLIME ||
+			gameObject->GetObjectMember() == GameObject::BOSSENEMY ||
+			gameObject->GetObjectMember() == GameObject::RECOVERYENEMY ||
+			gameObject->GetObjectMember() == GameObject::SIMULTANEOUSENEMY)
+		{
+			actionFlag = gameObject->GetActionFlag();
+		}
 	}
 }
 
