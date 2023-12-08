@@ -97,7 +97,7 @@ void WeakEnemy::Move()
 			number = 100;
 			for (GameObject* gameobject : referenceGameObjects)
 			{
-				if (gameobject->GetObjectMember() == OBJECTMEMBER::SLIME)
+				if (gameobject->GetObjectMember() == OBJECTMEMBER::WEAKENEMY)
 				{
 					gameobject->SetActionFlag(true);
 				}

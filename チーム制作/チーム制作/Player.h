@@ -41,7 +41,8 @@ private:
 	int chargeAnimation = 0;
 	int chargeAnimationCount = 0;
 
-	bool hitButton = false;
+	bool attackFlag = false;
+	int coolTime = 0;
 
 	int chargeTime = 0;
 	int pushTime = 0;

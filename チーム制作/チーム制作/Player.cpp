@@ -107,20 +107,27 @@ void Player::Attack()
 {
 	if (objState != TENTATIVE)
 	{
-		if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
+		if (attackFlag == false)
 		{
-			if (hitButton == true)return;
-			PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
-			PlayerBullet* bullet = new PlayerBullet();
-			bullet->BaseInitialize(referenceGameObjects);
-			bullet->Initialize({ position.x + r / 32,position.y + r });
-			addGameObjects.push_back(bullet);
-			hitButton = true;
-			timeFlag = true;
+			if (CheckHitKey(KEY_INPUT_SPACE) == 1)//�X�y�[�X�������ōU����������
+			{
+				PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
+				PlayerBullet* bullet = new PlayerBullet();
+				bullet->BaseInitialize(referenceGameObjects);
+				bullet->Initialize({ position.x + r / 32,position.y + r });
+				addGameObjects.push_back(bullet);
+				attackFlag = true;
+				timeFlag = true;
+			}
 		}
 		else
 		{
-			hitButton = false;
+			coolTime++;
+			if (coolTime >= 15)
+			{
+				coolTime = 0;
+				attackFlag = false;
+			}
 		}
 	}
 }
@@ -145,7 +152,7 @@ void Player::HitAction(GameObject* gameObject)
 				gameObject->GetObjectMember() == OBJECTMEMBER::BOSSBULLET)
 			{
 
-			PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
+				PlaySoundMem(damageSE, DX_PLAYTYPE_BACK, TRUE);
 				HP--;
 				invincibleFlag = true;
 				gameObject->SetDeathFlag(true);

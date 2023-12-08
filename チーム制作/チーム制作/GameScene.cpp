@@ -456,7 +456,7 @@ void GameScene::LoadResource()
 
 void GameScene::changeForm()
 {
-	if (CheckHitKey(KEY_INPUT_X) == 1)
+	if (CheckHitKey(KEY_INPUT_Q) == 1)
 	{
 		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
 		{
@@ -465,7 +465,7 @@ void GameScene::changeForm()
 			gameobject->FormationX(formPos);
 		}
 	}
-	else if (CheckHitKey(KEY_INPUT_Z) == 1)
+	else if (CheckHitKey(KEY_INPUT_E) == 1)
 	{
 		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
 		{
