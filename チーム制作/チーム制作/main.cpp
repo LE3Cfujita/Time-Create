@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-const char TITLE[] = "4042_コンポジション";
+const char TITLE[] = "4248_METAL PLASMA";
 
 const int WIN_WIDTH = 1280; //ウィンドウ横幅
 const int WIN_HEIGHT = 720;//ウィンドウ縦幅
