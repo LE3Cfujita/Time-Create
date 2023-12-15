@@ -36,7 +36,8 @@ void PlayerBullet::HitAction(GameObject* gameObject)
 			gameObject->GetObjectMember() == OBJECTMEMBER::WEAKENEMY ||
 			gameObject->GetObjectMember() == OBJECTMEMBER::BOSSENEMY ||
 			gameObject->GetObjectMember() == OBJECTMEMBER::RECOVERYENEMY ||
-			gameObject->GetObjectMember() == OBJECTMEMBER::SIMULTANEOUSENEMY)
+			gameObject->GetObjectMember() == OBJECTMEMBER::SIMULTANEOUSENEMY||
+			gameObject->GetObjectMember() == OBJECTMEMBER::OBSTACLE)
 		{
 			HitEffect* effect;
 			effect = new HitEffect();

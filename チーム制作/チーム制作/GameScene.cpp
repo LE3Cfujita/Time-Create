@@ -12,9 +12,9 @@ void GameScene::Initialize()
 	gameObjectManager = new GameObjectManager();
 	gameObjectManager->Intialize();
 
-	gameState = TITLE;
+	gameState = PLAY;
 
-	objectAge = STAND;
+	objectAge = FORTHSTAGE;
 	createFlag = false;
 
 	if (loadFlag != false)return;
@@ -25,8 +25,8 @@ void GameScene::Initialize()
 	}
 
 	{//デバッグ用
-		/*PlayerCreate();
-		EnemyCreate();*/
+		PlayerCreate();
+		EnemyCreate();
 	}
 }
 
@@ -231,6 +231,19 @@ void GameScene::EnemyCreate()
 			enemy->Resource(recoveryBullet);
 			gameObjectManager->AddGameObject(enemy);
 		}
+		for (int i = 1; i <= 9; i++)
+		{
+			for (int j = 1; j < 5; j++)
+			{
+				//障害物生成
+				Obstacle* obstacle = nullptr;
+				obstacle = new Obstacle();
+				obstacle->BaseInitialize(gameObjectManager->GetGameObjects());
+				obstacle->Initialize({ (float)900 + 32 * j,(float)250 + 32 * i });
+				obstacle->Resource(obstacleGraph);
+				gameObjectManager->AddGameObject(obstacle);
+			}
+		}
 	}
 	createFlag = true;
 }
@@ -345,7 +358,7 @@ void GameScene::GameClearToManager(GameObject* gameObject)
 			}
 			else if (objectAge == THIRDSTAGE)
 			{
-				objectAge = FORTHSTAGE;//2ステージ目だったら3ステージ目へ
+				objectAge = FORTHSTAGE;//3ステージ目だったら4ステージ目へ
 				gameObject->SetObjAge(GameObject::STAGE::FORTHSTAGE);
 			}
 			createFlag = false;
@@ -422,7 +435,8 @@ void GameScene::LoadResource()
 	slimeGraph = LoadGraph("Resource/EnemySlimeAnime.png");
 	bossGraph = LoadGraph("Resource/bossEnemy.png");
 	recoveryGraph = LoadGraph("Resource/recovery.png");
-
+	//障害物
+	obstacleGraph = LoadGraph("Resource/obstacle.png");
 	//弾絵
 	recoveryBullet = LoadGraph("Resource/enemyBullret.png");
 
@@ -456,26 +470,19 @@ void GameScene::LoadResource()
 
 void GameScene::changeForm()
 {
-	if (CheckHitKey(KEY_INPUT_Q) == 1)
+	if (CheckHitKey(KEY_INPUT_E) == 1)
 	{
 		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
 		{
-			//ゲームオーバー
 			if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
-			gameobject->FormationX(formPos);
+			if (hitButton != false)return;
+			gameobject->changeForm(formPos);
 		}
-	}
-	else if (CheckHitKey(KEY_INPUT_E) == 1)
-	{
-		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
-		{
-			//ゲームオーバー
-			if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;
-			gameobject->FormationZ(formPos);
-		}
+		hitButton = true;
 	}
 	else
 	{
+		hitButton = false;
 		for (GameObject* gameobject : gameObjectManager->GetGameObjects())
 		{
 			if (gameobject->GetObjectMember() != GameObject::OBJECTMEMBER::PLAYER)continue;

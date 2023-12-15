@@ -18,6 +18,21 @@ void Player::Resource(int graph, int se, int kirikae, int damage, int recovery)
 	recoverySE = recovery;
 }
 
+void Player::changeForm(XMFLOAT2 pos)
+{
+	if (formFlag == false)
+	{
+		FormationQ(pos);
+		formFlag = true;
+	}
+	else
+	{
+		FormationE(pos);
+		formFlag = false;
+	}
+	
+}
+
 void Player::Initialize(XMFLOAT2 pos, int number)
 {
 	objectMember = GameObject::PLAYER;
@@ -34,6 +49,7 @@ void Player::Update()
 	if (actionFlag == true)
 	{
 		Move();
+		Limit();
 		Attack();
 		Invincible();
 	}
@@ -69,37 +85,23 @@ void Player::Draw()
 
 void Player::Move()
 {
+	oldPos = position;
 	if (CheckHitKey(KEY_INPUT_D) == 1)
 	{
-		if (position.x + r > 650)
-		{
-			position.x = 650 - r;
-		}
-		position.x += 5;
+		position.x += speed;
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
 	{
-		if (position.x - r < 0)
-		{
-			position.x = r;
-		}
-		position.x -= 5;
+		position.x -= speed;
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
-		if (position.y - r < 0)
-		{
-			position.y = 0 + r;
-		}
-		position.y -= 5;
+		if (moveFlag != true)return;
+		position.y -= speed;
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
-		if (position.y + r > 720)
-		{
-			position.y = 720 - r;
-		}
-		position.y += 5;
+		position.y += speed;
 	}
 }
 
@@ -174,29 +176,46 @@ void Player::HitAction(GameObject* gameObject)
 	//プレイヤー同士が触れ合ってる場合
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYER)
 	{
+		AnotherP(gameObject);
+		if (gameObject->GetObjectState() == GameObject::OBJSTATE::TENTATIVE)return;
 		if (X == true)
 		{
-			if (CheckHitKey(KEY_INPUT_D) == 1)
-			{
-				position.x -= 5;
-			}
-			if (CheckHitKey(KEY_INPUT_A) == 1)
-			{
-				position.x += 5;
-			}
+				if (number > subNumber)
+				{
+					position.x = subPos.x + r * 2;
+				}
+				else
+				{
+					position.x = oldPos.x;
+				}
+				if (number < subNumber)
+				{
+					position.x = subPos.x - r * 2;
+				}
+				else
+				{
+					position.x = oldPos.x;
+				}
 		}
 		else
 		{
-			if (CheckHitKey(KEY_INPUT_W) == 1)
-			{
-				position.y += 5;
-			}
-			if (CheckHitKey(KEY_INPUT_S) == 1)
-			{
-				position.y -= 5;
-			}
+				if (number > subNumber)
+				{
+					position.y = subPos.y + r * 2;
+				}
+				else
+				{
+					position.y = oldPos.y;
+				}
+				if (number < subNumber)
+				{
+					position.y = subPos.y - r * 2;
+				}
+				else
+				{
+					position.y = oldPos.y;
+				}
 		}
-		hitFlag = true;
 	}
 }
 
@@ -239,7 +258,43 @@ void Player::Action()
 	}
 }
 
-void Player::FormationX(XMFLOAT2 pos)
+void Player::AnotherP(GameObject* gameObject)
+{
+	subNumber = gameObject->GetNumber();
+	subPos = gameObject->GetPosition();
+
+}
+
+void Player::Distance()//プレイヤー同士の距離計算
+{
+	dx = subPos.x - position.x;//Xの距離の計算
+	dy = subPos.y - position.y;//Yの距離の計算
+	//ルートの中の計算
+	da = dx * dx + dy * dy;
+	L = sqrt(da);
+}
+
+void Player::Limit()
+{
+	if (position.x + r > 650)
+	{
+		position.x = 650 - r;
+	}
+	if (position.x - r < 0)
+	{
+		position.x = 0 + r;
+	}
+	if (position.y - r < 0)
+	{
+		position.y = 0 + r;
+	}
+	if (position.y + r > 720)
+	{
+		position.y = 720 - r;
+	}
+}
+
+void Player::FormationQ(XMFLOAT2 pos)
 {
 	switch (number)
 	{
@@ -259,6 +314,7 @@ void Player::FormationX(XMFLOAT2 pos)
 		position = { pos.x + 100 * 2,pos.y };
 		break;
 	}
+	Limit();
 	if (CheckSoundMem(kirikaeSE) == FALSE)
 	{
 		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
@@ -266,7 +322,7 @@ void Player::FormationX(XMFLOAT2 pos)
 	X = true;
 }
 
-void Player::FormationZ(XMFLOAT2 pos)
+void Player::FormationE(XMFLOAT2 pos)
 {
 	switch (number)
 	{
@@ -290,6 +346,7 @@ void Player::FormationZ(XMFLOAT2 pos)
 	{
 		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
 	}
+	Limit();
 	X = false;
 }
 
