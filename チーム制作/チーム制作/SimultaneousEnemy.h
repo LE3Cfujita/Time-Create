@@ -2,6 +2,7 @@
 #include"GameObject.h"
 #include"BossNormalBullet.h"
 #include"RecoveryItem.h"
+#include"SlimeBullet.h"
 class SimultaneousEnemy : public GameObject
 {
 

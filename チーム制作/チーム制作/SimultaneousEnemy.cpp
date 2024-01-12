@@ -11,7 +11,7 @@ SimultaneousEnemy::~SimultaneousEnemy()
 void SimultaneousEnemy::Initialize(XMFLOAT2 pos, int number)
 {
 	objectMember = GameObject::SIMULTANEOUSENEMY;
-	HP = 15;
+	HP = 20;
 	r = 32;
 	simultaneous = LoadGraph("Resource/allEnemy_New.png");
 	position = pos;
@@ -102,30 +102,53 @@ void SimultaneousEnemy::Move()
 	if (time >= 240)
 	{
 		objState = IDLE;
-		HP = 15;
+		HP = 20;
 		time = 0;
 	}
 }
 
 void SimultaneousEnemy::Attack()
 {
-	if (attackFlag == true)
+	if (objState != TENTATIVE)
 	{
-		BossNormalBullet* bullet;
-		bullet = new BossNormalBullet();
-		bullet->BaseInitialize(referenceGameObjects);
-		bullet->Initialize({ position });
-		bullet->Resource();
-		addGameObjects.push_back(bullet);
-		RecoveryDrop();
-		attackFlag = false;
+		if (attackFlag == true)
+		{
+			BossNormalBullet* bullet;
+			bullet = new BossNormalBullet();
+			bullet->BaseInitialize(referenceGameObjects);
+			bullet->Initialize({ position });
+			bullet->Resource();
+			addGameObjects.push_back(bullet);
+			RecoveryDrop();
+			attackFlag = false;
+		}
+		else
+		{
+			timer++;
+			if (timer <= 120)return;
+			attackFlag = true;
+			timer = 0;
+		}
 	}
 	else
 	{
-		timer++;
-		if (timer <= 120)return;
-		attackFlag = true;
-		timer = 0;
+		if (attackFlag == true)
+		{
+			//PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
+			SlimeBullet* bullet = new SlimeBullet();
+			bullet->BaseInitialize(referenceGameObjects);
+			bullet->Initialize(position, 1);
+			addGameObjects.push_back(bullet);
+			RecoveryDrop();
+			attackFlag = false;
+		}
+		else
+		{
+			timer++;
+			if (timer <= 5)return;
+			attackFlag = true;
+			timer = 0;
+		}
 	}
 }
 
@@ -146,7 +169,7 @@ void SimultaneousEnemy::Spwan()
 
 void SimultaneousEnemy::RecoveryDrop()
 {
-	int a = rand() % 10;
+	int a = rand() % 15;
 	if (a == 1)
 	{
 		RecoveryItem* item = new RecoveryItem;
