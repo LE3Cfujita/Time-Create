@@ -11,7 +11,7 @@ SimultaneousEnemy::~SimultaneousEnemy()
 void SimultaneousEnemy::Initialize(XMFLOAT2 pos, int number)
 {
 	objectMember = GameObject::SIMULTANEOUSENEMY;
-	HP = 20;
+	HP = 15;
 	r = 32;
 	simultaneous = LoadGraph("Resource/allEnemy_New.png");
 	position = pos;
@@ -102,7 +102,7 @@ void SimultaneousEnemy::Move()
 	if (time >= 240)
 	{
 		objState = IDLE;
-		HP = 20;
+		HP = 15;
 		time = 0;
 	}
 }

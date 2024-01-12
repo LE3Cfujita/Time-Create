@@ -12,6 +12,7 @@ void Obstacle::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::OBSTACLE;
 	position = pos;
+	r = 16;
 }
 
 void Obstacle::Update()
@@ -20,7 +21,7 @@ void Obstacle::Update()
 
 void Obstacle::Draw()
 {
-	DrawGraph(position.x - r, position.y - r, obstacle, true);
+	DrawGraph(position.x - r, position.y - r * 2, obstacle, true);
 }
 
 void Obstacle::Resource(int graph)
@@ -30,7 +31,8 @@ void Obstacle::Resource(int graph)
 
 void Obstacle::HitAction(GameObject* gameObject)
 {
-	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET)
+	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET ||
+		gameObject->GetObjectMember() == OBJECTMEMBER::BOSSBULLET)
 	{
 		gameObject->SetDeathFlag(true);
 	}

@@ -65,5 +65,7 @@ private:
 	XMFLOAT2 oldPos = { 0,0 };//1フレーム前の座標
 
 	bool formFlag = false;
+
+	int bullet;
 };
 
