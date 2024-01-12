@@ -8,6 +8,7 @@
 #include"GameObjectManager.h"
 #include"DxLib.h"
 #include"Collision.h"
+#include "Obstacle.h"
 class GameScene
 {
 public:
@@ -99,6 +100,7 @@ private:
 	int slimeGraph;//ƒXƒ‰ƒCƒ€ŠG
 	int bossGraph;
 	int recoveryGraph;
+	int obstacleGraph;//áŠQ•¨
 
 	//’eŠG
 	int recoveryBullet;//ƒXƒ‰ƒCƒ€‚Ì’e‚ÌŠG

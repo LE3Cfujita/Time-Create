@@ -16,8 +16,10 @@ public:
 
 	void Resource(int graph, int se,int kirikae,int damage, int recovery);
 
-	void FormationX(XMFLOAT2 pos);
-	void FormationZ(XMFLOAT2 pos);
+	void changeForm(XMFLOAT2 pos);
+
+	void FormationQ(XMFLOAT2 pos);
+	void FormationE(XMFLOAT2 pos);
 
 private:
 	void Move();//移動
@@ -26,6 +28,9 @@ private:
 	void HitAction(GameObject* gameObject);
 	void Animation();
 	void Action();
+	void AnotherP(GameObject* gameObject);//別のプレイヤーキャラ
+	void Distance();//プレイヤー間の距離
+	void Limit();//移動限界
 
 	int player;//描画用
 	int attackSE;
@@ -41,7 +46,8 @@ private:
 	int chargeAnimation = 0;
 	int chargeAnimationCount = 0;
 
-	bool hitButton = false;
+	bool attackFlag = false;
+	int coolTime = 0;
 
 	int chargeTime = 0;
 	int pushTime = 0;
@@ -49,5 +55,15 @@ private:
 	bool X = false;
 
 	bool actionFlag = false;
+
+	int speed = 5;
+
+	int subNumber = 0;
+	XMFLOAT2 subPos = { 0,0 };
+	bool moveFlag = true;
+
+	XMFLOAT2 oldPos = { 0,0 };//1フレーム前の座標
+
+	bool formFlag = false;
 };
 

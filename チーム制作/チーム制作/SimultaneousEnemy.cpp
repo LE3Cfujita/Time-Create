@@ -146,7 +146,7 @@ void SimultaneousEnemy::Spwan()
 
 void SimultaneousEnemy::RecoveryDrop()
 {
-	int a = rand() % 5;
+	int a = rand() % 10;
 	if (a == 1)
 	{
 		RecoveryItem* item = new RecoveryItem;

@@ -11,7 +11,7 @@ RecoveryEnemy::~RecoveryEnemy()
 void RecoveryEnemy::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::RECOVERYENEMY;
-	HP = 100;
+	HP = 1;
 	r = 64;
 	recovery = LoadGraph("Resource/healEnemy.png");
 	heal = LoadGraph("Resource/healEffect.png");
@@ -47,7 +47,7 @@ void RecoveryEnemy::Draw()
 	}
 	if (moveFlag == false)
 	{
-		DrawGraph(position.x, position.y, heal, true);
+		DrawGraph(position.x-r, position.y-r, heal, true);
 	}
 }
 

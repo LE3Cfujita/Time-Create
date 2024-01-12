@@ -24,6 +24,7 @@ public:
 		BOSSBULLET,//ボスの攻撃
 		HITEFFECT,//ヒットエフェクト
 		RECOVERY,
+		OBSTACLE,//障害物
 	};
 	enum STAGE
 	{
@@ -180,8 +181,7 @@ public:
 
 	virtual void Resource() {}
 
-	virtual void FormationX(XMFLOAT2 pos) {}
-	virtual void FormationZ(XMFLOAT2 pos) {}
+	virtual void changeForm(XMFLOAT2 pos) {}
 
 
 	std::vector<GameObject*> addGameObjects;
