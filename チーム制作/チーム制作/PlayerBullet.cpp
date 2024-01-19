@@ -25,7 +25,7 @@ void PlayerBullet::Update()
 
 void PlayerBullet::Draw()
 {
-	DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 32, bullet, TRUE, FALSE);
+	DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, bullet, TRUE, FALSE);
 }
 
 void PlayerBullet::HitAction(GameObject* gameObject)

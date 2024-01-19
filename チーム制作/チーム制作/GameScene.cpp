@@ -231,15 +231,15 @@ void GameScene::EnemyCreate()
 			enemy->Resource(recoveryBullet);
 			gameObjectManager->AddGameObject(enemy);
 		}
-		for (int i = 1; i <= 9; i++)
+		for (int i = 1; i <= 5; i++)
 		{
-			for (int j = 1; j < 5; j++)
+			for (int j = 1; j < 2; j++)
 			{
 				//障害物生成
 				Obstacle* obstacle = nullptr;
 				obstacle = new Obstacle();
 				obstacle->BaseInitialize(gameObjectManager->GetGameObjects());
-				obstacle->Initialize({ (float)900 + 32 * j,(float)250 + 32 * i });
+				obstacle->Initialize({ (float)900 + 32 * j,(float)50 + 140 * i });
 				obstacle->Resource(obstacleGraph);
 				gameObjectManager->AddGameObject(obstacle);
 			}

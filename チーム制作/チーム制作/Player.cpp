@@ -30,7 +30,7 @@ void Player::changeForm(XMFLOAT2 pos)
 		FormationE(pos);
 		formFlag = false;
 	}
-	
+
 }
 
 void Player::Initialize(XMFLOAT2 pos, int number)
@@ -49,7 +49,6 @@ void Player::Update()
 	if (actionFlag == true)
 	{
 		Move();
-		Limit();
 		Attack();
 		Invincible();
 	}
@@ -89,19 +88,34 @@ void Player::Move()
 	if (CheckHitKey(KEY_INPUT_D) == 1)
 	{
 		position.x += speed;
+		if (position.x + r > 650)
+		{
+			position.x = 650 - r;
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_A) == 1)
 	{
 		position.x -= speed;
+		if (position.x - r < 0)
+		{
+			position.x = 0 + r;
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_W) == 1)
 	{
-		if (moveFlag != true)return;
 		position.y -= speed;
+		if (position.y - r < 0)
+		{
+			position.y = 0 + r;
+		}
 	}
 	if (CheckHitKey(KEY_INPUT_S) == 1)
 	{
 		position.y += speed;
+		if (position.y + r > 720)
+		{
+			position.y = 720 - r;
+		}
 	}
 }
 
@@ -180,41 +194,41 @@ void Player::HitAction(GameObject* gameObject)
 		if (gameObject->GetObjectState() == GameObject::OBJSTATE::TENTATIVE)return;
 		if (X == true)
 		{
-				if (number > subNumber)
-				{
-					position.x = subPos.x + r * 2;
-				}
-				else
-				{
-					position.x = oldPos.x;
-				}
-				if (number < subNumber)
-				{
-					position.x = subPos.x - r * 2;
-				}
-				else
-				{
-					position.x = oldPos.x;
-				}
+			if (number > subNumber)
+			{
+				position.x = subPos.x + r * 2;
+			}
+			else
+			{
+				position.x = oldPos.x;
+			}
+			if (number < subNumber)
+			{
+				position.x = subPos.x - r * 2;
+			}
+			else
+			{
+				position.x = oldPos.x;
+			}
 		}
 		else
 		{
-				if (number > subNumber)
-				{
-					position.y = subPos.y + r * 2;
-				}
-				else
-				{
-					position.y = oldPos.y;
-				}
-				if (number < subNumber)
-				{
-					position.y = subPos.y - r * 2;
-				}
-				else
-				{
-					position.y = oldPos.y;
-				}
+			if (number > subNumber)
+			{
+				position.y = subPos.y + r * 2;
+			}
+			else
+			{
+				position.y = oldPos.y;
+			}
+			if (number < subNumber)
+			{
+				position.y = subPos.y - r * 2;
+			}
+			else
+			{
+				position.y = oldPos.y;
+			}
 		}
 	}
 }
@@ -274,26 +288,6 @@ void Player::Distance()//プレイヤー同士の距離計算
 	L = sqrt(da);
 }
 
-void Player::Limit()
-{
-	if (position.x + r > 650)
-	{
-		position.x = 650 - r;
-	}
-	if (position.x - r < 0)
-	{
-		position.x = 0 + r;
-	}
-	if (position.y - r < 0)
-	{
-		position.y = 0 + r;
-	}
-	if (position.y + r > 720)
-	{
-		position.y = 720 - r;
-	}
-}
-
 void Player::FormationQ(XMFLOAT2 pos)
 {
 	switch (number)
@@ -314,7 +308,6 @@ void Player::FormationQ(XMFLOAT2 pos)
 		position = { pos.x + 100 * 2,pos.y };
 		break;
 	}
-	Limit();
 	if (CheckSoundMem(kirikaeSE) == FALSE)
 	{
 		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
@@ -346,7 +339,6 @@ void Player::FormationE(XMFLOAT2 pos)
 	{
 		PlaySoundMem(kirikaeSE, DX_PLAYTYPE_BACK, TRUE);
 	}
-	Limit();
 	X = false;
 }
 

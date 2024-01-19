@@ -30,7 +30,6 @@ private:
 	void Action();
 	void AnotherP(GameObject* gameObject);//別のプレイヤーキャラ
 	void Distance();//プレイヤー間の距離
-	void Limit();//移動限界
 
 	int player;//描画用
 	int attackSE;
@@ -60,10 +59,11 @@ private:
 
 	int subNumber = 0;
 	XMFLOAT2 subPos = { 0,0 };
-	bool moveFlag = true;
 
 	XMFLOAT2 oldPos = { 0,0 };//1フレーム前の座標
 
 	bool formFlag = false;
+
+	int bullet;
 };
 

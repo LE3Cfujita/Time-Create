@@ -109,23 +109,46 @@ void SimultaneousEnemy::Move()
 
 void SimultaneousEnemy::Attack()
 {
-	if (attackFlag == true)
+	if (objState != TENTATIVE)
 	{
-		BossNormalBullet* bullet;
-		bullet = new BossNormalBullet();
-		bullet->BaseInitialize(referenceGameObjects);
-		bullet->Initialize({ position });
-		bullet->Resource();
-		addGameObjects.push_back(bullet);
-		RecoveryDrop();
-		attackFlag = false;
+		if (attackFlag == true)
+		{
+			BossNormalBullet* bullet;
+			bullet = new BossNormalBullet();
+			bullet->BaseInitialize(referenceGameObjects);
+			bullet->Initialize({ position });
+			bullet->Resource();
+			addGameObjects.push_back(bullet);
+			RecoveryDrop();
+			attackFlag = false;
+		}
+		else
+		{
+			timer++;
+			if (timer <= 120)return;
+			attackFlag = true;
+			timer = 0;
+		}
 	}
 	else
 	{
-		timer++;
-		if (timer <= 120)return;
-		attackFlag = true;
-		timer = 0;
+		if (attackFlag == true)
+		{
+			//PlaySoundMem(attackSE, DX_PLAYTYPE_BACK, TRUE);
+			SlimeBullet* bullet = new SlimeBullet();
+			bullet->BaseInitialize(referenceGameObjects);
+			bullet->Initialize(position, 1);
+			addGameObjects.push_back(bullet);
+			RecoveryDrop();
+			attackFlag = false;
+		}
+		else
+		{
+			timer++;
+			if (timer <= 5)return;
+			attackFlag = true;
+			timer = 0;
+		}
 	}
 }
 
@@ -146,7 +169,7 @@ void SimultaneousEnemy::Spwan()
 
 void SimultaneousEnemy::RecoveryDrop()
 {
-	int a = rand() % 10;
+	int a = rand() % 15;
 	if (a == 1)
 	{
 		RecoveryItem* item = new RecoveryItem;
