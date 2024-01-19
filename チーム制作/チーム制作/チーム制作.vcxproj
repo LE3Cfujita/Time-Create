@@ -145,6 +145,7 @@
     <ClCompile Include="DownEffec.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="RecoveryBeam.cpp" />
     <ClCompile Include="RecoveryBullet.cpp" />
     <ClCompile Include="RecoveryEnemy.cpp" />
     <ClCompile Include="RecoveryItem.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="DownEffec.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="RecoveryBeam.h" />
     <ClInclude Include="RecoveryBullet.h" />
     <ClInclude Include="RecoveryEnemy.h" />
     <ClInclude Include="RecoveryItem.h" />

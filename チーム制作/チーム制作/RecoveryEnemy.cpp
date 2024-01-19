@@ -11,7 +11,7 @@ RecoveryEnemy::~RecoveryEnemy()
 void RecoveryEnemy::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::RECOVERYENEMY;
-	HP = 1;
+	HP = 100;
 	r = 64;
 	recovery = LoadGraph("Resource/healEnemy.png");
 	heal = LoadGraph("Resource/healEffect.png");
@@ -28,6 +28,7 @@ void RecoveryEnemy::Update()
 	else
 	{
 		Move();
+		BeamAttack();
 	}
 	if (HP <= 0)
 	{
@@ -47,7 +48,7 @@ void RecoveryEnemy::Draw()
 	}
 	if (moveFlag == false)
 	{
-		DrawGraph(position.x-r, position.y-r, heal, true);
+		DrawGraph(position.x - r, position.y - r, heal, true);
 	}
 }
 
@@ -81,6 +82,7 @@ void RecoveryEnemy::Move()
 			item->BaseInitialize(referenceGameObjects);
 			item->Initialize({ position });
 			addGameObjects.push_back(item);
+			beamFlag = true;
 		}
 		Attack();
 		if (position.y <= 16)topFlag = true;//true‚¾‚Á‚½‚ç‰ºˆÚ“®
@@ -104,7 +106,10 @@ void RecoveryEnemy::Recovery()
 	time++;
 	if (time >= 15)
 	{
-		HP += 2;
+		if (HP < 99)
+		{
+			HP += 2;
+		}
 		time = 0;
 	}
 }
@@ -128,6 +133,27 @@ void RecoveryEnemy::Attack()
 			attackFlag = false;
 			attackTime = 0;
 		}
+	}
+}
+
+void RecoveryEnemy::BeamAttack()
+{
+	if (beamFlag == true)
+	{
+		int a = rand() % 2;
+
+		RecoveryBeam* bullet = new RecoveryBeam();
+		bullet->BaseInitialize(referenceGameObjects);
+		if (a == 1)
+		{
+			bullet->Initialize({ 180,-720 });
+		}
+		else
+		{
+			bullet->Initialize({ 480,-720 });
+		}
+		addGameObjects.push_back(bullet);
+		beamFlag = false;
 	}
 }
 
