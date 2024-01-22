@@ -1,8 +1,11 @@
-﻿  SimultaneousEnemy.cpp
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(270,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
-  (ソース ファイル 'SimultaneousEnemy.cpp' をコンパイルしています)
+﻿  RecoveryEnemy.cpp
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\GameObject.h(271,23): warning C4244: 'return': 'float' から 'int' への変換です。データが失われる可能性があります。
+  (ソース ファイル 'RecoveryEnemy.cpp' をコンパイルしています)
   
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\SimultaneousEnemy.cpp(39,43): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\SimultaneousEnemy.cpp(39,27): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\SimultaneousEnemy.cpp(161,11): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\RecoveryEnemy.cpp(43,44): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\RecoveryEnemy.cpp(43,28): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\RecoveryEnemy.cpp(47,37): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\RecoveryEnemy.cpp(47,25): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\RecoveryEnemy.cpp(51,40): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\チーム制作\RecoveryEnemy.cpp(51,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   チーム制作.vcxproj -> C:\Users\K020J1172\Desktop\チーム制作\Time-Create\チーム制作\x64\Debug\チーム制作.exe

@@ -14,7 +14,7 @@ void GameScene::Initialize()
 
 	gameState = PLAY;
 
-	objectAge = FORTHSTAGE;
+	objectAge = THIRDSTAGE;
 	createFlag = false;
 
 	if (loadFlag != false)return;

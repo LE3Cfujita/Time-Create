@@ -174,6 +174,10 @@ void Player::HitAction(GameObject* gameObject)
 				gameObject->SetDeathFlag(true);
 			}
 		}
+		if (gameObject->GetObjectMember() == OBJECTMEMBER::RECOVERYBEAM)
+		{
+			HP--;
+		}
 		if (gameObject->GetObjectMember() == OBJECTMEMBER::RECOVERY)
 		{
 			for (GameObject* gameobject2 : referenceGameObjects)

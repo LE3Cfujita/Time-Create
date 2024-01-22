@@ -2,6 +2,7 @@
 #include"GameObject.h"
 #include"RecoveryItem.h"
 #include "RecoveryBullet.h"
+#include"RecoveryBeam.h"
 class RecoveryEnemy : public GameObject
 {
 public:
@@ -13,8 +14,8 @@ public:
 
 	void Update();
 
-	void Draw(); 
-	
+	void Draw();
+
 	void Resource(int bul);
 
 	void HitAction(GameObject* gameObject);
@@ -25,13 +26,15 @@ private:
 	void Recovery();
 
 	void Attack();
-	
+
+	void BeamAttack();
+
 	void Spwan();
 
 	bool topFlag = false;
 	bool moveFlag = false;
 	bool attackFlag = false;
-
+	bool beamFlag = false;
 
 	int recovery;
 	int bul;

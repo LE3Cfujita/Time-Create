@@ -19,11 +19,12 @@ public:
 		WEAKENEMY,//取り巻き
 		BOSSENEMY,//ボス敵
 		RECOVERYENEMY,//横並びでしか倒しきれない敵
+		RECOVERYBEAM,//横並びで倒す敵のビーム
 		SIMULTANEOUSENEMY,//縦並びでしか倒せない
 		SLIMEBULLET,//スライムの攻撃
 		BOSSBULLET,//ボスの攻撃
 		HITEFFECT,//ヒットエフェクト
-		RECOVERY,
+		RECOVERY,//回復
 		OBSTACLE,//障害物
 	};
 	enum STAGE
