@@ -32,7 +32,8 @@ void Obstacle::Resource(int graph)
 void Obstacle::HitAction(GameObject* gameObject)
 {
 	if (gameObject->GetObjectMember() == OBJECTMEMBER::PLAYERBULLET ||
-		gameObject->GetObjectMember() == OBJECTMEMBER::BOSSBULLET)
+		gameObject->GetObjectMember() == OBJECTMEMBER::BOSSBULLET ||
+		gameObject->GetObjectMember() == OBJECTMEMBER::SLIMEBULLET)
 	{
 		gameObject->SetDeathFlag(true);
 	}

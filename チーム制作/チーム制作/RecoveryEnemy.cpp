@@ -74,7 +74,7 @@ void RecoveryEnemy::Move()
 
 	if (moveFlag == false)
 	{
-		if (moveTime >= 300)
+		if (moveTime >= 240)
 		{
 			moveFlag = true;
 			moveTime = 0;
@@ -93,7 +93,7 @@ void RecoveryEnemy::Move()
 	else
 	{
 		Recovery();
-		if (moveTime >= 300)
+		if (moveTime >= 240)
 		{
 			moveFlag = false;
 			moveTime = 0;
