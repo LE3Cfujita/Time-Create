@@ -219,7 +219,7 @@ void GameScene::EnemyCreate()
 		enemy->Initialize({ (float)1100,(float)300 });
 		enemy->Resource(recoveryBullet);
 		gameObjectManager->AddGameObject(enemy);
-		for (int i = 1; i <= 3; i++)
+		for (int i = 1; i <= 2; i++)
 		{
 			//障害物生成
 			Obstacle* obstacle = nullptr;
@@ -229,7 +229,7 @@ void GameScene::EnemyCreate()
 			obstacle->Resource(obstacleGraph);
 			gameObjectManager->AddGameObject(obstacle);
 		}
-		for (int i = 1; i <= 3; i++)
+		for (int i = 1; i <= 2; i++)
 		{
 			//障害物生成
 			Obstacle* obstacle = nullptr;
