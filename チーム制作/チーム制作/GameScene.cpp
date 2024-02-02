@@ -12,9 +12,9 @@ void GameScene::Initialize()
 	gameObjectManager = new GameObjectManager();
 	gameObjectManager->Intialize();
 
-	gameState = PLAY;
+	gameState = TITLE;
 
-	objectAge = THIRDSTAGE;
+	objectAge = FIRSTSTAGE;
 	createFlag = false;
 
 	if (loadFlag != false)return;
@@ -25,8 +25,8 @@ void GameScene::Initialize()
 	}
 
 	{//デバッグ用
-		PlayerCreate();
-		EnemyCreate();
+		/*PlayerCreate();
+		EnemyCreate();*/
 	}
 }
 
@@ -219,6 +219,26 @@ void GameScene::EnemyCreate()
 		enemy->Initialize({ (float)1100,(float)300 });
 		enemy->Resource(recoveryBullet);
 		gameObjectManager->AddGameObject(enemy);
+		for (int i = 1; i <= 2; i++)
+		{
+			//障害物生成
+			Obstacle* obstacle = nullptr;
+			obstacle = new Obstacle();
+			obstacle->BaseInitialize(gameObjectManager->GetGameObjects());
+			obstacle->Initialize({ (float)900 + 32,(float)0 + 32 * i });
+			obstacle->Resource(obstacleGraph);
+			gameObjectManager->AddGameObject(obstacle);
+		}
+		for (int i = 1; i <= 2; i++)
+		{
+			//障害物生成
+			Obstacle* obstacle = nullptr;
+			obstacle = new Obstacle();
+			obstacle->BaseInitialize(gameObjectManager->GetGameObjects());
+			obstacle->Initialize({ (float)900 + 32,(float)752 - 32 * i });
+			obstacle->Resource(obstacleGraph);
+			gameObjectManager->AddGameObject(obstacle);
+		}
 	}
 	else if (objectAge == FORTHSTAGE)
 	{

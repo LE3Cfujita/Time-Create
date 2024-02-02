@@ -11,7 +11,7 @@ RecoveryEnemy::~RecoveryEnemy()
 void RecoveryEnemy::Initialize(XMFLOAT2 pos)
 {
 	objectMember = GameObject::RECOVERYENEMY;
-	HP = 100;
+	HP = 10;
 	r = 64;
 	recovery = LoadGraph("Resource/healEnemy.png");
 	heal = LoadGraph("Resource/healEffect.png");
@@ -74,7 +74,7 @@ void RecoveryEnemy::Move()
 
 	if (moveFlag == false)
 	{
-		if (moveTime >= 300)
+		if (moveTime >= 240)
 		{
 			moveFlag = true;
 			moveTime = 0;
@@ -93,7 +93,7 @@ void RecoveryEnemy::Move()
 	else
 	{
 		Recovery();
-		if (moveTime >= 300)
+		if (moveTime >= 240)
 		{
 			moveFlag = false;
 			moveTime = 0;

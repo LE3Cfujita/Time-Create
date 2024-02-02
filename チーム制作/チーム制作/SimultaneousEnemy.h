@@ -34,6 +34,7 @@ private:
 
 	int bullet;
 	int simultaneous;
+	int tentativ;
 
 	int time = 0;
 
