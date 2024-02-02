@@ -12,9 +12,9 @@ void GameScene::Initialize()
 	gameObjectManager = new GameObjectManager();
 	gameObjectManager->Intialize();
 
-	gameState = PLAY;
+	gameState = TITLE;
 
-	objectAge = THIRDSTAGE;
+	objectAge = FIRSTSTAGE;
 	createFlag = false;
 
 	if (loadFlag != false)return;
@@ -25,8 +25,8 @@ void GameScene::Initialize()
 	}
 
 	{//デバッグ用
-		PlayerCreate();
-		EnemyCreate();
+		/*PlayerCreate();
+		EnemyCreate();*/
 	}
 }
 

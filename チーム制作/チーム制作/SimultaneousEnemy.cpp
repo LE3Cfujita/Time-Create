@@ -14,6 +14,7 @@ void SimultaneousEnemy::Initialize(XMFLOAT2 pos, int number)
 	HP = 20;
 	r = 32;
 	simultaneous = LoadGraph("Resource/allEnemy_New.png");
+	tentativ = LoadGraph("Resource/allEnemy_New_Tentatib.png");
 	position = pos;
 	position.y = position.y * number;
 	moveNumber = number;
@@ -36,7 +37,14 @@ void SimultaneousEnemy::Update()
 
 void SimultaneousEnemy::Draw()
 {
-	DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, simultaneous, TRUE, FALSE);
+	if (objState != TENTATIVE)
+	{
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, simultaneous, TRUE, FALSE);
+	}
+	else
+	{
+		DrawRectGraph(position.x - r, position.y - r, animeCount * 64, 0, 64, 64, tentativ, TRUE, FALSE);
+	}
 }
 
 void SimultaneousEnemy::Resource(int bul)
